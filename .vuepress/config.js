@@ -49,6 +49,11 @@ module.exports = {
         "icon": "reco-date"
       },
       {
+        "text": "关于我",
+        "link": "/blogs/other/第一篇文章.html",
+        "icon": "reco-account"
+      },
+      {
         "text": "联系我",
         "link": "/about/",
         "icon": "reco-other"
@@ -71,7 +76,7 @@ module.exports = {
         "title": "关于我",
         "desc": "zealsay轻应用脚手架开发指南",
         "logo": "https://i.loli.net/2021/05/17/rRzqv6kGHwATM41.png",
-        "link": "/about/"
+        "link": "/blogs/other/第一篇文章.html"
       },
       {
         "title": "播客样式作者",

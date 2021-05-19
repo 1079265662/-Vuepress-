@@ -17,15 +17,15 @@ jQuery(document).ready(function ($) {
             "left": x,
             "position": "absolute",
             "font-weight": "bold",
-            "color": `rgb(${getRandomColor(255,0)},${getRandomColor(255,0)},${getRandomColor(255,0)})`,
+            "color": `rgb(${getRandomColor(255, 0)},${getRandomColor(255, 0)},${getRandomColor(255, 0)})`,
             "user-select": 'none',
             "cursor": 'default'
         });
         $("body").append($w);
         $w.animate({
-                "top": y - 180,
-                "opacity": 0
-            },
+            "top": y - 180,
+            "opacity": 0
+        },
             1500,
             function () {
                 $w.remove();
