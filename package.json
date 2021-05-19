@@ -10,14 +10,24 @@
   "devDependencies": {
     "glob": "^7.1.6",
     "mime": "^2.4.4",
+    "patch-package": "^6.4.7",
     "path": "^0.12.7",
     "qiniu": "^7.3.0",
     "vuepress": "^1.7.1",
+    "vuepress-plugin-go-top": "^1.0.4",
     "vuepress-theme-reco": "1.5.5"
   },
   "dependencies": {
+    "@vuepress-reco/vuepress-plugin-kan-ban-niang": "^1.0.5",
+    "@vuepress-reco/vuepress-plugin-pagation": "^1.6.0",
     "aos": "^2.3.4",
-    "vue-class-component": "^7.2.3"
+    "vue-class-component": "^7.2.3",
+    "vuepress-plugin-auto-sidebar": "^2.2.2",
+    "vuepress-plugin-cursor-effects": "^1.0.2",
+    "vuepress-plugin-dynamic-title": "^1.0.0",
+    "vuepress-plugin-meting": "^0.2.3",
+    "vuepress-plugin-nuggets-style-copy": "^1.0.3",
+    "vuepress-plugin-sponsor": "^1.0.0"
   },
   "description": "blog for zeal"
 }

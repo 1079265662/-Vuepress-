@@ -1,6 +1,6 @@
 module.exports = {
-  "title": "zealsay说你想说",
-  "description": "zealsay说你想说,是一个关注于互联网、IT技术经验分享的个人独立博客。专注于IT行业最前沿的技术。致力成为互联网上最个性、最极客、具传播力的个人独立博客。",
+  "title": "LKaiLi",
+  "description": "草 走 🤸 忽略",
   "dest": "dist",
   "head": [
     [
@@ -10,6 +10,9 @@ module.exports = {
         "href": "https://pan.zealsay.com/blog/favicon.ico"
       }
     ],
+    // 设置鼠标点击 社会主义核心价值观
+    ["script", { "language": "javascript", "type": "text/javascript", "src": "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js" }],
+    ["script", { "language": "javascript", "type": "text/javascript", "src": "/js/mouseClick.js" }],
     [
       "meta",
       {
@@ -46,9 +49,9 @@ module.exports = {
         "icon": "reco-date"
       },
       {
-        "text": "关于",
+        "text": "联系我",
         "link": "/about/",
-        "icon": "reco-account"
+        "icon": "reco-other"
       }
     ],
     "type": "blog",
@@ -65,96 +68,98 @@ module.exports = {
     },
     "friendLink": [
       {
-        "title": "作者博客",
+        "title": "关于我",
+        "desc": "zealsay轻应用脚手架开发指南",
+        "logo": "https://i.loli.net/2021/05/17/rRzqv6kGHwATM41.png",
+        "link": "/about/"
+      },
+      {
+        "title": "播客样式作者",
         "desc": "zealsay说你想说",
         "logo": "https://pan.zealsay.com/avatar/20200606105310570000000.jpg",
         "link": "https://blog.zealsay.com"
       },
       {
-        "title": "另一个博客",
+        "title": "播客友情链接",
         "desc": "vuepress_blog",
-        "logo": "https://pan.zealsay.com/blog/logo.png",
+        "logo": "https://pan.zealsay.com/avatar/20200606105310570000000.jpg",
         "link": "https://www.zealsay.com"
       },
       {
-        "title": "午后南杂",
-        "desc": "Enjoy when you can, and endure when you must.",
-        "logo": "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
-        "link": "https://www.recoluan.com"
-      },
-      {
-        "title": "zealsay开发指南",
-        "desc": "zealsay轻应用脚手架开发指南",
-        "logo": "https://pic.zealsay.com/20190909225214850000000.jpg",
-        "link": "https://docs.zealsay.com"
+        "title": "我的GitHub",
+        "desc": "记录我搬砖的网站",
+        "logo": "https://i.loli.net/2021/05/18/Cw4FEmbWIKROu7l.jpg",
+        "link": "https://github.com/1079265662"
       }
     ],
     "valineConfig": {
-      "appId": "xxx",// your appId
-      "appKey": "xxx", // your appKey
+      "appId": "tPugNRadb0huWnsoU1URpvSM-MdYXbMMI",// your appId
+      "appKey": "rDi2HfpHPFMIL6Vt8yV9Dbe5", // your appKey
       "avatar": "", //
       "enableQQ": true, //启用昵称框自动获取QQ昵称和QQ头像
-      "requiredFields": ['nick', 'mail'], //设置必填项
+      "requiredFields": ['nick'], //设置必填项
+      "placeholder": "可以评论一下吗😅",
+      "meta": ['nick', 'mail', 'link']
     },
     "logo": "/logo.png",
     // "huawei": true, //首页出现华为文案
     "search": true,
     "searchMaxSuggestions": 10,
     "lastUpdated": "Last Updated",
-    "author": "李白",
-    "authorAvatar": "https://pan.zealsay.com/avatar/20200606105310570000000.jpg",
-    "record": "你的备案号 ", //icp备案
-    "startYear": "2020",
-    "info": "一名追求技术喜欢安静的程序猿，目前在北京某互联网公司担任高级后台java开发。",
-    "socials":{
-      "github" : "https://github.com/GodLikeZeal", //github
-      "gitlub" : false, //gitlub
-      "gitee" : "https://gitee.com/GodLikeZeal", //gitee
-      "jianshu" : "https://www.jianshu.com/u/e2d051b6d2e9", //简书
-      "zhihu" : "https://www.zhihu.com/people/qian-ge-diao-63", //知乎
-      "toutiao" : false, //知乎
-      "juejin": "https://juejin.im/user/2796746683716990", //掘金
-      "segmentfault" : "https://segmentfault.com/u/zeal_5eecb699bdb08", //思否
-      "csdn" : false, //CSDN
-      "wechat" : "你的微信", //微信
-      "qq" : "你的QQ" //QQ
+    "author": "LKaiLi",
+    "authorAvatar": "https://i.loli.net/2021/05/17/rRzqv6kGHwATM41.png",
+    "record": "暂无备案号 ", //icp备案
+    "startYear": "2021 ",
+    "info": "你看100遍她的视频，她不是你的，你敲100遍vue代码，知识就是你的，该醒醒了，我们的目标是学习vue！😅",
+    "socials": {
+      "github": "https://github.com/1079265662", //github
+      "gitlub": false, //gitlub
+      "gitee": "https://gitee.com/liu_kaili", //gitee
+      "jianshu": false, //简书
+      "zhihu": false, //知乎
+      "toutiao": false, //知乎
+      "juejin": false, //掘金
+      "segmentfault": false, //思否
+      "csdn": false, //CSDN
+      "wechat": "https://i.loli.net/2021/05/18/KsB8A6JD7SVR3Oy.jpg", //微信
+      "qq": "https://i.loli.net/2021/05/18/4HCo6ieL2MZfu78.jpg" //QQ
     },
     "mottos": [{
-      "zh": "愿你保持初心和善良,笑里尽是温暖与坦荡。",
-      "en": "May you keep your original heart and kindness, and smile with warmth and magnanimity."
+      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
+      "en": "the part that is good is not original, and the part that is original is not good"
     },
-      {
-        "zh": "年轻就是无限的可能。",
-        "en": "Youth means limitless possibilities."
-      },
-      {
-        "zh": "真正的梦就是现实的彼岸。",
-        "en": "Real dream is the other shore of reality."
-      },
-      {
-        "zh": "不为模糊不清的未来担忧，只为清清楚楚的现在努力。",
-        "en": "Don't worry about the vague future, just strive for the clear present."
-      },
-      {
-        "zh": "与其装腔作势企图影响别人，不如咬牙切齿狠命修理自己。",
-        "en": "Rather than pretending to influence others, it's better to grind your teeth and repair yourself."
-      }, {
-        "zh": "上天是公平的，只要努力就会有收获，否则就是你不够努力。",
-        "en": "God is fair, as long as effort will include results, otherwise is you hard enough."
-      },
-      {
-        "zh": "人生没有后悔，我们只能尽力去不让自己后悔。",
-        "en": "Life without regret, we can only do our best to not to regret."
-      }
+    {
+      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
+      "en": "the part that is good is not original, and the part that is original is not good."
+    },
+    {
+      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
+      "en": "the part that is good is not original, and the part that is original is not good."
+    },
+    {
+      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
+      "en": "the part that is good is not original, and the part that is original is not good."
+    },
+    {
+      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
+      "en": "the part that is good is not original, and the part that is original is not good."
+    }, {
+      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
+      "en": "the part that is good is not original, and the part that is original is not good."
+    },
+    {
+      "zh": "优它的优秀之处并非原创，它的原创之处并不优秀。",
+      "en": "the part that is good is not original, and the part that is original is not good."
+    }
     ],
     "covers": [
-      'https://pan.zealsay.com/zealsay/cover/7.jpg',
-      'https://pan.zealsay.com/zealsay/cover/1.jpg',
-      'https://pan.zealsay.com/zealsay/cover/2.jpg',
-      'https://pan.zealsay.com/zealsay/cover/3.jpg',
       'https://pan.zealsay.com/zealsay/cover/4.jpg',
-      'https://pan.zealsay.com/zealsay/cover/5.jpg',
-      'https://pan.zealsay.com/zealsay/cover/6.jpg'
+      'https://pan.zealsay.com/zealsay/cover/4.jpg',
+      'https://pan.zealsay.com/zealsay/cover/4.jpg',
+      'https://pan.zealsay.com/zealsay/cover/4.jpg',
+      'https://pan.zealsay.com/zealsay/cover/4.jpg',
+      'https://pan.zealsay.com/zealsay/cover/4.jpg',
+      'https://pan.zealsay.com/zealsay/cover/4.jpg'
     ],
     "codeTheme": "tomorrow"
   },
@@ -170,4 +175,93 @@ module.exports = {
   //     config.output.filename = "assets/js/[name].js";
   //   }
   // }
+  plugins: [
+    // 自动生成侧边栏的插件
+    [
+      'vuepress-plugin-auto-sidebar', {
+        collapse: {
+          open: true
+        }
+      }
+    ],
+    [
+      "dynamic-title",
+      {
+        // Icon 建议根据自身需求选择
+        showIcon: "/favicon.ico",
+        showText: "",
+        hideIcon: "/favicon1.ico",
+        hideText: " 你在看什么呢！",
+        recoverTime: 2000
+      }
+    ],
+    // 复制代码功能
+    [
+      "vuepress-plugin-nuggets-style-copy",
+      {
+        copyText: "复制代码",
+        tip: {
+          content: "复制成功!"
+        }
+      }
+    ],
+    // 音乐播放器
+    [
+      'meting', {
+        meting: {
+          // 网易
+          server: "netease",
+          // 读取歌单列表
+          type: "playlist",
+          // 歌单id 
+          mid: "6755005481",
+        },
+        // 不配置该项的话不会出现全局播放器
+        aplayer: {
+          // 吸底模式
+          fixed: true,
+          mini: true,
+          // 自动播放
+          autoplay: false,
+          // 歌曲栏折叠
+          listFolded: true,
+          // 颜色
+          theme: '#647ea0',
+          // 播放顺序为随机
+          order: 'random',
+          // 初始音量
+          volume: 0.2,
+          // 关闭歌词显示
+          lrcType: 0
+        },
+        mobile: {
+          // 手机端去掉cover图
+          cover: false,
+        }
+      }
+    ],
+    // 小猫挂绳 npm install vuepress-plug-go-top 
+    ['go-top'],
+    [
+      'vuepress-plugin-sponsor',
+      {
+        theme: 'simple',
+        alipay: '/sponsor-qrcode/qrcode-alipay.png',
+        wechat: '/sponsor-qrcode/qrcode-wechat.png',
+        qq: '/sponsor-qrcode/qrcode-qq.png',
+        paypal: 'https://www.paypal.me/yokefellow',
+        duration: 2000
+      }
+    ],
+    [
+      //先安装在配置， npm install @vuepress-reco/vuepress-plugin-kan-ban-niang --save
+      "@vuepress-reco/vuepress-plugin-kan-ban-niang",
+      {
+        theme: ['blackCat'],
+        width: 120,
+        height: 322,
+        clean: true
+      }
+    ]
+  ]
 }

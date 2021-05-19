@@ -2,7 +2,7 @@ const path = require('path')
 
 // Theme API.
 module.exports = (options, ctx) => ({
-  alias () {
+  alias() {
     const { themeConfig, siteConfig } = ctx
     // resolve algolia
     const isAlgoliaSearch = (
@@ -19,7 +19,6 @@ module.exports = (options, ctx) => ({
   },
 
   plugins: [
-    '@vuepress-reco/back-to-top',
     '@vuepress-reco/loading-page',
     '@vuepress-reco/pagation',
     '@vuepress-reco/comments',

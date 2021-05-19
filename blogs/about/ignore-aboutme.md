@@ -1,11 +1,8 @@
 ---
-title: 第一篇博客
+title: 关于我
 date: 2020-08-31
-tags:
- - java
-categories:
- -  技术笔记
-sticky: 1
+permalink: '/about/'
+autoIgnore: true
 ---
 
 ::: tip 介绍
