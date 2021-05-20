@@ -104,7 +104,7 @@ module.exports = {
     "valineConfig": {
       "appId": "tPugNRadb0huWnsoU1URpvSM-MdYXbMMI",// your appId
       "appKey": "rDi2HfpHPFMIL6Vt8yV9Dbe5", // your appKey
-      "avatar": "", //
+      "avatar": "mp", //
       "enableQQ": true, //启用昵称框自动获取QQ昵称和QQ头像
       "requiredFields": ['nick'], //设置必填项
       "placeholder": "可以评论一下吗😅",
@@ -246,22 +246,12 @@ module.exports = {
         mobile: {
           // 手机端去掉cover图
           cover: false,
+          // lrc: false
         }
       }
     ],
     // 小猫挂绳 npm install vuepress-plug-go-top 
     ['go-top'],
-    [
-      'vuepress-plugin-sponsor',
-      {
-        theme: 'simple',
-        alipay: '/sponsor-qrcode/qrcode-alipay.png',
-        wechat: '/sponsor-qrcode/qrcode-wechat.png',
-        qq: '/sponsor-qrcode/qrcode-qq.png',
-        paypal: 'https://www.paypal.me/yokefellow',
-        duration: 2000
-      }
-    ],
     [
       //先安装在配置， npm install @vuepress-reco/vuepress-plugin-kan-ban-niang --save
       "@vuepress-reco/vuepress-plugin-kan-ban-niang",

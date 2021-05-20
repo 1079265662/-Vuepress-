@@ -26,8 +26,7 @@
     "vuepress-plugin-cursor-effects": "^1.0.2",
     "vuepress-plugin-dynamic-title": "^1.0.0",
     "vuepress-plugin-meting": "^0.2.3",
-    "vuepress-plugin-nuggets-style-copy": "^1.0.3",
-    "vuepress-plugin-sponsor": "^1.0.0"
+    "vuepress-plugin-nuggets-style-copy": "^1.0.3"
   },
   "description": "blog for zeal"
 }
