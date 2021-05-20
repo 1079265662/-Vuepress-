@@ -161,7 +161,7 @@ $navbar-horizontal-padding = 1.5rem;
     font-size: 0.9rem;
     position: absolute;
     right: 4.5rem;
-    top: 1.2rem;
+    top: 1.12rem;
     display: flex;
 
     // background-color var(--background-color)
