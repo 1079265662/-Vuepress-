@@ -53,7 +53,7 @@ module.exports = {
         icon: 'reco-other',
         items: [
           { text: '关于我', link: '/other/', icon: 'reco-account' },
-          { text: '联系我', link: '/about/', icon: 'reco-other' }
+          { text: '联系我', link: '/about/', icon: 'reco-mail' }
         ]
       },
     ],
