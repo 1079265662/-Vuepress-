@@ -49,15 +49,12 @@ module.exports = {
         "icon": "reco-date"
       },
       {
-        "text": "联系我",
-        "link": "/about/",
-        "icon": "reco-other"
-      },
-      {
-        "text": '关于我',
-        "link": "/blogs/other/第一篇文章.html",
-        "icon": 'reco-message',
-
+        text: '关于本播客',
+        icon: 'reco-other',
+        items: [
+          { text: '关于我', link: '/other/', icon: 'reco-message' },
+          { text: '联系我', link: '/about/', icon: 'reco-other' }
+        ]
       },
     ],
     "type": "blog",
@@ -65,20 +62,19 @@ module.exports = {
     "blogConfig": {
       "category": {
         "location": 2,
-        "text": "博客"
+        "text": "博客分类"
       },
       "tag": {
         "location": 3,
         "text": "标签"
       }
-
     },
     "friendLink": [
       {
         "title": "关于我",
-        "desc": "zealsay轻应用脚手架开发指南",
+        "desc": "欢迎访问本小站",
         "logo": "https://i.loli.net/2021/05/17/rRzqv6kGHwATM41.png",
-        "link": "/blogs/other/第一篇文章.html"
+        "link": "/other/"
       },
       {
         "title": "播客样式作者",

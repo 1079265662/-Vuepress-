@@ -53,6 +53,13 @@ module.exports = (options, ctx) => ({
           scopeLayout: 'TimeLine'
         },
         {
+          id: 'other',
+          keys: ['other'],
+          path: '/blogs/other/第一篇文章.md',
+          layout: 'Other',
+          scopeLayout: 'Other'
+        },
+        {
           id: 'about',
           keys: ['about'],
           path: '/about/',
