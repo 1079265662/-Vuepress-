@@ -49,15 +49,16 @@ module.exports = {
         "icon": "reco-date"
       },
       {
-        "text": "关于我",
-        "link": "/blogs/other/第一篇文章.html",
-        "icon": "reco-account"
-      },
-      {
         "text": "联系我",
         "link": "/about/",
         "icon": "reco-other"
-      }
+      },
+      {
+        "text": '关于我',
+        "link": "/blogs/other/第一篇文章.html",
+        "icon": 'reco-message',
+
+      },
     ],
     "type": "blog",
     "sidebar": false,
@@ -70,6 +71,7 @@ module.exports = {
         "location": 3,
         "text": "标签"
       }
+
     },
     "friendLink": [
       {
