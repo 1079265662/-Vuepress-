@@ -52,7 +52,7 @@ module.exports = {
         text: '关于本播客',
         icon: 'reco-other',
         items: [
-          { text: '关于我', link: '/other/', icon: 'reco-message' },
+          { text: '关于我', link: '/other/', icon: 'reco-account' },
           { text: '联系我', link: '/about/', icon: 'reco-other' }
         ]
       },
