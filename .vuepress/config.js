@@ -91,6 +91,12 @@ module.exports = {
         "link": "https://www.zealsay.com"
       },
       {
+        "title": "技术指导",
+        "desc": "vuepress_blog",
+        "logo": "https://zyj_yida.gitee.io/source/img/ico/head.jpg",
+        "link": "https://zhangyujie.top/"
+      },
+      {
         "title": "我的GitHub",
         "desc": "记录我搬砖的网站",
         "logo": "https://i.loli.net/2021/05/18/Cw4FEmbWIKROu7l.jpg",
