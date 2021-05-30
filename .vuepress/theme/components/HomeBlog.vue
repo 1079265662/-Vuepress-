@@ -3,29 +3,17 @@
     <div class="hero" :style="{ ...bgImageStyle }">
       <div class="motto">
         <ModuleTransition>
-          <img
-            class="hero-img"
-            v-if="recoShowModule && $frontmatter.heroImage"
-            :style="heroImageStyle || {}"
-            :src="$withBase($frontmatter.heroImage)"
-            alt="hero"
-          />
+          <img class="hero-img" v-if="recoShowModule && $frontmatter.heroImage" :style="heroImageStyle || {}" :src="$withBase($frontmatter.heroImage)" alt="hero" />
         </ModuleTransition>
 
         <ModuleTransition delay="0.04" duration="0.5">
-          <h1
-            v-if="recoShowModule && $frontmatter.heroText !== null"
-            class="longcang"
-          >
+          <h1 v-if="recoShowModule && $frontmatter.heroText !== null" class="longcang">
             {{ motto.zh || $frontmatter.heroText || $title || "zealsay" }}
           </h1>
         </ModuleTransition>
 
         <ModuleTransition delay="0.08" duration="0.5">
-          <p
-            v-if="recoShowModule && $frontmatter.tagline !== null"
-            class="description"
-          >
+          <p v-if="recoShowModule && $frontmatter.tagline !== null" class="description">
             {{
               motto.en ||
               $frontmatter.tagline ||
@@ -35,10 +23,7 @@
           </p>
         </ModuleTransition>
 
-        <a
-          href="#anchor"
-          class="scroll-down bounce-enter-active down-arrow"
-        ></a>
+        <a href="#anchor" class="scroll-down bounce-enter-active down-arrow"></a>
       </div>
     </div>
 
@@ -46,17 +31,9 @@
       <div id="anchor" v-show="recoShowModule" class="home-blog-wrapper">
         <div class="blog-list">
           <!-- 博客列表 -->
-          <note-abstract
-            :data="$recoPosts"
-            :currentPage="currentPage"
-          ></note-abstract>
+          <note-abstract :data="$recoPosts" :currentPage="currentPage"></note-abstract>
           <!-- 分页 -->
-          <pagation
-            class="pagation"
-            :total="$recoPosts.length"
-            :currentPage="currentPage"
-            @getCurrentPage="getCurrentPage"
-          />
+          <pagation class="pagation" :total="$recoPosts.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage" />
         </div>
         <div class="info-wrapper">
           <PersonalInfo />
@@ -64,18 +41,10 @@
             <i class="iconfont reco-category"></i> {{ homeBlogCfg.category }}
           </h4>
           <ul class="category-wrapper">
-            <li
-              class="category-item"
-              v-for="(item, index) in this.$categories.list"
-              :key="index"
-            >
+            <li class="category-item" v-for="(item, index) in this.$categories.list" :key="index">
               <router-link :to="item.path">
                 <span class="category-name">{{ item.name }}</span>
-                <span
-                  class="post-num"
-                  :style="{ backgroundColor: getOneColor() }"
-                  >{{ item.pages.length }}</span
-                >
+                <span class="post-num" :style="{ backgroundColor: getOneColor() }">{{ item.pages.length }}</span>
               </router-link>
             </li>
           </ul>
@@ -84,11 +53,9 @@
             <i class="iconfont reco-tag"></i> {{ homeBlogCfg.tag }}
           </h4>
           <TagList @getCurrentTag="getPagesByTags" />
-          <h4
-            v-if="
+          <h4 v-if="
               $themeConfig.friendLink && $themeConfig.friendLink.length !== 0
-            "
-          >
+            ">
             <i class="iconfont reco-friend"></i> {{ homeBlogCfg.friendLink }}
           </h4>
           <FriendLink />
@@ -122,7 +89,7 @@ export default {
     ModuleTransition,
     PersonalInfo,
   },
-  data() {
+  data () {
     return {
       recoShow: false,
       currentPage: 1,
@@ -130,10 +97,10 @@ export default {
     };
   },
   computed: {
-    homeBlogCfg() {
+    homeBlogCfg () {
       return this.$recoLocales.homeBlog;
     },
-    actionLink() {
+    actionLink () {
       const { actionLink: link, actionText: text } = this.$frontmatter;
 
       return {
@@ -141,7 +108,7 @@ export default {
         text,
       };
     },
-    motto() {
+    motto () {
       return (
         this.$themeConfig.mottos[new Date().getDay()] || {
           zh: "愿你保持初心和善良,笑里尽是温暖与坦荡。",
@@ -150,10 +117,10 @@ export default {
         }
       );
     },
-    heroImageStyle() {
+    heroImageStyle () {
       return this.$frontmatter.heroImageStyle || {};
     },
-    bgImageStyle() {
+    bgImageStyle () {
       //   const initBgImageStyle = {
       //     textAlign: 'center',
       //     overflow: 'hidden',
@@ -169,25 +136,25 @@ export default {
       //
       //   return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle
     },
-    heroHeight() {
+    heroHeight () {
       return document.querySelector(".hero").clientHeight;
     },
   },
-  mounted() {
+  mounted () {
     this.recoShow = true;
     this._setPage(this._getStoragePage());
     AOS.init();
   },
   methods: {
     // 获取当前页码
-    getCurrentPage(page) {
+    getCurrentPage (page) {
       this._setPage(page);
       setTimeout(() => {
         window.scrollTo(0, this.heroHeight);
       }, 100);
     },
     // 根据分类获取页面数据
-    getPages() {
+    getPages () {
       let pages = this.$site.pages;
       pages = pages.filter((item) => {
         const { home, date } = item.frontmatter;
@@ -196,10 +163,10 @@ export default {
       // reverse()是为了按时间最近排序排序
       this.pages = pages.length == 0 ? [] : pages;
     },
-    getPagesByTags(tagInfo) {
+    getPagesByTags (tagInfo) {
       this.$router.push({ path: tagInfo.path });
     },
-    _setPage(page) {
+    _setPage (page) {
       this.currentPage = page;
       this.$page.currentPage = page;
       this._setStoragePage(page);

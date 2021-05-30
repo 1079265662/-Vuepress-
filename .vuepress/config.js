@@ -49,7 +49,7 @@ module.exports = {
         "icon": "reco-date"
       },
       {
-        text: '关于本播客',
+        text: '关于播客',
         icon: 'reco-other',
         items: [
           { text: '关于我', link: '/other/', icon: 'reco-account' },
@@ -71,7 +71,7 @@ module.exports = {
     "blogConfig": {
       "category": {
         "location": 2,
-        "text": "博客分类"
+        "text": "分类"
       },
       "tag": {
         "location": 3,
