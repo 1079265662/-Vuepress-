@@ -81,7 +81,7 @@ module.exports = {
     "friendLink": [
       {
         "title": "关于我",
-        "desc": "欢迎访问本小站",
+        "desc": "欢迎访问本小站🥳",
         "logo": "https://i.loli.net/2021/05/17/rRzqv6kGHwATM41.png",
         "link": "/other/"
       },
@@ -104,8 +104,14 @@ module.exports = {
         "link": "https://zhangyujie.top/"
       },
       {
-        "title": "我的GitHub",
-        "desc": "记录我搬砖的网站",
+        "title": "去看电影 🎬︎",
+        "desc": "太好看啦 🔞",
+        "logo": "https://i.loli.net/2021/05/17/NWjePTC9BLD48tl.jpg",
+        "link": "https://cms.zhuanma.co/"
+      },
+      {
+        "title": "我的GitHub 🧱",
+        "desc": "记录我搬砖的网站🧱",
         "logo": "https://i.loli.net/2021/05/18/Cw4FEmbWIKROu7l.jpg",
         "link": "https://github.com/1079265662"
       }
@@ -227,12 +233,12 @@ module.exports = {
     [
       'meting', {
         meting: {
-          // 网易
-          server: "netease",
+          // 腾讯
+          server: "tencent",
           // 读取歌单列表
           type: "playlist",
           // 歌单id 
-          mid: "6755005481",
+          mid: "8013947516",
         },
         // 不配置该项的话不会出现全局播放器
         aplayer: {
@@ -246,11 +252,13 @@ module.exports = {
           // 颜色
           theme: '#647ea0',
           // 播放顺序为随机
-          order: 'random',
+          order: 'list',
           // 初始音量
-          volume: 0.2,
+          volume: 0.3,
           // 关闭歌词显示
-          lrcType: 0
+          lrcType: 0,
+          // 互斥
+          mutex: true
         },
         mobile: {
           // 手机端去掉cover图

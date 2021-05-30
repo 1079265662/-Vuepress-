@@ -4,8 +4,7 @@ date: 2021-5-30
 tags:
  - Vue
  - axios
-categories: axios接口配置
-
+categories: Vue
 ---
 
 ::: tip 介绍
