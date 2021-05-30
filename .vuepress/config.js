@@ -56,9 +56,18 @@ module.exports = {
           { text: '联系我', link: '/about/', icon: 'reco-mail' }
         ]
       },
+  
     ],
     "type": "blog",
-    "sidebar": false,
+    "sidebar": {
+       // 添加分类时，改两处位置，多加一个分类字段（第一处）
+      //  '/categories/': utils.genSidebar(folderhelper.getFolderName(rootpath + "/categories/"), filehelper.getFileName(rootpath + "/categories/"), true),
+      //  '/archives/': getArchivesSidebar(),
+      //  '/links/': getCategoriesSidebar(),
+      //  '/about/': getCategoriesSidebar(),
+      //  '/domains/': getCategoriesSidebar(),
+       // '/categories/': getCategoriesSidebar('Docker', 'Kali', 'Linux', 'Web', '生活', '云主机', '数据库', '树莓派', '机器学习', '科学上网', '编程语言')
+    },
     "blogConfig": {
       "category": {
         "location": 2,

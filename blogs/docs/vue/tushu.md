@@ -4,8 +4,7 @@ date: 2021-5-20
 tags:
  - Vue
  - 前端
-categories:
- -  Vue小案例
+categories: Vue小案例
 ---
 
 ::: tip 介绍
