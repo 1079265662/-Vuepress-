@@ -189,6 +189,7 @@ export default {
       max-width: 320px;
 
       .cover-img {
+        opacity: 1;
         max-width: 320px;
         width: inherit;
       }
