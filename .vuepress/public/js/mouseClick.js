@@ -12,7 +12,7 @@ jQuery(document).ready(function ($) {
         var x = e.pageX,
             y = e.pageY;
         $w.css({
-            "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+            "z-index": 11,
             "top": y - 20,
             "left": x,
             "position": "absolute",

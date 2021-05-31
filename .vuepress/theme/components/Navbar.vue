@@ -3,34 +3,24 @@
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
     <router-link :to="$localePath" class="home-link">
-      <img
-        class="logo"
-        v-if="$themeConfig.logo"
-        :src="$withBase($themeConfig.logo)"
-        :alt="$siteTitle"
-      />
+      <img class="logo" v-if="$themeConfig.logo" :src="$withBase($themeConfig.logo)" :alt="$siteTitle" />
       <span ref="siteName" class="site-name" v-if="$siteTitle">{{
         $siteTitle
       }}</span>
     </router-link>
 
-    <div
-      class="links"
-      :style="
+    <div class="links" :style="
         linksWrapMaxWidth
           ? {
               'max-width': linksWrapMaxWidth + 'px',
             }
           : {}
-      "
-    >
+      ">
       <DayAndNight />
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
-      <SearchBox
-        v-else-if="
+      <SearchBox v-else-if="
           $themeConfig.search !== false && $frontmatter.search !== false
-        "
-      />
+        " />
       <NavLinks class="can-hide" />
     </div>
   </header>
@@ -52,13 +42,13 @@ export default {
     DayAndNight,
   },
 
-  data() {
+  data () {
     return {
       linksWrapMaxWidth: null,
     };
   },
 
-  mounted() {
+  mounted () {
     const MOBILE_DESKTOP_BREAKPOINT = 719; // refer to config.styl
     const NAVBAR_VERTICAL_PADDING =
       parseInt(css(this.$el, "paddingLeft")) +
@@ -78,17 +68,17 @@ export default {
   },
 
   computed: {
-    algolia() {
+    algolia () {
       return this.$themeLocaleConfig.algolia || this.$themeConfig.algolia || {};
     },
 
-    isAlgoliaSearch() {
+    isAlgoliaSearch () {
       return this.algolia && this.algolia.apiKey && this.algolia.indexName;
     },
   },
 
   methods: {
-    throttle(func, delay) {
+    throttle (func, delay) {
       let timer = null;
       let startTime = Date.now();
 
@@ -110,7 +100,7 @@ export default {
   },
 };
 
-function css(el, property) {
+function css (el, property) {
   // NOTE: Known bug, will return 'auto' if style value is 'auto'
   const win = el.ownerDocument.defaultView;
   // null means not to return pseudo styles
@@ -183,6 +173,7 @@ $navbar-horizontal-padding = 1.5rem;
 
     .links {
       padding-left: 0.2rem;
+      right: 0.18rem;
     }
 
     .home-link {

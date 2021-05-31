@@ -1,35 +1,9 @@
 <template>
   <div class="search-box">
     <i class="iconfont reco-search"></i>
-    <input
-      @input="query = $event.target.value"
-      aria-label="Search"
-      :value="query"
-      :class="{ focused: focused }"
-      :placeholder="placeholder"
-      autocomplete="off"
-      spellcheck="false"
-      @focus="focused = true"
-      @blur="focused = false"
-      @keyup.enter="go(focusIndex)"
-      @keyup.up="onUp"
-      @keyup.down="onDown"
-      ref="input"
-    />
-    <ul
-      class="suggestions"
-      v-if="showSuggestions"
-      :class="{ 'align-right': alignRight }"
-      @mouseleave="unfocus"
-    >
-      <li
-        class="suggestion"
-        v-for="(s, i) in suggestions"
-        :key="i"
-        :class="{ focused: i === focusIndex }"
-        @mousedown="go(i)"
-        @mouseenter="focus(i)"
-      >
+    <input @input="query = $event.target.value" aria-label="Search" :value="query" :class="{ focused: focused }" :placeholder="placeholder" autocomplete="off" spellcheck="false" @focus="focused = true" @blur="focused = false" @keyup.enter="go(focusIndex)" @keyup.up="onUp" @keyup.down="onDown" ref="input" />
+    <ul class="suggestions" v-if="showSuggestions" :class="{ 'align-right': alignRight }" @mouseleave="unfocus">
+      <li class="suggestion" v-for="(s, i) in suggestions" :key="i" :class="{ focused: i === focusIndex }" @mousedown="go(i)" @mouseenter="focus(i)">
         <a :href="s.path" @click.prevent>
           <span class="page-title">{{ s.title || s.path }}</span>
           <span v-if="s.header" class="header">&gt; {{ s.header.title }}</span>
@@ -41,7 +15,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       query: "",
       focused: false,
@@ -49,14 +23,14 @@ export default {
       placeholder: undefined,
     };
   },
-  mounted() {
+  mounted () {
     this.placeholder = this.$site.themeConfig.searchPlaceholder || "";
   },
   computed: {
-    showSuggestions() {
+    showSuggestions () {
       return this.focused && this.suggestions && this.suggestions.length;
     },
-    suggestions() {
+    suggestions () {
       const query = this.query.trim().toLowerCase();
       if (!query) {
         return;
@@ -94,14 +68,14 @@ export default {
       return res;
     },
     // make suggestions align right when there are not enough items
-    alignRight() {
+    alignRight () {
       const navCount = (this.$site.themeConfig.nav || []).length;
       const repo = this.$site.repo ? 1 : 0;
       return navCount + repo <= 2;
     },
   },
   methods: {
-    getPageLocalePath(page) {
+    getPageLocalePath (page) {
       for (const localePath in this.$site.locales || {}) {
         if (localePath !== "/" && page.path.indexOf(localePath) === 0) {
           return localePath;
@@ -109,7 +83,7 @@ export default {
       }
       return "/";
     },
-    onUp() {
+    onUp () {
       if (this.showSuggestions) {
         if (this.focusIndex > 0) {
           this.focusIndex--;
@@ -118,7 +92,7 @@ export default {
         }
       }
     },
-    onDown() {
+    onDown () {
       if (this.showSuggestions) {
         if (this.focusIndex < this.suggestions.length - 1) {
           this.focusIndex++;
@@ -127,7 +101,7 @@ export default {
         }
       }
     },
-    go(i) {
+    go (i) {
       if (!this.showSuggestions) {
         return;
       }
@@ -135,10 +109,10 @@ export default {
       this.query = "";
       this.focusIndex = 0;
     },
-    focus(i) {
+    focus (i) {
       this.focusIndex = i;
     },
-    unfocus() {
+    unfocus () {
       this.focusIndex = -1;
     },
   },
@@ -274,7 +248,7 @@ export default {
 @media (max-width: $MQMobileNarrow) {
   .search-box {
     .suggestions {
-      width: calc(100vw - 4rem);
+      width: calc(100vw - 10.3rem);
     }
 
     input:focus {
