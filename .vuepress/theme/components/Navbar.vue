@@ -150,7 +150,7 @@ $navbar-horizontal-padding = 1.5rem;
     white-space: nowrap;
     font-size: 0.9rem;
     position: absolute;
-    right: 4.5rem;
+    right: 4.1rem;
     top: 1.12rem;
     display: flex;
 

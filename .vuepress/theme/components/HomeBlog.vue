@@ -460,4 +460,19 @@ export default {
   -webkit-transform: rotate(135deg); /* 箭头方向可以自由切换角度 */
   transform: rotate(135deg);
 }
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+  transform: translate(-66px);
+  transition: all 0.25s;
+  height: 66px !important;
+}
+
+.aplayer.aplayer-narrow .aplayer-body, .aplayer.aplayer-narrow .aplayer-pic {
+  height: 66px !important;
+}
+
+.aplayer .aplayer-info .aplayer-music .aplayer-title {
+  font-size: 14px;
+  color: #000;
+}
 </style>
