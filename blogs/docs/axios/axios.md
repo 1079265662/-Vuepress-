@@ -1,14 +1,14 @@
 ---
 title: axios配置接口
-date: 2021-5-30
+date: 2021-5-30 
 tags:
  - Vue
  - axios
-categories: Vue
+categories: axios
 ---
 
 ::: tip 介绍
-Vue中axios配置接口<br>
+Vue中axios增删改查<br>
 :::
 
 <!-- more -->
