@@ -1,11 +1,12 @@
 ---
 title: Vue接口模块设置步骤
-date: 2021-6-4 
+date: 2021-05-21
 tags:
  - Vue
  - axios
 categories:
  -  axios
+sticky: 2
 ---
 
 ::: tip 介绍

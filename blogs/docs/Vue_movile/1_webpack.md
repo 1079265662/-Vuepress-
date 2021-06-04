@@ -1,6 +1,6 @@
 ---
 title: 1. Vue脚手架自定义
-date: 2021-6-1
+date: 2021-06-01
 cover: https://i.loli.net/2021/05/30/mnhTAar3tc4gLdK.jpg
 tags:
  - Vue
