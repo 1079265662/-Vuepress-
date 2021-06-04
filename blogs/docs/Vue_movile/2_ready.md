@@ -1,5 +1,5 @@
 ---
-title: 2. Vue移动端项目初始化
+title: 2. Vue脚手架自定义
 date: 2021-6-1
 cover: https://i.loli.net/2021/05/30/mnhTAar3tc4gLdK.jpg
 tags:

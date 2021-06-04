@@ -6,8 +6,6 @@ tags:
  - axios
 categories:
  -  axios
-autoIgnore: true
-subSidebar: false
 ---
 
 ::: tip 介绍
