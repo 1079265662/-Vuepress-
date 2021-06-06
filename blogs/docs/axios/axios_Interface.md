@@ -1,6 +1,6 @@
 ---
 title: Vue接口模块设置步骤
-date: 2021-05-21
+date: 2021-05-25
 tags:
  - Vue
  - axios
@@ -21,6 +21,20 @@ sticky: 2
 
 * 路由配置分为三个阶段
   * 1. 配置axios通用接口文件 (一级接口组件)
+       * 通常配置 `axios.create({})` 分支设置url基础地址 方便操控
+
+  ```js
+  // 导入 axios组件
+  import axios from 'axios'
+  // 设置基准axios路径 用常量保存
+  const baseURL = 'http://api-toutiao-web.itheima.net/app/'
+  // axios分支的方法 创建axios接口调用方法 取代单一的axios方法(方便单独设置)
+  const instance = axios.create({
+    // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
+    baseURL: baseURL
+  })
+  ```
+
   * 2. 调用接口时候 调用一级接口组件 单独设置接口文件 (二级接口组件)
   * 3. 在需要调用接口的Vue文件引入二级接口组件 (导入二级接口)
 
@@ -28,6 +42,7 @@ sticky: 2
 
 ![11](https://i.loli.net/2021/06/04/l4R3Z1oLAGnmx6X.png)
 
+- 配置 `axios.create({})` 分支设置url基础地址 方便操控
 - 调用axios方法 设置基本url路径 设置参数 配置数据
   - 设置属性:  method(请求方式) , url(地址) , data(请求体) , params(请求方式参数) , headers(请求头)
 - return 返回结果
@@ -39,26 +54,30 @@ sticky: 2
 ```js
 // 导入 axios组件
 import axios from 'axios'
-// 设置基准axios路径
-axios.defaults.baseURL = 'http://api-toutiao-web.itheima.net/app/'
+// 设置基准axios路径 用常量保存
+const baseURL = 'http://api-toutiao-web.itheima.net/app/'
+// axios分支的方法 创建axios接口调用方法 取代单一的axios方法(方便单独设置)
+const instance = axios.create({
+  // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
+  baseURL: baseURL
+})
 // 封装通用的接口调用方法
 export default (options) => {
   // 这里的返回值是Promise实例对象
-    // return 返回数据
-  return axios({
-    // 设置请求方式 左边是固定属性名 右边是数据
-    method: options.method || 'GET', // 默认设置为'GET' 请求方式
+    // return 返回数据 instance是声明的axios分支方法
+  return instance({
+    // 设置请求方式
+    method: options.method || 'GET',
     // 设置请求地址
     url: options.url,
     // POST/PUT请求参数（请求体）
     data: options.data,
     // GET请求参数（自动拼接到url地址中）
     params: options.params,
-    // 设置请求头
+    // 设置请求头(一般用于跨域问题 和 传输token)
     headers: options.headers
   })
 }
-
 ```
 
 > <big>二、</big>api文件夹 二级路由 指定接口设置示例(登录二级接口) `api文件夹创建 二级路由模块(接口)`

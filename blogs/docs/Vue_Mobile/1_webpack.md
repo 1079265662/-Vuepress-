@@ -1,7 +1,7 @@
 ---
-title: 1. Vue脚手架自定义
+title: 1. Vue移动端脚手架自定义
 date: 2021-06-01
-cover: https://i.loli.net/2021/05/30/mnhTAar3tc4gLdK.jpg
+cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/4.jpg
 tags:
  - Vue
  - Vue移动端
@@ -9,7 +9,7 @@ categories: Vue移动头条项目
 ---
 
 ::: tip 介绍
-第一步 Vue脚手架移动端自定义(Vue 2.0)<br>
+Vue移动端脚手架自定义(Vue 2.0)<br>
 :::
 
 <!-- more -->

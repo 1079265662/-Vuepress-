@@ -1,7 +1,7 @@
 ---
-title: 2. Vue脚手架自定义
+title: 2. Vue移动端项目初始化
 date: 2021-06-02
-cover: https://i.loli.net/2021/05/30/mnhTAar3tc4gLdK.jpg
+cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/4.jpg
 tags:
  - Vue
  - Vant
@@ -11,7 +11,7 @@ categories: Vue移动头条项目
 
 ::: tip 介绍
 
-第二步 黑马移动端初始化<br>
+Vue移动端项目初始化<br>
 :::
 
 <!-- more -->

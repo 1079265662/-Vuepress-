@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="theme-container"
-    :class="pageClasses"
-    @touchstart="onTouchStart"
-    @touchend="onTouchEnd"
-  >
+  <div class="theme-container" :class="pageClasses" @touchstart="onTouchStart" @touchend="onTouchEnd">
     <div v-if="!absoluteEncryption">
       <transition name="fade">
         <LoadingPage v-show="firstLoad" class="loading-wrapper" />
@@ -13,18 +8,14 @@
         <Password v-show="!isHasKey" class="password-wrapper-out" key="out" />
       </transition>
       <div :class="{ hide: firstLoad || !isHasKey }">
-        <div
-          v-if="all"
-          class="wrapper-main"
-          :style="{
+        <div v-if="all" class="wrapper-main" :style="{
             backgroundImage: 'url(' + cover + ')',
             backgroundPositionX: 'center',
             backgroundPositionY: 'center',
             backgroundSize: 'cover',
             backgroundRepeatX: 'no-repeat',
             backgroundRepeatY: 'no-repeat',
-          }"
-        >
+          }">
           <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
           <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
@@ -36,12 +27,7 @@
             <slot name="sidebar-bottom" slot="bottom" />
           </Sidebar>
 
-          <Password
-            v-show="!isHasPageKey"
-            :isPage="true"
-            class="password-wrapper-in"
-            key="in"
-          ></Password>
+          <Password v-show="!isHasPageKey" :isPage="true" class="password-wrapper-in" key="in"></Password>
           <div :class="{ hide: !isHasPageKey }">
             <div :id="all ? 'smart' : 'smart1'">
               <slot></slot>
@@ -49,18 +35,14 @@
           </div>
         </div>
         <div v-else>
-          <div
-            class="wrapper-page"
-            :id="all ? 'smart1' : 'smart'"
-            :style="{
+          <div class="wrapper-page" :id="all ? 'smart1' : 'smart'" :style="{
               backgroundImage: 'url(' + pageCover + ')',
               backgroundPositionX: 'center',
               backgroundPositionY: 'center',
               backgroundSize: 'cover',
               backgroundRepeatX: 'no-repeat',
               backgroundRepeatY: 'no-repeat',
-            }"
-          >
+            }">
             <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
             <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
@@ -73,12 +55,7 @@
               <slot name="sidebar-bottom" slot="bottom" />
             </Sidebar>
 
-            <Password
-              v-show="!isHasPageKey"
-              :isPage="true"
-              class="password-wrapper-in"
-              key="in"
-            ></Password>
+            <Password v-show="!isHasPageKey" :isPage="true" class="password-wrapper-in" key="in"></Password>
           </div>
           <div :class="{ hide: !isHasPageKey }">
             <slot></slot>
@@ -141,7 +118,7 @@ export default {
     },
   },
 
-  data() {
+  data () {
     return {
       isSidebarOpen: false,
       isHasKey: true,
@@ -151,26 +128,26 @@ export default {
   },
 
   computed: {
-    absoluteEncryption() {
+    absoluteEncryption () {
       return (
         this.$themeConfig.keyPage &&
         this.$themeConfig.keyPage.absoluteEncryption === true
       );
     },
-    cover() {
+    cover () {
       return (
         this.$themeConfig.covers[new Date().getDay()] ||
         "https://pan.zealsay.com/zealsay/cover/1.jpg"
       );
     },
-    pageCover() {
+    pageCover () {
       return (
         this.$page.frontmatter.cover ||
         this.$themeConfig.covers[new Date().getDay()] ||
         "https://pan.zealsay.com/zealsay/cover/1.jpg"
       );
     },
-    shouldShowNavbar() {
+    shouldShowNavbar () {
       const { themeConfig } = this.$site;
       const { frontmatter } = this.$page;
 
@@ -186,7 +163,7 @@ export default {
       );
     },
 
-    shouldShowSidebar() {
+    shouldShowSidebar () {
       // const { frontmatter } = this.$page
       // return (
       //   this.sidebar !== false &&
@@ -197,7 +174,7 @@ export default {
       return this.sidebarItems.length > 0;
     },
 
-    pageClasses() {
+    pageClasses () {
       const userPageClass = this.$frontmatter.pageClass;
       return [
         {
@@ -210,7 +187,7 @@ export default {
     },
   },
 
-  mounted() {
+  mounted () {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
     });
@@ -228,7 +205,7 @@ export default {
   },
 
   methods: {
-    hasKey() {
+    hasKey () {
       const keyPage = this.$themeConfig.keyPage;
       if (!keyPage || !keyPage.keys || keyPage.keys.length === 0) {
         this.isHasKey = true;
@@ -239,7 +216,7 @@ export default {
       keys = keys.map((item) => item.toLowerCase());
       this.isHasKey = keys && keys.indexOf(sessionStorage.getItem("key")) > -1;
     },
-    hasPageKey() {
+    hasPageKey () {
       let pageKeys = this.$frontmatter.keys;
       if (!pageKeys || pageKeys.length === 0) {
         this.isHasPageKey = true;
@@ -253,19 +230,19 @@ export default {
           sessionStorage.getItem(`pageKey${window.location.pathname}`)
         ) > -1;
     },
-    toggleSidebar(to) {
+    toggleSidebar (to) {
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
     },
 
     // side swipe
-    onTouchStart(e) {
+    onTouchStart (e) {
       this.touchStart = {
         x: e.changedTouches[0].clientX,
         y: e.changedTouches[0].clientY,
       };
     },
 
-    onTouchEnd(e) {
+    onTouchEnd (e) {
       const dx = e.changedTouches[0].clientX - this.touchStart.x;
       const dy = e.changedTouches[0].clientY - this.touchStart.y;
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
@@ -277,10 +254,10 @@ export default {
       }
     },
 
-    handleLoading() {
+    handleLoading () {
       const time =
         this.$frontmatter.home &&
-        sessionStorage.getItem("firstLoad") == undefined
+          sessionStorage.getItem("firstLoad") == undefined
           ? 1000
           : 0;
       setTimeout(() => {
@@ -292,7 +269,7 @@ export default {
   },
 
   watch: {
-    $frontmatter(newVal, oldVal) {
+    $frontmatter (newVal, oldVal) {
       this.hasKey();
       this.hasPageKey();
     },

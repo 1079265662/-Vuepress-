@@ -1,7 +1,7 @@
 ---
-title: 3. Vue脚手架自定义
+title: 3. Vue移动端项目架构
 date: 2021-06-03
-cover: https://i.loli.net/2021/05/30/mnhTAar3tc4gLdK.jpg
+cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/4.jpg
 tags:
  - Vue
  - Vant
@@ -12,7 +12,7 @@ categories: Vue移动头条项目
 
 ::: tip 介绍
 
-第三步 项目架构<br>
+Vue移动端项目架构<br>
 :::
 
 <!-- more -->
