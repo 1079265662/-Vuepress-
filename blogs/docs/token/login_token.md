@@ -1,7 +1,7 @@
 ---
 title: 续签token的流程
 date: 2021-06-20
-cover: http://blog.acohome.cn/content/images/size/w1000/2020/07/wallhaven-4g3gk3.jpg
+cover: https://i.loli.net/2021/06/07/GktLzbgwxBYZJHh.jpg
 tags:
  - token续签
  - axios
