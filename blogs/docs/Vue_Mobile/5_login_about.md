@@ -163,7 +163,7 @@ const instance = axios.create({
   // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
   baseURL: baseURL
 })
-// 添加一个请求拦截器 (加工前)
+// 添加一个请求拦截器 (发送数据 进行处理)
 // 请求截拦器的作用是再请求发送前 进行一些操作 例如在每个请求体上加上token 获取登录权限后的数据
 // config 是数据发送请求的属性
 instance.interceptors.request.use(function (config) {
