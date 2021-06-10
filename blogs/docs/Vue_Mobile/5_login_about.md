@@ -1,5 +1,5 @@
 ---
-title: 5. Vant插件登录功能完善(中)
+title: 5. Vue移动端登录功能完善(中)
 date: 2021-06-06
 cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/4.jpg
 tags:
