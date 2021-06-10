@@ -1,5 +1,5 @@
 ---
-title: 1. Vue移动端脚手架自定义
+title: 1. Vue移动端 脚手架自定义
 date: 2021-06-01
 cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/4.jpg
 tags:

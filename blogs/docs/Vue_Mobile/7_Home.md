@@ -1,5 +1,5 @@
 ---
-title: 7. Vue移动端频道列表关联文章列表
+title: 7. Vue移动端 频道关联文章列表
 date: 2021-06-08
 cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/4.jpg
 tags:
@@ -11,7 +11,7 @@ categories: Vue移动头条项目
 
 ::: tip 介绍
 
-Vue首页布局 和 频道列表关联文章列表<br>
+Vue首页布局 和 频道和列表关联 实现点击切换相应文章<br>
 :::
 
 <!-- more -->
