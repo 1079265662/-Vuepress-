@@ -634,10 +634,11 @@ export const getArticles = (channelId, timestamp) => {
 * 第一步 先获取 频道数据
   * 需要单独设置api组件 
 * 第二步 频道数据添加关联文章列表根据的属性名(利用 `map`方法实现添加)
-* 第三步 添加文章列表关联属性名后 和服务器比对 获取相应的数据
+* 第三步 添加文章列表关联属性名后 和服务器比对 获取相应的数据 (基于接口的实现)
   * 需要单独设置api组件 
   * <big> 注意:</big> axios获取数据是异步操作 必须要让数据变成同步 实现串联(一环套一环)
-* 第四步 声明 下滑更新 上滑获取数据
+* 第四步 声明 下滑更新 上滑获取数据 (重新调用接口获取最新数据)
+  * 当前时间戳 比对 服务器时间戳 更新 获取最新数据
 
 >template 模板
 
@@ -840,13 +841,15 @@ export default {
 
 [Vue插件介绍官网](https://v3.cn.vuejs.org/guide/plugins.html#%E6%8F%92%E4%BB%B6)
 
-> 目标：自定义过滤器格式化时间 (相当于时间)
+> 目标：自定义过滤器格式化时间 (相对时间)
 >
 > 安装: npm install dayjs --save
 
 通过 dayjs提供的包 制作时间过滤器插件
 
-- `Vue.use()`实例化 创建一个过滤器插件
+- `Vue.use()`实例化 创建一个过滤器插件 
+- 用到 `Vue.use()` 都是Vue的插件
+- 本质上是一个对象 对象中需要有一个方法 `install` 
 
 > 在工具文件夹 `utils文件夹 里面 plugins.js` 创建一个时间过滤器插件`filter`
 
@@ -899,11 +902,11 @@ Vue.use(time)
 >
 > 预期效果：当屏幕中出现图片时，再去发送请求获取图片内容；尚未看到的图片暂时不发请求。
 >
-> 采用这种机制页面的加载效率比较高
->
-> Vant 提供懒加载插件 如果在Vant模板 `<van-image></van-image>` 使用的图片 引入后 直接在结尾添加 `lazy-load`
->
-> <van-image lazy-load></van-image>
+> 优势: 采用这种机制页面的加载效率比较高
+
+Vant 提供懒加载插件 如果在Vant模板 `<van-image></van-image>` 使用的图片 引入后 直接在结尾添加 `lazy-load`
+
+<van-image lazy-load></van-image>
 
 - vant内置插件导入，实现图片懒加载。`入口文件 main.js`
 
