@@ -181,9 +181,11 @@ export default {
 父传子 子传父` v-model` `$event`
 
 - 指令v-model在组件标签上使用
+  - ![](https://i.loli.net/2021/06/11/Bh2tHNwiOmKUP1W.png)
 
 ```vue
 <more-action v-model='isShow'></more-action>
+//$event 可以动态获取子组件传来的数据
 <more-action :value='isShow' @input='isShow=$event'></more-action>
 ```
 

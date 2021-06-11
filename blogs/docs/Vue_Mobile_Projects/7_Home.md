@@ -830,6 +830,10 @@ export default {
       } else {
         //! 27. 如果服务器没有更新数据 那么提示用户 没有数据更新 什么也不做
         channel.pullText = '没有数据更新'
+        //! 重新调用一遍数据 确保数据没有更新
+        channel.articles = []
+        channel.timestamp = ret.data.pre_timestamp
+        this.onLoad()
       }
       //! 28. 数据刷新完毕后 设置加载结束为 false 如果为true 则无法获取下滑刷新的数据
       channel.isLoading = false
