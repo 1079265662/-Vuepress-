@@ -135,8 +135,8 @@ Vue首页布局 频道和列表关联 实现点击切换相应文章<br>
 
 > 基本结构 template
 
-* @refresh是声明上拉方法
-* @load是声明下拉方法
+* `@refresh`是声明上拉方法 上滑触发刷新时候 执行方法 
+* `@load`是声明下拉获取数据方法 当频道没有数据的时候 执行方法
 
 ```vue
 <template>
@@ -659,6 +659,9 @@ export const getArticles = (channelId, timestamp) => {
   * 当前时间戳 比对 服务器时间戳 更新 获取最新数据
 
 >template 模板
+
+* `@refresh`是声明上拉方法 上滑触发刷新时候 执行方法
+* `@load`是声明下拉获取数据方法 当频道没有数据的时候 执行方法
 
 ```vue
 <template>
