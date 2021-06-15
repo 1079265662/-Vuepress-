@@ -181,7 +181,7 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 
 ```js
     // 把服务器 获取的数据 储存到页面对象里 需要使用 push方法 因为分页是动态获取数据 需要用push添加 不覆盖之前数据
-      this.list.push(...ret.data.results) // ...是吧
+      this.list.push(...ret.data.results) // ... 是把所有数据储存起来
 ```
 
 ## `unshift()` 数组开头添方法
