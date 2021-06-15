@@ -15,7 +15,7 @@ Vue中 v-model的三个修饰符<br>
 
 <!-- more -->
 
-![7275569-98ed4f27758aa67b.png](https://i.loli.net/2021/06/13/jcz6dGoBwsN3AtF.png)
+![7275569-98ed4f27758aa67b.png](https://tva4.sinaimg.cn/large/005INI3Xly8grino7rzf8j30p00anq3q.jpg)
 
 ## v-model 修饰符
 
