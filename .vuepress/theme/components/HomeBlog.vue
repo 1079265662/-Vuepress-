@@ -246,7 +246,7 @@ export default {
     .info-wrapper {
       position: -webkit-sticky;
       position: sticky;
-      top: 70px;
+      top: 10px; // 70px
       overflow: hidden;
       transition: all 0.3s;
       margin-left: 15px;
