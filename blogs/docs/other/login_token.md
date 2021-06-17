@@ -6,6 +6,8 @@ tags:
  - token续签
  - axios
 categories: token续签
+autoIgnore: true
+subSidebar: false
 ---
 
 ::: tip 介绍
@@ -15,7 +17,7 @@ axios插件 自动续签用户的token值<br>
 
 <!-- more -->
 
-> 响应式拦截器 续签token问题 `request.js`
+## 响应式拦截器 续签token问题 `request.js`
 
 * token续签需要用到 axios提供的 响应式截拦器`.interceptors.response.use()`
 * token续签总流程图

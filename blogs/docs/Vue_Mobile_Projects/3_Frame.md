@@ -1,5 +1,5 @@
 ---
-title: 3. Vue移动端 项目架构
+title: 2. Vue移动端 项目架构
 date: 2021-06-03
 cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/4.jpg
 tags:

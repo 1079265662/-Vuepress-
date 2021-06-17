@@ -1,5 +1,5 @@
 ---
-title: 2. Vue移动端 项目初始化
+title: 1. Vue移动端 项目初始化
 date: 2021-06-02
 cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/4.jpg
 tags:
