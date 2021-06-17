@@ -152,9 +152,5 @@ instance.interceptors.response.use(function (response) { // 获取数据成功�
 })
 ```
 
-
-
-
-
 * Promise.resolve() Promise方法 把数据包装为promise对象并获得正确结果
 * Promise.reject(error); Promise方法 把错误数据 包含为promise对象 并且得到异常数据
