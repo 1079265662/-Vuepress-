@@ -14,6 +14,14 @@ Vue移动端脚手架自定义(Vue 2.0)<br>
 
 <!-- more -->
 
+## 创建Vue脚手架
+
+* 目录只能用英文
+
+```bash
+vue create 项目名称(英文)
+```
+
 ## 选择`Manually select features`
 
 ![image-20201226221648826](https://i.loli.net/2021/06/01/ikYCzfl83JGK4RU.png)
