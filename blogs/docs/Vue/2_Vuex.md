@@ -236,7 +236,7 @@ export default {
 
 3、 利用结构赋值`...` 导入 `mapState`
 
-## 同步数据修改 `mutations`
+## 同步数据获取和修改数据 `mutations`
 
 [同步数据修改 mutations](https://vuex.vuejs.org/zh/guide/mutations.html)
 
