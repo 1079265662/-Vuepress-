@@ -256,5 +256,18 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 :key="item.art_id.toString()
 ```
 
+## `split(',')` 字符串分割成字符串数组
+
+* `split()` 会创建一个新的字符串数组 但不会改变原始字符串
+* `split()` 方法用于把一个字符串分割成字符串数组。
+* 数组字符串通过是 , 隔开 
+* 把字符串转成 字符串数组 可以方便循环遍历 在页面渲染出来
+
+```js
+            if (state.movie.tags) { // 满足条件 把字符串分割为 字符串数组
+                state.movie.tags = state.movie.tags.split(',')
+            }
+```
+
 
 

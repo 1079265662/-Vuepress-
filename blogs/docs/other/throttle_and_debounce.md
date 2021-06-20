@@ -1,5 +1,5 @@
 ---
-title: 函数节流 函数防抖的设置与原理
+title: 函数节流和函数防抖的设置与原理
 date: 2021-06-20
 cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/12.jpg
 tags:
