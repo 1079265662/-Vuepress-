@@ -1,5 +1,5 @@
 ---
-title: Vue接口模块设置步骤
+title: axios封装通用的接口模块
 date: 2021-05-25
 tags:
  - Vue
@@ -10,7 +10,7 @@ sticky: 2
 ---
 
 ::: tip 介绍
-一级接口组件、二级接口组件、引入二级接口组件<br>
+一级接口组件、二级接口组件、引入二级接口组件 获取数据<br>
 :::
 
 <!-- more -->
@@ -31,10 +31,12 @@ sticky: 2
   // axios分支的方法 创建axios接口调用方法 取代单一的axios方法(方便单独设置)
   const instance = axios.create({
     // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
-    baseURL: baseURL
+    baseURL: baseURL,
+    // 超时,如果超过10秒，后端没有返回数据，那么就报错
+    timeout: 10000
   })
   ```
-
+  
   * 2. 调用接口时候 调用一级接口组件 单独设置接口文件 (二级接口组件)
   * 3. 在需要调用接口的Vue文件引入二级接口组件 (导入二级接口)
 
@@ -60,6 +62,8 @@ const baseURL = 'http://api-toutiao-web.itheima.net/app/'
 const instance = axios.create({
   // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
   baseURL: baseURL
+  // 超时,如果超过10秒，后端没有返回数据，那么就报错 (可以自行设置)
+  timeout: 10000
 })
 // 封装通用的接口调用方法
 export default (options) => {

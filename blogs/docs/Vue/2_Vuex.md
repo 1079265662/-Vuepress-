@@ -6,6 +6,7 @@ tags:
  - Vue
  - Vuex
 categories: Vue
+
 ---
 
 ::: tip 介绍
@@ -341,13 +342,14 @@ methods: {
 * 不具备修改数据功能 需要在 `mutations`中进行修改 然后再获取到
 * action的作用：处理异步任务，获取异步结果后，把数据交给mutation更新数据
 * 触发action需要使用  this.$store.dispatch
+* action 支持获取 `promise`数据 并且支持导出
 
 ### 定义 `action`异步数据获取
 
 * actions是固定的，用于定义异步操作的动作（函数）
 * 本身不具备修改功能 需要导入到`mutations`中进行修改 然后再获取到
-*   参数一 constext 类似this.$store 用来实例化 actions 
-    参数二 payload接收传来的数值
+* 参数一 constext 类似this.$store 用来实例化 actions 
+  参数二 payload接收传来的数值
 * `commit`是触发`mutations`的Vuex方法 把异步数据获取到后 进入`mutations`进行同步数据获取
   * 异步数据获取后 `async` 处理后 把数据变成同步数据 然后 进入`mutations`进行同步数据获取
 
@@ -383,6 +385,8 @@ mutations: {
 ```
 
 ### 进入`mutations`进行同步数据获取简单的导入方法(非重点)
+
+* 常用于 数据获取
 
 ```js
 methods: {
@@ -451,6 +455,18 @@ import { mapActions } from 'vuex'
     </ul>
     <button @click="queryData">点击X</button>
 ```
+
+### 异步数据登录实战例子
+
+* 封装登录页的api接口
+  * 已经设置了 axios封装通用的接口模块 所以直接填入即可
+
+```
+```
+
+
+
+
 
 总结：
 
@@ -769,3 +785,36 @@ methods: {
     this['detail/getInfo']()
 }
 ```
+
+## 全局Vuex组件
+
+* 不加 `namespaced: true` 就是全局的Vuex组件
+* 一般全局Vuex组件 单独设置在一个js文件中
+
+### `mutation` 同步数据获取 Vuex全局
+
+```js
+// 定义一个打印消息的全局Vuex模块
+const mutation = {
+  showInfo (context, payload) {
+    console.log(payload)
+  }
+}
+
+export default {
+  // 不加 namespaced: true 就是全局的Vuex组件
+  getters:{},
+  state: {},
+  mutations: mutation, // 把定义的打印消息的组件 导入到全局Vuex模块
+  actions: {}
+}
+```
+
+* Vuex组件接收全局`mutation` 
+  * 需要在后面设置 { root:true } 才能获取到全局Vuex组件
+
+```js
+          // 接收全局mutation
+          context.commit('showInfo', ret.data.data, { root: true })
+```
+
