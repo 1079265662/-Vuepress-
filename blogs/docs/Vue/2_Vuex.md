@@ -351,6 +351,7 @@ methods: {
 * 参数一 constext 类似this.$store 用来实例化 actions 
   参数二 payload接收传来的数值
 * `commit`是触发`mutations`的Vuex方法 把异步数据获取到后 进入`mutations`进行同步数据获取
+  *  context.commit('mutations 获取数据方法名', 储存的数据)
   * 异步数据获取后 `async` 处理后 把数据变成同步数据 然后 进入`mutations`进行同步数据获取
 
 ```js
@@ -458,15 +459,117 @@ import { mapActions } from 'vuex'
 
 ### 异步数据登录实战例子
 
-* 封装登录页的api接口
+> **`目标`** 实现基本的登录功能 
+>
+> `插件` [饿了么ui表单](https://element.eleme.cn/#/zh-CN/component/form#form-biao-dan)  [表单验证validate](https://github.com/yiminghe/async-validator) [第三方包js-cookie](https://www.npmjs.com/package/js-cookie)
+
+* 封装登录页的api接口 `api文件夹里面 urse.js`
   * 已经设置了 axios封装通用的接口模块 所以直接填入即可
 
+```js
+// 登录请求
+export function login (data) {
+  return request({
+    // 请求登录的方式
+    method: 'post',
+    url: '/sys/login',
+    data: data
+  })
+}
 ```
+
+* 在Vuex组件的`actions:`获取登录异步数据 `modules文件夹的 user.js`
+  * 登录案例无需储存数据 只需要设置 async函数同步获取数据
+  * 判断如果登录成功 返回一个状态位(成功true 不成功false)
+  * `context.commit` 把数据储存到state里面
+  * 在`mutations` 数据获取中 把token储存到cookie里面(没有cookie token代替)
+    * cookie是 第三方包js-cookie
+
+```js
+// 导入登录的api接口
+import { login } from '../../api/user'
+// 导入存储和获取的cookie的组件(第三方包js-cookie)
+import { setToken, getToken } from '../../utils/auth'
+// 用户模块
+export default {
+  namespaced: true,
+  state: {
+    // 从浏览器缓存中 读取cookie值 如果没有 赋值为{} 防止报错
+    token: getToken() || {}
+  },
+  mutations: {
+    updateToken (state, payload) {
+      // 接收异步获取的数据
+      state.token = payload
+      // 把获取到的token值(目前没cookie) 存储到cookie缓存中去
+      setToken(payload)
+    }
+  },
+  // 异步获取数据
+  actions: {
+    // 实现异步登录 获取服务器的返回值 并且储存token
+    async login (context, payload) {
+      try {
+        const ret = await login(payload)
+        if (ret.data.code === 10000) {
+          // 登录成功，缓存服务器返回的token(储存到 Vuex的state里面)
+          context.commit('updateToken', ret.data.data)
+          // 如果登录成功 返回一个成功状态位
+          return true
+        } else {
+          // 登录失败 返回一个失败状态位
+          return false
+        }
+      } catch (error) {
+        // 登录失败(这个是网络错误) 返回一个失败状态位
+        return false
+      }
+    }
+  }
+}
 ```
 
+* 登录vue文件 导入Vuex异步获取的登录信息 `login文件夹 index.js`
+  * 使用了第三方表单验证 [validate](https://github.com/yiminghe/async-validator)
+  * mapActions 映射 actions 异步数据获取
 
+```js
+// 导入表单验证js文件
+import { validUsername } from '@/utils/validate'
+// 导入Vuex的Actions 映射
+import { mapActions } from 'vuex'
 
-
+methods: {
+    // 导入(映射)Vuex的 actions异步数据获取方法(Vuex入口文件user里面的login异步获取登录数据方法)
+    ...mapActions('user', ['login']),
+   handleLogin () {
+      // 点击登录按钮的时候 触发表单验证
+      // validate表单效验插件() $refs操作sel-form组件实例实现验证 通过this.$refs.名称 访问组件实例
+      this.$refs.loginForm.validate(async valid => {
+        // 防止用户不输入内容 点击登录 先服务器提交数据
+        // 如果通过效验(true) 就向服务器提交数据
+        if (valid) {
+          // 如果完成了输入效验 把账号密码 上传到服务器 判读是否正确
+          const ret = await this.login({ // 调用Vuex的异步获取登录数据声明的actions方法(映射Vuex方法)
+           mobile: this.loginForm.username, // 获取用户输入的账号密码 左侧是后端规定的属性名 上传到服务器比对
+           password: this.loginForm.password
+          })
+          // 判断Vuex返回的状态位(自设置的 如果登录成功 返回的true 不成功返回false)
+          if (ret) {
+            // 如果返回true 说明登录成功 跳转到主页面
+            this.$router.push('/dashboard')
+          } else {
+            // 否则就是false 说明登录失败 提示用户 (饿了么ui提供的弹窗)
+            this.$message.error('账号密码输入错误')
+          }
+        } else {
+          // 如果表单不通过 提示用户 不提交服务器 (饿了么ui提供的弹窗)
+          this.$message.error('请输入正确的用户名密码')
+        }
+      })
+    }
+  }
+```
 
 总结：
 
