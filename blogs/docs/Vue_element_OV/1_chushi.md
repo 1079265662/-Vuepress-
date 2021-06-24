@@ -375,7 +375,7 @@ export default store
 2. 如果没有空格就是兄弟关系（并列兄弟关系 ）
    * 把父元素 当成兄弟 常用于两个元素都存在时候显示样式
 
-> sass &写法 和 基础css样式 两者样式
+<font color = #ff3040>sass `&`写法 和 基础css样式 两者样式对比</font>
 
 ```scss
 // sass 兄弟关系(当sidebar和collapse 两个类名存在时候 显示sidebar-logo样式)
