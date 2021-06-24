@@ -914,7 +914,7 @@ export default {
 ```
 
 * Vuex组件接收全局`mutation` 
-  * 需要在后面设置 { root:true } 才能获取到全局Vuex组件
+  * 需要在后面设置 `{ root:true }` 才能获取到全局Vuex组件
 
 ```js
           // 接收全局mutation
