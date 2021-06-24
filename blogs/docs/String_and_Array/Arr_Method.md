@@ -25,8 +25,10 @@ JS 常用的数组方法合集<br>
   * 可以用于 给数组添加新的属性名
 * 需要 <font color = #ff3040>return</font>
 
+> 对每一个现有频道进行排序 并且添加一些属性
+
 ```js
-  //! 对每一个现有频道进行排序（添加一个seq属性进行编号）和其他数据
+  //! 对每一个现有频道进行排序（添加一个seq属性进行编号和其他数据）
       //! 先对之前的频道排序 利用map方法(包含index参数) 往里面添加 频道序列号
       const orderChannels = this.channels.map((item, index) => {
         return {
@@ -48,6 +50,8 @@ JS 常用的数组方法合集<br>
   * **注意**：filter() 不会对空数组进行检测。
   * **注意**： filter() 不会改变原始数组。
   *  <font color = #ff3040>需要: return</font>
+
+> 在数组筛选能被2整除的数据
 
 ```js
 let arr = [56, 15, 48, 3, 7];
@@ -76,37 +80,34 @@ console.log(newArr)
     }
 ```
 
-
-
 ## `some(item=>{return 条件判断})` 筛选数组方法
 
 * `some()`不会创建一个新数组 `some()` 方法用于检测数组中的元素是否满足指定条件（函数提供）。
-
 * 如果有一个元素满足条件，则表达式返回*true* , 剩余的元素不会再执行检测。
-
 * 如果没有满足条件的元素，则返回false。
 
   * **注意：** some() 不会对空数组进行检测。
   * **注意：** some() 不会改变原始数组。
   *  <font color = #ff3040>需要: return</font>
+* 通常和 `filter()`方法使用
 
-* 通常和 `filter`方法使用
+> 配合 `some()` 检测数组中的元素是否满足指定条件(取反) 再`filter()`储存不满足条件数据
 
-  ```js
-      optionChannels () {
-        // ? 进行筛选 filter()方法进行数据总筛选 接收some()传来的true(取反值) 代表不存在的数据为true filter() 方法储存不存在的数据即可
-        // ? filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
-          
-    return this.allChannels.filter(item => { // allChannels 是全部频道数据 channels是我的频道数据
-          // ? 进行符合条件筛选 some() 并且取反 把不满足条件的取反变成true 返回给filter()筛选器
-          // ?  some()方法作用：判断数组中是否包含符合条件的数据，只要有一项符合，就返回true
-          return !this.channels.some(items => {
-              // ?
-            return items.id === item.id
-          })
+```js
+    optionChannels () {
+      // ? 进行筛选 filter()方法进行数据总筛选 接收some()传来的true(取反值) 代表不存在的数据为true filter() 方法储存不存在的数据即可
+      // ? filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
+        
+  return this.allChannels.filter(item => { // allChannels 是全部频道数据 channels是我的频道数据
+        // ? 进行符合条件筛选 some() 并且取反 把不满足条件的取反变成true 返回给filter()筛选器
+        // ?  some()方法作用：判断数组中是否包含符合条件的数据，只要有一项符合，就返回true
+        return !this.channels.some(items => {
+            // ?
+          return items.id === item.id
         })
-      }
-  ```
+      })
+    }
+```
 
 ## `forEach((item,index)=>{})` 循环遍历
 
@@ -134,7 +135,9 @@ arr.forEach(function (item) {
   * 如果存在 返回相应的索引值
   * 如果不存在  返回 -1 (区分大小写)
 
-```
+> 查询相应内容的下标
+
+```js
 <script type="text/javascript">
 
 let str=["123","321","111"]
@@ -252,6 +255,8 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 * 把对象转换为字符串格式
   * 通常解决 js获取过长id无法解读 用到` json-bigint`插件时候 把查分id的对象  转为字符串 
 
+> 把对象转换为字符串 (Vue的key只是别字符串)
+
 ```js
 :key="item.art_id.toString()
 ```
@@ -263,11 +268,30 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 * 数组字符串通过是 , 隔开 
 * 把字符串转成 字符串数组 可以方便循环遍历 在页面渲染出来
 
+> 把符合条件的内容 从字符串分割成字符串数组
+
 ```js
             if (state.movie.tags) { // 满足条件 把字符串分割为 字符串数组
                 state.movie.tags = state.movie.tags.split(',')
             }
 ```
 
+## `includes()` 判断数组是否包含一个指定的值
 
+* 返回的值是布尔值
+  * 如果含有 返回true 
+  * 如果不含 返回false
+* 可以判断路径地址
+
+> 设置路径白名单 判断是否在该路径下 
+
+```js
+// 创建一个路径白名单 里面填写的是路径 (允许用户游客模式访问一些内容 比如登录页 404 没必要验证)
+const white = ['/login', '/404']
+
+// 判断是否处于该路径地址
+ if (white.includes(to.path)){
+ 
+ }
+```
 

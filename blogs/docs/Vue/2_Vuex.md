@@ -494,8 +494,8 @@ import { setToken, getToken } from '../../utils/auth'
 export default {
   namespaced: true,
   state: {
-    // 从浏览器缓存中 读取cookie值 如果没有 赋值为{} 防止报错
-    token: getToken() || {}
+    // 从浏览器缓存中 读取cookie值 如果没有 赋值为null 防止报错
+    token: getToken() || null
   },
   mutations: {
     updateToken (state, payload) {
