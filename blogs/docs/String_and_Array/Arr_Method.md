@@ -66,8 +66,8 @@ console.log(newArr)
 
 ```js
     optionChannels () {
-      // ? 进行筛选 filter()方法进行数据总筛选 接收some()传来的true(取反值) 代表不存在的数据为true filter() 方法储存不存在的数据即可
-      // ? filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
+// ? 进行筛选 filter()方法进行数据总筛选 接收some()传来的true(取反值) 代表不存在的数据为true filter() 方法储存不存在的数据即可
+// ? filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
         
       return this.allChannels.filter(item => { // allChannels 是全部频道数据 channels是我的频道数据
         // ? 进行符合条件筛选 some() 并且取反 把不满足条件的取反变成true 返回给filter()筛选器
@@ -95,8 +95,8 @@ console.log(newArr)
 
 ```js
     optionChannels () {
-      // ? 进行筛选 filter()方法进行数据总筛选 接收some()传来的true(取反值) 代表不存在的数据为true filter() 方法储存不存在的数据即可
-      // ? filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
+// ? 进行筛选 filter()方法进行数据总筛选 接收some()传来的true(取反值) 代表不存在的数据为true filter() 方法储存不存在的数据即可
+// ? filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
         
   return this.allChannels.filter(item => { // allChannels 是全部频道数据 channels是我的频道数据
         // ? 进行符合条件筛选 some() 并且取反 把不满足条件的取反变成true 返回给filter()筛选器

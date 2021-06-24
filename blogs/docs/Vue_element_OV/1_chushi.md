@@ -367,6 +367,41 @@ export default store
 
 ![image-20210621202020367](https://i.loli.net/2021/06/21/NCdPoaOgJQmHEL9.png)
 
+
+
+* sass样式中的 `&` 用法
+
+1. 如果有空格，就是父子关系(一般不写 没必要 在父元素嵌套自带父子关系)
+2. 如果没有空格就是兄弟关系（并列兄弟关系 ）
+   * 把父元素 当成兄弟 常用于两个元素都存在时候显示样式
+
+> sass &写法 和 基础css样式 两者样式
+
+```scss
+// sass 兄弟关系(当sidebar和collapse 两个类名存在时候 显示sidebar-logo样式)
+.sidebar {
+  &.collapse {
+    // 小图样式
+    .sidebar-logo {
+      margin-right: 0px;
+      width: 50px;
+      height: 24px;
+    }
+  }
+}
+
+//------------------- sass写法等同于 以下基础写法
+
+.sidebar.collapse {
+  // 小图样式
+  .sidebar-logo {
+    margin-right: 0px;
+    width: 50px;
+    height: 24px;
+  }
+}
+```
+
 * sass的导入自己文件方式 `@import '路径';` 没有from
 
 ```scss
@@ -427,7 +462,9 @@ export default store
     }
     ```
 
-### icons
+### icons(svg图标)
+
+[svg属性总览](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute)
 
 > 图标的文件结构如下
 
@@ -441,10 +478,9 @@ export default store
 > `<svg-icon class-name='abc' icon-class='user'></svg-icon>`
 >
 > - iconClass的值是svg文件的名称(更换图标时候 更换iconClass名称即可)
->
-> - className可以定制图标的样式
+>- className可以定制图标的样式
 
-### 使用svg图标的位置 
+### 使用svg图标的位置
 
 > svg图标路径: @/src/layout/components/SideBar/Item.vue
 

@@ -893,25 +893,105 @@ methods: {
 
 * 不加 `namespaced: true` 就是全局的Vuex组件
 * 一般全局Vuex组件 单独设置在一个js文件中
+* 设置全局数据使用的是 `getters`方法 处理state里面数据
+  * `...mapGetters([])` 导入全局数据 设置在`computed`计算属性当中
 
 ### `mutation` 同步数据获取 Vuex全局
 
+![image-20210624211830356](https://i.loli.net/2021/06/24/gJzPDIsFGXh9mpn.png)
+
+<br>
+
+> 设置 全局Vuex 组件 (全局数据导出)
+
+* 需要设置全局state的数据 `user.js`
+
 ```js
+  state: {
+    //! 储存用户信息
+    userInfo: {username:123}
+  },
+```
+
+* 配置控制全局Vuex的文件 `global.js`
+  * 这个文件只是控制全局Vuex文件 并非已经设置了全局Vuex组件
+
+```js
+// 这里设置全局的 Vuex模块
+// import getters from '@/store/getters.js'
+// 配置全局属性 getters
+const getters = {
+  // 左侧是调用全局Vuex的名称(自定义) 右侧是从指定文件中 导入数据 让其变为全局Vuex
+  // 导入全局的用户信息
+  // state类型 user文件 state里面userInfo属性名中的 username 里面的数据
+  uname: state => state.user.userInfo.username 
+
+}
 // 定义一个打印消息的全局Vuex模块
-const mutation = {
+const mutations = {
   showInfo (context, payload) {
-    console.log(payload)
+    console.log('--------------' + payload)
   }
 }
-
 export default {
   // 不加 namespaced: true 就是全局的Vuex组件
-  getters:{},
+  getters: getters,
   state: {},
-  mutations: mutation, // 把定义的打印消息的组件 导入到全局Vuex模块
+  mutations: mutations,
   actions: {}
 }
+
 ```
+
+* 把控制全局Vuex组件 设置为全局Vuex组件 `index.js`
+  * 把控制全局的Vuex组件 设置为全局Vuex组件
+
+```js
+import Vue from 'vue'
+import Vuex from 'vuex'
+// 导入全局模块
+import global from './modules/global'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  modules: {
+  },
+  // vuex中除了局部模块之外，也可以有全局模块(导出全局Vuex组件)
+  ...global
+})
+
+export default store
+
+```
+
+> 导入Vuex 声明的全局数据
+
+* `script`脚本
+  * 直接导入设置全局Vuex名称即可
+
+```js
+
+// 导入getters映射
+import { mapGetters } from 'vuex'
+export default {
+    // 导入全局的Vuex组件
+    ...mapGetters([
+      // ~ 导入全局的Vuex用户信息
+      'uname'
+    ])
+}
+```
+
+* `template`模板
+  * 直接差值表达式 导入全局Vuex数据
+
+```html
+<!-- 导入Vuex获取的全局数据 -->
+<span class="name">{{ uname }}</span>
+```
+
+> 扩展 导入全局`mutation`
 
 * Vuex组件接收全局`mutation` 
   * 需要在后面设置 `{ root:true }` 才能获取到全局Vuex组件

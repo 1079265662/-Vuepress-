@@ -166,3 +166,39 @@ export default {
 }
 ```
 
+## 关于基准路径的配置
+
+> 注意：`.env.development`和`.env.production` 文件用于配置开发环境和生产环境的基准url地址
+
+- .env.development 开发环境
+- .env.production 生产环境
+- `#` 是注释的意思 
+
+> .env.development 开发环境 配置文件 
+
+* 如果只添加结尾数据 默认拼接localhost:
+
+```bash
+# just a flag
+ENV = 'development'
+
+# base api
+# VUE_APP_BASE_API = 'http://ihrm-java.itheima.net/api/'
+VUE_APP_BASE_API = '/api/'
+
+```
+
+> axios封装通用的接口模块 `utils文件夹 request.js`
+
+```js
+// 创建一个axios实例对象
+const instance = axios.create({
+  // 基准路径 通过 开发环境 和 生产环境 文件进行配置(开发和生产单独设置 方便区分 脚手架方法需要重启)
+  baseURL: process.env.VUE_APP_BASE_API,
+  // baseURL: baseURL,
+  // 超时,如果超过10秒，后端没有返回数据，那么就报错
+  timeout: 10000
+})
+```
+
+> 总结：为了灵活配置接口的基准路径，可以基于配置文件的方式，在开发和生产环境分别切换到不同的地址。这种方式好处就是代码在开发和上线时修改比较容易

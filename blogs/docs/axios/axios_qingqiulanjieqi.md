@@ -34,6 +34,8 @@ axios.interceptors.request.use(function (config) {
   });
 ```
 
+<br>
+
 >`例子` 发送请求前 判断是否登录(有token) 如果登录 携带请求头 发送给服务器
 
 ```js
@@ -68,3 +70,38 @@ instance.interceptors.request.use(function (config) {
 
 * Promise.resolve() Promise方法 把数据包装为promise对象并获得正确结果
 * Promise.reject(error); Promise方法 把错误数据 包含为promise对象 并且得到异常数据
+
+<br>
+
+> `例子` 基于Vuex 判断是否登录(有token) 如果登录 携带请求头 发送给服务器
+
+* 此方法前提是 Vuex设置了全局token组件
+
+```js
+// 导入axios
+import axios from 'axios'
+// 导入 Vuex 获取全局的Vuex组件(获取token)
+import store from '../store/index'
+
+// 请求拦截器
+instance.interceptors.request.use(function (config) {
+  // 在发送请求之前做些什么
+  // 判断是否存在token(从Vuex全局组件中 获取其token)
+  if (store.getters.token) {
+    // 如果token存在 注入token (注入到请求头中)
+    // config是发送的数据 headers是axios请求头
+    config.headers = {
+      // 在请求头中 携带token 获取用户信息
+      // Authorization是后端接口判断token的属性名
+      Authorization: `Bearer ${store.getters.token}` // 后端需求必和Bearer拼接
+    }
+  }
+  // return返回一下
+  return config
+}, function (error) {
+  // 对请求错误做些什么
+  // 如果没获取到token 打印错误
+  return Promise.reject(error)
+})
+```
+
