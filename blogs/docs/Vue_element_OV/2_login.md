@@ -524,7 +524,7 @@ router.beforeEach((to, from, next) => {
 
 > .env.development 开发环境 配置文件 
 
-* 如果只添加结尾数据 默认拼接localhost:
+* 不设置固定的url地址 只设置末尾地址 这样默认就是 `localhost:`地址拼接
 
 ```bash
 # just a flag

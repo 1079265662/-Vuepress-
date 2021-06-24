@@ -915,6 +915,8 @@ methods: {
 
 * 配置控制全局Vuex的文件 `global.js`
   * 这个文件只是控制全局Vuex文件 并非已经设置了全局Vuex组件
+  *   <font color = #ff3040>全局Vuex `state` 数据是通过Vuex `getters`导出</font>
+    * `getters` 在Vue组件中 需要用` computed:` 计算属性导入
 
 ```js
 // 这里设置全局的 Vuex模块
@@ -967,24 +969,29 @@ export default store
 
 > 导入Vuex 声明的全局数据
 
-* `script`脚本
-  * 直接导入设置全局Vuex名称即可
+* `script` 脚本
+  * 导入的全局Vuex组件数据 uname数据
+  *   <font color = #ff3040>全局Vuex `state` 数据是通过Vuex `getters`导出</font>
+    * `getters` 在Vue组件中 需要用` computed:` 计算属性导入
+    * 直接导入设置全局Vuex名称即可
 
 ```js
-
 // 导入getters映射
 import { mapGetters } from 'vuex'
+
 export default {
+  computed: {
     // 导入全局的Vuex组件
     ...mapGetters([
-      // ~ 导入全局的Vuex用户信息
+    // ~ 导入全局的Vuex用户信息
       'uname'
     ])
+  }
 }
 ```
 
-* `template`模板
-  * 直接差值表达式 导入全局Vuex数据
+* `template` 模板
+  * 把获取的全局Vuex组件数据 渲染到页面上(插值表达式)
 
 ```html
 <!-- 导入Vuex获取的全局数据 -->
