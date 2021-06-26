@@ -1008,3 +1008,21 @@ export default {
           context.commit('showInfo', ret.data.data, { root: true })
 ```
 
+## Vue文件外 调用Vuex组件 (js文件) `commit`
+
+[官方commit api介绍](https://vuex.vuejs.org/zh/guide/mutations.html)
+
+* 导入Vuex的实例化对象 通过`commit `的Vuex提供api方法 操作Vuex组件
+* `store.commit('user/deluserInfo') ` 操作 user文件里面的 deluserInfo 方法
+
+```js
+// 导入 Vuex的实例化对象
+import store from '../store/index'
+
+//-------------------------------- Vue组件外 调用Vuex
+ 
+// 导入Vuex的实例化对象后 在组件外操作Vuex
+// Vue组件外 不需要写 this.$store 
+    store.commit('user/deluserInfo') // 操作 user文件里面的 deluserInfo 方法
+```
+
