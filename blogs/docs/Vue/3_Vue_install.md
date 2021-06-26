@@ -110,13 +110,13 @@ Vue.use(time)
 <span>{{item.pubdate|formatTime}}</span>
 ```
 
-## 制作头像失效问题
+##  制作头像失效问题插件
 
 <br>
 
 > `目标`：处理图片加载失败时的默认显示效果 如果默认图片加载失败 用统一图片代替
 >
-> `原理 `:  这里用到了Vue的插件机制`Vue.directive` 和 自定义Vue方法 `install`
+> `原理 `:  这里用到了Vue的插件机制 `install` 和 自定义Vue方法 `Vue.directive`
 
 * 在入口文件中导入Vue插件 并且实例化Vue插件 `main.js`
 
@@ -129,11 +129,12 @@ import MyPlugins from '@/utils/plugins.js'
 Vue.use(MyPlugins, '"https://tva2.sinaimg.cn/large/005INI3Xly8grusluz3ruj30b40b4wfn.jpg"')
 ```
 
-* 封装设置Vue插件 
+* 封装设置Vue插件 `utils文件夹 plugins.js`
   * 使用到了自定义指令`Vue.directive`  来检测图片加载失败清空
     * el:指令绑定的元素
     * bindings表示指令相关的配置信息 <font color = #ff3040>常用于动态绑定 `:`</font>
   * `onerror`是检测原始是否加载失败 如果失败就执行
+    * 当图片有地址 但是地址没有加载成功的时候 会报错 会触`onerror`
   * <font color = #ff3040>指令的名字在定义时候不需要加v-，在是用的时候才需要加v-</font> 
 
 ```js
@@ -163,7 +164,9 @@ export default {
 
 ```
 
-* Vue文件 `template`模板 使用该插件
+<br>
+
+* Vue文件 `template`模板 使用该插件 
   * 使用指令, 这里图片如果是用本地图片, 需要导入, 如果是完整地址的网图, 直接赋值即可
   * 使用自定义Vue指令 需要 `v-自定义指令名称 `这样写法
 

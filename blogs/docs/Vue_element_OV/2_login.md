@@ -306,7 +306,7 @@ export function login (data) {
 >
 >Cookie的类型：会话Cookie（浏览器一旦关闭就失效了）；持久Cookie（可以设置有效期）
 
-* 导入第三方包js-cookie 操作cookie 设置在工具文件
+* 导入[第三方包js-cookie](https://www.npmjs.com/package/js-cookie)操作cookie 设置在工具文件
   * `getToken` 获取cookie
   * `setToken` 储存cookie
   * `removeToken` 删除cookie
@@ -333,7 +333,7 @@ export function removeToken () {
 总结：
 
 1. 原生js可以操作Cookie，但是很麻烦
-2. 所以可以基于第三方包 js-cookie操作cookie，比较简单
+2. 所以可以基于[第三方包js-cookie](https://www.npmjs.com/package/js-cookie)操作cookie，比较简单
 
 ###  Vuex组件的`actions:`获取登录异步数据 `modules文件夹的 user.js`
 
@@ -341,7 +341,7 @@ export function removeToken () {
 * 判断如果登录成功 返回一个状态位(成功true 不成功false)
 * `context.commit` 把数据储存到state里面
 * 在`mutations` 数据获取中 把token储存到cookie里面(没有cookie token代替)
-  * cookie是 第三方包js-cookie
+  * cookie是 [第三方包js-cookie](https://www.npmjs.com/package/js-cookie)
 
 ```js
 // 导入登录的api接口
