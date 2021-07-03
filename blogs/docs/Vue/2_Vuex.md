@@ -119,6 +119,8 @@ npm i vuex --save/-S
 
 > 状态state用于存储所有组件的数据。
 
+* <font color = #ff3040>导入Vuex的`state`时候数据已经保存到了`computed`当中 无需在data()里面再次储存 直接拿来调用即可 </font>
+
 * 用于储存Vuex里面的数据
 * <font color = #ff3040>注意: 此方法写在 Vue计算属性`computed:` 里面</font>
 
@@ -181,6 +183,7 @@ computed: {
 > mapState作用：可以辅助获取到多个state的值(Vuex自带 但需要导入)
 
 - `template`模板
+  - <font color = #ff3040>导入Vuex的`state`时候数据已经保存到了`computed`当中 无需在data()里面再次储存 直接拿来调用即可 </font>
 
 ```vue
 <template>
@@ -193,6 +196,7 @@ computed: {
 
 - `script`脚本
   - 把vuex中的state数据映射到组件的计算属性中。(导入`mapState`)
+  - <font color = #ff3040>导入Vuex的`state`时候数据已经保存到了`computed`当中 无需在data()里面再次储存 直接拿来调用即可 </font>
 
 ```js
 import { mapState } from 'vuex'
@@ -222,8 +226,6 @@ export default {
   }
 }
 ```
-
-
 
 
 
@@ -777,6 +779,7 @@ export default {
 
 * `script` 脚本 
   * 数组简写 :`...mapActions('modules左侧设置的Vuex名称', ['Vuex模块中需要获取的数据'])`
+  * <font color = #ff3040>导入Vuex的`state`时候数据已经保存到了`computed`当中 无需在data()里面再次储存 直接拿来调用即可 </font>
 
 ```vue
 <script>
@@ -801,6 +804,18 @@ export default {
 }
 </script>
 
+```
+
+* `template`模板调用
+  * <font color = #ff3040>导入Vuex的`state`时候数据已经保存到了`computed`当中 无需在data()里面再次储存 直接拿来调用即可 </font>
+
+```vue
+<template>
+  <div>
+    <div>{{movieDetail}}</div>
+    <div>{{movieInfo}}</div>
+  </div>
+</template>
 ```
 
 #### 通过辅助函数进行简化 `createNamespacedHelpers`

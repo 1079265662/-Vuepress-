@@ -55,7 +55,9 @@ Vue.use(MyPlugins,'这里可以导入一些数据') // 配置和定义插件时�
 this.$abc
 ```
 
-## 绝对时间插件制作例
+## 绝对时间插件制作例 `基于dayjs`
+
+![Snipaste_2021-07-03_22-22-49](https://tva4.sinaimg.cn/large/005INI3Xly8gs44pcc3kuj30bo023748.jpg)
 
 [dayjs的相对时间官网](https://dayjs.fenxianglu.cn/category/plugin.html#%E7%9B%B8%E5%AF%B9%E6%97%B6%E9%97%B4)
 
@@ -109,6 +111,54 @@ Vue.use(time)
 ```vue
 <span>{{item.pubdate|formatTime}}</span>
 ```
+
+## 普通格式化时间制作例 `基于 moment`
+
+![image-20210703223417137](https://tva4.sinaimg.cn/large/005INI3Xly8gs44xqw7t8j304b05rt8l.jpg)
+
+[moment官方网站](http://momentjs.cn/)
+
+> 安装: npm install moment *--save*  
+>
+> 目标: 设置全局组件 绑定在全局过滤器上 实现绑定的时间格式化
+
+通过 moment提供的第三方包实现
+
+*  通过`Vue.filter()` 方法全局绑定过滤器
+
+> **在工具文件夹** **`utils文件夹 里面 plugins.js`** 创建一个时间过滤器插件`filter`
+
+```js
+// 导入 moment 时间过滤器第三方包
+import moment from 'moment'
+
+// 定义一个Vue插件并且导出
+export default {
+    //! 设置全局过滤器 格式化时间 Vue.filter()是绑定全局过滤器
+    Vue.filter('formatTime', value => {
+      // 通过第三方包 moment 设置格式化时间 调用时候 |formatTime
+      // yyyy-MM-DD 时间格式是 年-月-日 
+      return moment(value).format('yyyy-MM-DD') 
+    })
+}
+```
+
+> 在项目入口文件 导入制作的时间插件 `main.js`
+
+```js
+//~ 导入时间过滤器功能
+import time from './utils/plugins'
+// ~ 导入 自定义事件过滤器
+Vue.use(time)
+```
+
+> 在需要的Vue文件 使用过滤器 过滤器使用`|` `main.vue`
+
+```vue
+<span>{{item.pubdate|formatTime}}</span>
+```
+
+
 
 ##  制作头像失效问题插件
 

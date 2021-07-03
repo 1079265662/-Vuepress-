@@ -109,6 +109,28 @@ console.log(newArr)
     }
 ```
 
+## `find(item=>{return 筛选条件})` 筛选数组符合条件内容
+
+* `find()`不会修改原对象(数组) 但是<font color = #ff3040>会返回一个符合条件的对象</font>
+* 当数组中的元素在测试条件时返回 true 时, `find()` 返回符合条件的元素，之后的值不会再调用执行函数。
+* 如果没有符合条件的元素返回 undefined
+* **注意:** `find()` 对于空数组，函数是不会执行的。
+* 可以设置索引值的参数 array.find(function(当前元素, 索引值, 当前元素所属的数组对象))
+
+> 基于Vue进行的find()筛选 (作用域插槽传来的数据例子)
+
+```js
+    formatHireTyp (type) { // 接收作用域插槽传来的数据
+      // 使用find方法 查询符合格式化的数据
+      const obj = Types.hireType.find(item => { // 导入格式化规则
+        return item.id === type // 格式化条件 查询 作用域插槽传来的数据
+      })
+      // 把查完的结果 return返回 返回给作用域插槽
+      // 进行判断 如果查询到存在筛选内容 那就赋值给其正式的数据 如果没查到 返回原数据
+      return obj ? obj.value : type
+    },
+```
+
 ## `forEach((item,index)=>{})` 循环遍历
 
 * 不会生成一个新数组 会直接改变原数组
