@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JS的同步异步 宏任务微任务 | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?b0aae218897fa9d8a9f76e9a77e0b3c6";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+          })();
+        </script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.40190656.css" as="style"><link rel="preload" href="/assets/js/app.0c8e5225.js" as="script"><link rel="preload" href="/assets/js/5.cf8e9e04.js" as="script"><link rel="preload" href="/assets/js/1.0362ac49.js" as="script"><link rel="preload" href="/assets/js/43.1612be17.js" as="script"><link rel="prefetch" href="/assets/js/10.d3fc6e0e.js"><link rel="prefetch" href="/assets/js/11.da22fa86.js"><link rel="prefetch" href="/assets/js/12.e2145805.js"><link rel="prefetch" href="/assets/js/13.3350254e.js"><link rel="prefetch" href="/assets/js/14.883aa0f2.js"><link rel="prefetch" href="/assets/js/15.0916fb13.js"><link rel="prefetch" href="/assets/js/16.66c5e2c2.js"><link rel="prefetch" href="/assets/js/17.04239083.js"><link rel="prefetch" href="/assets/js/18.ed27da19.js"><link rel="prefetch" href="/assets/js/19.2a182bf9.js"><link rel="prefetch" href="/assets/js/20.be0f7652.js"><link rel="prefetch" href="/assets/js/21.38fc07fa.js"><link rel="prefetch" href="/assets/js/22.66b79c54.js"><link rel="prefetch" href="/assets/js/23.4aab5d58.js"><link rel="prefetch" href="/assets/js/24.20483d6c.js"><link rel="prefetch" href="/assets/js/25.82ec7a88.js"><link rel="prefetch" href="/assets/js/26.eeb4fa96.js"><link rel="prefetch" href="/assets/js/27.23f6ce03.js"><link rel="prefetch" href="/assets/js/28.4c0263fa.js"><link rel="prefetch" href="/assets/js/29.dbe2b0c6.js"><link rel="prefetch" href="/assets/js/3.dca7de66.js"><link rel="prefetch" href="/assets/js/30.a9807ec4.js"><link rel="prefetch" href="/assets/js/31.9c32a3f2.js"><link rel="prefetch" href="/assets/js/32.1e6a0831.js"><link rel="prefetch" href="/assets/js/33.c8d8170e.js"><link rel="prefetch" href="/assets/js/34.308e6b67.js"><link rel="prefetch" href="/assets/js/35.6631a4e0.js"><link rel="prefetch" href="/assets/js/36.f4e96fc6.js"><link rel="prefetch" href="/assets/js/37.f0936070.js"><link rel="prefetch" href="/assets/js/38.679ded28.js"><link rel="prefetch" href="/assets/js/39.4f8db925.js"><link rel="prefetch" href="/assets/js/4.6a82a72f.js"><link rel="prefetch" href="/assets/js/40.901775f0.js"><link rel="prefetch" href="/assets/js/41.262c5757.js"><link rel="prefetch" href="/assets/js/42.59040fac.js"><link rel="prefetch" href="/assets/js/44.edd13e90.js"><link rel="prefetch" href="/assets/js/45.84003a7e.js"><link rel="prefetch" href="/assets/js/46.59ee1e82.js"><link rel="prefetch" href="/assets/js/6.dfbf8e28.js"><link rel="prefetch" href="/assets/js/7.8f635830.js"><link rel="prefetch" href="/assets/js/8.3c69dc79.js"><link rel="prefetch" href="/assets/js/9.af116de0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.40190656.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-1dc90b28><div data-v-1dc90b28><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-1dc90b28 data-v-1dc90b28><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-5cb9a64e data-v-1dc90b28 data-v-1dc90b28><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
+            
+          <!---->
+          2021
+        </a></span></div></div> <div class="hide" data-v-1dc90b28><div data-v-1dc90b28><div id="smart" class="wrapper-page" style="background-image:url(https://tva4.sinaimg.cn/large/005INI3Xly8gs6hp23s20j31hc0u0n4o.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-1dc90b28><header class="navbar" data-v-1dc90b28><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/正则表达式/" class="nav-link"><i class="iconfont undefined"></i>
+  正则表达式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JS 方法合集/" class="nav-link"><i class="iconfont undefined"></i>
+  JS 方法合集
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue OV系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂项/" class="nav-link"><i class="iconfont undefined"></i>
+  杂项
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-1dc90b28></div> <aside class="sidebar" data-v-1dc90b28><div class="personal-info-wrapper" data-v-03833281 data-v-1dc90b28><img src="https://i.loli.net/2021/05/17/rRzqv6kGHwATM41.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>33</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>14</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/正则表达式/" class="nav-link"><i class="iconfont undefined"></i>
+  正则表达式
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JS 方法合集/" class="nav-link"><i class="iconfont undefined"></i>
+  JS 方法合集
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue OV系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂项/" class="nav-link"><i class="iconfont undefined"></i>
+  杂项
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Other</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/other/1_hongrenwu_weirenwu.html" aria-current="page" class="active sidebar-link">JS的同步异步 宏任务微任务</a></li><li><a href="/blogs/docs/other/http_and_websocket.html" class="sidebar-link">websocket 和 http 协议</a></li><li><a href="/blogs/docs/other/throttle_and_debounce.html" class="sidebar-link">函数节流和函数防抖的设置与原理</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-5cb9a64e data-v-1dc90b28><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>JS的同步异步 宏任务微任务</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
+            
+          <!---->
+          2021
+        </a></span></div></div></div> <div data-v-1dc90b28><main class="page"><div class="page-title" style="display:none;"><h1 class="title">JS的同步异步 宏任务微任务</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2021-07-09</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/other/1_hongrenwu_weirenwu.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>JavaScript</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>JS同步异步操作 和 宏任务微任务的面试介绍 <br></p></div> <h2 id="同步异步"><a href="#同步异步" class="header-anchor">#</a> 同步异步</h2> <ul><li>js运行环境是单线程
+<ul><li>同一时间只能做一件事 单线程(同步) + 事件队列(任务队列 异步)
+<ul><li>因为js需要操作页面 单线程对于页面操作很友好</li></ul></li> <li>单线程会卡断 所以引用了事件队列机制 防止阻塞影响性能
+<ul><li>如果单线程代码执行过程中 遇到异步场景 会放入队列(宏任务) 立刻执行后续其他的代码(微任务)
+<ul><li>异步操作: 1. 定时函数(满足延时时间) 2. 事件函数(特定事件触发) 3. ajax回调函数(服务器有数据返回)</li></ul></li></ul></li></ul></li> <li>js是单线程 浏览器是多线程
+<ul><li>浏览器编译js的时候是单线程 但是浏览器可以判断 同步任务 和 异步任务 如果是异步任务就放入事件队列</li></ul></li> <li>当同步任务执行完毕后 浏览器会传递异步任务 异步任务也分为 宏任务微任务 先执行宏任务 在=再执行微任务</li></ul> <h2 id="宏任务微任务"><a href="#宏任务微任务" class="header-anchor">#</a> 宏任务微任务</h2> <ul><li>进入浏览器事件队列的任务就 是宏任务</li> <li>不进入浏览器队列但是进入微任务队列的 是微任务</li> <li>宏任务 微任务 都是事件队列
+<ul><li><font color="#ff3040">先同步再异步，在此异步基础上先宏任务再微任务</font> <ul><li>任务执行的时候仍然可能产生新的任务(宏任务 微任务 都有可能)</li></ul></li></ul></li></ul> <h2 id="宏任务-微任务的执行顺序"><a href="#宏任务-微任务的执行顺序" class="header-anchor">#</a> 宏任务 微任务的执行顺序</h2> <ul><li>代码的优先级: 主线程&gt;宏任务&gt;微任务 (微任务 宏任务都是异步)</li></ul> <p><img src="https://i.loli.net/2021/07/04/s2lDdZPRqe6crIx.png" alt="image-20210704203139670"></p> <h2 id="宏任务-微任务-有哪些"><a href="#宏任务-微任务-有哪些" class="header-anchor">#</a> 宏任务 微任务 有哪些</h2> <p>同步:  网站的渲染过程 如元素的渲染，其实就是一个同步任务</p> <p>异步: ajax axios setTimeout setInterval (都是宏任务) Promise nextTick (微任务)</p> <p><font color="#ff3040">宏任务: </font>script setTimeout setInterval</p> <p><font color="#ff3040">微任务: </font>Promise nextTick process</p> <p><strong>try catch</strong>是处理同步异常</p> <p><strong>Promise catch</strong>是处理异步异常</p></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.0c8e5225.js" defer></script><script src="/assets/js/5.cf8e9e04.js" defer></script><script src="/assets/js/1.0362ac49.js" defer></script><script src="/assets/js/43.1612be17.js" defer></script>
+  </body>
+</html>

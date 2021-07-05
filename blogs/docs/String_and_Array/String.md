@@ -23,5 +23,6 @@ String.padStart(位数,补数)	 	 //补位 如果字符串不满足位数要求,
 String.toLacaleUpperCase()		//全部转换为大写
 String.toLacaleLowerCase()		//全部转换为小写
 String.trim()					//去除两边空格
+String.endsWith('.xlsx')	    //检查字符串是否以指定的子字符串结尾(常用于检查上传文件的后缀名.xlsx 等)
 ```
 

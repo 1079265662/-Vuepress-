@@ -5,7 +5,7 @@ cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/12.jpg
 tags:
  - Vue
  - JavaScript
-categories: 节流、防抖函数
+categories: Vue
 ---
 
 ::: tip 介绍

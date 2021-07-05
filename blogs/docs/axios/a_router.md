@@ -5,7 +5,8 @@ cover: https://tva2.sinaimg.cn/large/005INI3Xly8grlofqcdd3j31gi0u0dvl.jpg
 tags:
  - Vue
  - Vue Router
-categories: Vue
+categories:
+ -  axios
 
 ---
 

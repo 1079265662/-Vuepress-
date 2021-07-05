@@ -6,7 +6,7 @@ tags:
  - 协议
  - http
  - websocket
-categories: TCP协议
+categories: JavaScript
 ---
 
 ::: tip 介绍

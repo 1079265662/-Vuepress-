@@ -174,6 +174,23 @@ str.indexOf("666")
 -2
 ```
 
+## `includes() ` 判断数组是否包含指定的值
+
+* includes() 方法用来判断一个数组是否包含一个指定的值。
+* 如果是返回 true，否则false
+
+> 简单判断流程
+
+```js
+let site = ['runoob', 'google', 'taobao'];
+ 
+site.includes('runoob'); 
+// true 
+ 
+site.includes('baidu'); 
+// false
+```
+
 ## `splice()` 数组删除添加二合一
 
 * splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
@@ -316,4 +333,32 @@ const white = ['/login', '/404']
  
  }
 ```
+
+##  `Object.keys()`把对象里面的属性名 储存为一个字符串数组
+
+* 不会修改原对象内容 但是会返回一个字符串数组
+* 可以把对象里面的 属性名提取出来 返回到一个字符串数组中
+* 常用于 forEach 循环遍历替换 原属性名
+
+> 使用例子
+
+```js
+// 需要提取的对象
+	const headers = {
+        '姓名': 'username',
+        '手机号': 'mobile',
+        '入职日期': 'timeOfEntry',
+        '聘用形式': 'formOfEmployment',
+        '转正日期': 'correctionTime',
+        '工号': 'workNumber',
+        '部门': 'departmentName'
+      }
+// 开始提取
+      const demo = Object.keys(headers)
+      console.log(demo);
+// ----------------------------------------- 提出的结果
+ ["姓名", "手机号", "入职日期", "聘用形式", "转正日期", "工号", "部门"]
+```
+
+
 
