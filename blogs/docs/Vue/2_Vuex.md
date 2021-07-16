@@ -1,7 +1,7 @@
 ---
 title: Vuex 的食用方法
 date: 2021-06-29
-cover: https://tva2.sinaimg.cn/large/005INI3Xly8grlo28ue3tj31hc0u0q8z.jpg
+cover: https://tva3.sinaimg.cn/large/005INI3Xly8gsitp4k7pcj316g0u012o.jpg
 tags:
  - Vue
  - Vuex
@@ -158,6 +158,7 @@ const store = new vuex.Store({
 
 * `script` 脚本 `computed:`计算属性
   * 直接$store 也可以用  `computed:`计算属性 调用
+* <font color = #ff3040>适用于普通js文件</font>
 
 ```js
 // 把state中数据，定义在组件内的计算属性中
@@ -274,6 +275,9 @@ mutations: {
 
 ### 简单的导入方法(非重点)
 
+* 常用于同步数据的获取(同步和修改都可以)$store.commit()
+* <font color = #ff3040>适用于普通js文件</font>
+
 ```js
   methods: {
     increment () {
@@ -389,7 +393,8 @@ mutations: {
 
 ### 进入`mutations`进行同步数据获取简单的导入方法(非重点)
 
-* 常用于 数据获取
+* 常用于异步的数据获取 store.dispatch()
+* <font color = #ff3040>适用于普通js文件</font>
 
 ```js
 methods: {
@@ -617,6 +622,8 @@ getters: {
 ```
 
 ### 简单使用方法(非重点)
+
+* <font color = #ff3040>适用于普通js文件</font>
 
 ```js
 caleList () {
@@ -1023,12 +1030,49 @@ export default {
           context.commit('showInfo', ret.data.data, { root: true })
 ```
 
+## Vuex常用api `适用js文件调用`
+
+1. State: 提供一个响应式数据
+
+```js
+this.$store.state.xxx // mapState 取值
+```
+
+2. Getter：借助 Vue 的计算属性 computed 来实现缓存
+
+```js
+this.$store.getters.xxx // mapGetters 取值
+```
+
+3. Mutation：更改 state 方法(同步获取数据)
+
+```js
+this.$store.commit('xxx') // mapMutations 赋值
+```
+
+4. Action：触发 mutation 方法(异步数据获取)
+
+```js
+this.$store.dispatch('xxx') // mapActions 赋值
+```
+
+### 获取全局的的写法
+
+* 以Action 异步数据获取 为案例
+  * 获取user的Vuex文件下的 getInfo方法
+
+```js
+$this.store.dispatch('user/getInfo','可以设置参数 看情况')  // 获取user的Vuex文件下的 getInfo方法
+```
+
 ## Vue文件外 调用Vuex组件 (js文件) `commit`
 
 [官方commit api介绍](https://vuex.vuejs.org/zh/guide/mutations.html)
 
 * 导入Vuex的实例化对象 通过`commit `的Vuex提供api方法 操作Vuex组件
 * `store.commit('user/deluserInfo') ` 操作 user文件里面的 deluserInfo 方法
+
+> 案例是store.commit 是Mutation：更改 state 方法
 
 ```js
 // 导入 Vuex的实例化对象
