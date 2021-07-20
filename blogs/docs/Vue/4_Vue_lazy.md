@@ -58,6 +58,39 @@ const router = new VueRouter({
 })
 ```
 
+* 通过变量方法设置懒加载 `(Vue3)`
+
+```js
+// 导入Vue router Vu3
+import { createRouter, createWebHashHistory } from 'vue-router'
+// 声明常量的方式按需配置路由(变量方式配置路由懒加载)
+const Layout = () => import('@/views/layout')
+const Home = () => import('@/views/home')
+const routes = [
+  {
+    // 一级路由
+    path: '/',
+    component: Layout,
+    children: [
+      // 二级路由
+      // 导入路由的懒加载
+      { path: '/', component: Home }
+    ]
+  }
+]
+const router = createRouter({
+  // 设置hash路径方式
+  history: createWebHashHistory(),
+  // 映射 routes配置的路由
+  routes
+})
+// 导出router实例化对象
+export default router
+
+```
+
+
+
 ## Vue的按需导入组件 `import`
 
 * 按需导入指的是 当该组件功能用到的时候 才会加载该内容 (普通导入在页面加载时候 就会加载)

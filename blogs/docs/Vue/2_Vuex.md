@@ -1114,13 +1114,13 @@ store.getters.xxx // mapGetters 取值
 3. Mutation：更改 state 方法(同步获取数据)
 
 ```js
-store.commit('xxx') // mapMutations 赋值
+store.commit('Mutation方法','传递的数据') // Mutation 赋值
 ```
 
 4. Action：触发 mutation 方法(异步数据获取)
 
 ```js
-store.dispatch('xxx') // mapActions 赋值
+store.dispatch('Action方法','传递的数据') // Action 赋值
 ```
 
 ### Vue3调用Vuex的数据
@@ -1181,6 +1181,9 @@ export default {
 ```
 
 * 需要调用的Vuex文件 (js)
+  * mutations 里面的两个参数: state参数是操作state里面的数据  payload是接收传来的数据
+  * actions 里面的两个参数: context参数是操作mutations里面的方法(context.commit)  payload是接收传来的数据
+    * 通常在actions 只用一个参数context 把服务器获取到的数据 传入mutations 中 不需要payload是接收传来的数据
 
 ```js
 import { createStore } from 'vuex'
@@ -1193,13 +1196,13 @@ export default createStore({
   },
   mutations: {
     // 改数据函数
-    updateInfo (state, payload) {
+    updateInfo (state, payload) { // state参数是操作state里面的数据 payload是接收传来的数据
       state.info = payload
     }
   },
   actions: {
     // 请求数据函数
-    updateInfo (context, payload) {
+    updateInfo (context, payload) { // context参数是操作mutations里面的方法(context.commit) payload是接收传来的数据
       setTimeout(() => {
         context.commit('updateInfo', payload)
       }, 1000)
@@ -1335,6 +1338,8 @@ export default {
 
 1. 为了防止单个模块过于臃肿，可以进行store的模块拆分，方便后期维护
 2. 拆分为全局模板和局部模块
+
+### 生命周期中 页面打开时候 获取Vuex数据 `onMounted`
 
 ## Vue3 持久化Vuex的数据
 
