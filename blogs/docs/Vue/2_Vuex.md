@@ -15,6 +15,8 @@ Vuex 的操作流程<br>
 
 <!-- more -->
 
+# Vue2中Vuex
+
 ## 关于`VueX`
 
 `VueX`是适用于在`Vue`项目开发时使用的状态管理工具。试想一下，如果在一个项目开发中频繁的使用组件传参的方式来同步`data`中的值，一旦项目变得很庞大，管理和维护这些值将是相当棘手的工作。为此，`Vue`为这些被多个组件频繁使用的值提供了一个统一管理的工具——`VueX`。在具有`VueX`的Vue项目中，我们只需要把这些值定义在VueX中，即可在整个Vue项目的组件中使用
@@ -1032,6 +1034,8 @@ export default {
 
 ## Vuex常用api `适用js文件调用`
 
+* 如果是Vue3 无需设置this
+
 1. State: 提供一个响应式数据
 
 ```js
@@ -1055,6 +1059,8 @@ this.$store.commit('xxx') // mapMutations 赋值
 ```js
 this.$store.dispatch('xxx') // mapActions 赋值
 ```
+
+
 
 ### 获取全局的的写法
 
@@ -1085,3 +1091,316 @@ import store from '../store/index'
     store.commit('user/deluserInfo') // 操作 user文件里面的 deluserInfo 方法
 ```
 
+# Vue3 中的Vuex
+
+## Vue3 获取Vuex里面的数据
+
+* Vue3不可以用this 所以 获取Vuex里面的数据 不需要添加this
+
+> 如果是Vue3 无需设置this
+
+1. State: 提供一个响应式数据
+
+```js
+store.state.xxx // mapState 取值
+```
+
+2. Getter：借助 Vue 的计算属性 computed 来实现缓存
+
+```js
+store.getters.xxx // mapGetters 取值
+```
+
+3. Mutation：更改 state 方法(同步获取数据)
+
+```js
+store.commit('xxx') // mapMutations 赋值
+```
+
+4. Action：触发 mutation 方法(异步数据获取)
+
+```js
+store.dispatch('xxx') // mapActions 赋值
+```
+
+### Vue3调用Vuex的数据
+
+* Vue3调用Vuex需要先导入Vuex组件
+
+```js
+// 导入Vuex的组件 Vue3必须先导入Vuex组件 才能调用Vuex的数据
+import { useStore } from 'vuex'
+```
+
+* 并且需要 实例化导入的Vuex组件
+
+```js
+ setup () {
+    // 在setup ()中实例化Vuex组件
+    const store = useStore()
+    }
+```
+
+> 演示案例
+
+* Vue文件 调用Vuex中的数据
+  * Vue3调用Vuex需要先导入Vuex组件 并且需要 实例化导入的Vuex组件
+  * 模板中导入state数据需要` $`
+  * setup() 使用Vuex 不需要 this 和 `$`
+
+```vue
+<template>
+  <!-- 模板直接调用Vuex里面的state数据(模板中导入 需要$) -->
+  <div>{{$store.state.info}}</div>
+   <!-- 点击后触发Vuex的mutations和actions 获取数据 -->
+  <button @click='handleClick'>点击</button>
+</template>
+
+<script>
+// 导入Vuex的组件 Vue3必须先导入Vuex组件 才能调用Vuex的数据
+import { useStore } from 'vuex'
+export default {
+  name: 'App',
+  setup () {
+    // 在setup ()中实例化Vuex组件
+    const store = useStore()
+    // 把Vuex的数据 储存起来
+    const rets = store.state.info
+    const handleClick = () => {
+      console.log(rets)
+      // 调用 mutations修改数据
+      store.commit('updateInfo', 'hi')
+      // 调用 actions获取异步数据方法
+      store.dispatch('updateInfo', '你好')
+    }
+    return { handleClick }
+  }
+}
+</script>
+
+```
+
+* 需要调用的Vuex文件 (js)
+
+```js
+import { createStore } from 'vuex'
+
+// 创建vuex仓库并导出
+export default createStore({
+  state: {
+    // 数据
+    info: '测试数据'
+  },
+  mutations: {
+    // 改数据函数
+    updateInfo (state, payload) {
+      state.info = payload
+    }
+  },
+  actions: {
+    // 请求数据函数
+    updateInfo (context, payload) {
+      setTimeout(() => {
+        context.commit('updateInfo', payload)
+      }, 1000)
+    }
+  },
+  modules: {
+    // 分模块
+  },
+  getters: {
+    // vuex的计算属性
+    fullInfo (state) {
+      return state.info + ' tom'
+    }
+  }
+})
+
+```
+
+## Vue3 拆分Vuex模块
+
+* 模块拆分分为 全局模块文件 和 局部模块文件 然后整合导入到一个 入口文件中 (三个文件)
+
+> 演示案例
+
+* 局部Vuex模块 (cart.js)
+  * 设置 `namespaced: true` 就是局部模块
+  * state采取函数模式(仅限局部)
+
+```js
+// 设置局部Vuex模块
+export default {
+  // 设置为局部Vuex
+  namespaced: true,
+    // state采取函数模式(仅限局部)
+  state: () => {
+    return {
+      title: '拆分模块'
+    }
+  },
+  mutations: {},
+  actions: {},
+  getters: {}
+}
+
+```
+
+* 全局Vuex模块(global.js)
+  * 不设置 ` namespaced: true `就是全局模块
+
+```js
+// 全局模块 不设置 namespaced: true,
+export default {
+  state: {
+  },
+  getters: {
+  },
+  mutations: {
+  },
+  actions: {
+  }
+}
+
+```
+
+* Vuex入口文件 导入配置 全局Vuex模块 和 局部Vuex模块 (index.js)
+
+```js
+// 导入Vuex
+import { createStore } from 'vuex'
+// 导入全局Vuex组件
+import global from './modules/global'
+// 导入局部的Vuex组件
+import user from './modules/user'
+import cart from './modules/cart'
+// ------------------------------------
+// 创建vuex仓库并导出
+export default createStore({
+  // 全局的Vuex模块导入 直接 ...导入即可(展开语法)
+  ...global,
+  modules: {
+    // 局部的Vuex模块导入
+    user,
+    cart
+  }
+})
+
+```
+
+### 调用拆分的Vuex局部组件数据
+
+> 演示案例 
+
+* Vue3文件调用Vuex的数据
+  * template模板中 调用Vuex数据 需要 `$`
+  * script脚本中 需要先导入Vuex组件 并且实例化Vuex组件
+    * 调用Vuex数据 不需要`this` `$` 直接调用即可
+
+```vue
+<template>
+  <!-- 模板导入拆分的局部组件数据 -->
+  <div>{{$store.state.cart.title}}</div>
+  <button @click="changMutations">点击</button>
+</template>
+<script>
+// 导入Vuex的组件 Vue3必须先导入Vuex组件 才能调用Vuex的数据
+import { useStore } from 'vuex'
+export default {
+  name: 'App',
+  setup () {
+    // 实例化Vuex组件
+    const store = useStore()
+    const changMutations = () => {
+      // 获取Vuex局部模块的 state里的数据
+      const ret = store.state.cart.title
+      console.log(ret)
+      // 调用Vuex局部模块的 mutations
+      // store.commit('局部文件名/Vuex里的mutations方法名', '需要传入的数据')
+      store.commit('cart/updataTile', '传入的数据')
+      // 调用Vuex局部模块的 actions
+      // store.dispatch('局部文件名/Vuex里的actions方法名', '需要传入的数据')
+      store.dispatch('cart/updataTile', '传入的数据')
+    }
+    return { changMutations }
+  }
+}
+</script>
+<style lang="less">
+</style>
+
+```
+
+总结：
+
+1. 为了防止单个模块过于臃肿，可以进行store的模块拆分，方便后期维护
+2. 拆分为全局模板和局部模块
+
+## Vue3 持久化Vuex的数据
+
+> 目的：让在vuex中管理的状态数据同时存储在本地。可免去自己存储的环节。
+
+- 在开发的过程中，像用户信息（名字，头像，token）需要vuex中存储且需要本地存储。
+- 再例如，购物车如果需要未登录状态下也支持，如果管理在vuex中页需要存储在本地。
+- 我们需要category模块存储分类信息，但是分类信息不需要持久化。
+
+> (1）首先：我们需要安装一个vuex的插件`vuex-persistedstate`来支持vuex的状态持久化。
+
+```bash
+npm i vuex-persistedstate
+```
+
+> (2) 在Vuex入口文件中配置 `index.js`
+
+* 默认储存在local Storage缓存中(生命周期是永久的)
+
+```diff
+// 导入Vuex
+import { createStore } from 'vuex'
+// 导入全局Vuex组件
+import global from './modules/global'
+// 导入局部的Vuex组件
+import user from './modules/user'
+import cart from './modules/cart'
+import cate from './modules/cate'
++ // 导入持久化的Vuex插件
++ import createPersistedstate from 'vuex-persistedstate'
+// ------------------------------------
+// 创建vuex仓库并导出
+export default createStore({
+  // 全局的Vuex模块导入 直接 ...导入即可(展开语法)
+  ...global,
+  modules: {
+    // 局部的Vuex模块导入
+    user,
+    cart,
+    cate
+  },
++  // 配置导入的Vuex插件
++  plugins: [
++    // 默认储存在local Storage缓存中(生命周期是永久的)
++    createPersistedstate({
++      // key是储存在缓存中的数据名称(储存数据的键名)
++      key: 'erabbit-client-pc-store-128',
++      // paths是存储state中需要持久化的数据(Vuex模块的名称)
++      // 如果是模块下具体的数据需要加上模块名称，如user.token(储存指定数据)
++      paths: ['user', 'cart', 'cate']
++    })
++  ]
+})
+
+```
+
+<font color =#ff3040>**注意：**</font>
+
+* 默认储存在local Storage缓存中(生命周期是永久的)
+* key是储存在缓存中的数据名称(储存数据的键名)
+* paths是存储state中的那些数据，如果是模块下具体的数据需要加上模块名称，如`user.token`
+*  修改state后触发才可以看到本地存储数据的的变化。(修改后才会进行持久化)
+
+<hr>
+
+总结：
+
+1. 基于第三方包实现vuex中的数据的持久化
+2. 触发持久化的条件是state发生变化 (修改后才会进行持久化)

@@ -27,13 +27,13 @@ sticky: 2
   // 导入 axios组件
   import axios from 'axios'
   // 设置基准axios路径 用常量保存
-  const baseURL = 'http://api-toutiao-web.itheima.net/app/'
+  export const baseURL = 'http://api-toutiao-web.itheima.net/app/'
   // axios分支的方法 创建axios接口调用方法 取代单一的axios方法(方便单独设置)
   const instance = axios.create({
     // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
     baseURL: baseURL,
     // 超时,如果超过10秒，后端没有返回数据，那么就报错
-    timeout: 10000
+    // timeout: 10000
   })
   ```
   
@@ -47,41 +47,111 @@ sticky: 2
 - 配置 `axios.create({})` 分支设置url基础地址 方便操控
 - 调用axios方法 设置基本url路径 设置参数 配置数据
   - 设置属性:  method(请求方式) , url(地址) , data(请求体) , params(请求方式参数) , headers(请求头)
+    -  data(请求体) , params(请求方式参数) 可以通过es6的动态属性名(键) 来实现动态切换
 - return 返回结果
+- 设置axios的 请求拦截器 和 响应拦截器
 
 > 目标: 封装通用的接口调用模块
 >
 > 作用: 配置通用的`axios`接口模块 方便统一修改 统一配置 统一更换 减低耦合
 
 ```js
-// 导入 axios组件
+// 封装通用的接口调用模块
+// 导入axios组件
 import axios from 'axios'
-// 设置基准axios路径 用常量保存
-const baseURL = 'http://api-toutiao-web.itheima.net/app/'
-// axios分支的方法 创建axios接口调用方法 取代单一的axios方法(方便单独设置)
+// 导入Vuex 实例化
+import store from '@/store'
+// 导入Vue router 实例化
+import router from '@/router'
+
+// 请求的基准路径 常量保存并且支持导出
+export const baseURL = ''
+
+// 创建独立的axios的实例
 const instance = axios.create({
   // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
   baseURL: baseURL
-  // 超时,如果超过10秒，后端没有返回数据，那么就报错 (可以自行设置)
-  timeout: 10000
+  // 设置响应超时
+  // timeout: 5000
 })
-// 封装通用的接口调用方法
+
+// 请求拦截器 (发送数据前的加工数据)
+instance.interceptors.request.use((config) => { // config是发送的数据
+  // 判断Vuex中是否有token，如果有就添加到请求头
+  const token = store.state.user.profile.token
+  // 如果存在token 把token存入headers请求头中
+  if (token) {
+    //! config是发送的数据 headers是axios请求头 Authorization是后端接口判断token的属性名
+    config.headers.Authorization = 'Bearer ' + token
+  }
+  // 返回处理后的数据
+  return config
+}, (err) => {
+  // 如果请求拦截器错误 返回打印错误信息
+  return Promise.reject(err)
+})
+
+// 响应拦截器 (处理后端返回的数据)
+instance.interceptors.response.use((response) => {
+  // 去除axios自带的一层data
+  return response.data
+}, (err) => {
+  // 处理token的过期操作
+  if (err.response && err.response.status === 401) {
+    // ---------------------- 应该续签token 但是后端没做(按需设置)
+    // token过期了，清空过期的用户信息，跳转到登录页面
+    store.commit('user/updateUserInfo', {})
+    // 跳转到登录页
+    router.push('/login')
+  }
+  // 打印响应拦截器的错误信息
+  return Promise.reject(err)
+})
+
+// 封装一个通用的请求方法
 export default (options) => {
   // 这里的返回值是Promise实例对象
-    // return 返回数据 instance是声明的axios分支方法
+  // return 返回数据 instance是声明的axios分支方法
   return instance({
-    // 设置请求方式
+    // 如果没有传递请求方式，默认是使用get请求
     method: options.method || 'GET',
     // 设置请求地址
     url: options.url,
-    // POST/PUT请求参数（请求体）
-    data: options.data,
-    // GET请求参数（自动拼接到url地址中）
-    params: options.params,
+    // 动态判断请求的方式(es6规则: 对象的键可以是动态的变量)
+    // 如果不是data请求 那么就赋值params请求
+    // api掉接口的时候 传递数据的属性名(键) 全部为data:{} (不管是那种方式)
+    [options.method.toUpperCase() === 'GET' ? 'params' : 'data']: options.data, // toUpperCase转换为大写(请求是小写也可以)
     // 设置请求头(一般用于跨域问题 和 传输token)
     headers: options.headers
+    // 请求方式 ------------------------------------------------------
+    // data用于传递请求体数据（POST/PUT/DELETE）
+    // data: options.data,
+    // params用于传递get请求数据（查询字符串）
+    // params: options.data
   })
 }
+
+// --------------------------------- api接口上传数据模拟
+// 所有的请求方式 上传数据的对象都设置为data:{} (在通用的请求方法中已配置)
+// -------------- post请求方式
+// return request({
+//   method: 'post',
+//   url: '#',
+//   data: {
+//     uname: 'lisi',
+//     pwd: '123'
+//   }
+// })
+// -------------- get 请求方式
+// return request({
+//   method: 'get',
+//   url: '#',
+//   data: {
+//     uname: 'lisi',
+//     pwd: '123'
+//   }
+// })
+
 ```
 
 > <big>二、</big>api文件夹 二级路由 指定接口设置示例(登录二级接口) `api文件夹创建 二级路由模块(接口)`
