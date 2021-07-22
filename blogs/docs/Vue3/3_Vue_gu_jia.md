@@ -15,15 +15,15 @@ Vue3 骨架效果自定义插件设置<br>
 
 ## Vue3 的骨架效果
 
-![image-20210722184050574](C:/Users/liukaili/AppData/Roaming/Typora/typora-user-images/image-20210722184050574.png)
+![image-20210722184050574](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210722184050574.png)
 
 [骨架效果使用项目](https://gitee.com/liu_kaili/Vue_little_rabbit_fresh)
 
-> **目的：**  为了在加载的过程中等待效果更好，封装一个骨架屏组件。
+> 目的：为了在加载的过程中等待效果更好，封装一个骨架屏组件。
 
 * 骨架效果主要是 当页面刚打开时候 需要调用服务器数据 这时候页面还没有数据 为了提高用户体验 暂时性的用加载样式 代替服务器的数据
 
-大致步骤：
+> 大致步骤：
 
 - 需要一个组件，做占位使用。这个占位组件有个专业术语：骨架屏组件。
   - 暴露一些属性：高，宽，背景，是否有闪动画。
