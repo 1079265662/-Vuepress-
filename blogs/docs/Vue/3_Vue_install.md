@@ -1,5 +1,5 @@
 ---
-title: Vue插件食用方法 
+title: Vue2 install插件案例
 date: 2021-06-30
 cover: https://tva2.sinaimg.cn/large/005INI3Xly8grvjjbanusj31hc0u01f3.jpg
 tags:
@@ -8,12 +8,12 @@ categories: Vue
 ---
 
 ::: tip 介绍
-Vue插件 绝对时间插件 和 图片失效 制作方法 <br>
+Vue2插件 绝对时间插件 和 图片失效 制作方法 <br>
 :::
 
 <!-- more -->
 
-## Vue的插件机制 `install`
+## Vue2的插件机制 `install`
 
 [Vue插件介绍](https://v3.cn.vuejs.org/guide/plugins.html#%E6%8F%92%E4%BB%B6)
 

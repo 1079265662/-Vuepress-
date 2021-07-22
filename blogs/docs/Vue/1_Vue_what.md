@@ -1,7 +1,7 @@
 ---
 title: Vue 渐进式编程的介绍
 date: 2021-06-20
-cover: https://i.loli.net/2021/06/04/v1BFYofrWOIg2Ew.jpg
+cover: https://tva2.sinaimg.cn/large/005INI3Xly8gspqeyj4gaj31hc0u0dgu.jpg
 tags:
  - Vue
 categories: Vue
