@@ -275,13 +275,14 @@ createApp(App).use(XtxUI).mount('#app')
      * `slides`是轮播图的传入数据( 很关键 轮播需要的数据 通常动态绑定) `:slides='slides'`
      * `auto-play`是设置轮播图是否动态播放 `auto-play`
      * `duration`是设置轮播图自动切换图片的间隔事件(默认是1秒) `duration='2'`
+   * 如果需要给插件传递参数 通常会动态绑定数据 ( 动态绑定基本类型的传入插件的数据 可保证插件需求的数据类型)
 
 ```vue
 <template>
   <div class="home-banner">
     <!-- 设置轮播图组件(轮播图插件) -->
     <!-- slides 是传入轮播数据 auto-play设置自动播放 duration设置轮播时间 -->
-    <XtxCarousel :slides='slides' auto-play duration='2' />
+    <XtxCarousel :slides='slides' auto-play :duration='2' />
   </div>
 </template>
 <script>

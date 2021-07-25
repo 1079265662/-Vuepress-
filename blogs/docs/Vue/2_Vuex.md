@@ -1097,6 +1097,15 @@ import store from '../store/index'
 
 * Vue3不可以用this 所以 获取Vuex里面的数据 不需要添加this
 
+> Vue3的实例化方法导入
+
+* Vue3必须先导入Vuex组件 才能调用Vuex的数据
+
+```js
+// 导入Vuex的组件 Vue3必须先导入Vuex组件 才能调用Vuex的数据
+import { useStore } from 'vuex'
+```
+
 > 如果是Vue3 无需设置this
 
 1. State: 提供一个响应式数据
