@@ -13,17 +13,19 @@ Vue3 骨架效果自定义插件设置<br>
 
 <!-- more -->
 
+
+
 ## Vue3 的骨架效果
 
-![image-20210722184050574](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210722184050574.png)
+![image-20210722184050574](https://i.loli.net/2021/07/26/KNyRwatWq8izpoT.png)
 
 [骨架效果使用项目](https://gitee.com/liu_kaili/Vue_little_rabbit_fresh)
 
-> 目的：为了在加载的过程中等待效果更好，封装一个骨架屏组件。
+> **目的：**  为了在加载的过程中等待效果更好，封装一个骨架屏组件。
 
 * 骨架效果主要是 当页面刚打开时候 需要调用服务器数据 这时候页面还没有数据 为了提高用户体验 暂时性的用加载样式 代替服务器的数据
 
-> 大致步骤：
+大致步骤：
 
 - 需要一个组件，做占位使用。这个占位组件有个专业术语：骨架屏组件。
   - 暴露一些属性：高，宽，背景，是否有闪动画。
@@ -162,6 +164,14 @@ createApp(App).use(XtxUI).mount('#app')
 
 * 在`template` 中设置 骨架的显示隐藏
 
+* 可以设置一个骨架加载状态位 默认是false 在`template`进行判断 如果不存在数据 并且骨架状态位为false时候(取反)执行骨架效果
+
+  * ```js
+    v-if='filterParams && !filterLoading' // 设置骨架状态位的判断 当不存在数据和骨架状态位为false时候(取反) 执行骨架效果
+    ```
+
+<br>
+
 ```vue
     <ul class="menu">
       <li :class="{active:categoryId===item.id}" v-for="item in list" :key="item.id" @mouseenter="categoryId=item.id">
@@ -205,3 +215,4 @@ createApp(App).use(XtxUI).mount('#app')
 2. 配置Vue插件并且配置全局组件
 3. 入口文件导入并配置UI组件库这个插件
 4. 分类列表中使用骨架屏组件进行站位
+

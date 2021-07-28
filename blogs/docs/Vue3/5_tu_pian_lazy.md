@@ -1,6 +1,6 @@
 ---
-title:  Vue3自定义图片懒加载方法
-date: 2021-07-16
+title: Vue3 自定义图片懒加载方法
+date: 2021-07-19
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-z8mq8y.jpg
 tags:
  - Vue3
@@ -19,6 +19,8 @@ categories: Vue3
 * 非插件 自定实例化方法(跟插件差不多)
 
 ![image-20210723220724444](https://i.loli.net/2021/07/23/Qu9WRPXgvzladjM.png)
+
+[自定义图片懒加载方法效果使用项目](https://gitee.com/liu_kaili/Vue_little_rabbit_fresh)
 
 > `功能`: 懒加载 + 图片失效处理(代替失败图片)
 
@@ -102,7 +104,8 @@ createApp(App).use(XtxUI).mount('#app')
 ```
 
 3. 在需要的Vue组件中替换`:src`
-   * 原始的图片路径 `:src` 替换成自定义懒加载方法 `v-lazy`
+   * 自定义图片懒加载方法参数
+     *  `v-lazy` 设置需要懒加载的图片路径 (必须)
 
 ```vue
 <template>

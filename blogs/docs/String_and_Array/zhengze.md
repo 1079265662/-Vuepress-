@@ -4,7 +4,7 @@ date: 2021-05-24
 cover: https://i.loli.net/2021/06/06/LVQIriR5YnTdawv.jpg
 tags:
  - 正则表达式
-categories: 正则表达式
+categories: JS 方法合集
 subSidebar: false
 ---
 
@@ -70,5 +70,20 @@ subSidebar: false
 
 ```
 /^[\u4e00-\u9fa5a-zA-Z]+${4,15}/
+```
+
+## 对象方式的正则表达式 `RegExp`
+
+* `new RegExp`是正则表达式 对象方式表达 里面
+
+  * 格式: new RegExp(pattern, attributes)
+
+    * 参数 *pattern* 是一个字符串，指定了正则表达式的模式或其他正则表达式。(进行规则设置)
+* 参数 *attributes* 是一个可选的字符串，包含属性 "g"、"i" 和 "m"，分别用于指定全局匹配、区分大小写的匹配和多行匹配(进行全局设置)
+
+```js
+      // kw此时包括span高亮的标签，需要去掉
+      const reg = new RegExp(`<span>${this.q}</span>`, 'ig') //RegExp是正则表达式 对象模式
+   	  kw.replace(reg, this.q) // 替换方法 replace(替换规则,替换数据)
 ```
 

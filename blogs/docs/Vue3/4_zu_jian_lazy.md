@@ -1,6 +1,6 @@
 ---
-title:  Vue3组件懒加载方法(非插件)
-date: 2021-07-17
+title: Vue3 组件懒加载方法(非插件)
+date: 2021-07-19
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-l3zmwy.jpg
 tags:
  - Vue3
@@ -13,13 +13,18 @@ categories: Vue3
 
 <!-- more -->
 
+
+
 ## 设置组件懒加载方法(非插件)
 
 ![image-20210723223757171](https://i.loli.net/2021/07/23/JM58VpFCRZnhIXy.png)
 
+[组件懒加载方法效果使用项目](https://gitee.com/liu_kaili/Vue_little_rabbit_fresh)
+
 > `目的`：实现当组件进入可视区域在加载数据。
 
 * 我们可以使用 `@vueuse/core` 中的 `useIntersectionObserver` 来实现监听进入可视区域行为，但是必须配合vue3.0的组合API的方式才能实现。
+* 专业术语是 钩子函数 hooks
 * <font color =#ff3040>适用于图片较少的 大组件 组件整体的懒加载</font>
 
 >  大致步骤：
@@ -28,7 +33,8 @@ categories: Vue3
   - 通过`useIntersectionObserver` 来实现监听进入可视区域行为 判断是否到达可视区 
   - 返回两个参数 
     - 参数1是监听的Dom元素(需要的观察容器)
-    - 参数2是调用接口api返回的数据 (展示数据)
+    - 参数2是判断 是否到达可视区 如果到达返回 true (默认是false)
+  - 可以设置返回值 `stop`停止监控
 - Vue组件中 导入懒加载组件方法
   - 需要给组件懒加载传递api接口 
   - 并且接收懒加载组件返回的 参数 
@@ -38,10 +44,12 @@ categories: Vue3
 > 懒加载组件设置使用
 
 1. 设置一个懒加载组件(js文件)
+   * 路径: `src/hooks/index.js`
    * 通过`useIntersectionObserver` 来实现监听进入可视区域行为 判断是否到达可视区 
    * 返回两个参数 
      - 参数1是监听的Dom元素(需要的观察容器)
-     - 参数2是调用接口api返回的数据 (展示数据)
+     - 参数2是判断 是否到达可视区 如果到达返回 true (默认是false)
+   * 可以设置返回值 `stop`停止监控
 
 ```js
 // 数据展示的懒加载 需要配合图片懒加载

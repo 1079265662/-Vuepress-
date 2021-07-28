@@ -13,7 +13,7 @@ Vue3 将组件设置为插件的食用方法<br>
 
 <!-- more -->
 
-## Vue3自定义插件机制 `install`
+##  Vue3自定义插件机制 `install`
 
 [Vue3插件机制官网](https://v3.cn.vuejs.org/guide/plugins.html#%E6%8F%92%E4%BB%B6)
 
@@ -24,7 +24,7 @@ Vue3 将组件设置为插件的食用方法<br>
 
 ![image-20210722165649300](https://i.loli.net/2021/07/22/kaSbDBwVJC32TEh.png)
 
-## 设置Vue3自定义插件
+### 设置Vue3自定义插件 `install`
 
 [Vue3插件机制官网](https://v3.cn.vuejs.org/guide/plugins.html#%E6%8F%92%E4%BB%B6)
 
@@ -79,5 +79,37 @@ createApp(App).use(XtxUI).mount('#app')
 </template>
 ```
 
-* 如果需要给插件传递参数 通常会动态绑定数据 ( 动态绑定基本类型的传入插件的数据 可保证插件需求的数据类型)
+注意: 
 
+​	如果需要给插件传递参数 通常会动态绑定数据`:` ( 动态绑定基本类型的传入插件的数据 可保证插件需求的数据类型)
+
+### 批量导入Vue插件方法
+
+![image-20210725010517653](https://i.loli.net/2021/07/25/QCNwM1VujSiFLZs.png)
+
+* 适用于 所有插件都集合在一个文件夹 (index.js里面)
+* 通过`require`方法筛选插件 然后`importFn`进行批量导入插件方法 然后批量`component`实例化Vue插件
+* 无需`import`导入
+
+```js
+// -------------------------------------- 批量导入Vue插件
+// 参数一：从哪个目录中读取文件
+// 参数二：是否读取子目录中的文件：true读取子目录，false不读取子目录
+// 参数三：读取文件的匹配规则
+const importFn = require.context('./', false, /\.vue$/)
+// 自定义一个插件方法导出
+export default {
+  install (app) {
+    // 批量注册 -------------------------------------------------------------------
+    // 自动化批量注册全局组件
+    importFn.keys().forEach(componentPath => {
+      // componentPath表示其中一个组件的路径
+      // 根据路径导入组件
+      // 返回值component表示组件的实例对象
+      const component = importFn(componentPath).default
+      // 注册全局组局
+      app.component(component.name, component)
+    })
+  }
+}
+```
