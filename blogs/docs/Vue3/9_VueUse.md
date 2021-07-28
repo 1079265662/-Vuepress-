@@ -13,7 +13,7 @@ VueUse插件一些实用的方法合集<br>
 
 <!-- more -->
 
-## VueUse介绍
+## VueUse介绍和安装
 
 * [VueUse官网](https://vueuse.org/core/useWindowScroll/) 是Vue扩展方法插件 将一些原生api方法转换为简单的Vue方法
 * <font color = #ff3040>注意: </font>Vue3中导入Vue Use需要按需导入 用哪个方法导入那个
@@ -59,6 +59,8 @@ export default {
   }
 }
 ```
+
+ [吸顶效果样式 使用了该方法](https://liukaili.vercel.app/blogs/docs/Vue3/8_Vue_xi_ding.html)
 
 ##  检测组件是否可视化 `useIntersectionObserver`
 
@@ -179,8 +181,15 @@ export default {
 
 总结：监听DOM元素进入可视区，进入后停止监听，并且调用接口获取数据
 
-1. 将懒加载的整体流程代码封装为Hook
-2. 基于hook方法实现新鲜好物和人气推荐模块的懒加载效果
+[组件懒加载 使用了该方法](https://liukaili.vercel.app/blogs/docs/Vue3/8_Vue_xi_ding.html)
+
+## 监控鼠标移动 `useMouseInElement`
+
+[监控鼠标移动](https://vueuse.org/core/usemouseinelement/#usemouseinelement)
+
+* 适用于监控数据在某个容器内的移动参数 并且可以判断是否移出移入
+
+[图片预览放大镜组件 使用了该方法](https://liukaili.vercel.app/blogs/docs/Vue3/5_tu_pian_lazy.html)
 
 ## 父子组件相互传值 `useVModel`
 
@@ -197,6 +206,8 @@ export default {
     return { checked }
   }
  ```
+
+[功能性切换按钮效果实现 使用了该方法](https://liukaili.vercel.app/blogs/docs/Vue3/2.2_button.html#%E5%8A%9F%E8%83%BD%E6%80%A7%E5%88%87%E6%8D%A2%E6%8C%89%E9%92%AE%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0-%E9%9D%9E%E6%8F%92%E4%BB%B6)
 
 ## 全屏展示内容方法 `useFullscreen`
 
