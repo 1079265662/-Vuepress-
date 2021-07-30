@@ -16,7 +16,7 @@ Vue3 设置吸顶效果的小组件(可设插件)<br>
 
 ##  设置吸顶效果样式
 
-![image-20210720212627308.png](https://i.loli.net/2021/07/21/C2ErdLpbePHzacq.png)
+![image-20210720212627308.png](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/C2ErdLpbePHzacq.png)
 
 [吸顶效果组件项目预览](https://gitee.com/liu_kaili/Vue_little_rabbit_fresh)
 

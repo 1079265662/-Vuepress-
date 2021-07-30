@@ -17,7 +17,7 @@ Vue3 骨架效果自定义插件设置<br>
 
 ## Vue3 的骨架效果
 
-![image-20210722184050574](https://i.loli.net/2021/07/26/KNyRwatWq8izpoT.png)
+![image-20210722184050574](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/KNyRwatWq8izpoT.png)
 
 [骨架效果使用项目](https://gitee.com/liu_kaili/Vue_little_rabbit_fresh)
 

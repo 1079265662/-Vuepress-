@@ -18,7 +18,7 @@ categories: Vue3
 
 * 非插件 自定实例化方法(跟插件差不多)
 
-![image-20210723220724444](https://i.loli.net/2021/07/23/Qu9WRPXgvzladjM.png)
+![image-20210723220724444](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/Qu9WRPXgvzladjM.png)
 
 [自定义图片懒加载方法效果使用项目](https://gitee.com/liu_kaili/Vue_little_rabbit_fresh)
 

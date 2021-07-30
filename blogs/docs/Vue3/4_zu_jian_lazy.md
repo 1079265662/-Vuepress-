@@ -17,7 +17,7 @@ categories: Vue3
 
 ## 设置组件懒加载方法(非插件)
 
-![image-20210723223757171](https://i.loli.net/2021/07/23/JM58VpFCRZnhIXy.png)
+![image-20210723223757171](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/JM58VpFCRZnhIXy.png)
 
 [组件懒加载方法效果使用项目](https://gitee.com/liu_kaili/Vue_little_rabbit_fresh)
 

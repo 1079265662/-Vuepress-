@@ -223,7 +223,7 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 ## `replace()` 数组替换内容方法
 
 * replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
-* 此方法不会创建一个 新数组 会直接改变原来数组
+* 此方法不会创建一个新数组 会直接改变原来数组
 * 通常配合正则表达式来替换内容
 
 ```js
@@ -337,6 +337,20 @@ const white = ['/login', '/404']
  
  }
 ```
+
+## `slice()` 分割数组方法
+
+* slice()方法可提取字符串的某个部分，并以新的字符串返回被提取的部分。
+* 不会修改原数组 但会返回一个分割后的新数组(浅拷贝)
+
+> 简单小案例
+
+```js
+let fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+let citrus = fruits.slice(1,3);
+```
+
+
 
 # 对象方法
 

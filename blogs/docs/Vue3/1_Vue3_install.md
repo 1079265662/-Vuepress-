@@ -22,9 +22,9 @@ Vue3 将组件设置为插件的食用方法<br>
 * Vue3配置全局插件是 app. (Vue2是 Vue.)
 * Vue3设置插件的时候 设置插件的Vue组件需要 设置`name`属性
 
-![image-20210722165649300](https://i.loli.net/2021/07/22/kaSbDBwVJC32TEh.png)
+![image-20210722165649300](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/kaSbDBwVJC32TEh.png)
 
-### 设置Vue3自定义插件 `install`
+## 设置Vue3自定义插件 `install`
 
 [Vue3插件机制官网](https://v3.cn.vuejs.org/guide/plugins.html#%E6%8F%92%E4%BB%B6)
 
@@ -83,9 +83,9 @@ createApp(App).use(XtxUI).mount('#app')
 
 ​	如果需要给插件传递参数 通常会动态绑定数据`:` ( 动态绑定基本类型的传入插件的数据 可保证插件需求的数据类型)
 
-### 批量导入Vue插件方法
+## 批量导入Vue插件方法
 
-![image-20210725010517653](https://i.loli.net/2021/07/25/QCNwM1VujSiFLZs.png)
+![image-20210725010517653](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/QCNwM1VujSiFLZs.png)
 
 * 适用于 所有插件都集合在一个文件夹 (index.js里面)
 * 通过`require`方法筛选插件 然后`importFn`进行批量导入插件方法 然后批量`component`实例化Vue插件

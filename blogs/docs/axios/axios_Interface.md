@@ -36,9 +36,9 @@ sticky: 2
     // timeout: 10000
   })
   ```
-  
-  * 2. 调用接口时候 调用一级接口组件 单独设置接口文件 (二级接口组件)
-  * 3. 在需要调用接口的Vue文件引入二级接口组件 (导入二级接口)
+
+  * 调用接口时候 调用一级接口组件 单独设置接口文件 (二级接口组件)
+  * 在需要调用接口的Vue文件引入二级接口组件 (导入二级接口)
 
 > <big>一、</big>utils文件夹 一级路由 axios接口模块设置  `utils文件夹里面创建 request.js`
 
@@ -48,6 +48,7 @@ sticky: 2
 - 调用axios方法 设置基本url路径 设置参数 配置数据
   - 设置属性:  method(请求方式) , url(地址) , data(请求体) , params(请求方式参数) , headers(请求头)
     -  data(请求体) , params(请求方式参数) 可以通过es6的动态属性名(键) 来实现动态切换
+  -  接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接
 - return 返回结果
 - 设置axios的 请求拦截器 和 响应拦截器
 
@@ -159,6 +160,7 @@ export default (options) => {
 ![image-20210604084917295](https://i.loli.net/2021/06/04/rVzQ9DwZpHEboj6.png)
 
 * 设置命名导出(不是默认导出) 按需配置参数 
+* 接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接
 * return返回数据
 
 > 目标: 封装单独的登录接口文件 
@@ -176,6 +178,7 @@ export const login = (mobile, code) => {
   // 返回数据设置 return
   return request({
     method: 'POST',
+    // 接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接
     url: 'v1_0/authorizations',
     data: { // 跟服务器比对数据
       mobile,
@@ -272,3 +275,4 @@ const instance = axios.create({
 ```
 
 > 总结：为了灵活配置接口的基准路径，可以基于配置文件的方式，在开发和生产环境分别切换到不同的地址。这种方式好处就是代码在开发和上线时修改比较容易
+
