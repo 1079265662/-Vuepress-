@@ -340,7 +340,7 @@ const white = ['/login', '/404']
 
 ## `slice()` 分割数组方法
 
-* slice()方法可提取字符串的某个部分，并以新的字符串返回被提取的部分。
+* `slice()`方法可提取字符串的某个部分，并以新的字符串返回被提取的部分。
 * 不会修改原数组 但会返回一个分割后的新数组(浅拷贝)
 
 > 简单小案例
@@ -348,6 +348,34 @@ const white = ['/login', '/404']
 ```js
 let fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
 let citrus = fruits.slice(1,3);
+```
+
+## `reduce(()=>{},初始值可不写)` 把数组中的所有项进行拼接
+
+* `reduce()` 可以把数组中所有项目进行拼接 
+  * 拼接格式 必须是: 参数1+参数2+...... (参数1必须在最前)
+* 不会修改原数组的数据 但是会返回一个拼接后的新数组
+* <font color =#ff3040>需要return</font>
+* `reduce()` 有四个参数
+  * item代表一次回调的值 初始值为0
+  * cart代表当前元素的值
+  * index当前下标
+  * arr原数组
+  * 对象结尾是 初始值
+* 通常可以代替循环遍历 拼接数据
+
+> 简单的`reduce()` 使用
+
+```js
+let a=[4,5,6,7,8]
+//item代表一次回调的值 初始值为0
+//cart代表当前元素的值
+//index当前下标
+//arr原数组
+let num=a.reduce((item,cart,index,arr)=>{
+    return item+=cart
+},0)//初始值为0
+console.log(num) //输出为30
 ```
 
 
