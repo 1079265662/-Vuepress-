@@ -1100,13 +1100,21 @@ import store from '../store/index'
 > Vue3的实例化方法导入
 
 * Vue3必须先导入Vuex组件 才能调用Vuex的数据
+* 导入Vuex后再`setup()`中实例化Vuex组件
 
 ```js
 // 导入Vuex的组件 Vue3必须先导入Vuex组件 才能调用Vuex的数据
 import { useStore } from 'vuex'
+// 在setup ()中实例化Vuex组件
+const store = useStore()
 ```
 
 > 如果是Vue3 无需设置this
+
+* <font color =#ff3040>注意: 如果在`template`模板中 需要用$ 在`setup()`中导入Vuex后不需要</font>
+  * Vue3调用Vuex需要先导入Vuex组件 并且需要 实例化导入的Vuex组件
+  * 模板中导入state数据需要` $`
+  * setup() 使用Vuex 不需要 this 和 `$`
 
 1. State: 提供一个响应式数据
 
@@ -1114,22 +1122,54 @@ import { useStore } from 'vuex'
 store.state.xxx // mapState 取值
 ```
 
+* 拆分模块后 调用某个Vuex文件
+
+```js
+store.state.拆分模块的文件名(名称).调用的state名称 // 在拆分模块中使用
+```
+
+<br>
+
 2. Getter：借助 Vue 的计算属性 computed 来实现缓存
 
 ```js
 store.getters.xxx // mapGetters 取值
 ```
 
+* 拆分模块后 调用某个Vuex文件
+
+```js
+store.getters.拆分模块的文件名(名称).调用的state名称 // 在拆分模块中使用
+```
+
+<br>
+
 3. Mutation：更改 state 方法(同步获取数据)
 
 ```js
-store.commit('Mutation方法','传递的数据') // Mutation 赋值
+store.commit('Mutation方法',传递的数据) // Mutation 赋值
 ```
+
+* 拆分模块后 调用某个Vuex文件
+
+```js
+store.commit('拆分模块的文件名.Mutation方法',传递的数据) // 在拆分模块中使用
+```
+
+<br>
 
 4. Action：触发 mutation 方法(异步数据获取)
 
+   * 通常不用写 传递的数据
+
 ```js
-store.dispatch('Action方法','传递的数据') // Action 赋值
+store.dispatch('Action方法',传递的数据) // Action 赋值
+```
+
+* 拆分模块后 调用某个Vuex文件
+
+```js
+store.dispatch('拆分模块的文件名.Action方法',传递的数据) // 在拆分模块中使用
 ```
 
 ### Vue3调用Vuex的数据
