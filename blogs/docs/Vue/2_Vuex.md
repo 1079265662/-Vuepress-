@@ -409,11 +409,13 @@ methods: {
 
 ### `mapActions` 方法获取数据 `重点`
 
-> - mapActions辅助函数，把actions中的函数映射组件methods中
-> - 通俗：通过mapActions函数可以生成methods中函数
-> - 1. `mapActions` 方法获取 获取异步数据
->   2. 获取到的数据 通过Vuex的`mutations` 处理 储存到Vuex的 `state` 数据
->   3. 通过Vue文件的 `mapState` 方法导入 `state` 数据
+mapActions辅助函数，把actions中的函数映射组件methods中
+
+通俗：通过mapActions函数可以生成methods中函数
+
+- 1. `mapActions` 方法获取 获取异步数据
+  2. 获取到的数据 通过Vuex的`mutations` 处理 储存到Vuex的 `state` 数据
+  3. 通过Vue文件的 `mapState` 方法导入 `state` 数据
 
 * `script` 脚本
   * 把vuex中的`mapActions`数据映射到组件的计算属性中。(导入`mapActions`)
@@ -468,7 +470,7 @@ import { mapActions } from 'vuex'
 
 ### 异步数据登录实战例子
 
-> **`目标`** 实现基本的登录功能 
+> `目标` 实现基本的登录功能 
 >
 > `插件` [饿了么ui表单](https://element.eleme.cn/#/zh-CN/component/form#form-biao-dan)  [表单验证validate](https://github.com/yiminghe/async-validator) [第三方包js-cookie](https://www.npmjs.com/package/js-cookie)
 
@@ -585,6 +587,36 @@ methods: {
 1. 原始方式：this.$store.dispatch('queryData', num)
 2. 简化方式一：对象
 3. 简化方式二：数组
+
+### 获取`action`的返回值(return)
+
+* Vuex中支持获取`action`的返回值 因为`action`返回的是promise对象 只需要`then`即可获取返回值(return)
+
+> 获取返回值例子
+
+1. Vuex中 设置`action`的返回值
+
+```js
+  actions: {
+    // 设置一个return的返回值
+    updateInfo (context, payload) {
+		return '你好'
+    }
+  },
+```
+
+2. 在Vue组件中 获取`action`的返回值
+   * 在Vue组件中调用action 并且通过then 获取其return的返回值
+
+```js
+// 在Vue组件中调用action 并且通过then 获取其return的返回值
+store.dispatch().then(ret=>{
+	// ret 就是其返回的值
+	  console.log(ret) // 你好
+})
+```
+
+
 
 ## 处理state里的数据 `getters`
 
@@ -913,6 +945,26 @@ methods: {
 }
 ```
 
+## 模块化拆分`actions`获取所有拆分组件的`state`数据
+
+* `actions`异步获取数据 支持获取其他拆分组件的`state`数据
+
+> 获取案例
+
+![image-20210803212126561](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210803212126561.png)
+
+* 需要获取拆分组件 user.js里面的`state`里的profile对象中的token值
+
+```js
+    insertCart (context) {
+      // context.rootState可以获取所有的模块的状态
+      // 获取user.js里面的state里的profile对象中的token值
+      const token = context.rootState.user.profile.token
+    }
+```
+
+
+
 ## 全局Vuex组件
 
 * 不加 `namespaced: true` 就是全局的Vuex组件
@@ -1090,6 +1142,8 @@ import store from '../store/index'
 // Vue组件外 不需要写 this.$store 
     store.commit('user/deluserInfo') // 操作 user文件里面的 deluserInfo 方法
 ```
+
+
 
 # Vue3 中的Vuex
 
