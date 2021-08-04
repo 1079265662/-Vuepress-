@@ -9,7 +9,7 @@
       </transition>
       <div :class="{ hide: firstLoad || !isHasKey }">
         <div v-if="all" class="wrapper-main" :style="{
-            backgroundImage: `url( ${cover} )`,
+            backgroundImage: `url( ${cover ? cover : 'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg' } )`,
             backgroundPositionX: 'center',
             backgroundPositionY: 'center',
             backgroundSize: 'cover',
@@ -124,12 +124,11 @@ export default {
       isHasKey: true,
       isHasPageKey: true,
       firstLoad: true,
-      images: ['https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg',
+      images: [
+        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-6o51k6.jpg',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m23jw.jpg',
-        'https://pan.zealsay.com/zealsay/cover/1.jpg',
-        'https://pan.zealsay.com/zealsay/cover/4.jpg',
-        'https://pan.zealsay.com/zealsay/cover/6.jpg'
+        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8gs6gwelsbzj31a90u043m.jpg'
       ]
     };
   },
@@ -150,7 +149,7 @@ export default {
         return (
           // this.$themeConfig.covers[new Date().getDay()] ||
           // "https://pan.zealsay.com/zealsay/cover/1.jpg"
-          this.images[Math.round(Math.random() * this.images.length - 1)]
+          this.images[Math.round(Math.random() * this.images.length)]
 
         );
       }
