@@ -15,7 +15,7 @@ JS 常用的数组方法合集<br>
 
 # 数组方法
 
-## `map(item=>{return 重组解构})` 处理数组方法(重组)
+## `map(item=>{重组解构})` 处理数组方法(重组)
 
 > map后的数据类型: [{id:'',name:'',seq:''},{},{}.........]
 
@@ -25,7 +25,6 @@ JS 常用的数组方法合集<br>
 * map() 方法会遍历出一个新的数组(无需存储) 拿来用即可
   * 用于数组中的每一项数据进行处理 最后返回一个新的数组
   * 可以用于 给数组添加新的属性名
-* 需要 <font color = #ff3040>return</font>
 
 > 对每一个现有频道进行排序 并且添加一些属性
 
@@ -44,14 +43,13 @@ JS 常用的数组方法合集<br>
   // 数据类型: [{id:'',name:'',seq:''},{},{}.........]
 ```
 
-## `filter(item=>{return 筛选条件})` 筛选数组方法
+## `filter(item=>{筛选条件})` 筛选数组方法
 
 >返回的数据类型是 布尔值 符合条件 true 不符合 false
 
 * filter() 方法创建一个`新数组`，新数组中的元素是通过检查指定数组中符合条件的所有元素。
   * **注意**：filter() 不会对空数组进行检测。
   * **注意**： filter() 不会改变原始数组。
-  *  <font color = #ff3040>需要: return</font>
 
 > 在数组筛选能被2整除的数据
 
@@ -82,7 +80,7 @@ console.log(newArr)
     }
 ```
 
-## `some(item=>{return 条件判断})` 筛选数组方法
+## `some(item=>{条件判断})` 筛选数组方法(有一个满足)
 
 * `some()`不会创建一个新数组 `some()` 方法用于检测数组中的元素是否满足指定条件（函数提供）。
 * 如果有一个元素满足条件，则表达式返回*true* , 剩余的元素不会再执行检测。
@@ -91,28 +89,50 @@ console.log(newArr)
 * 如果没有满足条件的元素，则返回false。
   * **注意：** some() 不会对空数组进行检测。
   * **注意：** some() 不会改变原始数组。
-  *  <font color = #ff3040>需要: return</font>
 * 通常和 `filter()`方法使用
 
-> 配合 `some()` 检测数组中的元素是否满足指定条件(取反) 再`filter()`储存不满足条件数据
+> 简单的some()案例
 
 ```js
-    optionChannels () {
-// ? 进行筛选 filter()方法进行数据总筛选 接收some()传来的true(取反值) 代表不存在的数据为true filter() 方法储存不存在的数据即可
-// ? filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
-        
-  return this.allChannels.filter(item => { // allChannels 是全部频道数据 channels是我的频道数据
-        // ? 进行符合条件筛选 some() 并且取反 把不满足条件的取反变成true 返回给filter()筛选器
-        // ?  some()方法作用：判断数组中是否包含符合条件的数据，只要有一项符合，就返回true
-        return !this.channels.some(items => {
-            // ?
-          return items.id === item.id
-        })
-      })
-    }
+        var a=[1,2,4,69,56,89]
+        // 如果有超过88的 就返回true
+　　　　 var some1=a.some((item)=>{
+                return item > 88
+            })
+        console.log(some1)//true
 ```
 
-## `find(item=>{return 筛选条件})` 筛选数组符合条件内容
+## `every(item=>{条件判断})` 筛选数组方法(所有满足)
+
+* 大致和`some()`方法一致 
+
+* every() 方法用于检测数组所有元素是否都符合指定条件（通过函数提供）。
+
+  every() 方法使用指定函数检测数组中的所有元素：
+
+  - 如果数组中检测到有一个元素不满足，则整个表达式返回 *false* ，且剩余的元素不会再进行检测。
+  - 如果所有元素都满足条件，则返回 true。
+
+* **注意：** every() 不会对空数组进行检测。
+
+  **注意：** every() 不会改变原始数组。
+
+* `every()`是所有条件都满足 才会返回true `some`有一个满足就返回true
+
+> 简单的every()案例
+
+```js
+	 var a=[1,2,4,69,56,89]
+	 // 如果都超过0 返回true
+　　　　 var some1=a.every((item)=>{
+                return item > 0
+            })
+        console.log(some1)
+```
+
+
+
+## `find(item=>{筛选条件})` 筛选数组符合条件内容
 
 * `find()`不会修改原对象(数组) 但是<font color = #ff3040>会返回一个符合条件的对象</font>
 * 当数组中的元素在测试条件时返回 true 时, `find()` 返回符合条件的元素，之后的值不会再调用执行函数。
@@ -374,7 +394,7 @@ let a=[4,5,6,7,8]
 //arr原数组
 let num=a.reduce((item,cart,index,arr)=>{
     return item+=cart
-},0)//初始值为0
+},0)//初始值为0 从0开始
 console.log(num) //输出为30
 ```
 

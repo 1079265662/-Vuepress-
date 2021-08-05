@@ -628,11 +628,12 @@ store.dispatch().then(ret=>{
 >
 > 应用场景：模板中需要的数据和State中的数据不完全一样 需要基于state中的数据进行加工处理，形成一份新的的数据，给模板使用
 
-* <font color = #ff3040>注意: 此方法写在 Vue方法`computed:` 计算属性</font>
+* <font color = #ff3040>注意: 此方法写在 Vue方法`computed:` 来获取`getters`修改后的值</font>
 * 只能修改 Vuex里面的`state`数据
 * 如果Vue文件不调用此方法 数据在Vuex中不会做出改变(即便是设置了)
   * 即便调用了这个方法 `state` 里面原数据也不会被修改 `getters`方法调用时 只是在原数据上进行修改
 * `getters`可以通过`mapGetters`映射到不同的组件中(这些组件共享这个`getters`) 这样有一个这些组件不需要再单独定义个子的计算属性 代码沉余度较低
+* <font color =#ff3040>需要 return</font>
 
 ### 定义 `getters` 修改state里数据
 
@@ -651,6 +652,29 @@ getters: {
       return state.list.filter(item => {
         return item.id > 1
       })
+    }
+  }
+```
+
+### 获取其他`getters`的值
+
+* `getters`有两个参数 
+  * 参数1 获取`state`里面的数据 进行修改
+  * 参数2 获取`getters` 里面的其他数据
+
+```js
+state: {
+    list: [1,2,3,4] 
+  },
+getters: {
+    getPartList (state) {
+      return state.list.filter(item => {
+        return item.id > 1
+      })
+    },
+      getGetters (state,getters) {
+          // 获取getters里面的其他数据
+		return getters.getPartList
     }
   }
 ```

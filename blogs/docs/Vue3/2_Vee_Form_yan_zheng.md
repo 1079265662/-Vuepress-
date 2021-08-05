@@ -50,7 +50,7 @@ components: { Form, Field },
 
 ## Vee的使用方法
 
-* Vee把原`div`和`input` 分别设置为 `Form`和`Field` 两个Vee提供的组件 实现表单验证功能
+* Vee把原`div或form`和`input`标签分别替换为 `Form`和`Field` 两个Vee提供的组件 实现表单验证功能
 
   * 需要给`Form`(div) 绑定表单验证
   * 需要给`Field`(input) 绑定表单验证规则 和 内容
