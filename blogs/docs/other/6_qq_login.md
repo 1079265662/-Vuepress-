@@ -1,7 +1,7 @@
 ---
 title: Vue脚手架导入qq登录方法
 date: 2021-08-06
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-1kxrz3.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-z8oojg%20(1).jpg
 tags:
  - Vue
  - QQ
