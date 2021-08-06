@@ -89,7 +89,7 @@ export default {
 
 函数防抖: 连续两次触发条件超过特定时间才会执行一次任务
 
-### 函数防抖 搜索示例
+> 函数防抖 搜索示例
 
 [Vant 提供搜索插件](https://vant-contrib.gitee.io/vant/#/zh-CN/search)
 
