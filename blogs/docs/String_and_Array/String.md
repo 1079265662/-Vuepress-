@@ -24,5 +24,6 @@ String.toUpperCase()			//全部转换为大写
 String.toLacaleLowerCase()		//全部转换为小写
 String.trim()					//去除两边空格
 String.endsWith('.xlsx')	    //检查字符串是否以指定的子字符串结尾(常用于检查上传文件的后缀名.xlsx 等)
+String.startsWith()				//检测字符串开头是否以XXX开头(常用于检测获取到的地址 检测地址开头是否符合标准)
 ```
 

@@ -130,8 +130,7 @@ export default {
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m23jw.jpg',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8gs6gwelsbzj31a90u043m.jpg',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-6o59k7.png',
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-g792j3.jpg',
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-57kzd1.jpg'
+        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-g792j3.jpg'
       ]
     };
   },
