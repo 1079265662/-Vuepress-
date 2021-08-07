@@ -37,7 +37,7 @@ JS同步异步操作 和 宏任务微任务的面试介绍 <br>
 
 * 代码的优先级: 主线程>宏任务>微任务 (微任务 宏任务都是异步)
 
-![image-20210704203139670](https://i.loli.net/2021/07/04/s2lDdZPRqe6crIx.png)
+![image-20210704203139670](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/s2lDdZPRqe6crIx.png)
 
 ## 宏任务 微任务 有哪些
 
@@ -51,4 +51,4 @@ JS同步异步操作 和 宏任务微任务的面试介绍 <br>
 
 **try catch**是处理同步异常
 
-**Promise catch**是处理异步异常
+**`Promise`的 try catch**是处理异步异常
