@@ -297,7 +297,7 @@ Vue.use(Vant)
 
 - 安装依赖包
   - postcss-pxtorem (把px单位转换为rem单位)
-  - lib-flexable () (设置html的font-size)
+  - lib-flexable (设置html的font-size)
 
 ```bash
 npm i postcss-pxtorem@5.1.1 -D
