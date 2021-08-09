@@ -25,7 +25,7 @@ categories: Vue
 
 > 函数节流 滚动条示例
 
-```diff
+```js
 <script>
 // ? 导入不同用户的频道数据
 import { getAllChannels } from '../../api/channel'
@@ -40,20 +40,20 @@ export default {
       finished: false,
       // 列表数据
       list: [],
-+      // 设置函数节流
-+      throttle: false
+      // 设置函数节流
+      throttle: false
     }
   },
   methods: {
 // 每次触发动态加载一页新的数据（上滑到底部时触发）
     onLoad () {
       // 函数节流: 固定的时间内 无论触发多少次条件 都只会进行一次进入
-+ // 原理: 设置一个对象 默认为false 如果第一次执行方法 先让其编程true 等代码执行完毕后 再恢复false 判断是否为true 如果是return跳出 防止多次刷新
-+       // 启动函数节流: 如果 throttle为true 就让其跳出 不执行下面代码
-+       if (this.throttle) return
-+       // 设置 throttle 为true 让其执行一次
-+       this.throttle = true
-      // 模拟异步操作
+ // 原理: 设置一个对象 默认为false 如果第一次执行方法 先让其编程true 等代码执行完毕后 再恢复false 判断是否为true 如果是return跳出 防止多次刷新
+       // 启动函数节流: 如果 throttle为true 就让其跳出 不执行下面代码
+       if (this.throttle) return
+       // 设置 throttle 为true 让其执行一次 (节流开始)
+       this.throttle = true
+       // 模拟异步操作
       setTimeout(() => {
         // 加载一页新的数据
         for (let i = 0; i < 10; i++) {
@@ -66,8 +66,8 @@ export default {
           // 加载结束(不改成true 加载不会结束 会一直加载)
           this.finished = true
         }
-+       // 再设置回false 让其下次可以触发方法  
-+         this.throttle = false
+       // 再设置回false 让其下次可以触发方法 (节流结束)
+         this.throttle = false
       }, 1000)
     }
   }
