@@ -127,9 +127,7 @@ export default {
       images: [
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-6o51k6.jpg',
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m23jw.jpg',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8gs6gwelsbzj31a90u043m.jpg',
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-6o59k7.png',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-g792j3.jpg'
       ]
     };
@@ -158,9 +156,10 @@ export default {
     },
     pageCover () {
       return (
-        this.$page.frontmatter.cover ||
-        this.$themeConfig.covers[new Date().getDay()] ||
-        "https://pan.zealsay.com/zealsay/cover/1.jpg"
+        // this.$page.frontmatter.cover ||
+        // this.$themeConfig.covers[new Date().getDay()] ||
+        // "https://pan.zealsay.com/zealsay/cover/1.jpg"
+          this.images[Math.round(Math.random() * this.images.length)]
       );
     },
     shouldShowNavbar () {

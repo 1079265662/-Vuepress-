@@ -32,6 +32,10 @@ websocket 和 http 协议区别 和 websocket应用 <br>
 
 ![image-20210131195932810](https://i.loli.net/2021/06/16/R1HJjDQOvefNw8L.png)
 
+![三次握手](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png)
+
+![四次挥手](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png)
+
 > 结论：websocket做双向通信更加高效（比如聊天功能，推送服务）
 
 ## websocket基本使用
