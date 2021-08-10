@@ -156,10 +156,9 @@ export default {
     },
     pageCover () {
       return (
-        // this.$page.frontmatter.cover ||
-        // this.$themeConfig.covers[new Date().getDay()] ||
-        // "https://pan.zealsay.com/zealsay/cover/1.jpg"
-          this.images[Math.round(Math.random() * this.images.length)]
+        this.$page.frontmatter.cover ||
+        this.$themeConfig.covers[new Date().getDay()] ||
+        "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg"
       );
     },
     shouldShowNavbar () {
