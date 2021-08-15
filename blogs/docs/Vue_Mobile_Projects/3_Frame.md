@@ -135,7 +135,7 @@ export default {
 
 > scoped 的作用：
 
-![image-20210602121826794](https://i.loli.net/2021/06/02/mNGDSeZ5A3Ja2O1.png)
+![image-20210602121826794](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/mNGDSeZ5A3Ja2O1.png)
 
 ## 配置全局样式
 

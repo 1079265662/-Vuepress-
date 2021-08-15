@@ -26,7 +26,7 @@ Vue个人中心 获取个人信息 退出功能<br>
 >
 > 路径: my文件夹 中的 `my.vue`
 
-![image-20210615232712541](https://tva4.sinaimg.cn/large/005INI3Xly8grjdav3n7gj308e0eijrz.jpg)
+![image-20210615232712541](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grjdav3n7gj308e0eijrz.jpg)
 
 - `template` 模板
 
@@ -271,7 +271,7 @@ import { getUserInfo } from '../../api/my'
 >
 > 原理: 基于Vant Dialog 弹出框 插件
 
-![image-20210615232712541](https://tva3.sinaimg.cn/large/005INI3Xly8grjdu676ewj308v0eq755.jpg)
+![image-20210615232712541](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grjdu676ewj308v0eq755.jpg)
 
 - `template`模板 (主模板已设置)
   - 事件绑定

@@ -24,7 +24,7 @@ Vue移动端 搜索功能 通过动态路由传参 设置搜索页<br>
 >
 > 效果: 点击搜索按钮 弹出一级路由的 搜索组件
 
-![image.png](https://i.loli.net/2021/06/12/XZdqocaOlE5Qn68.png)
+![image.png](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/XZdqocaOlE5Qn68.png)
 
 ### 搜索功能组件基本样式 `search.vue`
 
@@ -188,7 +188,7 @@ import search from '../views/search/search'
 >
 > <font color = #ff3040>注意: </font>浏览器缓存的数据格式是 json 需要用到 `JSON.parse()`方法 转换数据成字符串
 
-![image.png](https://i.loli.net/2021/06/12/PxR4tygA6lXKSV1.png)
+![image.png](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/PxR4tygA6lXKSV1.png)
 
 - `script` 脚本 `data()`存储数据
   - `JSON.parse(localStorage.getItem('search')` 把缓存到浏览器的数据读取出来 并且`JSON.parse`转换为字符串

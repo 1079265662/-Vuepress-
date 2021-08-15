@@ -30,7 +30,7 @@ Vue首页 文章列表更多操作弹出层 (举报 不感兴趣)<br>
 >
 > 组件创建: 文件路径` src/components/MoreAction.vue` `components文件夹 里面 MoreAction.vue`
 
-![image-20210608205520862](https://i.loli.net/2021/06/08/Ua7DWQG8bYNfMp9.png)
+![image-20210608205520862](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/Ua7DWQG8bYNfMp9.png)
 
 1. 给子组件设置两个 绑定事件 `:value ` `@input` (使用v-model语法糖)
 

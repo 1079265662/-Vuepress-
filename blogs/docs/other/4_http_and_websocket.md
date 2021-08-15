@@ -30,7 +30,7 @@ websocket 和 http 协议区别 和 websocket应用 <br>
   - 后续收发消息就不再需要建立连接
   - 长时间没有数据交互会自动断开连接（也可以手动断开连接）
 
-![image-20210131195932810](https://i.loli.net/2021/06/16/R1HJjDQOvefNw8L.png)
+![image-20210131195932810](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/R1HJjDQOvefNw8L.png)
 
 ![三次握手](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png)
 
@@ -82,7 +82,7 @@ ws.onclose = function(evt) {
 >
 > 路径: xiaozhi文件夹 中的 `xiaozhi.vue`
 
-![image-20210616181407468](https://i.loli.net/2021/06/16/hy9IetMduJ5KbRv.png)
+![image-20210616181407468](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/hy9IetMduJ5KbRv.png)
 
 - `template` 模板
 

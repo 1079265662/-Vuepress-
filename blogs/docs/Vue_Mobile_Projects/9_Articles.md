@@ -54,7 +54,7 @@ import detail from '../views/detail/detail'
 >
 > 原理: 通过 编程式导航(动态路由) 携带的文章id值 上传到服务器 获取服务器返回的详细文章数据
 
-![image-20210615205914591](https://tva2.sinaimg.cn/large/005INI3Xly8grjdmxwbuzj30860ejwgi.jpg)
+![image-20210615205914591](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grjdmxwbuzj30860ejwgi.jpg)
 
 ### 封装接口调用方法 `api文件夹 里面 search.js`
 
@@ -218,7 +218,7 @@ import { getDetailById, unFollowArticle, followArticle, likes, unlikes, undislik
 >
 > 原理: 获取服务器返回的关注状态 再利用三元表达式 设置关注按钮
 
-![image-20210615222641041](https://tva2.sinaimg.cn/large/005INI3Xly8grjbjypxnij30940f975s.jpg)
+![image-20210615222641041](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grjbjypxnij30940f975s.jpg)
 
 ### 封装关注与取消关注api接口`search.js`
 
@@ -308,7 +308,7 @@ import { getDetailById, unFollowArticle, followArticle, likes, unlikes, undislik
 >
 > 原理:  和关注功能大致一样 只不过两个按钮是互斥按钮 并且两个点击事件使用相同点击方法 需要区分两个按钮
 
-![image-20210615221845811](https://tva1.sinaimg.cn/large/005INI3Xly8grjdpxjnl3j30aa0i4q3t.jpg)
+![image-20210615221845811](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grjdpxjnl3j30aa0i4q3t.jpg)
 
 ### 封装点赞 和 不喜欢的 api接口`search.js`
 
@@ -449,7 +449,7 @@ export const undislikes = (articleId) => {
 >
 >原理:  根据文章的id 获取服务器评论数据 打印到页面上 上滑根据评论数据id 实现评论分页 
 
-![image-20210615221845811](https://tva3.sinaimg.cn/large/005INI3Xly8grjchgwoymj30880emgmx.jpg)
+![image-20210615221845811](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grjchgwoymj30880emgmx.jpg)
 
 ### 评论区单独组件设置 `ArticleComment.vue`
 

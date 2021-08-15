@@ -32,14 +32,14 @@ css扩展语言之一 less<br>
 * sass中 deep方法是 `::v-deep` 而 less里面的方法是 `/deep/`
 * 通常用覆盖组件(或者插件) 自带的样式 进行自定义样式设置
 
-![image-20210722150940103](https://i.loli.net/2021/07/22/yXEb8o9jCKWNxma.png)
+![image-20210722150940103](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/yXEb8o9jCKWNxma.png)
 
 ## less 自定义变量 `@`
 
 *  less 自定义变量是 `@`
 *  sass的定义变量是 `$`
 
-![image-20210721084039748](https://i.loli.net/2021/07/21/Gz1fBLJ2qMpeY6R.png)
+![image-20210721084039748](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/Gz1fBLJ2qMpeY6R.png)
 
 #### 导入less的自定义变量
 
@@ -75,7 +75,7 @@ css扩展语言之一 less<br>
 
 * 这是脚手架插件 需要在生成的 `vue.config.js`文件中添加配置
 
-![01.png](https://tva3.sinaimg.cn/large/005INI3Xly8gspqruow10j30z50gb41t.jpg)
+![01.png](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8gspqruow10j30z50gb41t.jpg)
 
 (2) 安装完毕后会在`vue.config.js`中自动添加配置，并且注入 如下：
 
@@ -115,7 +115,7 @@ module.exports = {
 
 * 通常我们会把less函数样式单独封装在一个less文件中
 
-![image-20210722152452049](https://i.loli.net/2021/07/22/cyAj4YfBFe27LC1.png)
+![image-20210722152452049](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/cyAj4YfBFe27LC1.png)
 
 * 这时候 我们只需要`@import`导入即可使用 
 

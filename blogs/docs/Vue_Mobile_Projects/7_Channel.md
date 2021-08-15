@@ -19,7 +19,7 @@ Vue频道列表(Vant动作面板) 频道编辑操作(添加 删除)<br>
 
 > 需求：登录的用户，可以选择喜欢的频道
 
-![image-20210611083432783](https://i.loli.net/2021/06/11/b9LWE7oJdM4eDKn.png)
+![image-20210611083432783](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/b9LWE7oJdM4eDKn.png)
 
 ## 获取父组件的频道数据 渲染到编辑模板 `ChannelEdit.vue`
 
@@ -204,7 +204,7 @@ import ChannelEdit from '../../components/ChannelEdit'
 >
 > 原理: 所有频道 减去 用户当前拥有的频道 得出用户还没有获得的频道
 
-![](https://pic.imgdb.cn/item/60c37411844ef46bb2af8686.jpg)
+![](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/60c37411844ef46bb2af8686.jpg)
 
 ###  封装可选频道 api接口 `api文件夹 channel.js`
 
@@ -389,7 +389,7 @@ this.$emit('update:activeIndex', index)
 >
 > 效果: 点击删除按钮后 删除改频道 并且通知服务器 该频道已删除
 
-![](https://pic.imgdb.cn/item/60c37cd9844ef46bb289049d.jpg)
+![](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/60c37cd9844ef46bb289049d.jpg)
 
 ### 封装上传频道 api接口 `api文件夹 channel.js`
 

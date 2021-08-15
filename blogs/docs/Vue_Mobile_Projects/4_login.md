@@ -160,7 +160,7 @@ this.$router.push('/home')
 
 > 总结：绑定表单数据；绑定提交事件；调用接口；跳转页面。
 
-![image-20210602161633614](https://i.loli.net/2021/06/02/ApcZa8H4L6sDCxO.png)
+![image-20210602161633614](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/ApcZa8H4L6sDCxO.png)
 
 > 总结：封装的好处
 >
@@ -373,12 +373,12 @@ export default {
 
 [Vant Button 按钮](https://vant-contrib.gitee.io/vant/#/zh-CN/button)
 
-![image-20210604223154115](https://i.loli.net/2021/06/04/315fhwcZ9KVmQN4.png)
+![image-20210604223154115](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/315fhwcZ9KVmQN4.png)
 
 > 目标：实现登录按钮提示效果 (常用于电商网站购买按钮 和 登录等待验证按钮)
 
 - 通过vant按钮的`:loading`属性实现提示效果
-  - ![image-20210604223427347](https://i.loli.net/2021/06/04/h1IJviZBmW9dcnr.png)
+  - ![image-20210604223427347](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/h1IJviZBmW9dcnr.png)
 
 1. 在`template`里面设置Vant提供的加载方法`:loading:'对象名'`
 
@@ -498,7 +498,7 @@ router.beforeEach((to, from, next) => {
 
 ### 导航守卫工作流程
 
-![image-20210604171827880](https://i.loli.net/2021/06/05/n5NRQfYb9pK36rZ.png)
+![image-20210604171827880](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/n5NRQfYb9pK36rZ.png)
 
 ## 调用接口获取频道数据 `channel.js`
 
