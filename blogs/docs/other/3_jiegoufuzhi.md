@@ -46,6 +46,8 @@ JS的二次结构赋值使用方法 <br>
    let demo = {result:{id, avatar, account, mobile, token}} = ret
    // 打印二次结构后的数据 可以再其他作用域直接调用
     console.log(id, avatar, account, mobile, token);
+  // 打印结构后的所有数据
+	console.log(demo)
   </script>
 ```
 
@@ -75,6 +77,8 @@ JS的二次结构赋值使用方法 <br>
    let demo = {{id, avatar, account, mobile, token}} = ret.result
    // 打印二次结构后的数据 可以再其他作用域直接调用
     console.log(id, avatar, account, mobile, token);
+  // 打印结构后的所有数据
+	console.log(demo)
   </script>
 ```
 
