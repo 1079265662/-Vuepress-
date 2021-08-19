@@ -13,6 +13,20 @@ JS的二次结构赋值使用方法 <br>
 
 <!-- more -->
 
+## 结构赋值数组方式简单结构
+
+* 如果需要结构的数据很少 可以通过数组方式结构
+
+![image-20210819203952979](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210819203952979.png)
+
+* 以上只有两组数据 就可以用数组方式 结构赋值
+  * 按数组顺序 结构该两组数据 对应其索引值(下标)
+
+```js
+      // err 和 succ 对应两个返回的数据 对应其索引值(下标)
+      const [err, succ] = await uni.requestPayment(payParams)
+```
+
 ##  二次结构赋值方法使用案例 (方法1)
 
 * 适合两层对象中 获取指定数据
