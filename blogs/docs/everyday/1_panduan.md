@@ -1,6 +1,6 @@
 ---
 title: JS实用小技巧
-date: 2021-08-18
+date: 2021-08-21
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-o3lpzl.jpg
 tags:
  - JavaScript
@@ -39,5 +39,34 @@ JS日常总结的使用小技巧 <br>
 ```js
       // err 和 succ 对应两个返回的数据 对应其索引值(下标)
       const [err, succ] = await uni.requestPayment(payParams)
+```
+
+## 把后端返回的数据 转换成对象使用
+
+* 通常我们获取到后端返回的数据类型是这样的
+
+![image-20210822231515067](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210822231515067.png)
+
+* 如果有特殊需求 需要把其转换成对象
+
+![image-20210822231619762](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210822231619762.png)
+
+> 转换方法
+
+* 通过箭头函数把后端返回的数据转换成对象 箭头函数的参数就是转换成对象后的后端数据
+
+```vue
+       // goods是我们需要转换的数据
+       <block v-for="(goods, i) in cart" :key="i">
+       // 箭头函数里面的参数(goods) 就是转换成对象后的后端数据
+         <view @click="()=> bindClick(goods)" ></view>
+       </block>
+
+```
+
+* 我们可以用这种方法 使用一些字符串数组方法
+
+```js
+ goods.goods_id // 读取转换成对象的后端数据
 ```
 
