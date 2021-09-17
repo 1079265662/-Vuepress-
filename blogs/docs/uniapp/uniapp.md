@@ -3,8 +3,8 @@ title: uniapp的学习笔记
 date: 2021-08-23
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-j3k6dp.png
 tags:
- - uni-app
-categories: uni-app
+ - uniapp
+categories: uniapp
 ---
 
 ::: tip 介绍

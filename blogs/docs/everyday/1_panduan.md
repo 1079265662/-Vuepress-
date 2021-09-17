@@ -70,3 +70,35 @@ JS日常总结的使用小技巧 <br>
  goods.goods_id // 读取转换成对象的后端数据
 ```
 
+## 倒计时样式设置
+
+* 我们一般提交完毕数据 或者 登录成功后 会用倒计时方式通知用户即将跳转到某个页面 这个时候就需要`setInterval()` 定时器通知用户即将跳转
+
+<img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210917193701640.png" alt="image-20210917193700300" style="zoom: 33%;" />
+
+* `setInterval()` 使用的时候会有一秒的延迟(异步方法) 所以我们需要在定时器开始前 进行一次提示
+* 这里用`alert()`弹窗效果
+
+```js
+          // 设置定时器的秒数
+          const TIME_COUNT = 3;
+          // 提前显示弹窗 防止定时器延迟显示
+          alert(`提交成功3秒进入积分榜`)
+          if (!this.timer) {
+            this.count = TIME_COUNT;
+            this.show = false;
+            this.timer = setInterval(() => {
+              if (this.count > 1 && this.count <= TIME_COUNT) {
+                this.count--;
+                alert(`提交成功${this.count}秒进入积分榜`)
+              } else {
+                this.show = true;
+                clearInterval(this.timer);
+                this.timer = null;
+                // 这里是倒计时结束执行的事件 可以添加跳转到其他页面
+                  // 这里可以写一些跳转逻辑
+              }
+            }, 1000);
+          } 
+```
+
