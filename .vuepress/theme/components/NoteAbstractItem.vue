@@ -52,6 +52,9 @@ export default {
   }
 
   .cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     max-width: 320px;
     flex: 1;
     overflow: hidden;
@@ -62,7 +65,7 @@ export default {
     border-radius: 0.5rem;
     width: 100%;
     height: 100%;
-    max-height: 210px;
+    max-height: 195px;
     transition: 1s ease-out;
   }
 

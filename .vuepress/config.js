@@ -246,7 +246,7 @@ module.exports = {
           fixed: true,
           mini: true,
           // 自动播放
-          autoplay: true,
+          autoplay: false,
           // 歌曲栏折叠
           listFolded: true,
           // 颜色
