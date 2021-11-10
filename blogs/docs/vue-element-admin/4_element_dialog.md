@@ -1,5 +1,5 @@
 ---
-title: element ui的dialog 支持拖拽拉伸和边界限制
+title: element-dialog添加拖拽拉伸和边界限制
 date: 2021-11-05
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-m9y9j1.jpg
 tags:
