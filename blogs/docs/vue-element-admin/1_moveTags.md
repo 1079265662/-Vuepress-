@@ -27,19 +27,19 @@ npm i sortablejs
 
 ## 效果实现步骤
 
-1. 第一步 首先你要找到 `TagsView` 快捷导航的文件下的`index`
+> 1. 第一步 首先你要找到 `TagsView` 快捷导航的文件下的`index`
 
 ![](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211108200829923.png)
 
-2. 第二步 找到文件后 进入查看作者封装的源代码
+> 2. 第二步 找到文件后 进入查看作者封装的源代码
 
-   * [SortableJS](https://sortablejs.github.io/Sortable/) 滑动原理是 把原渲染的数组 通过滑动的方式 重新排序 并且渲染排序后的数据 那么我们就需要找到 快捷导航渲染的数组
+* [SortableJS](https://sortablejs.github.io/Sortable/) 滑动原理是 把原渲染的数组 通过滑动的方式 重新排序 并且渲染排序后的数据 那么我们就需要找到 快捷导航渲染的数组
 
-   ![image-20211108201033951](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211108201033951.png)
+![image-20211108201033951](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211108201033951.png)
 
-   * 找到原数组后 我们知道原来原数组是通过计算属性 `computed` 在`vuex`中拿到的 这里我们不管他是怎么拿到的 只需要知道数组叫什么就行
+* 找到原数组后 我们知道原来原数组是通过计算属性 `computed` 在`vuex`中拿到的 这里我们不管他是怎么拿到的 只需要知道数组叫什么就行
 
-   ![image-20211108201303672](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211108201303672.png)
+![image-20211108201303672](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211108201303672.png)
 
 <font color =#ff3040>注意: 之前快捷导航作者是直接通过计算属性 `return`获取的数据 这种获取不支持修改 如果修改会报错(但是效果会有) 想解决报错 必须使用`get set` 获取计算数据</font>
 
@@ -56,12 +56,13 @@ npm i sortablejs
  }
 ```
 
-3. 第三步 导入 `SortableJS`
+> 3. 第三步 导入 `SortableJS`
 
 ![image-20211108201743784](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211108201743784.png)
 
-4. 第四步 在`template`中的导航数据外 包一层`div` 让其支持单个移动
-   * 这里需要额外包一层div 否则无法单独控制移动 注意要绑定id
+> 4. 第四步 在`template`中的导航数据外 包一层`div` 让其支持单个移动
+
+* 这里需要额外包一层div 否则无法单独控制移动 注意要绑定id
 
 ```diff
 <template>
@@ -85,8 +86,9 @@ npm i sortablejs
 </template>
 ```
 
-5. 第五步 在`methods` 设置`SortableJS`让其支持滑动操作
-   * 注意 要修改成自己的数组名称 `visitedViews`是我的数组名称 当然如果你是同款快捷导航不用注意 copy就行
+> 5. 第五步 在`methods` 设置`SortableJS`让其支持滑动操作
+
+* 注意 要修改成自己的数组名称 `visitedViews`是我的数组名称 当然如果你是同款快捷导航不用注意 copy就行
 
 ```js
  methods:  {
@@ -113,8 +115,9 @@ npm i sortablejs
  }
 ```
 
-6. 第六步 在`mounted`Dom渲染完毕后的生命周期 挂载`SortableJS`设置的方法
-   * 一定要在`mounted`Dom渲染完毕后的生命周期挂载奥
+> 6. 第六步 在`mounted`Dom渲染完毕后的生命周期 挂载`SortableJS`设置的方法
+
+* 一定要在`mounted`Dom渲染完毕后的生命周期挂载奥
 
 ```js
   mounted () {
