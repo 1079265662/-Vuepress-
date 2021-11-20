@@ -22,7 +22,7 @@ categories: Vue
 
 ## 开始我们的流程
 
-> 1. 第一步 开始安装我们渲染md的npm包
+> 第一步 开始安装我们渲染md的npm包
 
 * `vue-markdown-loader`和`github-markdown-css` 是我们需要的npm包
 * 注意 -S 和 -D  
@@ -34,7 +34,7 @@ npm i github-markdown-css -S  //markdown样式
 
 ![1781107-20201021091614764-1363270215](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1781107-20201021091614764-1363270215.png)
 
-> 2. 第二步 配置vue.config.js,支持markdown语法
+> 第二步 配置vue.config.js,支持markdown语法
 
 * <font color =#ff3040>注意 这一步会修改Vue配置文件 需要重启才能生效 并且不要修改你自带的配置信息 直接在 `chainWebpack (config)` 方法中 添加支持markdown即可</font>
 
@@ -57,7 +57,7 @@ npm i github-markdown-css -S  //markdown样式
   }
 ````
 
-> 3. 第三步 在main.js中引入markdown样式
+> 第三步 在main.js中引入markdown样式
 
 * 入口文件导入`markdown`样式奥 进行全局挂载css
 
@@ -65,14 +65,14 @@ npm i github-markdown-css -S  //markdown样式
 import 'github-markdown-css'
 ```
 
-> 4. 第四步 创建一个md文件
+> 第四步 创建一个md文件
 
 * 这里推荐用 [typora](https://www.typora.io/) 体检极致的markdown书写体验 (注意写太多不建议这个软件 会闪退 大概超过2M)
 * 以下是vscode读取markdown的样子
 
 ![image-20211108204842839](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211108204842839.png)
 
-> 5. 第五步 在components中挂载组件
+> 第五步 在components中挂载组件
 
 * 在需要的组件中引入help.md文件并在浏览器中查看
 * <font color =#ff3040>注意class="markdown-body"是对markdown-css的引用，必须要有，不添加该class会导致文件没有样式</font>
@@ -101,7 +101,7 @@ export default {
 
 ```
 
-> 6. 恭喜你导入成功 快看看样子吧
+> 第六步 恭喜你导入成功 快看看样子吧
 
 ![image-20211108205325723](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211108205325723.png)
 

@@ -23,7 +23,7 @@ element ui的dialog 支持拖拽拉伸和边界限制 <br>
 
 ## 开始设置
 
-> 1. 第一步 在js文件中 写一下功能代码
+> 第一步 在js文件中 写一下功能代码
 
 ```js
 import Vue from 'vue'
@@ -277,7 +277,7 @@ Vue.directive('dialogDrag', {
 
 ```
 
-> 2. 第二步 在main.js入口文件引入挂载全局
+> 第二步 在main.js入口文件引入挂载全局
 
 * 不用`Vue.use()` 直接导入即可
 
@@ -286,7 +286,7 @@ Vue.directive('dialogDrag', {
 import '@/components/elementUImove/elementUImove'
 ```
 
-> 3. 第三步 在`el-dialog`的组件中 直接使用声明的方法 `v-dialogDrag`
+> 第三步 在`el-dialog`的组件中 直接使用声明的方法 `v-dialogDrag`
 
 ```vue
 <el-dialog title="收货地址" :visible.sync="dialogTableVisible" v-dialogDrag>
