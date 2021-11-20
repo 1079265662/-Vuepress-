@@ -5,38 +5,24 @@
 
       <div class="author-social">
         <ModuleTransition delay="0.04" duration="0.5">
-          <img
-              class="personal-img"
-              v-if="recoShowModule || $themeConfig.authorAvatar"
-              :src="$withBase($themeConfig.authorAvatar)"
-              alt="author-avatar"
-          >
+          <div class="personal-img">
+            <img class="personal-radius" v-if="recoShowModule || $themeConfig.authorAvatar" :src="$withBase($themeConfig.authorAvatar)" alt="author-avatar">
+          </div>
         </ModuleTransition>
 
         <ModuleTransition delay="0.04" duration="0.5">
           <div v-if="recoShowModule" class="socials">
-            <a v-if="socials.github" :href="socials.github" title="github" target="_blank"><i
-                class="iconfont big reco-github black"></i></a>
-            <a v-if="socials.gitlab" :href="socials.gitlab" title="gitlab" target="_blank"><i
-                class="iconfont big reco-gitlab coral"></i></a>
-            <a v-if="socials.gitee" :href="socials.gitee" title="gitee" target="_blank"><i
-                class="iconfont big reco-mayun crimson"></i></a>
-            <a v-if="socials.jianshu" :href="socials.jianshu" title="简书" target="_blank"><i
-                class="iconfont big reco-jianshu indianred"></i></a>
-            <a v-if="socials.zhihu" :href="socials.zhihu" title="知乎" target="_blank"><i
-                class="iconfont big reco-zhihu lightskyblue"></i></a>
-            <a v-if="socials.toutiao" :href="socials.toutiao" title="头条" target="_blank"><i
-                class="iconfont big reco-toutiao lightsalmon"></i></a>
-            <a v-if="socials.juejin" :href="socials.juejin" title="掘金" target="_blank"><i
-                class="iconfont big reco-juejin dodgerblue"></i></a>
-            <a v-if="socials.segmentfault" :href="socials.segmentfault" title="思否" target="_blank"><i
-                class="iconfont big reco-sf forestgreen"></i></a>
-            <a v-if="socials.csdn" :href="socials.csdn" title="CSDN" target="_blank"><i
-                class="iconfont big reco-csdn indianred"></i></a>
-            <a v-if="socials.wechat" :href="socials.wechat" title="微信" target="_blank"><i
-                class="iconfont big reco-wechat forestgreen"></i></a>
-            <a v-if="socials.qq" :href="socials.qq" title="QQ" target="_blank"><i
-                class="iconfont big reco-qq lightskyblue"></i></a>
+            <a v-if="socials.github" :href="socials.github" title="github" target="_blank"><i class="iconfont big reco-github black"></i></a>
+            <a v-if="socials.gitlab" :href="socials.gitlab" title="gitlab" target="_blank"><i class="iconfont big reco-gitlab coral"></i></a>
+            <a v-if="socials.gitee" :href="socials.gitee" title="gitee" target="_blank"><i class="iconfont big reco-mayun crimson"></i></a>
+            <a v-if="socials.jianshu" :href="socials.jianshu" title="简书" target="_blank"><i class="iconfont big reco-jianshu indianred"></i></a>
+            <a v-if="socials.zhihu" :href="socials.zhihu" title="知乎" target="_blank"><i class="iconfont big reco-zhihu lightskyblue"></i></a>
+            <a v-if="socials.toutiao" :href="socials.toutiao" title="头条" target="_blank"><i class="iconfont big reco-toutiao lightsalmon"></i></a>
+            <a v-if="socials.juejin" :href="socials.juejin" title="掘金" target="_blank"><i class="iconfont big reco-juejin dodgerblue"></i></a>
+            <a v-if="socials.segmentfault" :href="socials.segmentfault" title="思否" target="_blank"><i class="iconfont big reco-sf forestgreen"></i></a>
+            <a v-if="socials.csdn" :href="socials.csdn" title="CSDN" target="_blank"><i class="iconfont big reco-csdn indianred"></i></a>
+            <a v-if="socials.wechat" :href="socials.wechat" title="微信" target="_blank"><i class="iconfont big reco-wechat forestgreen"></i></a>
+            <a v-if="socials.qq" :href="socials.qq" title="QQ" target="_blank"><i class="iconfont big reco-qq lightskyblue"></i></a>
             <h1 class="longcang">{{ $themeConfig.info }}</h1>
           </div>
         </ModuleTransition>
@@ -55,10 +41,10 @@ import moduleTransitonMixin from '@theme/mixins/moduleTransiton'
 export default {
   name: 'About',
   mixins: [moduleTransitonMixin],
-  components: {Common, ModuleTransition},
+  components: { Common, ModuleTransition },
 
   computed: {
-    socials() {
+    socials () {
       return this.$themeConfig.socials
     }
   },
@@ -73,77 +59,106 @@ export default {
 <style src="../styles/theme.styl" lang="stylus"></style>
 
 <style lang="stylus" scoped>
-@require '../styles/mode.styl'
-.grey
-  color grey
+.personal-radius {
+  border-radius: 50%;
+  transition: all 1.35s;
+  cursor: pointer;
+}
 
-.orange
-  color orange
+.personal-radius:hover {
+  transform: rotate(360deg);
+}
 
-.green
-  color green
+@require '../styles/mode.styl';
 
-.blue
-  color deepskyblue
+.grey {
+  color: grey;
+}
 
-.pink
-  color pink
+.orange {
+  color: orange;
+}
 
-.dgreen
-  color forestgreen
+.green {
+  color: green;
+}
 
-.black
-  color black
+.blue {
+  color: deepskyblue;
+}
 
-.coral
-  color coral
+.pink {
+  color: pink;
+}
 
-.crimson
-  color crimson
+.dgreen {
+  color: forestgreen;
+}
 
-.indianred
-  color indianred
+.black {
+  color: black;
+}
 
-.lightskyblue
-  color lightskyblue
+.coral {
+  color: coral;
+}
 
-.lightsalmon
-  color lightsalmon
+.crimson {
+  color: crimson;
+}
 
-.dodgerblue
-  color dodgerblue
+.indianred {
+  color: indianred;
+}
 
-.forestgreen
-  color forestgreen
+.lightskyblue {
+  color: lightskyblue;
+}
 
+.lightsalmon {
+  color: lightsalmon;
+}
 
-.author-social
-  position relative;
+.dodgerblue {
+  color: dodgerblue;
+}
+
+.forestgreen {
+  color: forestgreen;
+}
+
+.author-social {
+  position: relative;
   display: flex;
-  height 100vh;
+  height: 100vh;
   flex-direction: column;
   text-align: center;
-  margin-top -23rem
+  margin-top: -23rem;
 
-  .personal-img
+  .personal-img {
     width: 8rem;
     height: 8rem;
     border-radius: 50%;
     margin: 8rem auto;
+  }
 
-  .socials
-    margin 3rem 0
+  .socials {
+    margin: 3rem 0;
 
-    h1
-      margin 3rem 0
+    h1 {
+      margin: 3rem 0;
+    }
 
-    .big
-      font-size x-large
-      margin 0 .5rem
+    .big {
+      font-size: x-large;
+      margin: 0 0.5rem;
+    }
+  }
+}
 
 .scroll-down {
   display: block;
-  margin 0 auto;
+  margin: 0 auto;
   bottom: 45px;
   width: 34px;
   height: 34px;
@@ -155,22 +170,26 @@ export default {
   animation: bounce-in 5s 3s infinite;
 }
 
-/*.bounce-leave-active {*/
-/*  animation: bounce-in 4s 2s reverse;*/
-/*}*/
+/* .bounce-leave-active { */
+/* animation: bounce-in 4s 2s reverse; */
+/* } */
 @keyframes bounce-in {
   0% {
     transform: translateY(0);
   }
+
   20% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
+
   80% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(0);
   }
@@ -188,13 +207,13 @@ export default {
   height: 20px;
   border-right: 3px solid #3eaf7c;
   border-top: 3px solid #3eaf7c;
-  -webkit-transform: rotate(135deg); /*箭头方向可以自由切换角度*/
+  -webkit-transform: rotate(135deg); /* 箭头方向可以自由切换角度 */
   transform: rotate(135deg);
 }
 
 .body {
   overflow: hidden;
-  margin 0;
+  margin: 0;
   padding: 0;
   background: linear-gradient(90deg, #addfff, #fff9e8);
   display: flex;
@@ -219,6 +238,7 @@ export default {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -272,11 +292,11 @@ span {
   width: 1px;
   border-radius: 10px;
   background: linear-gradient(
-      to top,
-      #0f80c7 20%,
-      transparent 30%,
-      transparent 50%,
-      #3f7ba0 100%
+    to top,
+    #0f80c7 20%,
+    transparent 30%,
+    transparent 50%,
+    #3f7ba0 100%
   );
   opacity: 1;
   z-index: 5;
@@ -293,11 +313,11 @@ span {
   width: 1px;
   border-radius: 10px;
   background: linear-gradient(
-      to top,
-      #0f80c7 20%,
-      transparent 10%,
-      transparent 50%,
-      #addfff 100%
+    to top,
+    #0f80c7 20%,
+    transparent 10%,
+    transparent 50%,
+    #addfff 100%
   );
   opacity: 1;
   z-index: 5;
@@ -308,23 +328,19 @@ span {
   content: '';
 }
 
-.window:nth-child(5n - 3)::after,
-.window:nth-child(5n - 3)::before {
+.window:nth-child(5n - 3)::after, .window:nth-child(5n - 3)::before {
   opacity: 0.8 !important;
 }
 
-.window:nth-child(5n - 2)::after,
-.window:nth-child(5n - 2)::before {
+.window:nth-child(5n - 2)::after, .window:nth-child(5n - 2)::before {
   opacity: 0.4 !important;
 }
 
-.window:nth-child(5n - 1)::after,
-.window:nth-child(5n -1)::before {
+.window:nth-child(5n - 1)::after, .window:nth-child(5n -1)::before {
   opacity: 0.3 !important;
 }
 
-.window:nth-child(5n)::after,
-.window:nth-child(5n)::before {
+.window:nth-child(5n)::after, .window:nth-child(5n)::before {
   opacity: 0.2 !important;
 }
 
@@ -357,8 +373,7 @@ span {
   right: -400px;
 }
 
-.fly::after,
-.fly::before {
+.fly::after, .fly::before {
   content: '';
   position: absolute;
   width: 7px;
@@ -509,7 +524,7 @@ span {
 }
 
 .fan__staddle {
-  z-index -1
+  z-index: -1;
   position: absolute;
   bottom: 45px;
   background: #2f423f;
@@ -637,7 +652,7 @@ span {
   bottom: 195px;
   left: calc(50% - 150px);
   /* transform: translateX(-50%);
-     */
+   */
 }
 
 #engine:checked + div > div {
@@ -692,13 +707,17 @@ span {
   }
 }
 
-@media (max-width: $MQMobile)
-  .tag-wrapper
+@media (max-width: $MQMobile) {
+  .tag-wrapper {
     padding: 4.6rem 1rem 0;
+  }
 
-  .body
-    display none
+  .body {
+    display: none;
+  }
 
-  .scroll-down
-    display none
+  .scroll-down {
+    display: none;
+  }
+}
 </style>

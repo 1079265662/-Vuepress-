@@ -1,26 +1,43 @@
 module.exports = {
-  "title": "LKaiLi",
-  "description": "草 走 🤸 忽略",
-  "dest": "dist",
-  "head": [
+  title: "LKaiLi",
+  description: "草 走 🤸 忽略",
+  dest: "dist",
+  head: [
     [
       "link",
       {
-        "rel": "icon",
-        "href": "https://pan.zealsay.com/blog/favicon.ico"
-      }
+        rel: "icon",
+        href: "https://pan.zealsay.com/blog/favicon.ico",
+      },
     ],
     // 设置鼠标点击 社会主义核心价值观
-    ["script", { "language": "javascript", "type": "text/javascript", "src": "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js" }],
-    ["script", { "language": "javascript", "type": "text/javascript", "src": "/js/mouseClick.js" }],
+    [
+      "script",
+      {
+        language: "javascript",
+        type: "text/javascript",
+        src: "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js",
+      },
+    ],
+    [
+      "script",
+      {
+        language: "javascript",
+        type: "text/javascript",
+        src: "/js/mouseClick.js",
+      },
+    ],
     [
       "meta",
       {
-        "name": "viewport",
-        "content": "width=device-width,initial-scale=1,user-scalable=no"
-      }
+        name: "viewport",
+        content: "width=device-width,initial-scale=1,user-scalable=no",
+      },
     ],
-    ['script', {}, `
+    [
+      "script",
+      {},
+      `
           var _hmt = _hmt || [];
           (function() {
             var hm = document.createElement("script");
@@ -28,167 +45,175 @@ module.exports = {
             var s = document.getElementsByTagName("script")[0]; 
             s.parentNode.insertBefore(hm, s);
           })();
-        `] //百度统计
+        `,
+    ], //百度统计
   ],
-  "locales": {
+  locales: {
     "/": {
-      "lang": 'zh-CN'
-    }
+      lang: "zh-CN",
+    },
   },
   // "theme": "reco",
-  "themeConfig": {
-    "nav": [
+  themeConfig: {
+    nav: [
       {
-        "text": "主页",
-        "link": "/",
-        "icon": "reco-home"
+        text: "主页",
+        link: "/",
+        icon: "reco-home",
       },
       {
-        "text": "时间轴",
-        "link": "/timeline/",
-        "icon": "reco-date"
+        text: "时间轴",
+        link: "/timeline/",
+        icon: "reco-date",
       },
       {
-        text: '关于播客',
-        icon: 'reco-other',
+        text: "关于播客",
+        icon: "reco-other",
         items: [
-          { text: '关于我', link: '/other/', icon: 'reco-account' },
-          { text: '联系我', link: '/about/', icon: 'reco-mail' }
-        ]
+          { text: "关于我", link: "/other/", icon: "reco-account" },
+          { text: "联系我", link: "/about/", icon: "reco-mail" },
+        ],
       },
-  
     ],
-    "type": "blog",
-    "sidebar": {
-       // 添加分类时，改两处位置，多加一个分类字段（第一处）
+    type: "blog",
+    sidebar: {
+      // 添加分类时，改两处位置，多加一个分类字段（第一处）
       //  '/categories/': utils.genSidebar(folderhelper.getFolderName(rootpath + "/categories/"), filehelper.getFileName(rootpath + "/categories/"), true),
       //  '/archives/': getArchivesSidebar(),
       //  '/links/': getCategoriesSidebar(),
       //  '/about/': getCategoriesSidebar(),
       //  '/domains/': getCategoriesSidebar(),
-       // '/categories/': getCategoriesSidebar('Docker', 'Kali', 'Linux', 'Web', '生活', '云主机', '数据库', '树莓派', '机器学习', '科学上网', '编程语言')
+      // '/categories/': getCategoriesSidebar('Docker', 'Kali', 'Linux', 'Web', '生活', '云主机', '数据库', '树莓派', '机器学习', '科学上网', '编程语言')
     },
-    "blogConfig": {
-      "category": {
-        "location": 2,
-        "text": "分类"
+    blogConfig: {
+      category: {
+        location: 2,
+        text: "分类",
       },
-      "tag": {
-        "location": 3,
-        "text": "标签"
-      }
+      tag: {
+        location: 3,
+        text: "标签",
+      },
     },
-    "friendLink": [
+    friendLink: [
       {
-        "title": "关于我",
-        "desc": "欢迎访问本小站🥳",
-        "logo": "https://i.loli.net/2021/05/17/rRzqv6kGHwATM41.png",
-        "link": "/other/"
+        title: "关于我",
+        desc: "欢迎访问本小站🥳",
+        logo:
+          "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png",
+        link: "/other/",
       },
       {
-        "title": "播客样式作者",
-        "desc": "zealsay说你想说",
-        "logo": "https://pan.zealsay.com/avatar/20200606105310570000000.jpg",
-        "link": "https://blog.zealsay.com"
+        title: "播客样式作者",
+        desc: "zealsay说你想说",
+        logo: "https://pan.zealsay.com/avatar/20200606105310570000000.jpg",
+        link: "https://blog.zealsay.com",
       },
       {
-        "title": "播客友情链接",
-        "desc": "vuepress_blog",
-        "logo": "https://pan.zealsay.com/avatar/20200606105310570000000.jpg",
-        "link": "https://www.zealsay.com"
+        title: "播客友情链接",
+        desc: "vuepress_blog",
+        logo: "https://pan.zealsay.com/avatar/20200606105310570000000.jpg",
+        link: "https://www.zealsay.com",
       },
       {
-        "title": "技术指导",
-        "desc": "vuepress_blog",
-        "logo": "https://zyj_yida.gitee.io/source/img/ico/head.jpg",
-        "link": "https://zhangyujie.top/"
+        title: "技术指导",
+        desc: "vuepress_blog",
+        logo: "https://zyj_yida.gitee.io/source/img/ico/head.jpg",
+        link: "https://zhangyujie.top/",
       },
       {
-        "title": "去看电影 🎬︎",
-        "desc": "太好看啦 🔞",
-        "logo": "https://i.loli.net/2021/05/17/NWjePTC9BLD48tl.jpg",
-        "link": "https://cms.zhuanma.co/"
+        title: "去看电影 🎬︎",
+        desc: "太好看啦 🔞",
+        logo: "https://i.loli.net/2021/05/17/NWjePTC9BLD48tl.jpg",
+        link: "https://cms.zhuanma.co/",
       },
       {
-        "title": "我的GitHub 🧱",
-        "desc": "记录我搬砖的网站🧱",
-        "logo": "https://i.loli.net/2021/05/18/Cw4FEmbWIKROu7l.jpg",
-        "link": "https://github.com/1079265662"
-      }
+        title: "我的GitHub 🧱",
+        desc: "记录我搬砖的网站🧱",
+        logo: "https://i.loli.net/2021/05/18/Cw4FEmbWIKROu7l.jpg",
+        link: "https://github.com/1079265662",
+      },
     ],
-    "valineConfig": {
-      "appId": "tPugNRadb0huWnsoU1URpvSM-MdYXbMMI",// your appId
-      "appKey": "rDi2HfpHPFMIL6Vt8yV9Dbe5", // your appKey
-      "avatar": "mp", //
-      "enableQQ": true, //启用昵称框自动获取QQ昵称和QQ头像
-      "requiredFields": ['nick'], //设置必填项
-      "placeholder": "可以评论一下吗😅",
-      "meta": ['nick', 'mail', 'link']
+    valineConfig: {
+      appId: "tPugNRadb0huWnsoU1URpvSM-MdYXbMMI", // your appId
+      appKey: "rDi2HfpHPFMIL6Vt8yV9Dbe5", // your appKey
+      avatar: "mp", //
+      enableQQ: true, //启用昵称框自动获取QQ昵称和QQ头像
+      requiredFields: ["nick"], //设置必填项
+      placeholder: "可以评论一下吗😅",
+      meta: ["nick", "mail", "link"],
     },
-    "logo": "/logo.png",
+    logo: "/logo.png",
     // "huawei": true, //首页出现华为文案
-    "search": true,
-    "searchMaxSuggestions": 10,
-    "lastUpdated": "Last Updated",
-    "author": "LKaiLi",
-    "authorAvatar": "https://i.loli.net/2021/05/17/rRzqv6kGHwATM41.png",
-    "record": "暂无备案号 ", //icp备案
-    "startYear": "2021 ",
-    "info": "你看100遍她的视频，她不是你的，你敲100遍vue代码，知识就是你的，该醒醒了，我们的目标是学习vue！😅",
-    "socials": {
-      "github": "https://github.com/1079265662", //github
-      "gitlub": false, //gitlub
-      "gitee": "https://gitee.com/liu_kaili", //gitee
-      "jianshu": false, //简书
-      "zhihu": false, //知乎
-      "toutiao": false, //知乎
-      "juejin": false, //掘金
-      "segmentfault": false, //思否
-      "csdn": false, //CSDN
-      "wechat": "https://i.loli.net/2021/05/18/KsB8A6JD7SVR3Oy.jpg", //微信
-      "qq": "https://i.loli.net/2021/05/18/4HCo6ieL2MZfu78.jpg" //QQ
+    search: true,
+    searchMaxSuggestions: 10,
+    lastUpdated: "Last Updated",
+    author: "LKaiLi",
+    authorAvatar:
+      "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png",
+    record: "暂无备案号 ", //icp备案
+    startYear: "2021 ",
+    info:
+      "你看100遍她的视频，她不是你的，你敲100遍vue代码，知识就是你的，该醒醒了，我们的目标是学习vue！😅",
+    socials: {
+      github: "https://github.com/1079265662", //github
+      gitlub: false, //gitlub
+      gitee: "https://gitee.com/liu_kaili", //gitee
+      jianshu: false, //简书
+      zhihu: false, //知乎
+      toutiao: false, //知乎
+      juejin: false, //掘金
+      segmentfault: false, //思否
+      csdn: false, //CSDN
+      wechat: "https://i.loli.net/2021/05/18/KsB8A6JD7SVR3Oy.jpg", //微信
+      qq: "https://i.loli.net/2021/05/18/4HCo6ieL2MZfu78.jpg", //QQ
     },
-    "mottos": [{
-      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
-      "en": "the part that is good is not original, and the part that is original is not good"
-    },
-    {
-      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
-      "en": "the part that is good is not original, and the part that is original is not good."
-    },
-    {
-      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
-      "en": "the part that is good is not original, and the part that is original is not good."
-    },
-    {
-      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
-      "en": "the part that is good is not original, and the part that is original is not good."
-    },
-    {
-      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
-      "en": "the part that is good is not original, and the part that is original is not good."
-    }, {
-      "zh": "它的优秀之处并非原创，它的原创之处并不优秀。",
-      "en": "the part that is good is not original, and the part that is original is not good."
-    },
-    {
-      "zh": "优它的优秀之处并非原创，它的原创之处并不优秀。",
-      "en": "the part that is good is not original, and the part that is original is not good."
-    }
+    mottos: [
+      {
+        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
+        en:
+          "the part that is good is not original, and the part that is original is not good",
+      },
+      // 可以按天数 7条添加
+      {
+        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
+        en:
+          "the part that is good is not original, and the part that is original is not good.",
+      },
+      {
+        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
+        en:
+          "the part that is good is not original, and the part that is original is not good.",
+      },
+      {
+        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
+        en:
+          "the part that is good is not original, and the part that is original is not good.",
+      },
+      {
+        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
+        en:
+          "the part that is good is not original, and the part that is original is not good.",
+      },
+      {
+        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
+        en:
+          "the part that is good is not original, and the part that is original is not good.",
+      },
+      {
+        zh: "优它的优秀之处并非原创，它的原创之处并不优秀。",
+        en:
+          "the part that is good is not original, and the part that is original is not good.",
+      },
     ],
-    "covers": [
-      'https://pan.zealsay.com/zealsay/cover/4.jpg',
-      'https://pan.zealsay.com/zealsay/cover/4.jpg',
-      'https://pan.zealsay.com/zealsay/cover/4.jpg',
-      'https://pan.zealsay.com/zealsay/cover/4.jpg',
-      'https://pan.zealsay.com/zealsay/cover/4.jpg',
-      'https://pan.zealsay.com/zealsay/cover/4.jpg',
-      'https://pan.zealsay.com/zealsay/cover/4.jpg'
+    covers: [
+      // 可以按天数 7条添加
+      "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg",
     ],
-    "codeTheme": "tomorrow"
+    codeTheme: "tomorrow",
   },
-  "markdown": {
-    "lineNumbers": false
+  markdown: {
+    lineNumbers: false,
   },
   // configureWebpack: (config, isServer) => {
   //   if (!isServer) {
@@ -202,11 +227,12 @@ module.exports = {
   plugins: [
     // 自动生成侧边栏的插件
     [
-      'vuepress-plugin-auto-sidebar', {
+      "vuepress-plugin-auto-sidebar",
+      {
         collapse: {
-          open: true
-        }
-      }
+          open: true,
+        },
+      },
     ],
     [
       "dynamic-title",
@@ -216,8 +242,8 @@ module.exports = {
         showText: "",
         hideIcon: "/favicon1.ico",
         hideText: " 你在看什么呢！",
-        recoverTime: 2000
-      }
+        recoverTime: 2000,
+      },
     ],
     // 复制代码功能
     [
@@ -225,19 +251,20 @@ module.exports = {
       {
         copyText: "复制代码",
         tip: {
-          content: "复制成功!"
-        }
-      }
+          content: "复制成功!",
+        },
+      },
     ],
     // 音乐播放器
     [
-      'meting', {
+      "meting",
+      {
         meting: {
           // 腾讯
           server: "tencent",
           // 读取歌单列表
           type: "playlist",
-          // 歌单id 
+          // 歌单id
           mid: "8013947516",
         },
         // 不配置该项的话不会出现全局播放器
@@ -250,34 +277,34 @@ module.exports = {
           // 歌曲栏折叠
           listFolded: true,
           // 颜色
-          theme: '#647ea0',
+          theme: "#647ea0",
           // 播放顺序为随机
-          order: 'list',
+          order: "list",
           // 初始音量
           volume: 0.3,
           // 关闭歌词显示
           lrcType: 0,
           // 互斥
-          mutex: true
+          mutex: true,
         },
         mobile: {
           // 手机端去掉cover图
           cover: false,
           // lrc: false
-        }
-      }
+        },
+      },
     ],
-    // 小猫挂绳 npm install vuepress-plug-go-top 
-    ['go-top'],
+    // 小猫挂绳 npm install vuepress-plug-go-top
+    ["go-top"],
     [
       //先安装在配置， npm install @vuepress-reco/vuepress-plugin-kan-ban-niang --save
       "@vuepress-reco/vuepress-plugin-kan-ban-niang",
       {
-        theme: ['blackCat'],
+        theme: ["blackCat"],
         width: 120,
         height: 322,
-        clean: true
-      }
+        clean: true,
+      },
     ],
     // 播客背景绸缎
     // ["ribbon-animation", {
@@ -309,5 +336,5 @@ module.exports = {
     //   ribbonShow: false, //  点击彩带  true显示  false为不显示
     //   ribbonAnimationShow: true  // 滑动彩带
     // }]
-  ]
-}
+  ],
+};
