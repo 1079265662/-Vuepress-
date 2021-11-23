@@ -170,40 +170,33 @@ module.exports = {
     },
     mottos: [
       {
-        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
-        en:
-          "the part that is good is not original, and the part that is original is not good",
+        zh: "并非它们轻而易举，而是它们困难重重。",
+        en: "not because they are easy,but because they are hard!",
       },
       // 可以按天数 7条添加
       {
-        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
-        en:
-          "the part that is good is not original, and the part that is original is not good.",
+        zh: "并非它们轻而易举，而是它们困难重重。",
+        en: "not because they are easy,but because they are hard!.",
       },
       {
-        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
-        en:
-          "the part that is good is not original, and the part that is original is not good.",
+        zh: "并非它们轻而易举，而是它们困难重重。",
+        en: "not because they are easy,but because they are hard!.",
       },
       {
-        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
-        en:
-          "the part that is good is not original, and the part that is original is not good.",
+        zh: "并非它们轻而易举，而是它们困难重重。",
+        en: "not because they are easy,but because they are hard!.",
       },
       {
-        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
-        en:
-          "the part that is good is not original, and the part that is original is not good.",
+        zh: "并非它们轻而易举，而是它们困难重重。",
+        en: "not because they are easy,but because they are hard!.",
       },
       {
-        zh: "它的优秀之处并非原创，它的原创之处并不优秀。",
-        en:
-          "the part that is good is not original, and the part that is original is not good.",
+        zh: "并非它们轻而易举，而是它们困难重重。",
+        en: "not because they are easy,but because they are hard!.",
       },
       {
-        zh: "优它的优秀之处并非原创，它的原创之处并不优秀。",
-        en:
-          "the part that is good is not original, and the part that is original is not good.",
+        zh: "优并非它们轻而易举，而是它们困难重重。",
+        en: "not because they are easy,but because they are hard!.",
       },
     ],
     covers: [
