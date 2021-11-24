@@ -111,13 +111,13 @@ module.exports = {
       },
       {
         title: "播客友情链接",
-        desc: "vuepress_blog",
+        desc: "致谢曾经帮助我的人",
         logo: "https://pan.zealsay.com/avatar/20200606105310570000000.jpg",
         link: "https://www.zealsay.com",
       },
       {
         title: "技术指导",
-        desc: "vuepress_blog",
+        desc: "致谢曾经帮助我的人",
         logo: "https://zyj_yida.gitee.io/source/img/ico/head.jpg",
         link: "https://zhangyujie.top/",
       },
@@ -165,8 +165,9 @@ module.exports = {
       juejin: false, //掘金
       segmentfault: false, //思否
       csdn: false, //CSDN
-      wechat: "https://i.loli.net/2021/05/18/KsB8A6JD7SVR3Oy.jpg", //微信
-      qq: "https://i.loli.net/2021/05/18/4HCo6ieL2MZfu78.jpg", //QQ
+      wechat:
+        "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/KsB8A6JD7SVR3Oy.jpg", //微信
+      // qq: "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/KsB8A6JD7SVR3Oy.jpg", //QQ
     },
     mottos: [
       {
@@ -201,7 +202,7 @@ module.exports = {
     ],
     covers: [
       // 可以按天数 7条添加
-      "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg",
+      "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-zxkgeg.jpg",
     ],
     codeTheme: "tomorrow",
   },

@@ -9,7 +9,7 @@
       </transition>
       <div :class="{ hide: firstLoad || !isHasKey }">
         <div v-if="all" class="wrapper-main" :style="{
-            backgroundImage: `url( ${cover ? cover : 'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg' } )`,
+            backgroundImage: `url( ${cover ? cover : 'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-zxkgeg.jpg' } )`,
             backgroundPositionX: 'center',
             backgroundPositionY: 'center',
             backgroundSize: 'cover',
@@ -126,12 +126,7 @@ export default {
       firstLoad: true,
       // 随机图片
       images: [
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg',
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-6o51k6.jpg',
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8gs6gwelsbzj31a90u043m.jpg',
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-pkgk6j.jpg',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m9jq1.jpg',
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-6oyk6q.jpg',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-zxkgeg.jpg'
       ]
     };
@@ -162,7 +157,7 @@ export default {
       return (
         this.$page.frontmatter.cover ||
         this.$themeConfig.covers[new Date().getDay()] ||
-        "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zwpl6.jpg"
+        "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-zxkgeg.jpg"
       );
     },
     shouldShowNavbar () {
