@@ -76,6 +76,8 @@ categories: 小程序
                 if (result.data.statusCode == 1000) {
                   wx.setStorageSync('phoneNumber', result.data.data.phoneNumber);
                   wx.setStorageSync('sessionKey', result.data.data.sessionKey);
+                 // 声明成功回调状态位 (这里设在在缓存以后执行 防止获取不到缓存数据)
+            	  backall(true)
                   wx.showToast({
                     title: '授权成功',
                     duration: 1000,
@@ -89,8 +91,6 @@ categories: 小程序
 
               }
             })
-              // 声明成功回调状态为
-            backall(true)
           } else {
             console.log('wx.login:error')
           }
