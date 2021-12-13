@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vue3 轮播图插件 | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>
+      var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?47cdeb0482806d0e9ea91137d2195282";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.039ca999.css" as="style"><link rel="preload" href="/assets/js/app.cf12b5c4.js" as="script"><link rel="preload" href="/assets/js/5.208c645a.js" as="script"><link rel="preload" href="/assets/js/1.0a16e656.js" as="script"><link rel="preload" href="/assets/js/45.962c52d6.js" as="script"><link rel="prefetch" href="/assets/js/10.d3fc6e0e.js"><link rel="prefetch" href="/assets/js/11.2436862c.js"><link rel="prefetch" href="/assets/js/12.c16c8515.js"><link rel="prefetch" href="/assets/js/13.ab49165f.js"><link rel="prefetch" href="/assets/js/14.1a2bb191.js"><link rel="prefetch" href="/assets/js/15.3c3eee68.js"><link rel="prefetch" href="/assets/js/16.59bcec79.js"><link rel="prefetch" href="/assets/js/17.e0c7a1fe.js"><link rel="prefetch" href="/assets/js/18.714f816f.js"><link rel="prefetch" href="/assets/js/19.952bf36c.js"><link rel="prefetch" href="/assets/js/20.84b47d91.js"><link rel="prefetch" href="/assets/js/21.64c92b11.js"><link rel="prefetch" href="/assets/js/22.77251751.js"><link rel="prefetch" href="/assets/js/23.0c81f195.js"><link rel="prefetch" href="/assets/js/24.79c7b403.js"><link rel="prefetch" href="/assets/js/25.16651e9f.js"><link rel="prefetch" href="/assets/js/26.92b4777c.js"><link rel="prefetch" href="/assets/js/27.c2d46d10.js"><link rel="prefetch" href="/assets/js/28.18377def.js"><link rel="prefetch" href="/assets/js/29.d8734759.js"><link rel="prefetch" href="/assets/js/3.f0dba089.js"><link rel="prefetch" href="/assets/js/30.302ddd30.js"><link rel="prefetch" href="/assets/js/31.60fe60ec.js"><link rel="prefetch" href="/assets/js/32.26faaf7d.js"><link rel="prefetch" href="/assets/js/33.2d9c4c7b.js"><link rel="prefetch" href="/assets/js/34.b4fb5f88.js"><link rel="prefetch" href="/assets/js/35.5b4bff72.js"><link rel="prefetch" href="/assets/js/36.8b71f76f.js"><link rel="prefetch" href="/assets/js/37.87fc7257.js"><link rel="prefetch" href="/assets/js/38.650ca922.js"><link rel="prefetch" href="/assets/js/39.a8ae9e11.js"><link rel="prefetch" href="/assets/js/4.841aa095.js"><link rel="prefetch" href="/assets/js/40.83580449.js"><link rel="prefetch" href="/assets/js/41.48dc932f.js"><link rel="prefetch" href="/assets/js/42.7c041c53.js"><link rel="prefetch" href="/assets/js/43.618696ee.js"><link rel="prefetch" href="/assets/js/44.77c282e1.js"><link rel="prefetch" href="/assets/js/46.2744fbc7.js"><link rel="prefetch" href="/assets/js/47.daf8da9c.js"><link rel="prefetch" href="/assets/js/48.45433c42.js"><link rel="prefetch" href="/assets/js/49.06737014.js"><link rel="prefetch" href="/assets/js/50.dcbe7aaa.js"><link rel="prefetch" href="/assets/js/51.1c70f73b.js"><link rel="prefetch" href="/assets/js/52.f54a67c4.js"><link rel="prefetch" href="/assets/js/53.7b50485c.js"><link rel="prefetch" href="/assets/js/54.fc18ed62.js"><link rel="prefetch" href="/assets/js/55.34cb70f4.js"><link rel="prefetch" href="/assets/js/56.ad811fae.js"><link rel="prefetch" href="/assets/js/57.a6b9a3dc.js"><link rel="prefetch" href="/assets/js/58.8042780c.js"><link rel="prefetch" href="/assets/js/59.1002b45f.js"><link rel="prefetch" href="/assets/js/6.8ac34170.js"><link rel="prefetch" href="/assets/js/60.c7469ef3.js"><link rel="prefetch" href="/assets/js/61.a6547960.js"><link rel="prefetch" href="/assets/js/62.7e8215ba.js"><link rel="prefetch" href="/assets/js/63.6ba9217d.js"><link rel="prefetch" href="/assets/js/64.62b248fe.js"><link rel="prefetch" href="/assets/js/65.32847b0e.js"><link rel="prefetch" href="/assets/js/66.f479b709.js"><link rel="prefetch" href="/assets/js/67.1b1104d3.js"><link rel="prefetch" href="/assets/js/68.985f403e.js"><link rel="prefetch" href="/assets/js/69.5cae20c6.js"><link rel="prefetch" href="/assets/js/7.8f635830.js"><link rel="prefetch" href="/assets/js/70.c6125810.js"><link rel="prefetch" href="/assets/js/71.4a90417d.js"><link rel="prefetch" href="/assets/js/72.9139141e.js"><link rel="prefetch" href="/assets/js/73.6de632c3.js"><link rel="prefetch" href="/assets/js/74.4c9fcffd.js"><link rel="prefetch" href="/assets/js/75.cfc53c0e.js"><link rel="prefetch" href="/assets/js/76.3b4a7db4.js"><link rel="prefetch" href="/assets/js/77.33f86e60.js"><link rel="prefetch" href="/assets/js/78.94e73deb.js"><link rel="prefetch" href="/assets/js/79.2863479e.js"><link rel="prefetch" href="/assets/js/8.a7083d17.js"><link rel="prefetch" href="/assets/js/80.3d453a98.js"><link rel="prefetch" href="/assets/js/81.a9d272a8.js"><link rel="prefetch" href="/assets/js/82.d92992c4.js"><link rel="prefetch" href="/assets/js/9.af116de0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.039ca999.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-49168ae0><div data-v-49168ae0><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-49168ae0 data-v-49168ae0><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-5cb9a64e data-v-49168ae0 data-v-49168ae0><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
+            
+          <!---->
+          2021
+        </a></span></div></div> <div class="hide" data-v-49168ae0><div data-v-49168ae0><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9mdkv1.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-49168ae0><header class="navbar" data-v-49168ae0><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/JS 方法合集/" class="nav-link"><i class="iconfont undefined"></i>
+  JS 方法合集
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue OV系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/H5Video/" class="nav-link"><i class="iconfont undefined"></i>
+  H5Video
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂项/" class="nav-link"><i class="iconfont undefined"></i>
+  杂项
+</a></li><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-49168ae0></div> <aside class="sidebar" data-v-49168ae0><div class="personal-info-wrapper" data-v-03833281 data-v-49168ae0><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>68</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>24</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/JS 方法合集/" class="nav-link"><i class="iconfont undefined"></i>
+  JS 方法合集
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue OV系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/H5Video/" class="nav-link"><i class="iconfont undefined"></i>
+  H5Video
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂项/" class="nav-link"><i class="iconfont undefined"></i>
+  杂项
+</a></li><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Vue Style</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/Vue_style/1.6_vue_login.html" class="sidebar-link">Vue登录样式</a></li><li><a href="/blogs/docs/Vue_style/1.7_que_ren_tan_chu.html" class="sidebar-link">Vue3 确认弹窗Dom方法(非插件)</a></li><li><a href="/blogs/docs/Vue_style/1.8_tan_chu.html" class="sidebar-link">Vue3 弹窗Dom方法(非插件)</a></li><li><a href="/blogs/docs/Vue_style/1.9_fen_ye.html" class="sidebar-link">Vue3 通过页码页数实现分页插件</a></li><li><a href="/blogs/docs/Vue_style/2.1_Vue2_lun_bo_tu.html" aria-current="page" class="active sidebar-link">Vue3 轮播图插件</a></li><li><a href="/blogs/docs/Vue_style/2.2_button.html" class="sidebar-link">Vue3 功能性切换按钮组件(非插件)</a></li><li><a href="/blogs/docs/Vue_style/2.3_checkout.html" class="sidebar-link">Vue3 勾选框插件效果</a></li><li><a href="/blogs/docs/Vue_style/2.4_photo_big.html" class="sidebar-link">Vue3 图片预览放大镜组件(非插件)</a></li><li><a href="/blogs/docs/Vue_style/2.5_ez_button.html" class="sidebar-link">Vue3 简单的按钮插件</a></li><li><a href="/blogs/docs/Vue_style/2.6_ji_suan.html" class="sidebar-link">Vue3 计数器插件</a></li><li><a href="/blogs/docs/Vue_style/2.7_tab.html" class="sidebar-link">Vue3 选项卡tab标签组件(非插件)</a></li><li><a href="/blogs/docs/Vue_style/2.8_photo_look.html" class="sidebar-link">Vue3 图片展示组件(非插件)</a></li><li><a href="/blogs/docs/Vue_style/2_Vee_Form_yan_zheng.html" class="sidebar-link">Vue3 的表单验证功能(Vee V4版)</a></li><li><a href="/blogs/docs/Vue_style/3_Vue_gu_jia.html" class="sidebar-link">Vue3 骨架效果插件</a></li><li><a href="/blogs/docs/Vue_style/4_zu_jian_lazy.html" class="sidebar-link">Vue3 组件懒加载方法(非插件)</a></li><li><a href="/blogs/docs/Vue_style/5_tu_pian_lazy.html" class="sidebar-link">Vue3 自定义图片懒加载方法</a></li><li><a href="/blogs/docs/Vue_style/8_Vue_xi_ding.html" class="sidebar-link">Vue3 吸顶效果实现组件</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-5cb9a64e data-v-49168ae0><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>Vue3 轮播图插件</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
+            
+          <!---->
+          2021
+        </a></span></div></div></div> <div data-v-49168ae0><main class="page"><div class="page-title" style="display:none;"><h1 class="title">Vue3 轮播图插件</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2021-07-22</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/Vue_style/2.1_Vue2_lun_bo_tu.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>Vue3</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>Vue3 轮播图自定义插件设置<br></p></div> <h2 id="vue3的轮播图效果"><a href="#vue3的轮播图效果" class="header-anchor">#</a> Vue3的轮播图效果</h2> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/Snipaste_2021-07-22_19-52-46.png" alt="image-20210722190156607"></p> <p><a href="https://gitee.com/liu_kaili/Vue_little_rabbit_fresh" target="_blank" rel="noopener noreferrer">轮播图效果使用项目<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <blockquote><p>目的: 封装小兔鲜轮播图组件 让其具备展示效果</p></blockquote> <p>大致步骤：</p> <ul><li>准备轮播图组件基础布局</li> <li>这是一个公用组件，需要全局注册，将来这样的组件建议再vue插件中定义。</li> <li>Vue导入轮播插件 配置轮播插件</li></ul> <blockquote><p>实现轮播插件步骤</p></blockquote> <ol><li>封装轮播图的基本效果组件
+<ul><li>封装一个具备轮播样式 交互的文件  <code>src/components/library/xtx-carousel.vue</code></li> <li>该组件基于 <code>less</code> 样式处理器设置</li> <li>需要设置函数防抖 防止用户多次点击</li> <li><font color="#ff3040">轮播插件的配置参数</font> <ul><li><code>:slides</code>是轮播图的传入的图片数据( 很关键 轮播需要的数据 通常动态绑定) <code>:slides='slides'</code> (必填)</li> <li><code>auto-play</code>是设置轮播图是否动态播放 <code>auto-play</code> (选填 默认自动)</li> <li><code>duration</code>是设置轮播图自动切换图片的间隔事件<code>duration='2'</code> (选填 默认是1秒)</li></ul></li></ul></li></ol> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>xtx-carousel<span class="token punctuation">'</span></span> <span class="token attr-name">@mouseenter</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>stop<span class="token punctuation">&quot;</span></span> <span class="token attr-name">@mouseleave</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>start<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- 轮播图所有图片 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>carousel-body<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>carousel-item<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>{fade: index === i}<span class="token punctuation">'</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>item.id<span class="token punctuation">'</span></span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>(item, i) in slides<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RouterLink</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>item.imgUrl<span class="token punctuation">'</span></span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item.hrefUrl<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">:src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item.imgUrl<span class="token punctuation">&quot;</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RouterLink</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- 显示商品推荐的布局 --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-else</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>slider<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RouterLink</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>goods in item<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>goods.id<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>`/product/${goods.id}`<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">:src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>goods.picture<span class="token punctuation">&quot;</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>name ellipsis<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{goods.name}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>price<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token entity named-entity" title="&amp;yen;">&amp;yen;</span>{{goods.price}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RouterLink</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- 两侧的小按钮 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>toggle(-1)<span class="token punctuation">'</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>javascript:;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>carousel-btn prev<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>iconfont icon-angle-left<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>toggle(1)<span class="token punctuation">'</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>javascript:;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>carousel-btn next<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>iconfont icon-angle-right<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- 指示器（小圆点） --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>carousel-indicator<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>i in slides.length<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>i<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>{active: index === i - 1}<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> onUnmounted<span class="token punctuation">,</span> ref<span class="token punctuation">,</span> watch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token string">'XtxCarousel'</span><span class="token punctuation">,</span>
+  props<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 轮播图数据</span>
+    slides<span class="token operator">:</span> <span class="token punctuation">{</span>
+      type<span class="token operator">:</span> Array<span class="token punctuation">,</span>
+      <span class="token function-variable function">default</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 轮播的时间间隔</span>
+    duration<span class="token operator">:</span> <span class="token punctuation">{</span>
+      type<span class="token operator">:</span> Number<span class="token punctuation">,</span>
+      <span class="token keyword">default</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 是否自动轮播</span>
+    autoPlay<span class="token operator">:</span> <span class="token punctuation">{</span>
+      type<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+      <span class="token keyword">default</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">setup</span> <span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 当前选中的索引</span>
+    <span class="token keyword">const</span> index <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token comment">// 实现自动轮播功能</span>
+    <span class="token comment">// 给轮播设置一个函数防抖状态位</span>
+    <span class="token keyword">let</span> timer <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token comment">// 封装启动定时任务的动作</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">autoPlayAction</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 判断是否已经执行过一次轮播图 如果执行 清除之前的定时器 实现函数防抖</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>timer<span class="token punctuation">)</span> <span class="token function">clearInterval</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span>
+      <span class="token comment">// 记录轮播执行次数</span>
+      timer <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 实现轮播功能</span>
+        index<span class="token punctuation">.</span>value<span class="token operator">++</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>index<span class="token punctuation">.</span>value <span class="token operator">&gt;=</span> props<span class="token punctuation">.</span>slides<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 轮播到最后从新开始</span>
+          index<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> props<span class="token punctuation">.</span>duration <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 基于侦听器控制启动轮播</span>
+    <span class="token function">watch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> props<span class="token punctuation">.</span>slides<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>props<span class="token punctuation">.</span>autoPlay <span class="token operator">&amp;&amp;</span> props<span class="token punctuation">.</span>slides<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        index<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token function">autoPlayAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> immediate<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// 停止轮播</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">stop</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>timer<span class="token punctuation">)</span> <span class="token function">clearInterval</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 启动轮播</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">start</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>props<span class="token punctuation">.</span>autoPlay <span class="token operator">&amp;&amp;</span> props<span class="token punctuation">.</span>slides<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">autoPlayAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 手动点击左右滑动</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">toggle</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">i</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      index<span class="token punctuation">.</span>value <span class="token operator">+=</span> i
+      <span class="token comment">// 判断左边界</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>index<span class="token punctuation">.</span>value <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        index<span class="token punctuation">.</span>value <span class="token operator">=</span> props<span class="token punctuation">.</span>slides<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// 判断右边界</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>index<span class="token punctuation">.</span>value <span class="token operator">&gt;=</span> props<span class="token punctuation">.</span>slides<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        index<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token number">0</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 销毁定时器</span>
+    <span class="token function">onUnmounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>timer<span class="token punctuation">)</span> <span class="token function">clearInterval</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> index<span class="token punctuation">,</span> stop<span class="token punctuation">,</span> start<span class="token punctuation">,</span> toggle <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>less<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.xtx-carousel</span> <span class="token punctuation">{</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 380px<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+  <span class="token property">min-width</span><span class="token punctuation">:</span> 300px<span class="token punctuation">;</span>
+  <span class="token property">min-height</span><span class="token punctuation">:</span> 150px<span class="token punctuation">;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token selector">;
+  .carousel</span> <span class="token punctuation">{</span>
+    <span class="token selector">&amp;-body</span> <span class="token punctuation">{</span>
+      <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+      <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">&amp;-item</span> <span class="token punctuation">{</span>
+      <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+      <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+      <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+      <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+      <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+      <span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+      <span class="token property">transition</span><span class="token punctuation">:</span> opacity 0.5s linear<span class="token selector">;
+      // 轮播商品
+      .slider</span> <span class="token punctuation">{</span>
+        <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+        <span class="token property">justify-content</span><span class="token punctuation">:</span> space-around<span class="token punctuation">;</span>
+        <span class="token property">padding</span><span class="token punctuation">:</span> 0 40px<span class="token selector">;
+        &gt; a</span> <span class="token punctuation">{</span>
+          <span class="token property">width</span><span class="token punctuation">:</span> 240px<span class="token punctuation">;</span>
+          <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token selector">;
+          img</span> <span class="token punctuation">{</span>
+            <span class="token property">padding</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> 230px <span class="token important">!important</span><span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> 230px <span class="token important">!important</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token selector">.name</span> <span class="token punctuation">{</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
+            <span class="token property">color</span><span class="token punctuation">:</span> #666<span class="token punctuation">;</span>
+            <span class="token property">padding</span><span class="token punctuation">:</span> 0 40px<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token selector">.price</span> <span class="token punctuation">{</span>
+            <span class="token property">font-size</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
+            <span class="token property">color</span><span class="token punctuation">:</span> #CF4444<span class="token punctuation">;</span>
+            <span class="token property">margin-top</span><span class="token punctuation">:</span> 15px<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      <span class="token selector">&amp;.fade</span> <span class="token punctuation">{</span>
+        <span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
+        <span class="token property">z-index</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token selector">img</span> <span class="token punctuation">{</span>
+        <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+        <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">&amp;-indicator</span> <span class="token punctuation">{</span>
+      <span class="token property">bottom</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+      <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+      <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+      <span class="token property">bottom</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+      <span class="token property">z-index</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
+      <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+      <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token selector">;
+      span</span> <span class="token punctuation">{</span>
+        <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+        <span class="token property">width</span><span class="token punctuation">:</span> 12px<span class="token punctuation">;</span>
+        <span class="token property">height</span><span class="token punctuation">:</span> 12px<span class="token punctuation">;</span>
+        <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token property">border-radius</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+        <span class="token property">cursor</span><span class="token punctuation">:</span> pointer<span class="token selector">;
+        ~ span</span> <span class="token punctuation">{</span>
+          <span class="token property">margin-left</span><span class="token punctuation">:</span> 12px<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector">&amp;.active</span> <span class="token punctuation">{</span>
+          <span class="token property">background</span><span class="token punctuation">:</span> #27bb9a<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">&amp;-btn</span> <span class="token punctuation">{</span>
+      <span class="token property">width</span><span class="token punctuation">:</span> 44px<span class="token punctuation">;</span>
+      <span class="token property">height</span><span class="token punctuation">:</span> 44px<span class="token punctuation">;</span>
+      <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+      <span class="token property">border-radius</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+      <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+      <span class="token property">top</span><span class="token punctuation">:</span> 110px<span class="token punctuation">;</span>
+      <span class="token property">z-index</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
+      <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+      <span class="token property">line-height</span><span class="token punctuation">:</span> 44px<span class="token punctuation">;</span>
+      <span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
+      <span class="token property">transition</span><span class="token punctuation">:</span> all 0.5s<span class="token selector">;
+      &amp;.prev</span> <span class="token punctuation">{</span>
+        <span class="token property">left</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token selector">&amp;.next</span> <span class="token punctuation">{</span>
+        <span class="token property">right</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token selector">&amp;:hover</span> <span class="token punctuation">{</span>
+    <span class="token selector">.carousel-btn</span> <span class="token punctuation">{</span>
+      <span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><ol start="2"><li>把轮播图组件 封装为插件
+<ul><li>定义轮播图插件 <code>src/componets/library/index.js</code></li></ul></li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 导入轮播图组件</span>
+<span class="token keyword">import</span> XtxCarousel <span class="token keyword">from</span> <span class="token string">'./xtx-carousel.vue'</span>
+
+<span class="token comment">// 自定义一个插件导出</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">install</span> <span class="token punctuation">(</span><span class="token parameter">app</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// app表示Vue全局组件的实例对象 (Vue2是Vue. Vue3是app.)</span>
+    <span class="token comment">// 配置全局插件</span>
+    app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span>XtxCarousel<span class="token punctuation">.</span>name<span class="token punctuation">,</span> XtxCarousel<span class="token punctuation">)</span> <span class="token comment">// (导入组件的名称的name名.name,导入组件的名称)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>实例化轮播图插件
+<ul><li>在入口文件中 实例化轮播图插件 <code>src/main.js</code></li> <li>通过 <code>.use()</code>进行导入</li></ul></li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 导入实例化的Vue3</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createApp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
+<span class="token comment">// 导入自定义插件 让其实例化可在组件内使用</span>
+<span class="token keyword">import</span> XtxUI <span class="token keyword">from</span> <span class="token string">'./components/library/index'</span>
+
+<span class="token comment">// 创建一个vue应用实例(.use() 可以实例化导入的插件)</span>
+<span class="token function">createApp</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>XtxUI<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span>
+</code></pre></div><ol start="4"><li>在需要的Vue组件中 配置轮播图插件效果
+<ul><li>在需要的Vue组件中 调用轮播图插件 并且配置数据 <code>src/views/home/components/home-cate.vue</code></li> <li><font color="#ff3040">需要向轮播图传递相应的数据 <code>:slides</code></font></li> <li>可以通过less的深度选择器 <code>/deep/</code> 修改轮播图的一些默认样式</li> <li><font color="#ff3040">轮播插件的配置参数</font> <ul><li><code>:slides</code>是轮播图的传入的图片数据( 很关键 轮播需要的数据 通常动态绑定) <code>:slides='slides'</code> (必填)</li> <li><code>auto-play</code>是设置轮播图是否动态播放 <code>auto-play</code> (选填 默认自动)</li> <li><code>duration</code>是设置轮播图自动切换图片的间隔事件<code>duration='2'</code> (选填 默认是1秒)</li></ul></li> <li>如果需要给插件传递参数 通常会动态绑定数据 ( 动态绑定基本类型的传入插件的数据 可保证插件需求的数据类型)</li></ul></li></ol> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>home-banner<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- 设置轮播图组件(轮播图插件) --&gt;</span>
+    <span class="token comment">&lt;!-- slides 是传入轮播数据 auto-play设置自动播放 duration设置轮播时间 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>XtxCarousel</span> <span class="token attr-name">:slides</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>slides<span class="token punctuation">'</span></span> <span class="token attr-name">auto-play</span> <span class="token attr-name">:duration</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>2<span class="token punctuation">'</span></span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ref <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-demi'</span>
+<span class="token comment">// 导入获取轮播图的api接口</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> findBanner <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../../api/home'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token string">'HomeBanner'</span><span class="token punctuation">,</span>
+  <span class="token function">setup</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ref可以储存数据数据</span>
+    <span class="token keyword">const</span> slides <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token comment">// 储存获取到的轮播数据</span>
+    <span class="token function">findBanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">ret</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      slides<span class="token punctuation">.</span>value <span class="token operator">=</span> ret<span class="token punctuation">.</span>result
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> slides <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>less<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.home-banner</span> <span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 1240px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+  <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">z-index</span><span class="token punctuation">:</span> 98<span class="token selector">;
+  // /deep/设置深度选择器 覆盖轮播图原样式(覆盖插件上的默认样式)
+  .xtx-carousel</span> <span class="token punctuation">{</span>
+    <span class="token selector">/deep/ .carousel-btn.prev</span> <span class="token punctuation">{</span>
+      <span class="token property">left</span><span class="token punctuation">:</span> 270px<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">/deep/ .carousel-indicator</span> <span class="token punctuation">{</span>
+      <span class="token property">padding-left</span><span class="token punctuation">:</span> 250px<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><ol start="5"><li>设置api接口 获取轮播图的数据 (有接口可以省略 仅供测试使用)
+<ul><li>基础路径需要手动设置 : https://apipc-xiaotuxian-front.itheima.net</li> <li>API接口路径 <code>src/api/home.js</code></li></ul></li></ol> <div class="language-js extra-class"><pre class="language-js"><code>
+<span class="token comment">// 获取首页轮播图列表数据</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">findBanner</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    method<span class="token operator">:</span> <span class="token string">'get'</span><span class="token punctuation">,</span>
+    url<span class="token operator">:</span> <span class="token string">'https://apipc-xiaotuxian-front.itheima.net/home/banner'</span> <span class="token comment">// 需要在前面添加基础路径 </span>
+    <span class="token comment">// url: '/home/banner' </span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit" style="display:none;"><!----> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">2021/12/13 下午7:57:50</span></div></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.cf12b5c4.js" defer></script><script src="/assets/js/5.208c645a.js" defer></script><script src="/assets/js/1.0a16e656.js" defer></script><script src="/assets/js/45.962c52d6.js" defer></script>
+  </body>
+</html>
