@@ -126,7 +126,7 @@ export default {
       firstLoad: true,
       // 随机图片
       images: [
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m9jq1.jpg',
+        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m9jq1-min.jpg',
         'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-zxkgeg.jpg'
       ]
     };

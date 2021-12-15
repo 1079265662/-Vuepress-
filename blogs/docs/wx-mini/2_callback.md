@@ -1,7 +1,7 @@
 ---
 title: 小程序中的全局方法回调函数
 date: 2021-11-23
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m9jq1.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m9jq1-min.jpg
 tags:
  - 小程序
 categories: 小程序
