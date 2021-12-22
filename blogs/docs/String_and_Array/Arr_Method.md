@@ -1,7 +1,7 @@
 ---
 title: JS 常用的数组方法
 date: 2021-06-24
-cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/16.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-g71zy7.jpg
 tags:
  - 数组方法
 categories: JS 方法合集
@@ -12,8 +12,6 @@ JS 常用的数组方法合集<br>
 :::
 
 <!-- more -->
-
-# 数组方法
 
 ## `map(item=>{重组解构})` 处理数组方法(重组)
 
@@ -397,79 +395,3 @@ let num=a.reduce((item,cart,index,arr)=>{
 },0)//初始值为0 从0开始
 console.log(num) //输出为30
 ```
-
-
-
-# 对象方法
-
-##  `Object.keys()`把对象里面的属性名 储存为一个字符串数组
-
-* 不会修改原对象内容 但是会返回一个字符串数组
-* 可以把对象里面的 属性名提取出来 返回到一个字符串数组中
-* 常用于 forEach 循环遍历替换 原属性名
-
-> 使用例子
-
-```js
-// 需要提取的对象
-	const headers = {
-        '姓名': 'username',
-        '手机号': 'mobile',
-        '入职日期': 'timeOfEntry',
-        '聘用形式': 'formOfEmployment',
-        '转正日期': 'correctionTime',
-        '工号': 'workNumber',
-        '部门': 'departmentName'
-      }
-// 开始提取
-      const demo = Object.keys(headers)
-      console.log(demo);
-// ----------------------------------------- 提出的结果
- ["姓名", "手机号", "入职日期", "聘用形式", "转正日期", "工号", "部门"]
-```
-
-
-
-## `object.assign()`合并对象中的属性(浅拷贝)
-
-* 适用于合并两个对象 并且指定保留那个对象(合并储存的对象)
-
-* 不会修改合并储存对象里面的原数据 只是继续添加数据
-
-* `object.assign()` 有n个参数 但是参数1是 指定储存合并的对象
-
-  * 参数1是 指定储存合并的对象( 自己可以拥有原数据 并不会覆盖原数据 )
-  * 参数2 需要合并的对象
-  * 参数3 需要合并的对象
-
-  .....
-
-* 注意，如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
-
-> 使用例子
-
-```js
-// 合并储存的对象
-const target = { 
-               		 a: 1
-               };
-// 需要合并的对象1
-const source1 = { 
-                	b: 2
-               };
-// 需要合并的对象2
-const source2 = { 
-					c: 3 
-				};
-// 进行对象合并
-Object.assign(target, source1, source2);
-//---------------------- 合并后的target值
-target {
-        a:1,
-        b:2,
-        c:3
-	}
-```
-
-
-

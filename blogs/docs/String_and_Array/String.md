@@ -1,7 +1,7 @@
 ---
 title: JS 常用字符串方法
 date: 2021-06-25
-cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/16.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-g71pve.jpg
 tags:
  - 字符串方法
 categories: JS 方法合集

@@ -1,7 +1,7 @@
 ---
 title: 常用正则表达式
 date: 2021-05-24
-cover: https://i.loli.net/2021/06/06/LVQIriR5YnTdawv.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-m9opzk.jpg
 tags:
  - 正则表达式
 categories: JS 方法合集
