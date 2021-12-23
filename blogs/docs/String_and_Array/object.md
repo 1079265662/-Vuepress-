@@ -40,7 +40,7 @@ JS 常用对象方法 <br>
  ["姓名", "手机号", "入职日期", "聘用形式", "转正日期", "工号", "部门"]
 ```
 
-## 清空对象所有数据(格式化)
+## `Object.keys()`清空对象所有数据(格式化)
 
 * 常用于对象数据的清空 重置数据
 
@@ -98,7 +98,7 @@ export default function resetForm (formName, obj) {
 
 > vue入口文件注册使用 `main.js`
 
-```
+```js
 // 清空表单
 import resetForm from '@/src/utils/resrtForm'
 Vue.prototype.$resetForm = resetForm
@@ -148,7 +148,7 @@ export default async function objCoppy (obj1, obj2) {
 
 > vue入口文件注册使用 `main.js`
 
-```
+```js
 // 数据的快速复制
 import objCoppy from '../src/utils/objCoppy'
 Vue.prototype.$objCoppy = objCoppy
@@ -213,7 +213,7 @@ target {
 
 * 这个时候 你想把`id`替换成value ` region_name`替换成text 需要用到`replace`这个方法 通过正则来替换key 替换成自己想要的
 
-```
+```js
   // 接收数据
 const ret = res.data.data
   // 处理数据b
