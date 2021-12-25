@@ -223,3 +223,24 @@ const changeObject = JSON.parse(JSON.stringify(ret).replace(/region_name/g, "tex
 ![image-20211222195215458](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211222195215458.png)
 
 * 这样数据就处理好啦
+
+## 从数组中的对象取出特定字段并生成新的数组
+
+* 如果后端返回的数组对象中的数据你想单独拎出来放到一个数组中 就需要通过`map`来把该字段洗出来
+
+![image-20211225211500239](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211225211500239.png)
+
+```js
+// 假设这个是你要处理的该数组对象
+const ret = res.data.data
+// 把数组对象用map洗出来
+const rtx = ret.map(e => {
+    return e.real_img_src
+})
+// 这里就是你想要的数组内容
+console.log(rtx)
+```
+
+* 洗完后的数据
+
+![image-20211225211916673](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211225211916673.png)

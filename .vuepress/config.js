@@ -196,7 +196,7 @@ module.exports = {
         en: "not because they are easy,but because they are hard!.",
       },
       {
-        zh: "优并非它们轻而易举，而是它们困难重重。",
+        zh: "并非它们轻而易举，而是它们困难重重。",
         en: "not because they are easy,but because they are hard!.",
       },
     ],
