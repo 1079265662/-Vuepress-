@@ -282,12 +282,26 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 ## `push()` 数组添加方法
 
 * 把数据添加到数组末尾 对原数据不会有修改 不会覆盖 只是添加到末尾
+* <font color =#ff3040>注意: 该方法会直接对原数组进行操作 </font>
 
 > `push()` 方法 添加数据 示例
 
 ```js
     // 把服务器 获取的数据 储存到页面对象里 需要使用 push方法 因为分页是动态获取数据 需要用push添加 不覆盖之前数据
       this.list.push(...ret.data.results) // ... 是把所有数据储存起来
+```
+
+## `concat()`数组连接(拼接)方法
+
+* `concat()` 方法用于连接两个或多个数组。<font color =#ff3040>注意; 只能拼接数组 不能拼其他的</font>
+* <font color =#ff3040>该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。通常需要用变量来接收</font>
+
+```js
+let a = [1,2,3,4];
+
+let b = [5,6];
+
+let c = a.concat(b); // a,b 数组都不变，c变成了1,2,3,4,5,6 该方法并不会改变原数组
 ```
 
 ## `unshift()` 数组开头添方法
