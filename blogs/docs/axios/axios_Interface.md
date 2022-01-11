@@ -42,7 +42,7 @@ sticky: 2
 
 > <big>一、</big>utils文件夹 一级路由 axios接口模块设置  `utils文件夹里面创建 request.js`
 
-![11](https://i.loli.net/2021/06/04/l4R3Z1oLAGnmx6X.png)
+![11](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/l4R3Z1oLAGnmx6X.png)
 
 - 配置 `axios.create({})` 分支设置url基础地址 方便操控
 - 调用axios方法 设置基本url路径 设置参数 配置数据
@@ -157,7 +157,7 @@ export default (options) => {
 
 > <big>二、</big>api文件夹 二级路由 指定接口设置示例(登录二级接口) `api文件夹创建 二级路由模块(接口)`
 
-![image-20210604084917295](https://i.loli.net/2021/06/04/rVzQ9DwZpHEboj6.png)
+![image-20210604084917295](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/rVzQ9DwZpHEboj6.png)
 
 * 设置命名导出(不是默认导出) 按需配置参数 
 * 接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接

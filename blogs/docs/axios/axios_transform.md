@@ -24,7 +24,7 @@ categories:
 >
 > 类型: 会把 超范围的id 转换为对象拼接起来 并非之前字符串 所以调用时候 需要用 `toString()`转换成字符串
 
-![image-20210610132529317](https://i.loli.net/2021/06/10/YKC2j6HSOGcQNZX.png)
+![image-20210610132529317](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/YKC2j6HSOGcQNZX.png)
 
 > 在通用的接口调用模块设置  `utils文件夹 里面 request.js`
 

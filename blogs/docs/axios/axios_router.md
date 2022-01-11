@@ -61,7 +61,7 @@ router.beforeEach((to, from, next) => {
 })
 ```
 
-![image-20210604171827880](https://i.loli.net/2021/06/05/n5NRQfYb9pK36rZ.png)
+![image-20210604171827880](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/n5NRQfYb9pK36rZ.png)
 
 ## 全局路由导航守卫设置 白名单
 
@@ -103,7 +103,7 @@ router.beforeEach((to, from, next) => {
 >
 > **<font color = #ff3040>路径</font>** :  登录路径 `/login` 首页路径`/dashboard` 白名单路径`'/login', '/404', '/qita'`
 
-![image-20210216132052672](https://tva1.sinaimg.cn/large/005INI3Xly8grtqo20yraj30kw07fgmc.jpg)
+![image-20210216132052672](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grtqo20yraj30kw07fgmc.jpg)
 
 ```js
 // axios的路由导航守卫 配合Vue-router 实现登录权限功能(在router上设置axios导航守卫)

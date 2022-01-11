@@ -21,7 +21,7 @@ axios插件 自动续签用户的token值<br>
 * token续签需要用到 axios提供的 响应式截拦器`.interceptors.response.use()`
 * token续签总流程图
 
-![image-20210605115451235](https://i.loli.net/2021/06/06/VaQ6uA7POdc8qJv.png)
+![image-20210605115451235](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/VaQ6uA7POdc8qJv.png)
 
 * token分为两种
   * `token` 普通的token 用于访问需要身份验证的普通接口 获取数据 (一般有效期2小时)

@@ -119,7 +119,7 @@ export default {
 
 > 总结：绑定表单数据；绑定提交事件；调用接口；跳转页面。
 
-![image-20210602161633614](https://i.loli.net/2021/06/02/ApcZa8H4L6sDCxO.png)
+![image-20210602161633614](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/ApcZa8H4L6sDCxO.png)
 
 > 总结：封装的好处
 >
