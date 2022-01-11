@@ -1,10 +1,11 @@
 ---
 title: RABC权限学习记录文档
 date: 2022-01-11
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-wq37kp.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m92rx-min.jpg
 tags:
  - Vue
  - axios
+ - RABC
 categories:
  - RABC
 ---
@@ -1143,6 +1144,10 @@ RABC权限学习记录文档 从头到尾学习文档<br>
 ### 用户管理左侧菜单
 
 * 用户管理为二合一 左侧菜单栏是显示每个层级部门并且选中后右侧显示对应的角色权限
+
+> 展示效果
+
+![image-20220111203308636](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220111203308636.png)
 
 > 用户管理左侧菜单数据结构
 

@@ -1,12 +1,13 @@
 ---
 title: 续签token的流程
 date: 2021-05-12
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-k7jmg6.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m92rx-min.jpg
 tags:
  - token续签
  - axios
+ - RABC
 categories:
- -  axios
+ - axios
 ---
 
 ::: tip 介绍

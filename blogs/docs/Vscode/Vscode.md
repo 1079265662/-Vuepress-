@@ -1,10 +1,11 @@
 ---
 title: Vscode快速设置文档
 date: 2022-01-10
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9mkp2k.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-wq37kp-min.jpg
 tags:
  - Vscode
-categories: Vscode
+categories: 
+ - Vscode
 ---
 
 ::: tip 介绍
