@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>axios封装通用的接口模块 | LKaiLi</title>
+    <title>axios封装通用的api接口方法 | LKaiLi</title>
     <meta name="generator" content="VuePress 1.8.2">
     <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
     <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,7 +18,7 @@
     <meta name="description" content="草 走 🤸 忽略">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     
-    <link rel="preload" href="/assets/css/0.styles.159c2376.css" as="style"><link rel="preload" href="/assets/js/app.d035ed31.js" as="script"><link rel="preload" href="/assets/js/5.208c645a.js" as="script"><link rel="preload" href="/assets/js/1.f7fb77a7.js" as="script"><link rel="preload" href="/assets/js/73.3063920a.js" as="script"><link rel="prefetch" href="/assets/js/10.d3fc6e0e.js"><link rel="prefetch" href="/assets/js/11.2e80a6c4.js"><link rel="prefetch" href="/assets/js/12.e2145805.js"><link rel="prefetch" href="/assets/js/13.3350254e.js"><link rel="prefetch" href="/assets/js/14.9c8197fa.js"><link rel="prefetch" href="/assets/js/15.a7a06deb.js"><link rel="prefetch" href="/assets/js/16.3b41305c.js"><link rel="prefetch" href="/assets/js/17.d04fda60.js"><link rel="prefetch" href="/assets/js/18.6994ad31.js"><link rel="prefetch" href="/assets/js/19.0b42222c.js"><link rel="prefetch" href="/assets/js/20.dc2436e1.js"><link rel="prefetch" href="/assets/js/21.8e74addf.js"><link rel="prefetch" href="/assets/js/22.165475bb.js"><link rel="prefetch" href="/assets/js/23.07943706.js"><link rel="prefetch" href="/assets/js/24.f825a823.js"><link rel="prefetch" href="/assets/js/25.ce1b26d4.js"><link rel="prefetch" href="/assets/js/26.260ea304.js"><link rel="prefetch" href="/assets/js/27.f46f98ca.js"><link rel="prefetch" href="/assets/js/28.79f29873.js"><link rel="prefetch" href="/assets/js/29.6e52279f.js"><link rel="prefetch" href="/assets/js/3.f0dba089.js"><link rel="prefetch" href="/assets/js/30.249eabb8.js"><link rel="prefetch" href="/assets/js/31.ecfa0fca.js"><link rel="prefetch" href="/assets/js/32.515157b7.js"><link rel="prefetch" href="/assets/js/33.d769d2a8.js"><link rel="prefetch" href="/assets/js/34.ce174c62.js"><link rel="prefetch" href="/assets/js/35.bf570a07.js"><link rel="prefetch" href="/assets/js/36.f1919b90.js"><link rel="prefetch" href="/assets/js/37.e8d581cb.js"><link rel="prefetch" href="/assets/js/38.09b68e8b.js"><link rel="prefetch" href="/assets/js/39.06be14b7.js"><link rel="prefetch" href="/assets/js/4.841aa095.js"><link rel="prefetch" href="/assets/js/40.b8c4f834.js"><link rel="prefetch" href="/assets/js/41.2be762a9.js"><link rel="prefetch" href="/assets/js/42.c749c58d.js"><link rel="prefetch" href="/assets/js/43.c118a312.js"><link rel="prefetch" href="/assets/js/44.f20a3dca.js"><link rel="prefetch" href="/assets/js/45.2eb753f1.js"><link rel="prefetch" href="/assets/js/46.d0bd2679.js"><link rel="prefetch" href="/assets/js/47.c93a696b.js"><link rel="prefetch" href="/assets/js/48.7569498f.js"><link rel="prefetch" href="/assets/js/49.022c793c.js"><link rel="prefetch" href="/assets/js/50.f2c99b53.js"><link rel="prefetch" href="/assets/js/51.a0127e62.js"><link rel="prefetch" href="/assets/js/52.2aee986e.js"><link rel="prefetch" href="/assets/js/53.ab14b5bc.js"><link rel="prefetch" href="/assets/js/54.8b7874cc.js"><link rel="prefetch" href="/assets/js/55.032fd2c4.js"><link rel="prefetch" href="/assets/js/56.5c21fda9.js"><link rel="prefetch" href="/assets/js/57.c7e97613.js"><link rel="prefetch" href="/assets/js/58.0f1903d5.js"><link rel="prefetch" href="/assets/js/59.dfa00f22.js"><link rel="prefetch" href="/assets/js/6.8ac34170.js"><link rel="prefetch" href="/assets/js/60.9ffa20ab.js"><link rel="prefetch" href="/assets/js/61.f6ca7192.js"><link rel="prefetch" href="/assets/js/62.7dee9d8d.js"><link rel="prefetch" href="/assets/js/63.165405ae.js"><link rel="prefetch" href="/assets/js/64.f358b923.js"><link rel="prefetch" href="/assets/js/65.74fe4f34.js"><link rel="prefetch" href="/assets/js/66.0cab5c79.js"><link rel="prefetch" href="/assets/js/67.70234889.js"><link rel="prefetch" href="/assets/js/68.6513991b.js"><link rel="prefetch" href="/assets/js/69.a4b8d658.js"><link rel="prefetch" href="/assets/js/7.8f635830.js"><link rel="prefetch" href="/assets/js/70.35d16c40.js"><link rel="prefetch" href="/assets/js/71.9e81d647.js"><link rel="prefetch" href="/assets/js/72.f15b4e6d.js"><link rel="prefetch" href="/assets/js/74.179fd2d4.js"><link rel="prefetch" href="/assets/js/75.9020fac7.js"><link rel="prefetch" href="/assets/js/76.6af47c67.js"><link rel="prefetch" href="/assets/js/77.9711b0ce.js"><link rel="prefetch" href="/assets/js/78.b2a9fbb6.js"><link rel="prefetch" href="/assets/js/79.773212d8.js"><link rel="prefetch" href="/assets/js/8.a7083d17.js"><link rel="prefetch" href="/assets/js/80.4349e225.js"><link rel="prefetch" href="/assets/js/81.eb5a6728.js"><link rel="prefetch" href="/assets/js/82.4aeee916.js"><link rel="prefetch" href="/assets/js/83.4a8c918a.js"><link rel="prefetch" href="/assets/js/84.ae75459c.js"><link rel="prefetch" href="/assets/js/85.919715ee.js"><link rel="prefetch" href="/assets/js/86.ae4b12ab.js"><link rel="prefetch" href="/assets/js/87.c8cacb3a.js"><link rel="prefetch" href="/assets/js/9.af116de0.js">
+    <link rel="preload" href="/assets/css/0.styles.159c2376.css" as="style"><link rel="preload" href="/assets/js/app.201a3bc2.js" as="script"><link rel="preload" href="/assets/js/5.208c645a.js" as="script"><link rel="preload" href="/assets/js/1.f7fb77a7.js" as="script"><link rel="preload" href="/assets/js/73.47ddbd1e.js" as="script"><link rel="prefetch" href="/assets/js/10.d3fc6e0e.js"><link rel="prefetch" href="/assets/js/11.2e80a6c4.js"><link rel="prefetch" href="/assets/js/12.e2145805.js"><link rel="prefetch" href="/assets/js/13.c81b214c.js"><link rel="prefetch" href="/assets/js/14.3cfc12ee.js"><link rel="prefetch" href="/assets/js/15.ea6e29f5.js"><link rel="prefetch" href="/assets/js/16.25e1fd5b.js"><link rel="prefetch" href="/assets/js/17.d04fda60.js"><link rel="prefetch" href="/assets/js/18.420b34d9.js"><link rel="prefetch" href="/assets/js/19.d1ada2cb.js"><link rel="prefetch" href="/assets/js/20.ca9530d4.js"><link rel="prefetch" href="/assets/js/21.5f2dacae.js"><link rel="prefetch" href="/assets/js/22.3c694910.js"><link rel="prefetch" href="/assets/js/23.647d45b4.js"><link rel="prefetch" href="/assets/js/24.4b2406dc.js"><link rel="prefetch" href="/assets/js/25.19a4683b.js"><link rel="prefetch" href="/assets/js/26.260ea304.js"><link rel="prefetch" href="/assets/js/27.f46f98ca.js"><link rel="prefetch" href="/assets/js/28.79f29873.js"><link rel="prefetch" href="/assets/js/29.32f6e094.js"><link rel="prefetch" href="/assets/js/3.f0dba089.js"><link rel="prefetch" href="/assets/js/30.249eabb8.js"><link rel="prefetch" href="/assets/js/31.c6af39cc.js"><link rel="prefetch" href="/assets/js/32.515157b7.js"><link rel="prefetch" href="/assets/js/33.d769d2a8.js"><link rel="prefetch" href="/assets/js/34.c93f95ce.js"><link rel="prefetch" href="/assets/js/35.4e5fcfc3.js"><link rel="prefetch" href="/assets/js/36.49584c5f.js"><link rel="prefetch" href="/assets/js/37.cb8ca05f.js"><link rel="prefetch" href="/assets/js/38.6f3e317a.js"><link rel="prefetch" href="/assets/js/39.06be14b7.js"><link rel="prefetch" href="/assets/js/4.841aa095.js"><link rel="prefetch" href="/assets/js/40.1fb07ab1.js"><link rel="prefetch" href="/assets/js/41.6c1a00f1.js"><link rel="prefetch" href="/assets/js/42.c3d99779.js"><link rel="prefetch" href="/assets/js/43.18760d60.js"><link rel="prefetch" href="/assets/js/44.f60771d4.js"><link rel="prefetch" href="/assets/js/45.902107e4.js"><link rel="prefetch" href="/assets/js/46.2c7ad037.js"><link rel="prefetch" href="/assets/js/47.c93a696b.js"><link rel="prefetch" href="/assets/js/48.282874b8.js"><link rel="prefetch" href="/assets/js/49.2dde913f.js"><link rel="prefetch" href="/assets/js/50.f2c99b53.js"><link rel="prefetch" href="/assets/js/51.80d251c0.js"><link rel="prefetch" href="/assets/js/52.829faaaf.js"><link rel="prefetch" href="/assets/js/53.d203356d.js"><link rel="prefetch" href="/assets/js/54.8b7874cc.js"><link rel="prefetch" href="/assets/js/55.d64422c1.js"><link rel="prefetch" href="/assets/js/56.dbbc915b.js"><link rel="prefetch" href="/assets/js/57.44293a0d.js"><link rel="prefetch" href="/assets/js/58.abbb8c20.js"><link rel="prefetch" href="/assets/js/59.46cee69e.js"><link rel="prefetch" href="/assets/js/6.8ac34170.js"><link rel="prefetch" href="/assets/js/60.1e94a22b.js"><link rel="prefetch" href="/assets/js/61.f6ca7192.js"><link rel="prefetch" href="/assets/js/62.7dee9d8d.js"><link rel="prefetch" href="/assets/js/63.f251f9b5.js"><link rel="prefetch" href="/assets/js/64.7b3483ee.js"><link rel="prefetch" href="/assets/js/65.d2c68c96.js"><link rel="prefetch" href="/assets/js/66.86d16a56.js"><link rel="prefetch" href="/assets/js/67.6e3d7731.js"><link rel="prefetch" href="/assets/js/68.767bbffb.js"><link rel="prefetch" href="/assets/js/69.ae74951b.js"><link rel="prefetch" href="/assets/js/7.8f635830.js"><link rel="prefetch" href="/assets/js/70.7f5a8d7f.js"><link rel="prefetch" href="/assets/js/71.fa41a397.js"><link rel="prefetch" href="/assets/js/72.13f31a7f.js"><link rel="prefetch" href="/assets/js/74.f7866f27.js"><link rel="prefetch" href="/assets/js/75.fd5189d9.js"><link rel="prefetch" href="/assets/js/76.27d202e9.js"><link rel="prefetch" href="/assets/js/77.999948ac.js"><link rel="prefetch" href="/assets/js/78.fb60c685.js"><link rel="prefetch" href="/assets/js/79.1f276cae.js"><link rel="prefetch" href="/assets/js/8.a7083d17.js"><link rel="prefetch" href="/assets/js/80.30aa3916.js"><link rel="prefetch" href="/assets/js/81.eb5a6728.js"><link rel="prefetch" href="/assets/js/82.f5c3f187.js"><link rel="prefetch" href="/assets/js/83.4a8c918a.js"><link rel="prefetch" href="/assets/js/84.fe6b9af1.js"><link rel="prefetch" href="/assets/js/85.a13465c9.js"><link rel="prefetch" href="/assets/js/86.cf7574b4.js"><link rel="prefetch" href="/assets/js/87.bf90a882.js"><link rel="prefetch" href="/assets/js/9.af116de0.js">
     <link rel="stylesheet" href="/assets/css/0.styles.159c2376.css">
   </head>
   <body>
@@ -26,7 +26,7 @@
             
           <span data-v-5cb9a64e>2021  - </span>
           2022
-        </a></span></div></div> <div class="hide" data-v-72e667d5><div data-v-72e667d5><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-zxkgeg.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-72e667d5><header class="navbar" data-v-72e667d5><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+        </a></span></div></div> <div class="hide" data-v-72e667d5><div data-v-72e667d5><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-o37o8l.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-72e667d5><header class="navbar" data-v-72e667d5><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
   主页
 </a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
       分类
@@ -42,14 +42,14 @@
   Vue3
 </a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
   Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
 </a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
   Vscode
 </a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
   RABC
 </a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
   Vue OV系统
-</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
-  小程序
 </a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
   axios
 </a></li><li class="dropdown-item"><!----> <a href="/categories/H5Video/" class="nav-link"><i class="iconfont undefined"></i>
@@ -86,14 +86,14 @@
   Vue3
 </a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
   Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
 </a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
   Vscode
 </a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
   RABC
 </a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
   Vue OV系统
-</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
-  小程序
 </a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
   axios
 </a></li><li class="dropdown-item"><!----> <a href="/categories/H5Video/" class="nav-link"><i class="iconfont undefined"></i>
@@ -112,11 +112,11 @@
   关于我
 </a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
   联系我
-</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Axios</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/axios/axios_Interface.html" aria-current="page" class="active sidebar-link">axios封装通用的接口模块</a></li><li><a href="/blogs/docs/axios/axios_async.html" class="sidebar-link">async 同步获取axios数据</a></li><li><a href="/blogs/docs/axios/axios_qingqiulanjieqi.html" class="sidebar-link">axios 请求拦截器</a></li><li><a href="/blogs/docs/axios/axios_router.html" class="sidebar-link">路由导航守卫(访问权限 白名单)</a></li><li><a href="/blogs/docs/axios/axios_transform.html" class="sidebar-link">文章id超范围问题</a></li><li><a href="/blogs/docs/axios/axios_xiangyinglanjieqi.html" class="sidebar-link">axios 响应拦截器</a></li><li><a href="/blogs/docs/axios/login_token.html" class="sidebar-link">续签token的流程</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-5cb9a64e data-v-72e667d5><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>axios封装通用的接口模块</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Axios</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/axios/axios_Interface.html" aria-current="page" class="active sidebar-link">axios封装通用的api接口方法</a></li><li><a href="/blogs/docs/axios/axios_async.html" class="sidebar-link">async 同步获取axios数据</a></li><li><a href="/blogs/docs/axios/axios_qingqiulanjieqi.html" class="sidebar-link">axios 请求拦截器</a></li><li><a href="/blogs/docs/axios/axios_router.html" class="sidebar-link">路由导航守卫(访问权限 白名单)</a></li><li><a href="/blogs/docs/axios/axios_transform.html" class="sidebar-link">文章id超范围问题</a></li><li><a href="/blogs/docs/axios/axios_xiangyinglanjieqi.html" class="sidebar-link">axios 响应拦截器</a></li><li><a href="/blogs/docs/axios/login_token.html" class="sidebar-link">续签token的流程</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-5cb9a64e data-v-72e667d5><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>axios封装通用的api接口方法</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
             
           <span data-v-5cb9a64e>2021  - </span>
           2022
-        </a></span></div></div></div> <div data-v-72e667d5><main class="page"><div class="page-title" style="display:none;"><h1 class="title">axios封装通用的接口模块</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2021-05-25</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/axios/axios_Interface.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>Vue</span><span class="tag-item" data-v-0efa1f05>axios</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>一级接口组件 二级接口组件 二级接口组件 获取数据<br></p></div> <h2 id="封装通用的接口模块"><a href="#封装通用的接口模块" class="header-anchor">#</a> 封装通用的接口模块</h2> <p>安装axios <code>npm i axios -S</code></p> <ul><li><p>路由配置分为三个阶段</p> <ul><li><ol><li>配置axios通用接口文件 (一级接口组件)
+        </a></span></div></div></div> <div data-v-72e667d5><main class="page"><div class="page-title" style="display:none;"><h1 class="title">axios封装通用的api接口方法</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2022-01-12</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/axios/axios_Interface.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>Vue</span><span class="tag-item" data-v-0efa1f05>axios</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>二次封装axios 实现api接口直接调用<br></p></div> <h2 id="封装通用的接口模块"><a href="#封装通用的接口模块" class="header-anchor">#</a> 封装通用的接口模块</h2> <p>安装axios <code>npm i axios -S</code></p> <ul><li><p>路由配置分为三个阶段</p> <ul><li><ol><li>配置axios通用接口文件 (一级接口组件)
 <ul><li>通常配置 <code>axios.create({})</code> 分支设置url基础地址 方便操控</li></ul></li></ol></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 导入 axios组件</span>
 <span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
 <span class="token comment">// 设置基准axios路径 用常量保存</span>
@@ -130,16 +130,19 @@
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre></div><ul><li>调用接口时候 调用一级接口组件 单独设置接口文件 (二级接口组件)</li> <li>在需要调用接口的Vue文件引入二级接口组件 (导入二级接口)</li></ul></li></ul> <blockquote><p><big>一、</big>utils文件夹 一级路由 axios接口模块设置  <code>utils文件夹里面创建 request.js</code></p></blockquote> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/l4R3Z1oLAGnmx6X.png" alt="11"></p> <ul><li>配置 <code>axios.create({})</code> 分支设置url基础地址 方便操控</li> <li>调用axios方法 设置基本url路径 设置参数 配置数据
 <ul><li>设置属性:  method(请求方式) , url(地址) , data(请求体) , params(请求方式参数) , headers(请求头)
-<ul><li>data(请求体) , params(请求方式参数) 可以通过es6的动态属性名(键) 来实现动态切换</li></ul></li> <li>接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接</li></ul></li> <li>return 返回结果</li> <li>设置axios的 请求拦截器 和 响应拦截器</li></ul> <blockquote><p>目标: 封装通用的接口调用模块</p> <p>作用: 配置通用的<code>axios</code>接口模块 方便统一修改 统一配置 统一更换 减低耦合</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 封装通用的接口调用模块</span>
+<ul><li>data(请求体) , params(请求方式参数) 可以通过es6的动态属性名(键) 来实现动态切换</li></ul></li> <li>接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接</li></ul></li> <li>return 返回结果</li> <li>设置axios的 请求拦截器 和 响应拦截器</li></ul> <blockquote><p>目标: 封装通用的接口调用模块</p> <p>作用: 配置通用的<code>axios</code>接口模块 方便统一修改 统一配置 统一更换 减低耦合</p> <p><font color="#ff3040">注意: 分为 携带token请求头的通用封装 和 携带token还需要其他请求头参数的特殊接口封装</font></p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 封装通用的接口调用模块</span>
 <span class="token comment">// 导入axios组件</span>
 <span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
 <span class="token comment">// 导入Vuex 实例化</span>
 <span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'@/store'</span>
+<span class="token comment">// 获取toekn</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> getToken <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/auth'</span>
 <span class="token comment">// 导入Vue router 实例化</span>
 <span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'@/router'</span>
 
 <span class="token comment">// 请求的基准路径 常量保存并且支持导出</span>
 <span class="token keyword">export</span> <span class="token keyword">const</span> baseURL <span class="token operator">=</span> <span class="token string">''</span>
+<span class="token comment">// const baseURL = process.env.VUE_APP_BASE_API</span>
 
 <span class="token comment">// 创建独立的axios的实例</span>
 <span class="token keyword">const</span> instance <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -151,12 +154,16 @@
 
 <span class="token comment">// 请求拦截器 (发送数据前的加工数据)</span>
 instance<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">config</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token comment">// config是发送的数据</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span>
+  <span class="token comment">// 特殊处理headers传值（内容类型）</span>
   <span class="token comment">// 判断Vuex中是否有token，如果有就添加到请求头</span>
-  <span class="token keyword">const</span> token <span class="token operator">=</span> store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>user<span class="token punctuation">.</span>profile<span class="token punctuation">.</span>token
+  <span class="token keyword">const</span> token <span class="token operator">=</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>token
   <span class="token comment">// 如果存在token 把token存入headers请求头中</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>token<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">//! config是发送的数据 headers是axios请求头 Authorization是后端接口判断token的属性名</span>
-    config<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>Authorization <span class="token operator">=</span> <span class="token string">'Bearer '</span> <span class="token operator">+</span> token
+    <span class="token comment">//! config是发送的数据 headers是axios请求头</span>
+    config<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'token'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// 也可以这样写</span>
+    <span class="token comment">// config.headers.token= getToken()</span>
   <span class="token punctuation">}</span>
   <span class="token comment">// 返回处理后的数据</span>
   <span class="token keyword">return</span> config
@@ -173,15 +180,17 @@ instance<span class="token punctuation">.</span>interceptors<span class="token p
   <span class="token comment">// 处理token的过期操作</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">.</span>response <span class="token operator">&amp;&amp;</span> err<span class="token punctuation">.</span>response<span class="token punctuation">.</span>status <span class="token operator">===</span> <span class="token number">401</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// ---------------------- 应该续签token 但是后端没做(按需设置)</span>
-    <span class="token comment">// token过期了，清空过期的用户信息，跳转到登录页面</span>
-    store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'user/updateUserInfo'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-    <span class="token comment">// 跳转到登录页</span>
-    router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">)</span>
+      
+    <span class="token comment">// 进行清除操作</span>
+      
+    <span class="token comment">// 刷新跳转</span>
+    window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href <span class="token operator">=</span> <span class="token string">'/login'</span>
   <span class="token punctuation">}</span>
   <span class="token comment">// 打印响应拦截器的错误信息</span>
   <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
+<span class="token comment">//! 这里是只携带token请求头的通用接口</span>
 <span class="token comment">// 封装一个通用的请求方法</span>
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token comment">// 这里的返回值是Promise实例对象</span>
@@ -195,15 +204,26 @@ instance<span class="token punctuation">.</span>interceptors<span class="token p
     <span class="token comment">// 如果不是data请求 那么就赋值params请求</span>
     <span class="token comment">// api掉接口的时候 传递数据的属性名(键) 全部为data:{} (不管是那种方式)</span>
     <span class="token punctuation">[</span>options<span class="token punctuation">.</span>method<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'GET'</span> <span class="token operator">?</span> <span class="token string">'params'</span> <span class="token operator">:</span> <span class="token string">'data'</span><span class="token punctuation">]</span><span class="token operator">:</span> options<span class="token punctuation">.</span>data<span class="token punctuation">,</span> <span class="token comment">// toUpperCase转换为大写(请求是小写也可以)</span>
-    <span class="token comment">// 设置请求头(一般用于跨域问题 和 传输token)</span>
-    headers<span class="token operator">:</span> options<span class="token punctuation">.</span>headers
-    <span class="token comment">// 请求方式 ------------------------------------------------------</span>
-    <span class="token comment">// data用于传递请求体数据（POST/PUT/DELETE）</span>
-    <span class="token comment">// data: options.data,</span>
-    <span class="token comment">// params用于传递get请求数据（查询字符串）</span>
-    <span class="token comment">// params: options.data</span>
+   <span class="token comment">// 设置请求头(一般用于跨域问题 和 传输token)</span>
+    <span class="token comment">// headers: options.headers // 不建议覆盖之前的headers 会出现问题 建议单独处理具备其他请求头的接口</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
+
+<span class="token comment">//! 这里是不光携带token还需要其他请求头参数的特殊接口封装</span>
+<span class="token comment">// 单独处理一些特殊请求头的请求 通常是post请求需要携带一些奇怪的请求头参数</span>
+<span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 名称要和api接口名称一致</span>
+  <span class="token function">demoToken</span> <span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> instance<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      headers<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string">'Content-Type'</span><span class="token operator">:</span> <span class="token string">'application/json'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 命名导出</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span> http <span class="token punctuation">}</span>
+
 
 <span class="token comment">// --------------------------------- api接口上传数据模拟</span>
 <span class="token comment">// 所有的请求方式 上传数据的对象都设置为data:{} (在通用的请求方法中已配置)</span>
@@ -226,25 +246,24 @@ instance<span class="token punctuation">.</span>interceptors<span class="token p
 <span class="token comment">//   }</span>
 <span class="token comment">// })</span>
 
-</code></pre></div><blockquote><p><big>二、</big>api文件夹 二级路由 指定接口设置示例(登录二级接口) <code>api文件夹创建 二级路由模块(接口)</code></p></blockquote> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/rVzQ9DwZpHEboj6.png" alt="image-20210604084917295"></p> <ul><li>设置命名导出(不是默认导出) 按需配置参数</li> <li>接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接</li> <li>return返回数据</li></ul> <blockquote><p>目标: 封装单独的登录接口文件</p> <p>作用: 接口文件 单独控制 方便修改 降低耦合度 便于维护</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Login业务模块，专门负责调用接口</span>
-<span class="token comment">// 导入配置的axios组件</span>
-<span class="token keyword">import</span> request <span class="token keyword">from</span> <span class="token string">'../utils/request'</span>
-<span class="token comment">// 使用导入axios组件 实现登录功</span>
-<span class="token comment">// 使用命名导出</span>
-<span class="token comment">// 需要设置形参 获取页面的数据 传给axios组件</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">login</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">mobile<span class="token punctuation">,</span> code</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  <span class="token comment">// 返回数据设置 return</span>
+</code></pre></div><blockquote><p><big>二、</big>api文件夹 二级路由 指定接口设置示例(登录二级接口) <code>api文件夹创建 二级路由模块(接口)</code></p></blockquote> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/rVzQ9DwZpHEboj6.png" alt="image-20210604084917295"></p> <ul><li>设置命名导出(不是默认导出) 按需配置参数</li> <li>接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接</li> <li>return返回数据</li></ul> <blockquote><p>目标: 封装单独的登录接口文件</p> <p>作用: 接口文件 单独控制 方便修改 降低耦合度 便于维护</p> <p><font color="#ff3040">注意: 分为 携带token请求头的通用接口 和 携带token还需要其他请求头参数的特殊接口接口</font></p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//! 这里是只携带token请求头通用接口</span>
+<span class="token keyword">import</span> request <span class="token keyword">from</span> <span class="token string">'@/utils/request'</span>
+<span class="token comment">//! 这里是不光携带token还需要其他参数的特殊接口</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> http <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/request'</span>
+<span class="token comment">// 登录接口 携带token请求头通用接口(登录其实不需要 只是展示案例)</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">login</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    method<span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
-    <span class="token comment">// 接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接</span>
-    url<span class="token operator">:</span> <span class="token string">'v1_0/authorizations'</span><span class="token punctuation">,</span>
-    data<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// 跟服务器比对数据</span>
-      mobile<span class="token punctuation">,</span>
-      code
-    <span class="token punctuation">}</span>
+    method<span class="token operator">:</span> <span class="token string">'get'</span><span class="token punctuation">,</span>
+    url<span class="token operator">:</span> <span class="token string">'public/index.php/login/login/todata'</span><span class="token punctuation">,</span>
+    data
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code></pre></div><blockquote><p><big>三、</big>Vue文件引入配置路由(登录组件)</p></blockquote> <ul><li>命名方法 导入登录组件  (导入二级接口)</li> <li>try{}catch{}方法 配合async 获取数据 正确登入 错误提示用户
+<span class="token comment">// 测试接口 携带token还需要其他请求头参数的特殊接口</span>
+<span class="token keyword">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">demoToken</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">await</span> http<span class="token punctuation">.</span><span class="token function">demoToken</span><span class="token punctuation">(</span><span class="token string">'public/index.php/custequip/authrule/index/index'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><blockquote><p><big>三、</big>Vue文件引入配置api接口(登录组件)</p></blockquote> <ul><li>命名方法 导入登录组件  (导入二级接口)</li> <li>try{}catch{}方法 配合async 获取数据 正确登入 错误提示用户
 <ul><li>try{}是获取正确数据(用于成功登录) catch{}是获取错误信息(用户提示用户)
 <ul><li>类似于 if else方法</li></ul></li></ul></li></ul> <blockquote><p>目标: 导入命名导出的 二级路由接口 获取数据</p> <p>作用: 判断用户是否登录成功 登录成功转到相应界面 登录失败提示用户</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 1. 传入 login axios 组件 login是登录验证axios命名方法名称</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> login <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../api/login'</span>
@@ -303,6 +322,6 @@ VUE_APP_BASE_API <span class="token operator">=</span> <span class="token string
     </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
     看板娘
   </div></div></div></div>
-    <script src="/assets/js/app.d035ed31.js" defer></script><script src="/assets/js/5.208c645a.js" defer></script><script src="/assets/js/1.f7fb77a7.js" defer></script><script src="/assets/js/73.3063920a.js" defer></script>
+    <script src="/assets/js/app.201a3bc2.js" defer></script><script src="/assets/js/5.208c645a.js" defer></script><script src="/assets/js/1.f7fb77a7.js" defer></script><script src="/assets/js/73.47ddbd1e.js" defer></script>
   </body>
 </html>

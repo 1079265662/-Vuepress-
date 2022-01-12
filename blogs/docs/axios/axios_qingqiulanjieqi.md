@@ -1,6 +1,7 @@
 ---
 title: axios 请求拦截器
 date: 2021-05-27
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-l3geq2.jpg
 tags:
  - Vue
  - axios

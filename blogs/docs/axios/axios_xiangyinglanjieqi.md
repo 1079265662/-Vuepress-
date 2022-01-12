@@ -1,6 +1,7 @@
 ---
 title: axios 响应拦截器
 date: 2021-05-27
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-1kov2w.jpg
 tags:
  - Vue
  - axios
@@ -9,7 +10,7 @@ categories:
 ---
 
 ::: tip 介绍
-axios 响应拦截器 .interceptors.response.use<br>
+axios响应拦截器 axios.interceptors.response.use<br>
 :::
 
 <!-- more -->

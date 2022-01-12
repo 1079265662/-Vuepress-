@@ -1,7 +1,7 @@
 ---
 title: 路由导航守卫(访问权限 白名单)
 date: 2021-06-26
-cover: https://tva2.sinaimg.cn/large/005INI3Xly8grlofqcdd3j31gi0u0dvl.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-57pqv5.jpg
 tags:
  - Vue
  - Vue Router

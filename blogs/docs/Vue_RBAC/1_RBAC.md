@@ -1,7 +1,7 @@
 ---
 title: RABC权限学习记录文档
 date: 2022-01-11
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m92rx-min.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/vue.jpg
 tags:
  - Vue
  - axios
@@ -1372,7 +1372,8 @@ export function getTokenTime () {
 ## token续签
 
 * token续签有两种方式 其实全部的token续签都涉及到了axios的请求拦截器 通过拦截器去实现token的续签 
-* 通常都会在`utils`里的`request.js`中进行处理
+  * <font color =#ff3040>注意: 如果你把token的续签根据(`ReFresh_token或者token过期时间戳`)储存到session中那么页面关闭后会自动销毁 也就不具备续签性了</font>
+* 通常都会在`utils`里的`request.js`中进行续签处理
 
 ### 双token机制
 

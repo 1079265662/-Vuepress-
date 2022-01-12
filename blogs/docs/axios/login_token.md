@@ -1,7 +1,7 @@
 ---
 title: 续签token的流程
 date: 2021-05-12
-cover: https://i.loli.net/2021/06/07/GktLzbgwxBYZJHh.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/vue.jpg
 tags:
  - token续签
  - axios
@@ -16,9 +16,9 @@ axios插件 自动续签用户的token值<br>
 
 <!-- more -->
 
-## 响应式拦截器 续签token问题 `request.js`
+## 双token机制 `request.js`
 
-* token续签需要用到 axios提供的 响应式截拦器`.interceptors.response.use()`
+* 第一种是双token `ReFresh_token` 和 `用户token` 当`用户token`过期后 拿`ReFresh_token`去续签 `ReFresh_token`一般有效期是半年 该token不具备任何数据 只是作为续签凭证 如果`ReFresh_token`过期了 就需要重新登录了 这种方式是相对安全的 因为`用户token`时间只有五分钟 
 * token续签总流程图
 
 ![image-20210605115451235](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/VaQ6uA7POdc8qJv.png)
@@ -115,5 +115,167 @@ instance.interceptors.response.use(function (response) { // 获取数据成功�
   }
   return Promise.reject(error)
 })
+```
+
+## 单token机制
+
+* 第二种是企业常用的 单`用户token` 当用户登录的时候 接口会返回一个`token过期时间戳` 前端把时间戳储存session中 每当请求接口的时候 需要电脑当前时间去计算后端返回`token过期时间戳` 如果小于10分钟(或者其他) 就会进行续签操作 替换一个新的`用户token`并且更新`token过期时间戳` 这种方式相对后端来说简单 安全性不如第一种 因为`用户token` 有效期通常为8小时甚至更长 因为后端是不会把过期token续签的 所以时间设置太短的话 用户临时不操作就会过期重新登录
+
+  ![image-20220111163947060](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220111163947060.png)
+
+> 后端接口数据需求
+
+* 前端需要给后端传递旧token即可 后端就会返回一个新的token 和 新的过期时间戳
+
+1. 第一步在`utils`文件夹下创建cookie 或者 session方法
+
+![image-20220111170221100](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220111170221100.png)
+
+```js
+import Cookies from 'js-cookie'
+// cookie命名
+const TokenKey = 'Admin-Token'
+// session命名
+const timeKey = 'expireTime'
+
+// 获取cookie
+export function getToken () {
+  return Cookies.get(TokenKey)
+}
+// 保存cookie
+export function setToken (token) {
+  return Cookies.set(TokenKey, token)
+}
+// 移除cookie
+export function removeToken () {
+  return Cookies.remove(TokenKey)
+}
+// 清空sessionStorage
+export function clearStorage () {
+  return sessionStorage.clear()
+}
+// 设置token过期时间 (保存token过期和当前时间进行比较 低于10分钟(或其他时间)进行续签)
+export function setTokenTime (time) {
+  return sessionStorage.setItem(timeKey, time)
+}
+// 重置token过期时间 (清空token不需要设置为'' 或者null 防止无法判断 需要设置为0或-1)
+export function removeTokenTime () {
+  return sessionStorage.setItem(timeKey, 0)
+}
+// 获取储存的token的时间
+export function getTokenTime () {
+  return sessionStorage.getItem(timeKey)
+}
+```
+
+2. 第二步创建一个续签token的api接口 `api`文件夹
+
+> 续签token的数据结构
+
+续签token的数据结构: [续签token的数据结构json](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E7%BB%AD%E7%AD%BEtoken%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.json)
+
+```js
+// token续签
+export async function refreshTokenApi (parm) {
+  return await http.post('/api/sysUser/refreshToken', parm)
+}
+```
+
+3. 第三步在axios二次封装下的截器去实现token的续签 
+   * <font color =#ff3040>注意: token续签的处理需要写在添加请求头的上面(把token塞到请求头里) 因为我们在续签后就已经处理了</font>
+
+```js
+import axios from 'axios'
+// 导入vuex
+import store from '@/store'
+// 处理token和cookie
+import { getToken, getTokenTime, setTokenTime, removeTokenTime, setToken, clearStorage, removeToken } from '@/utils/auth'
+import { refreshTokenApi } from '@/api/user'
+// create an axios instance
+const service = axios.create({
+  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  // withCredentials: true, // send cookies when cross-domain requests
+ // timeout: 5000 // request timeout
+})
+//! --------------------处理token续签
+// token续签方法
+function reFresh () {
+  // 声明一个变量 储存当前token 作为替换凭证
+  const parm = {
+    'token': getToken()
+  }
+  // 向接口请求一个新的token
+  return refreshTokenApi(parm).then(res => {
+    return res
+  })
+  // 这里其实可以简写
+  //  return refreshTokenApi(parm).then(res => res)
+}
+//! 处理token续签
+// 定义一个状态位 防止多次获取 无需每个接口都请求
+let isReFresh = false
+
+// request interceptor
+// 发送请求之前的拦截器
+service.interceptors.request.use(
+  config => {
+    //! 处理token续签
+    // 获取当前系统时间戳
+    const curent = new Date().getTime()
+    // 获取缓存中的时间戳
+    const expireTime = getTokenTime()
+    // 如果缓存中的时间戳存在
+    if (expireTime > 0) {
+      const minMx = (expireTime - curent) / 1000 / 60 // 毫秒计算
+      // 判断token时间是否小于十分钟 小于十分钟进行token续签操作
+      if (minMx < 10) {
+        // 判断状态位 为false执行 防止多次请求token续签接口
+        if (!isReFresh) {
+          isReFresh = true
+          // 返回操作 不再执行以下拦截器操作 防止报错
+          return reFresh().then(res => {
+            // 判断是否请求成功
+            if (res.code == 200) {
+              // 设置新的token
+              setToken(res.data.token)
+              // 设置新的时间戳
+              setTokenTime(res.data.expireTime)
+              // 把新的token添加到头部 实现正常获取数据
+              config.headers['token'] = getToken()
+            }
+            // 返回config 正常获取接口数据
+            return config
+          }).catch(res => {
+            // 如果续签失败进行处理(没有)
+            console.log(res)
+          }).finally(res => {
+            // 无论是否获取成功或者失败 都需要把状态位重置
+            isReFresh = false
+          })
+        }
+      }
+    }
+
+    // do something before request is sent
+    // 从store里面获取token，如果token存在，
+    // 把token添加到请求的头部Headers里面
+    if (store.getters.token) {
+      // let each request carry token
+      // ['X-Token'] is a custom headers key
+      // please modify it according to the actual situation
+      // 把token添加到请求的头部
+      //! config是发送的数据 headers是axios请求头 Authorization是后端接口判断token的属性名
+        config.headers['token'] = getToken()
+    }
+    return config
+  },
+  error => {
+    // do something with request error
+    console.log(error) // for debug
+    return Promise.reject(error)
+  }
+)
+
+
 ```
 

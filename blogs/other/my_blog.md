@@ -53,7 +53,7 @@ subSidebar: false
 
 技术指导 : [Yida](https://zhangyujie.top/) [暴富指南](https://alphaloveomega.gitee.io/blog/)
 
-静态托管 : ~~[vercel](https://vercel.com/)~~ [netlify](https://app.netlify.com/)
+静态托管 : ~~[vercel](https://vercel.com/)~~   [netlify](https://app.netlify.com/)
 
 
 

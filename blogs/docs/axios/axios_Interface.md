@@ -1,6 +1,7 @@
 ---
-title: axios封装通用的接口模块
-date: 2021-05-25
+title: axios封装通用的api接口方法
+date: 2022-01-12
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-o37o8l.jpg
 tags:
  - Vue
  - axios
@@ -10,7 +11,7 @@ sticky: 2
 ---
 
 ::: tip 介绍
-一级接口组件 二级接口组件 二级接口组件 获取数据<br>
+二次封装axios 实现api接口直接调用<br>
 :::
 
 <!-- more -->
@@ -55,6 +56,8 @@ sticky: 2
 > 目标: 封装通用的接口调用模块
 >
 > 作用: 配置通用的`axios`接口模块 方便统一修改 统一配置 统一更换 减低耦合
+>
+> <font color =#ff3040>注意: 分为 携带token请求头的通用封装 和 携带token还需要其他请求头参数的特殊接口封装</font>
 
 ```js
 // 封装通用的接口调用模块
@@ -62,11 +65,14 @@ sticky: 2
 import axios from 'axios'
 // 导入Vuex 实例化
 import store from '@/store'
+// 获取toekn
+import { getToken } from '@/utils/auth'
 // 导入Vue router 实例化
 import router from '@/router'
 
 // 请求的基准路径 常量保存并且支持导出
 export const baseURL = ''
+// const baseURL = process.env.VUE_APP_BASE_API
 
 // 创建独立的axios的实例
 const instance = axios.create({
@@ -78,12 +84,16 @@ const instance = axios.create({
 
 // 请求拦截器 (发送数据前的加工数据)
 instance.interceptors.request.use((config) => { // config是发送的数据
+  console.log(config)
+  // 特殊处理headers传值（内容类型）
   // 判断Vuex中是否有token，如果有就添加到请求头
-  const token = store.state.user.profile.token
+  const token = store.getters.token
   // 如果存在token 把token存入headers请求头中
   if (token) {
-    //! config是发送的数据 headers是axios请求头 Authorization是后端接口判断token的属性名
-    config.headers.Authorization = 'Bearer ' + token
+    //! config是发送的数据 headers是axios请求头
+    config.headers['token'] = getToken()
+    // 也可以这样写
+    // config.headers.token= getToken()
   }
   // 返回处理后的数据
   return config
@@ -100,15 +110,17 @@ instance.interceptors.response.use((response) => {
   // 处理token的过期操作
   if (err.response && err.response.status === 401) {
     // ---------------------- 应该续签token 但是后端没做(按需设置)
-    // token过期了，清空过期的用户信息，跳转到登录页面
-    store.commit('user/updateUserInfo', {})
-    // 跳转到登录页
-    router.push('/login')
+      
+    // 进行清除操作
+      
+    // 刷新跳转
+    window.location.href = '/login'
   }
   // 打印响应拦截器的错误信息
   return Promise.reject(err)
 })
 
+//! 这里是只携带token请求头的通用接口
 // 封装一个通用的请求方法
 export default (options) => {
   // 这里的返回值是Promise实例对象
@@ -122,15 +134,26 @@ export default (options) => {
     // 如果不是data请求 那么就赋值params请求
     // api掉接口的时候 传递数据的属性名(键) 全部为data:{} (不管是那种方式)
     [options.method.toUpperCase() === 'GET' ? 'params' : 'data']: options.data, // toUpperCase转换为大写(请求是小写也可以)
-    // 设置请求头(一般用于跨域问题 和 传输token)
-    headers: options.headers
-    // 请求方式 ------------------------------------------------------
-    // data用于传递请求体数据（POST/PUT/DELETE）
-    // data: options.data,
-    // params用于传递get请求数据（查询字符串）
-    // params: options.data
+   // 设置请求头(一般用于跨域问题 和 传输token)
+    // headers: options.headers // 不建议覆盖之前的headers 会出现问题 建议单独处理具备其他请求头的接口
   })
 }
+
+//! 这里是不光携带token还需要其他请求头参数的特殊接口封装
+// 单独处理一些特殊请求头的请求 通常是post请求需要携带一些奇怪的请求头参数
+const http = {
+  // 名称要和api接口名称一致
+  demoToken (url) {
+    return instance.post(url, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  }
+}
+// 命名导出
+export { http }
+
 
 // --------------------------------- api接口上传数据模拟
 // 所有的请求方式 上传数据的对象都设置为data:{} (在通用的请求方法中已配置)
@@ -166,29 +189,30 @@ export default (options) => {
 > 目标: 封装单独的登录接口文件 
 >
 > 作用: 接口文件 单独控制 方便修改 降低耦合度 便于维护
+>
+> <font color =#ff3040>注意: 分为 携带token请求头的通用接口 和 携带token还需要其他请求头参数的特殊接口接口</font>
 
 ```js
-// Login业务模块，专门负责调用接口
-// 导入配置的axios组件
-import request from '../utils/request'
-// 使用导入axios组件 实现登录功
-// 使用命名导出
-// 需要设置形参 获取页面的数据 传给axios组件
-export const login = (mobile, code) => {
-  // 返回数据设置 return
+//! 这里是只携带token请求头通用接口
+import request from '@/utils/request'
+//! 这里是不光携带token还需要其他参数的特殊接口
+import { http } from '@/utils/request'
+// 登录接口 携带token请求头通用接口(登录其实不需要 只是展示案例)
+export function login (data) {
   return request({
-    method: 'POST',
-    // 接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接
-    url: 'v1_0/authorizations',
-    data: { // 跟服务器比对数据
-      mobile,
-      code
-    }
+    method: 'get',
+    url: 'public/index.php/login/login/todata',
+    data
   })
 }
+// 测试接口 携带token还需要其他请求头参数的特殊接口
+export async function demoToken () {
+  return await http.demoToken('public/index.php/custequip/authrule/index/index')
+}
+
 ```
 
-> <big>三、</big>Vue文件引入配置路由(登录组件)
+> <big>三、</big>Vue文件引入配置api接口(登录组件)
 
 * 命名方法 导入登录组件  (导入二级接口)
 * try{}catch{}方法 配合async 获取数据 正确登入 错误提示用户

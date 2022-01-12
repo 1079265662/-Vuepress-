@@ -1,6 +1,7 @@
 ---
 title: 文章id超范围问题
 date: 2021-05-28
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-57p818.jpg
 tags:
  - Vue
  - axios

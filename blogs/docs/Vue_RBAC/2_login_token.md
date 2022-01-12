@@ -1,7 +1,7 @@
 ---
 title: 续签token的流程
 date: 2021-05-12
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m92rx-min.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/vue.jpg
 tags:
  - token续签
  - axios

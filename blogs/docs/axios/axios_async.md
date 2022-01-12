@@ -1,6 +1,7 @@
 ---
 title: async 同步获取axios数据
 date: 2021-05-26
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-y8kdvd.jpg
 tags:
  - Vue
  - axios
