@@ -6,8 +6,7 @@ tags:
  - Vue
  - axios
  - RABC
-categories:
- - RABC
+categories: RABC
 ---
 
 ::: tip 介绍

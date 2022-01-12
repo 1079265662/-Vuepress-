@@ -16,7 +16,7 @@ const router = new Router({
 
 // 防止相同路由跳转时报错
 const VueRouterPush = Router.prototype.push
-Router.prototype.push = function push(to) {
+Router.prototype.push = function push (to) {
     return VueRouterPush.call(this, to).catch(err => err)
 }
 

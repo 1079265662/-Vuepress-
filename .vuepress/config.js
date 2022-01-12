@@ -37,15 +37,13 @@ module.exports = {
     [
       "script",
       {},
-      `
-      var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?47cdeb0482806d0e9ea91137d2195282";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        `,
+      `var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?61498f37b83812e7b85952d5feaaab47";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();`,
     ], //百度统计
   ],
   locales: {
@@ -135,8 +133,8 @@ module.exports = {
       },
     ],
     valineConfig: {
-      appId: "tPugNRadb0huWnsoU1URpvSM-MdYXbMMI", // your appId
-      appKey: "rDi2HfpHPFMIL6Vt8yV9Dbe5", // your appKey
+      appId: "8ThOLCz8sVJvY8PHO4RaSPrx-gzGzoHsz", // your appId
+      appKey: "w5mESIHqc7dlB0cwrtJgjrs4", // your appKey
       avatar: "mp", //
       enableQQ: true, //启用昵称框自动获取QQ昵称和QQ头像
       requiredFields: ["nick"], //设置必填项

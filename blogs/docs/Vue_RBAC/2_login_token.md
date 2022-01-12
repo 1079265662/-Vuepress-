@@ -6,8 +6,7 @@ tags:
  - token续签
  - axios
  - RABC
-categories:
- - axios
+categories: RABC
 ---
 
 ::: tip 介绍
