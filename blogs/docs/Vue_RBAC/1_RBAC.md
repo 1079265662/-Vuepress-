@@ -93,7 +93,7 @@ RABC权限学习记录文档 从头到尾学习文档<br>
          // ['X-Token'] is a custom headers key
          // please modify it according to the actual situation
          // 把token添加到请求的头部
-         config.headers['token'] = getToken()
+         ['token'] = getToken()
        }
        return config
      },
@@ -1585,11 +1585,7 @@ service.interceptors.request.use(
               // 设置新的时间戳
               setTokenTime(res.data.expireTime)
               // 把新的token添加到头部 实现正常获取数据
-              config.headers = {
-                // 在请求头中 携带token 获取用户信息
-                // Authorization是后端接口判断token的属性名
-                token: getToken()
-              }
+              config.headers['token'] = getToken()
             }
             // 返回config 正常获取接口数据
             return config
@@ -1613,11 +1609,7 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       // 把token添加到请求的头部
       //! config是发送的数据 headers是axios请求头 Authorization是后端接口判断token的属性名
-      config.headers = {
-        // 在请求头中 携带token 获取用户信息
-        // Authorization是后端接口判断token的属性名
-        token: getToken()
-      }
+        config.headers['token'] = getToken()
     }
     return config
   },
