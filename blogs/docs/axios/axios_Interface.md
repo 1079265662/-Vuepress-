@@ -57,7 +57,7 @@ sticky: 2
 >
 > 作用: 配置通用的`axios`接口模块 方便统一修改 统一配置 统一更换 减低耦合
 >
-> <font color =#ff3040>注意: 分为 携带token请求头的通用封装 和 携带token还需要其他请求头参数的特殊接口封装</font>
+> <font color =#ff3040>注意: 分为 携带token请求头的通用封装 和 携带token还需要其他请求头参数的特殊封装</font>
 
 ```js
 // 封装通用的接口调用模块
@@ -120,7 +120,7 @@ instance.interceptors.response.use((response) => {
   return Promise.reject(err)
 })
 
-//! 这里是只携带token请求头的通用接口
+//! 这里是只携带token请求头的通用封装
 // 封装一个通用的请求方法
 export default (options) => {
   // 这里的返回值是Promise实例对象
@@ -139,7 +139,7 @@ export default (options) => {
   })
 }
 
-//! 这里是不光携带token还需要其他请求头参数的特殊接口封装
+//! 这里是不光携带token还需要其他请求头参数的特殊封装
 // 单独处理一些特殊请求头的请求 通常是post请求需要携带一些奇怪的请求头参数
 const http = {
   // 名称要和api接口名称一致
@@ -190,7 +190,7 @@ export { http }
 >
 > 作用: 接口文件 单独控制 方便修改 降低耦合度 便于维护
 >
-> <font color =#ff3040>注意: 分为 携带token请求头的通用接口 和 携带token还需要其他请求头参数的特殊接口接口</font>
+> <font color =#ff3040>注意: 分为 携带token请求头的通用接口 和 携带token还需要其他请求头参数的特殊接口</font>
 
 ```js
 //! 这里是只携带token请求头通用接口
