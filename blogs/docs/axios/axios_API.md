@@ -1,6 +1,6 @@
 ---
 title: axios封装通用的api接口方法
-date: 2022-01-12
+date: 2022-01-13
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-o37o8l.jpg
 tags:
  - Vue
@@ -21,8 +21,9 @@ sticky: 2
 安装axios `npm i axios -S`
 
 * 路由配置分为三个阶段
-  * 配置axios通用接口文件 (一级接口组件)
-    * 通常配置 `axios.create({})` 分支设置url基础地址 方便操控
+
+  1. 配置通用axios封装组件
+     * 通常配置 `axios.create({})` 分支设置url基础地址 方便操控
 
   ```js
   // 导入 axios组件
@@ -33,13 +34,14 @@ sticky: 2
   const instance = axios.create({
     // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
     baseURL: baseURL,
-    // 超时,如果超过10秒，后端没有返回数据，那么就报错
+    // 设置响应超时 建议不设置 或者设置时间较长 会影响一些较大的文件下载
     // timeout: 10000
   })
   ```
 
-  * 调用接口时候 调用一级接口组件 单独设置接口文件 (二级接口组件)
-  * 在需要调用接口的Vue文件引入二级接口组件 (导入二级接口)
+  2. 调用接口时候 调用一级接口组件 单独设置api接口组件
+
+  3. 在需要调用接口的Vue文件 导入api接口
 
 > <big>一、</big>utils文件夹 一级路由 axios接口模块设置  `utils文件夹里面创建 request.js`
 
@@ -49,15 +51,31 @@ sticky: 2
 - 调用axios方法 设置基本url路径 设置参数 配置数据
   - 设置属性:  method(请求方式) , url(地址) , data(请求体) , params(请求方式参数) , headers(请求头)
     -  data(请求体) , params(请求方式参数) 可以通过es6的动态属性名(键) 来实现动态切换
-  -  接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接
+  -  <font color =#ff3040>注意: 接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接 会直接调用</font> 
 - return 返回结果
-- 设置axios的 请求拦截器 和 响应拦截器
+- 设置axios的 请求拦截器`request` 和 响应拦截器`response`
+- `transformRequest`是axios请求处理(比拦截器还早) 通常会把数据转换为json格式 并且在headers(请求头)中做一些处理
+- `paramsSerializer`是处理你向后端传递的数据 是一个负责向后端传递数据时序列化的函数 通常搭配qs把前端传递的数组序列化
+
+```js
+  // 导入qs序列化
+  import qs from 'qs'
+  //! qs序列化的用法
+   qs.stringify({ids: [1, 2, 3]}, { indices: false })
+  // 转换形式： ids=1 ids=2 id=3
+   qs.stringify({ids: [1, 2, 3]}, {arrayFormat: 'indices'})
+  // 转换形式： ids[0]=1 ids[1]=2 ids[2]=3
+   qs.stringify({ids: [1, 2, 3]}, {arrayFormat: 'brackets'})
+  // 转换形式：ids[]=1 ids[]=2 ids[]=3
+   qs.stringify({ids: [1, 2, 3]}, {arrayFormat: 'repeat'})
+  // 转换形式： ids=1 ids=2 id=3
+```
 
 > 目标: 封装通用的接口调用模块
 >
 > 作用: 配置通用的`axios`接口模块 方便统一修改 统一配置 统一更换 减低耦合
 >
-> <font color =#ff3040>注意: 分为 携带token请求头的通用封装 和 携带token还需要其他请求头参数的特殊封装</font>
+> <font color =#ff3040>注意: 封装分为 携带token请求头的通用封装 和 携带token还需要其他请求头参数的特殊封装</font>
 
 ```js
 // 封装通用的接口调用模块
@@ -69,16 +87,19 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 // 导入Vue router 实例化
 import router from '@/router'
+// 导入序列化函数
+import qs from 'qs'
 
 // 请求的基准路径 常量保存并且支持导出
 export const baseURL = ''
+// 更规范的调用 通过process.env调用
 // const baseURL = process.env.VUE_APP_BASE_API
 
 // 创建独立的axios的实例
 const instance = axios.create({
   // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
   baseURL: baseURL
-  // 设置响应超时
+  // 设置响应超时 建议不设置 或者设置时间较长 会影响一些较大的文件下载
   // timeout: 5000
 })
 
@@ -133,49 +154,74 @@ export default (options) => {
     // 动态判断请求的方式(es6规则: 对象的键可以是动态的变量)
     // 如果不是data请求 那么就赋值params请求
     // api掉接口的时候 传递数据的属性名(键) 全部为data:{} (不管是那种方式)
-    [options.method.toUpperCase() === 'GET' ? 'params' : 'data']: options.data, // toUpperCase转换为大写(请求是小写也可以)
-   // 设置请求头(一般用于跨域问题 和 传输token)
-    // headers: options.headers // 不建议覆盖之前的headers 会出现问题 建议单独处理具备其他请求头的接口
+    [options.method.toUpperCase() === 'GET' ? 'params' : 'data']: options.data, // toUpperCase转换为大写(请求为小写也可)
+    // 设置请求头(一般用于跨域问题 和 传输token)
+   // headers: options.headers // 不建议覆盖之前的headers 会出现问题 建议单独处理具备其他请求头的接口
   })
 }
 
 //! 这里是不光携带token还需要其他请求头参数的特殊封装
-// 单独处理一些特殊请求头的请求 通常是post请求需要携带一些奇怪的请求头参数
+// 名称要和api接口名称一致
 const http = {
-  // 名称要和api接口名称一致
-  demoToken (url) {
-    return instance.post(url, {
+    
+  //! 这里是特殊的post请求 通常需要携带参数
+  // transformRequest是axios请求处理(拦截器还早) 允许在向服务器发送前，修改请求数据
+  // 这里是只能提交json数据 需要在请求头数据类型中设置类型为json
+  postToken (url, params) {
+    return instance.post(url, params, {
+      transformRequest: [(params) => {
+        return JSON.stringify(params)
+      }],
       headers: {
         'Content-Type': 'application/json'
       }
     })
+  },
+  //! 这里是post请求不需要携带参数
+  // 如果不需要参数 需要把参数2设置为null
+  postNo (url) {
+    return instance.post(url, null, {
+      transformRequest: [(params) => {
+        return JSON.stringify(params)
+      }],
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  },
+  //! 这里是获取arraybuffer类型的二进制数据 适用于验证码图片的获取 需要指定responseType类型
+  // 他没有没有参数 在post请求时候参数需要写null 因为其不携带参数 否则无法转换
+  getImage (url) {
+    return instance.post(url, null, {
+      responseType: 'arraybuffer'
+    })
+  },
+
+  //! 这里是特殊的get请求 通常特殊处理的get请求需要携带参数 比如通过qs来实现序列化的函数
+  // paramsSerializer是处理你向后端传递的数据 是一个负责向后端传递数据时序列化的函数
+  qsToken (url, params) {
+    return instance.get(url, {
+      params: params,
+      paramsSerializer: (params) => {
+        // 通过qs处理序列化函数
+        return qs.stringify(params, { arrayFormat: 'repeat' })
+      }
+    })
   }
+
+  //! qs序列化的用法
+  // qs.stringify({ids: [1, 2, 3]}, { indices: false })
+  // 转换形式： ids=1 ids=2 id=3
+  // qs.stringify({ids: [1, 2, 3]}, {arrayFormat: 'indices'})
+  // 转换形式： ids[0]=1 ids[1]=2 ids[2]=3
+  // qs.stringify({ids: [1, 2, 3]}, {arrayFormat: 'brackets'})
+  // 转换形式：ids[]=1 ids[]=2 ids[]=3
+  // qs.stringify({ids: [1, 2, 3]}, {arrayFormat: 'repeat'})
+  // 转换形式： ids=1 ids=2 id=3
 }
+
 // 命名导出
 export { http }
-
-
-// --------------------------------- api接口上传数据模拟
-// 所有的请求方式 上传数据的对象都设置为data:{} (在通用的请求方法中已配置)
-// -------------- post请求方式
-// return request({
-//   method: 'post',
-//   url: '#',
-//   data: {
-//     uname: 'lisi',
-//     pwd: '123'
-//   }
-// })
-// -------------- get 请求方式
-// return request({
-//   method: 'get',
-//   url: '#',
-//   data: {
-//     uname: 'lisi',
-//     pwd: '123'
-//   }
-// })
-
 ```
 
 > <big>二、</big>api文件夹 二级路由 指定接口设置示例(登录二级接口) `api文件夹创建 二级路由模块(接口)`
@@ -183,7 +229,7 @@ export { http }
 ![image-20210604084917295](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/rVzQ9DwZpHEboj6.png)
 
 * 设置命名导出(不是默认导出) 按需配置参数 
-* 接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接
+* <font color =#ff3040>注意: 接口的url地址也是 http和https标准协议时候 那么axios基准路径不会拼接 会直接调用</font> 
 * return返回数据
 
 > 目标: 封装单独的登录接口文件 
@@ -197,7 +243,9 @@ export { http }
 import request from '@/utils/request'
 //! 这里是不光携带token还需要其他参数的特殊接口
 import { http } from '@/utils/request'
-// 登录接口 携带token请求头通用接口(登录其实不需要 只是展示案例)
+
+//! 通用接口请求示例
+// get请求
 export function login (data) {
   return request({
     method: 'get',
@@ -205,70 +253,80 @@ export function login (data) {
     data
   })
 }
-// 测试接口 携带token还需要其他请求头参数的特殊接口
-export async function demoToken () {
-  return await http.demoToken('public/index.php/custequip/authrule/index/index')
+// post请求
+export function loginOut (data) {
+  return request({
+    method: 'post',
+    url: 'public/index.php/login/login/todata',
+    data
+  })
+}
+
+//! 特殊接口的api封装 必须和一次封装名称一致
+// 携带参数的post请求 
+export async function postToken (parm) {
+  return await http.postToken('public/index.php/custequip/authrule/index/index', parm)
+}
+// 不需要携带参数的post请求
+export async function postNo () {
+  return await http.postNo('public/index.php/custequip/authrule/index/index')
+}
+
+// 不需要携带参数arraybuffer类型二进制数据的post请求
+export async function getImage () {
+  return await http.getImage('public/index.php/custequip/authrule/index/index')
+}
+// 序列化传参的get接口
+export async function qsToken (parm) {
+  return await http.qsToken('public/index.php/custequip/authrule/index/index', parm)
 }
 
 ```
 
-> <big>三、</big>Vue文件引入配置api接口(登录组件)
+> <big>三、</big>Vue文件引入二次封装的api接口
 
-* 命名方法 导入登录组件  (导入二级接口)
-* try{}catch{}方法 配合async 获取数据 正确登入 错误提示用户
-  * try{}是获取正确数据(用于成功登录) catch{}是获取错误信息(用户提示用户)
-    * 类似于 if else方法
-
-> 目标: 导入命名导出的 二级路由接口 获取数据 
->
-> 作用: 判断用户是否登录成功 登录成功转到相应界面 登录失败提示用户
+* 在页面调用二次封装的api接口
 
 ```js
-// 1. 传入 login axios 组件 login是登录验证axios命名方法名称
-import { login } from '../api/login'
-export default {
-  // 2. 设置 用户输入数据的储存
-  data () {
-    return {
-      mobile: '',
-      code: ''
+import { postToken, postNo, getImage, qsToken } from '@/api/user'
+
+// 通用接口请求我们就不操作了
+
+// 特殊接口的api封装请求
+// 携带参数的post请求
+    async demo () {
+      const res = await postToken({
+        // 传递参数
+        limt: 1
+      })
     }
-  },
-  methods: {
-    // 3. 创建数据验证方法
-    async getLogin () {
-      // 4. 用try catch 来判断 数据是否接收成功 提示用户
-      try { // 给服务器发送信息
-        // 5. 传入用户输入的数值 login是封装的axios登录验证方法名称
-        const ret = await login(this.mobile, this.code)
-        // 6. 进行判断 获取数据 如果获取成功 保存后端返回的 token值 不成功提示用户
-        if (ret.status === 201) {
-          // 7. 再进行判断 如果用户获取到后端的token 再让其登录
-          if (ret.data.data.token && ret.data.data.refresh_token) {
-            // 8. 保存token值(服务器缓存)
-            // sessionStorage.setItem('保存名称', JSON.stringify(获取的token路径)); 保存token到服务器缓存
-            // JSON.stringif()把获取的token转换成字符串
-            sessionStorage.setItem('mytoken', JSON.stringify(ret.data.data))
-            this.$router.push('/home')
-          }
-        }
-      } catch (error) {
-        // 登录失败时候会进入 catch 参数是错误信息
-        console.log(error)
-        // 9. 提示用户登录失败 $toast是Vant提供的模板
-        this.$toast('登录失败')
-      }
+// 不需要携带参数的post请求
+    async demo () {
+      const res = await postNo({
+      })
+      console.log(res)
     }
-  }
-}
+// 不需要携带参数的post的arraybuffer类型的二进制数据
+    async demo () {
+      const res = await getImage({
+      })
+      console.log(res)
+    }
+// 序列化传参的get接口
+    async demo () {
+      const res = await qsToken({
+        limt: [1, 2, 3] // 序列化后 limt: 1 limt: 2 limt: 3
+      })
+      console.log(res)
+    }
 ```
 
 ## 关于基准路径的配置
 
 > 注意：`.env.development`和`.env.production` 文件用于配置开发环境和生产环境的基准url地址
 
-- .env.development 开发环境
-- .env.production 生产环境
+- .env.development 开发环境 (测试)
+- .env.production 生产环境 (正式)
 - `#` 是注释的意思 
 
 > .env.development 开发环境 配置文件 
@@ -280,8 +338,8 @@ export default {
 ENV = 'development'
 
 # base api
-# VUE_APP_BASE_API = 'http://ihrm-java.itheima.net/api/'
-VUE_APP_BASE_API = '/api/'
+VUE_APP_BASE_API = 'https://miningrenewapi-qa.lshmnc.com.cn/'
+VUE_APP_BASE_API = 'http://localhost:8089/'
 
 ```
 
