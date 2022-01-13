@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>less样式预处理.md | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?61498f37b83812e7b85952d5feaaab47";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.a64b4f9d.css" as="style"><link rel="preload" href="/assets/js/app.d452100b.js" as="script"><link rel="preload" href="/assets/js/5.208c645a.js" as="script"><link rel="preload" href="/assets/js/1.28c8b51a.js" as="script"><link rel="preload" href="/assets/js/83.6a8f5fea.js" as="script"><link rel="prefetch" href="/assets/js/10.d3fc6e0e.js"><link rel="prefetch" href="/assets/js/11.2e80a6c4.js"><link rel="prefetch" href="/assets/js/12.c16c8515.js"><link rel="prefetch" href="/assets/js/13.c81b214c.js"><link rel="prefetch" href="/assets/js/14.72055e95.js"><link rel="prefetch" href="/assets/js/15.10a0648c.js"><link rel="prefetch" href="/assets/js/16.5ad76533.js"><link rel="prefetch" href="/assets/js/17.d04fda60.js"><link rel="prefetch" href="/assets/js/18.620bf15b.js"><link rel="prefetch" href="/assets/js/19.ce91c7bd.js"><link rel="prefetch" href="/assets/js/20.993ec9ab.js"><link rel="prefetch" href="/assets/js/21.bad982e1.js"><link rel="prefetch" href="/assets/js/22.21596c80.js"><link rel="prefetch" href="/assets/js/23.ccb814da.js"><link rel="prefetch" href="/assets/js/24.3946eddd.js"><link rel="prefetch" href="/assets/js/25.8b6358ad.js"><link rel="prefetch" href="/assets/js/26.ab40f0e9.js"><link rel="prefetch" href="/assets/js/27.f46f98ca.js"><link rel="prefetch" href="/assets/js/28.7abbd820.js"><link rel="prefetch" href="/assets/js/29.32f6e094.js"><link rel="prefetch" href="/assets/js/3.f0dba089.js"><link rel="prefetch" href="/assets/js/30.77449506.js"><link rel="prefetch" href="/assets/js/31.00dfe0e5.js"><link rel="prefetch" href="/assets/js/32.cc146282.js"><link rel="prefetch" href="/assets/js/33.0880afb8.js"><link rel="prefetch" href="/assets/js/34.283b2dce.js"><link rel="prefetch" href="/assets/js/35.87bf9c07.js"><link rel="prefetch" href="/assets/js/36.d42ab7f7.js"><link rel="prefetch" href="/assets/js/37.6764a56d.js"><link rel="prefetch" href="/assets/js/38.98f7d96f.js"><link rel="prefetch" href="/assets/js/39.b3e1b1b0.js"><link rel="prefetch" href="/assets/js/4.841aa095.js"><link rel="prefetch" href="/assets/js/40.b2b046df.js"><link rel="prefetch" href="/assets/js/41.e91cb1a7.js"><link rel="prefetch" href="/assets/js/42.841ce32d.js"><link rel="prefetch" href="/assets/js/43.c118a312.js"><link rel="prefetch" href="/assets/js/44.b44780e0.js"><link rel="prefetch" href="/assets/js/45.dac68406.js"><link rel="prefetch" href="/assets/js/46.c18290d5.js"><link rel="prefetch" href="/assets/js/47.4894d975.js"><link rel="prefetch" href="/assets/js/48.5e86b91c.js"><link rel="prefetch" href="/assets/js/49.a24695db.js"><link rel="prefetch" href="/assets/js/50.838bf127.js"><link rel="prefetch" href="/assets/js/51.5af1ace1.js"><link rel="prefetch" href="/assets/js/52.2aee986e.js"><link rel="prefetch" href="/assets/js/53.f11b9ec4.js"><link rel="prefetch" href="/assets/js/54.c4d94047.js"><link rel="prefetch" href="/assets/js/55.b47aaec4.js"><link rel="prefetch" href="/assets/js/56.e8c717cf.js"><link rel="prefetch" href="/assets/js/57.c7e97613.js"><link rel="prefetch" href="/assets/js/58.76e0590a.js"><link rel="prefetch" href="/assets/js/59.46cee69e.js"><link rel="prefetch" href="/assets/js/6.8ac34170.js"><link rel="prefetch" href="/assets/js/60.8773299f.js"><link rel="prefetch" href="/assets/js/61.f6ca7192.js"><link rel="prefetch" href="/assets/js/62.667a534b.js"><link rel="prefetch" href="/assets/js/63.165405ae.js"><link rel="prefetch" href="/assets/js/64.c0ec5228.js"><link rel="prefetch" href="/assets/js/65.74fe4f34.js"><link rel="prefetch" href="/assets/js/66.0cab5c79.js"><link rel="prefetch" href="/assets/js/67.3fc7bcc6.js"><link rel="prefetch" href="/assets/js/68.6513991b.js"><link rel="prefetch" href="/assets/js/69.b89e8666.js"><link rel="prefetch" href="/assets/js/7.8f635830.js"><link rel="prefetch" href="/assets/js/70.35d16c40.js"><link rel="prefetch" href="/assets/js/71.1613afa1.js"><link rel="prefetch" href="/assets/js/72.dc5b9476.js"><link rel="prefetch" href="/assets/js/73.7151517f.js"><link rel="prefetch" href="/assets/js/74.aef8794b.js"><link rel="prefetch" href="/assets/js/75.73a85797.js"><link rel="prefetch" href="/assets/js/76.ee213126.js"><link rel="prefetch" href="/assets/js/77.28647930.js"><link rel="prefetch" href="/assets/js/78.a9cebda8.js"><link rel="prefetch" href="/assets/js/79.32970198.js"><link rel="prefetch" href="/assets/js/8.a7083d17.js"><link rel="prefetch" href="/assets/js/80.30aa3916.js"><link rel="prefetch" href="/assets/js/81.eb5a6728.js"><link rel="prefetch" href="/assets/js/82.f5c3f187.js"><link rel="prefetch" href="/assets/js/84.ae75459c.js"><link rel="prefetch" href="/assets/js/85.b2e662bd.js"><link rel="prefetch" href="/assets/js/86.ae4b12ab.js"><link rel="prefetch" href="/assets/js/87.1fe8a3b4.js"><link rel="prefetch" href="/assets/js/9.af116de0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.a64b4f9d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-71074b5b><div data-v-71074b5b><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-71074b5b data-v-71074b5b><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-5cb9a64e data-v-71074b5b data-v-71074b5b><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
+            
+          <span data-v-5cb9a64e>2021  - </span>
+          2022
+        </a></span></div></div> <div class="hide" data-v-71074b5b><div data-v-71074b5b><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_4.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-71074b5b><header class="navbar" data-v-71074b5b><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JS 方法合集/" class="nav-link"><i class="iconfont undefined"></i>
+  JS 方法合集
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue OV系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/H5Video/" class="nav-link"><i class="iconfont undefined"></i>
+  H5Video
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂项/" class="nav-link"><i class="iconfont undefined"></i>
+  杂项
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-71074b5b></div> <aside class="sidebar" data-v-71074b5b><div class="personal-info-wrapper" data-v-03833281 data-v-71074b5b><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>73</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>27</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JS 方法合集/" class="nav-link"><i class="iconfont undefined"></i>
+  JS 方法合集
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue OV系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/H5Video/" class="nav-link"><i class="iconfont undefined"></i>
+  H5Video
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂项/" class="nav-link"><i class="iconfont undefined"></i>
+  杂项
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Other</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/other/1.1_what_m3u8.html" class="sidebar-link">m3u8的学习资料(博客版)</a></li><li><a href="/blogs/docs/other/3.1_shence_maidian.html" class="sidebar-link">神策埋点安装记录</a></li><li><a href="/blogs/docs/other/4_http_and_websocket.html" class="sidebar-link">websocket 和 http 协议</a></li><li><a href="/blogs/docs/other/6_less.html" aria-current="page" class="active sidebar-link">less样式预处理.md</a></li><li><a href="/blogs/docs/other/9_qq_login.html" class="sidebar-link">Vue脚手架导入qq登录方法</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-5cb9a64e data-v-71074b5b><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>less样式预处理.md</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
+            
+          <span data-v-5cb9a64e>2021  - </span>
+          2022
+        </a></span></div></div></div> <div data-v-71074b5b><main class="page"><div class="page-title" style="display:none;"><h1 class="title">less样式预处理.md</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2021-08-07</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/other/6_less.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>JavaScript</span><span class="tag-item" data-v-0efa1f05>Vue</span><span class="tag-item" data-v-0efa1f05>less</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>css扩展语言之一 less<br></p></div> <h2 id="less-样式预处理介绍"><a href="#less-样式预处理介绍" class="header-anchor">#</a> less 样式预处理介绍</h2> <p><a href="https://less.bootcss.com/" target="_blank" rel="noopener noreferrer">less样式预处理的官网<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <ul><li>less是类似于scss的css扩展语言之一</li> <li>sass和less大部分规则一致</li> <li>less支持写法嵌套</li> <li>支持变量: less是<code>@</code> sass使用的是<code>$</code></li> <li>sass混入(导出)全局样式 <code>@mixin</code>  接收混入(导入)全局样式是 <code>@include</code></li></ul> <h2 id="less深度选择器-deep-vue2"><a href="#less深度选择器-deep-vue2" class="header-anchor">#</a> less深度选择器 <code>/deep/</code> (Vue2)</h2> <ul><li>sass中 deep方法是 <code>::v-deep</code> 而 less里面的方法是 <code>/deep/</code></li> <li>通常用覆盖组件(或者插件) 自带的样式 进行自定义样式设置</li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/yXEb8o9jCKWNxma.png" alt="image-20210722150940103"></p> <h2 id="less-自定义变量"><a href="#less-自定义变量" class="header-anchor">#</a> less 自定义变量 <code>@</code></h2> <ul><li>less 自定义变量是 <code>@</code></li> <li>sass的定义变量是 <code>$</code></li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/Gz1fBLJ2qMpeY6R.png" alt="image-20210721084039748"></p> <h4 id="导入less的自定义变量"><a href="#导入less的自定义变量" class="header-anchor">#</a> 导入less的自定义变量</h4> <blockquote><p>手动引入使用其中的变量</p></blockquote> <ul><li>less文件 导入到Vue中 如果用到 <code>@</code> 需要在前面添加 <code>~</code> <ul><li>如果你不用<code>@</code> 直接 <code>../</code> 就不需要 <code>~</code></li></ul></li></ul> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token comment">&lt;!-- 一级路由出口 --&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-view</span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>test<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>我是测试文字<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>less<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+// 引入我们定义了less变化的文件
+// ~线不能丢
+<span class="token atrule"><span class="token rule">@import</span> <span class="token string">&quot;~@/styles/variables.less&quot;</span><span class="token punctuation">;</span></span>
+<span class="token selector">.test</span> <span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token atrule"><span class="token rule">@xtxColor</span><span class="token punctuation">;</span></span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h4 id="自动化引入less变量"><a href="#自动化引入less变量" class="header-anchor">#</a> 自动化引入less变量</h4> <blockquote><p>解决方案：使用vue-cli的style-resoures-loader插件来完成自动注入到每个vue组件中style标签中</p></blockquote> <ul><li>通过安装第三方插件 实现无需引入 直接在Vue组件中调用less变量 就能使用less变量</li></ul> <p>(1) 在当前项目下执行一下命令<code>vue add style-resources-loader</code>，添加一个vue-cli的插件</p> <ul><li>这是脚手架插件 需要在生成的 <code>vue.config.js</code>文件中添加配置</li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8gspqruow10j30z50gb41t.jpg" alt="01.png"></p> <p>(2) 安装完毕后会在<code>vue.config.js</code>中自动添加配置，并且注入 如下：</p> <ul><li><code>vue.config.js</code>文件中添加配置</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// node.js导入路径的实例化方法</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  pluginOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string">'style-resources-loader'</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      preProcessor<span class="token operator">:</span> <span class="token string">'less'</span><span class="token punctuation">,</span>
+      patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token comment">// 配置哪些文件需要自动导入</span>
+        <span class="token comment">// 导入less自定义变量的less文件</span>
+        path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./src/styles/variables.less'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>(3) <font color="#ff3040">配置后需要重启 </font></p> <p>总结：</p> <ol><li>通过vue脚手架的插件，可以辅助自动化导入less文件</li> <li>后续其他组件在使用less变量时，就不再需要手动导入了</li></ol> <h2 id="less的函数样式方法-less混入"><a href="#less的函数样式方法-less混入" class="header-anchor">#</a> less的函数样式方法(less混入)</h2> <ul><li>less支持css函数方法 相当于js代码中的函数方法 这样写的话 方便重用</li> <li>less默认函数方法需要导入 但是可以通过Vue插件 实现自动导入 无需导入 直接使用即可(需要重启)</li></ul> <blockquote><p>设置less样式函数文件</p></blockquote> <ul><li>通常我们会把less函数样式单独封装在一个less文件中</li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/cyAj4YfBFe27LC1.png" alt="image-20210722152452049"></p> <ul><li>这时候 我们只需要<code>@import</code>导入即可使用</li></ul> <h3 id="自动化引入less函数样式方法-less混入"><a href="#自动化引入less函数样式方法-less混入" class="header-anchor">#</a> 自动化引入less函数样式方法(less混入)</h3> <ul><li>如果安装了 vue-cli的style-resoures-loader插件(详见 less自定义变量)
+<ul><li>直接配置 less函数样式方法的less文件即可</li> <li><font color="#ff3040">配置后需要重启 </font></li></ul></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// node.js导入路径的实例化方法</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  pluginOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string">'style-resources-loader'</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      preProcessor<span class="token operator">:</span> <span class="token string">'less'</span><span class="token punctuation">,</span>
+      patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token comment">// 配置哪些文件需要自动导入</span>
+        <span class="token comment">// 导入less函数样式方法(less混入)的less文件</span>
+        path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./src/styles/mixins.less'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="less里面的选择器"><a href="#less里面的选择器" class="header-anchor">#</a> less里面的选择器 <code>&amp;</code></h2> <ul><li><p><code>&amp;</code> 在less中有两种意思</p> <ul><li><p>交集选择器</p> <ul><li>交集选择器是 两个类名同时存在时候 才能触发该样式</li></ul> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.classone.classtwo</span> <span class="token punctuation">{</span><span class="token property">background</span><span class="token punctuation">:</span>#090<span class="token punctuation">}</span> <span class="token comment">/** 当两个类名同时存在时候 才能触发该样式 **/</span>
+</code></pre></div></li> <li><p>后代选择器</p> <ul><li>后代选择器是元素的后代 无论子元素还是孙元素 都会变为同一个设置样式</li></ul> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">ul em a</span> <span class="token punctuation">{</span><span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span><span class="token punctuation">}</span>  <span class="token comment">/** 这里ul里面的 em a 标签 都会变为红色  **/</span>
+</code></pre></div></li></ul></li></ul> <h3 id="less-中的-使用方法"><a href="#less-中的-使用方法" class="header-anchor">#</a> less 中的 <code>&amp;</code> 使用方法</h3> <ul><li><code>&amp;</code>交集选择器写法 (<code>&amp;</code>没有空格)</li></ul> <div class="language-css extra-class"><pre class="language-css"><code><span class="token comment">/**
+当两个类名同时存在的时候 触发 background:#090这个样式 
+**/</span>
+<span class="token selector">.classone</span> <span class="token punctuation">{</span>
+ <span class="token selector">background:#000
+  &amp;.classtwo</span> <span class="token punctuation">{</span> 
+  <span class="token property">background</span><span class="token punctuation">:</span>#090
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li><code>&amp;</code>后代选择器 (<code>&amp;</code>有空格)</li></ul> <div class="language-css extra-class"><pre class="language-css"><code><span class="token comment">/**
+ul标签里面的 em 和 a标签 样式全部
+**/</span>
+<span class="token selector">ul</span> <span class="token punctuation">{</span>
+ <span class="token selector">background:#000
+  &amp;. em a</span><span class="token punctuation">{</span> 
+	<span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="less-中的-和"><a href="#less-中的-和" class="header-anchor">#</a> less 中的 <code>~</code>  和 <code>&gt;</code></h2> <ul><li><p><strong>css中<code>~</code>是:</strong></p> <ul><li>为所有相同的父元素中位于 p 元素之后的所有 ul 元素设置背景：</li></ul> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">p~ul</span><span class="token punctuation">{</span>
+　　<span class="token property">background</span><span class="token punctuation">:</span>#ff0000<span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+ &lt;p&gt;快乐生活&lt;/p&gt;
+&lt;ul&gt;
+
+　　&lt;li&gt;生活&lt;/li&gt;
+　　&lt;li&gt;生活&lt;/li&gt;
+　　&lt;li&gt;生活&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div></li> <li><p><strong>css中<code>&gt;</code>是:</strong></p> <ul><li>css3特有的选择器，A&gt;B 表示选择A元素的所有子B元素。</li> <li>与 A B的区别在于，A B 选择所有后代元素，而A&gt;B只选择一代。</li></ul></li></ul> <h2 id="vue3的深度选择器-deep-vue3"><a href="#vue3的深度选择器-deep-vue3" class="header-anchor">#</a> Vue3的深度选择器 <code>:deep()</code> (Vue3)</h2> <ul><li>深度选择器通常作用于修改封装好组件的样式 覆盖组件之前的样式</li> <li>Vue3的深度选择器 <code>:deep(类名)</code></li></ul> <div class="language-js extra-class"><pre class="language-js"><code>  <span class="token comment">// Vue3中深度选择器使用规则 :deep(类名)</span>
+   <span class="token operator">:</span><span class="token function">deep</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">.</span>xtx<span class="token operator">-</span>carousel</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    height<span class="token operator">:</span> <span class="token number">380</span>px<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit" style="display:none;"><!----> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">2021/8/16 上午12:00:24</span></div></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.d452100b.js" defer></script><script src="/assets/js/5.208c645a.js" defer></script><script src="/assets/js/1.28c8b51a.js" defer></script><script src="/assets/js/83.6a8f5fea.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>2. OV系统 登录模块 | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?61498f37b83812e7b85952d5feaaab47";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.a64b4f9d.css" as="style"><link rel="preload" href="/assets/js/app.d452100b.js" as="script"><link rel="preload" href="/assets/js/5.208c645a.js" as="script"><link rel="preload" href="/assets/js/1.28c8b51a.js" as="script"><link rel="preload" href="/assets/js/52.2aee986e.js" as="script"><link rel="prefetch" href="/assets/js/10.d3fc6e0e.js"><link rel="prefetch" href="/assets/js/11.2e80a6c4.js"><link rel="prefetch" href="/assets/js/12.c16c8515.js"><link rel="prefetch" href="/assets/js/13.c81b214c.js"><link rel="prefetch" href="/assets/js/14.72055e95.js"><link rel="prefetch" href="/assets/js/15.10a0648c.js"><link rel="prefetch" href="/assets/js/16.5ad76533.js"><link rel="prefetch" href="/assets/js/17.d04fda60.js"><link rel="prefetch" href="/assets/js/18.620bf15b.js"><link rel="prefetch" href="/assets/js/19.ce91c7bd.js"><link rel="prefetch" href="/assets/js/20.993ec9ab.js"><link rel="prefetch" href="/assets/js/21.bad982e1.js"><link rel="prefetch" href="/assets/js/22.21596c80.js"><link rel="prefetch" href="/assets/js/23.ccb814da.js"><link rel="prefetch" href="/assets/js/24.3946eddd.js"><link rel="prefetch" href="/assets/js/25.8b6358ad.js"><link rel="prefetch" href="/assets/js/26.ab40f0e9.js"><link rel="prefetch" href="/assets/js/27.f46f98ca.js"><link rel="prefetch" href="/assets/js/28.7abbd820.js"><link rel="prefetch" href="/assets/js/29.32f6e094.js"><link rel="prefetch" href="/assets/js/3.f0dba089.js"><link rel="prefetch" href="/assets/js/30.77449506.js"><link rel="prefetch" href="/assets/js/31.00dfe0e5.js"><link rel="prefetch" href="/assets/js/32.cc146282.js"><link rel="prefetch" href="/assets/js/33.0880afb8.js"><link rel="prefetch" href="/assets/js/34.283b2dce.js"><link rel="prefetch" href="/assets/js/35.87bf9c07.js"><link rel="prefetch" href="/assets/js/36.d42ab7f7.js"><link rel="prefetch" href="/assets/js/37.6764a56d.js"><link rel="prefetch" href="/assets/js/38.98f7d96f.js"><link rel="prefetch" href="/assets/js/39.b3e1b1b0.js"><link rel="prefetch" href="/assets/js/4.841aa095.js"><link rel="prefetch" href="/assets/js/40.b2b046df.js"><link rel="prefetch" href="/assets/js/41.e91cb1a7.js"><link rel="prefetch" href="/assets/js/42.841ce32d.js"><link rel="prefetch" href="/assets/js/43.c118a312.js"><link rel="prefetch" href="/assets/js/44.b44780e0.js"><link rel="prefetch" href="/assets/js/45.dac68406.js"><link rel="prefetch" href="/assets/js/46.c18290d5.js"><link rel="prefetch" href="/assets/js/47.4894d975.js"><link rel="prefetch" href="/assets/js/48.5e86b91c.js"><link rel="prefetch" href="/assets/js/49.a24695db.js"><link rel="prefetch" href="/assets/js/50.838bf127.js"><link rel="prefetch" href="/assets/js/51.5af1ace1.js"><link rel="prefetch" href="/assets/js/53.f11b9ec4.js"><link rel="prefetch" href="/assets/js/54.c4d94047.js"><link rel="prefetch" href="/assets/js/55.b47aaec4.js"><link rel="prefetch" href="/assets/js/56.e8c717cf.js"><link rel="prefetch" href="/assets/js/57.c7e97613.js"><link rel="prefetch" href="/assets/js/58.76e0590a.js"><link rel="prefetch" href="/assets/js/59.46cee69e.js"><link rel="prefetch" href="/assets/js/6.8ac34170.js"><link rel="prefetch" href="/assets/js/60.8773299f.js"><link rel="prefetch" href="/assets/js/61.f6ca7192.js"><link rel="prefetch" href="/assets/js/62.667a534b.js"><link rel="prefetch" href="/assets/js/63.165405ae.js"><link rel="prefetch" href="/assets/js/64.c0ec5228.js"><link rel="prefetch" href="/assets/js/65.74fe4f34.js"><link rel="prefetch" href="/assets/js/66.0cab5c79.js"><link rel="prefetch" href="/assets/js/67.3fc7bcc6.js"><link rel="prefetch" href="/assets/js/68.6513991b.js"><link rel="prefetch" href="/assets/js/69.b89e8666.js"><link rel="prefetch" href="/assets/js/7.8f635830.js"><link rel="prefetch" href="/assets/js/70.35d16c40.js"><link rel="prefetch" href="/assets/js/71.1613afa1.js"><link rel="prefetch" href="/assets/js/72.dc5b9476.js"><link rel="prefetch" href="/assets/js/73.7151517f.js"><link rel="prefetch" href="/assets/js/74.aef8794b.js"><link rel="prefetch" href="/assets/js/75.73a85797.js"><link rel="prefetch" href="/assets/js/76.ee213126.js"><link rel="prefetch" href="/assets/js/77.28647930.js"><link rel="prefetch" href="/assets/js/78.a9cebda8.js"><link rel="prefetch" href="/assets/js/79.32970198.js"><link rel="prefetch" href="/assets/js/8.a7083d17.js"><link rel="prefetch" href="/assets/js/80.30aa3916.js"><link rel="prefetch" href="/assets/js/81.eb5a6728.js"><link rel="prefetch" href="/assets/js/82.f5c3f187.js"><link rel="prefetch" href="/assets/js/83.6a8f5fea.js"><link rel="prefetch" href="/assets/js/84.ae75459c.js"><link rel="prefetch" href="/assets/js/85.b2e662bd.js"><link rel="prefetch" href="/assets/js/86.ae4b12ab.js"><link rel="prefetch" href="/assets/js/87.1fe8a3b4.js"><link rel="prefetch" href="/assets/js/9.af116de0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.a64b4f9d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-71074b5b><div data-v-71074b5b><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-71074b5b data-v-71074b5b><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-5cb9a64e data-v-71074b5b data-v-71074b5b><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
+            
+          <span data-v-5cb9a64e>2021  - </span>
+          2022
+        </a></span></div></div> <div class="hide" data-v-71074b5b><div data-v-71074b5b><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_4.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-71074b5b><header class="navbar" data-v-71074b5b><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JS 方法合集/" class="nav-link"><i class="iconfont undefined"></i>
+  JS 方法合集
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue OV系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/H5Video/" class="nav-link"><i class="iconfont undefined"></i>
+  H5Video
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂项/" class="nav-link"><i class="iconfont undefined"></i>
+  杂项
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-71074b5b></div> <aside class="sidebar" data-v-71074b5b><div class="personal-info-wrapper" data-v-03833281 data-v-71074b5b><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>73</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>27</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JS 方法合集/" class="nav-link"><i class="iconfont undefined"></i>
+  JS 方法合集
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue OV系统/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue OV系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/H5Video/" class="nav-link"><i class="iconfont undefined"></i>
+  H5Video
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂项/" class="nav-link"><i class="iconfont undefined"></i>
+  杂项
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Vue Element OV</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/Vue_element_OV/1_chushi.html" class="sidebar-link">1. OV系统 初始化</a></li><li><a href="/blogs/docs/Vue_element_OV/2_login.html" aria-current="page" class="active sidebar-link">2. OV系统 登录模块</a></li><li><a href="/blogs/docs/Vue_element_OV/3_Home.html" class="sidebar-link">3. OV系统 主页布局 用户信息获取</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-5cb9a64e data-v-71074b5b><h3 class="title" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e>2. OV系统 登录模块</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><input type="password" value="" data-v-5cb9a64e> <span data-v-5cb9a64e>Konck! Knock!</span> <button data-v-5cb9a64e>OK</button></label> <div class="footer" style="display:none;" data-v-5cb9a64e data-v-5cb9a64e><span data-v-5cb9a64e><i class="iconfont reco-theme" data-v-5cb9a64e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-5cb9a64e>vuePress-theme-reco</a></span> <span data-v-5cb9a64e><i class="iconfont reco-copyright" data-v-5cb9a64e></i> <a data-v-5cb9a64e><span data-v-5cb9a64e>LKaiLi</span>
+            
+          <span data-v-5cb9a64e>2021  - </span>
+          2022
+        </a></span></div></div></div> <div data-v-71074b5b><main class="page"><div class="page-title" style="display:none;"><h1 class="title">2. OV系统 登录模块</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2021-07-02</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/Vue_element_OV/2_login.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>Vue</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>Vue OV系统登录模块设置<br></p></div> <h2 id="登录页面基本布局-login文件夹-index-js"><a href="#登录页面基本布局-login文件夹-index-js" class="header-anchor">#</a> 登录页面基本布局 <code>login文件夹 index.js</code></h2> <blockquote><p>**<code>目标</code>**完成登录页面的基础布局</p></blockquote> <ul><li>基本布局</li></ul> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token comment">&lt;!-- 放置标题图片 @是设置的src目录别名--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>title-container<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>title<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@/assets/common/login-logo.png<span class="token punctuation">&quot;</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><ul><li>样式处理</li></ul> <div class="language-css extra-class"><pre class="language-css"><code><span class="token comment">/* reset element-ui css */</span>
+<span class="token selector">.login-container</span> <span class="token punctuation">{</span>
+  // 设置背景图片
+  <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'~@/assets/common/login.jpg'</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span> 
+  // 将图片位置设置为充满整个屏幕
+  <span class="token property">background-position</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p><strong><code>注意</code></strong>： 如需要在样式表中使用**<code>@</code><strong>别名的时候，需要在@前面加上一个</strong><code>~</code>**符号，否则不识别 <code>../</code>不需要加 <code>~</code></p></blockquote> <ul><li>设置手机号和密码的字体颜色</li></ul> <div class="language-scss extra-class"><pre class="language-scss"><code><span class="token comment">// 修改输入框字体颜色</span>
+<span class="token property"><span class="token variable">$light_gray</span></span><span class="token punctuation">:</span> #407ffe<span class="token punctuation">;</span> 
+</code></pre></div><ul><li>设置输入表单整体背景色</li></ul> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.el-form-item</span> <span class="token punctuation">{</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid <span class="token function">rgba</span><span class="token punctuation">(</span>255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 0.1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 0.9<span class="token punctuation">)</span><span class="token punctuation">;</span> // 输入登录表单的背景色
+  <span class="token property">border-radius</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #454545<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li>设置错误信息的颜色</li></ul> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.el-form-item__error</span> <span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 14px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li>设置登录按钮的样式</li></ul> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.login-btn</span> <span class="token punctuation">{</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #407ffe<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 64px<span class="token punctuation">;</span>
+  <span class="token property">line-height</span><span class="token punctuation">:</span> 32px<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 24px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>需要给el-button 增加一个login-btn的class样式</p></blockquote> <ul><li>修改显示的提示文本和登录文本</li></ul> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tips<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token style-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token style language-css"><span class="token property">margin-right</span><span class="token punctuation">:</span>20px<span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span></span><span class="token punctuation">&gt;</span></span>账号: 13800000002<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span> 密码: 123456<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><blockquote><p>总结：跳转登录页面的布局样式</p></blockquote> <h2 id="登录表单的校验-login文件夹-index-js"><a href="#登录表单的校验-login文件夹-index-js" class="header-anchor">#</a> 登录表单的校验 <code>login文件夹 index.js</code></h2> <p><a href="https://element.eleme.cn/#/zh-CN/component/form#form-biao-dan" target="_blank" rel="noopener noreferrer">饿了么ui自定义表单验证<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> <a href="https://github.com/yiminghe/async-validator" target="_blank" rel="noopener noreferrer">async-validator表单验证<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <blockquote><p>**<code>目标</code>**对登录表单进行规则校验</p> <p>基础模板已经有了基础校验的代码,我们只需在此基础上修改即可</p></blockquote> <ul><li>el-form表单校验的必要条件
+<ul><li>el-form标签上面绑定model和rules熟悉</li> <li>el-form-item标签上绑定prop熟悉，值是要验证的表单的输入域的name</li> <li>el-input上面要双向绑定输入域的name</li> <li>饿了么ui 是自定义表单验证 使用的是 <a href="https://github.com/yiminghe/async-validator" target="_blank" rel="noopener noreferrer">async-validator<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 插件 (设置在 登录按钮上)
+<ul><li>自定义规则单独写在一个文件里 导入到登录页<code>utils文件夹 validate.js</code></li></ul></li></ul></li></ul> <p><img src="https://i.loli.net/2021/06/22/fOyCbNpdsomM9ew.png" alt="image-20210216125719740"></p> <ul><li>登录表单验证 <code>login文件夹 index.js</code> <ul><li>饿了么ui 是自定义表单验证 使用的是 <a href="https://github.com/yiminghe/async-validator" target="_blank" rel="noopener noreferrer">async-validator<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 插件 (设置在 登录按钮上)</li> <li>表单自定义验证 单独导入的表单验证方法  <code>utils文件夹 validate.js</code> <ul><li>手机号必填，并且进行格式校验</li> <li>密码必填，长度6-16位之间</li></ul></li> <li>登录按钮的效验
+<ul><li>如果输入的效验不通过 那么点击登录时候不上传服务器 并且提示用户</li></ul></li></ul></li></ul> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token comment">// 导入表单验证js文件</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> validUsername <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/validate'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token string">'Login'</span><span class="token punctuation">,</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 自定义表单规则 验证用户名 是否正确 rule是规则设置(这里的规则是导入文件) value是输入用户名 callback是返回的提示信息 使用的是 async-validator插件</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">validateUsername</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">rule<span class="token punctuation">,</span> value<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token comment">// 使用导入表单验证的js文件</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">validUsername</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'请输入正确的用户名'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">validatePassword</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">rule<span class="token punctuation">,</span> value<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token comment">// 使用导入表单验证的js文件</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>value<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'密码长度不可以小于六位'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      loginForm<span class="token operator">:</span> <span class="token punctuation">{</span>
+        username<span class="token operator">:</span> <span class="token string">'admin'</span><span class="token punctuation">,</span>
+        password<span class="token operator">:</span> <span class="token string">'111111'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      loginRules<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// required是必填选项 trigger触发条件 validator自定义效验规则 自定义一个验证规则</span>
+        username<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> required<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> trigger<span class="token operator">:</span> <span class="token string">'blur'</span><span class="token punctuation">,</span> validator<span class="token operator">:</span> validateUsername <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        password<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> required<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> trigger<span class="token operator">:</span> <span class="token string">'blur'</span><span class="token punctuation">,</span> validator<span class="token operator">:</span> validatePassword <span class="token punctuation">}</span><span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      loading<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      passwordType<span class="token operator">:</span> <span class="token string">'password'</span><span class="token punctuation">,</span>
+      redirect<span class="token operator">:</span> <span class="token keyword">undefined</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  watch<span class="token operator">:</span> <span class="token punctuation">{</span>
+    $route<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token function-variable function">handler</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">route</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>redirect <span class="token operator">=</span> route<span class="token punctuation">.</span>query <span class="token operator">&amp;&amp;</span> route<span class="token punctuation">.</span>query<span class="token punctuation">.</span>redirect
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      immediate<span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">showPwd</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>passwordType <span class="token operator">===</span> <span class="token string">'password'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>passwordType <span class="token operator">=</span> <span class="token string">''</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>passwordType <span class="token operator">=</span> <span class="token string">'password'</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$nextTick</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>password<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment">// 设置登录按钮的效验</span>
+    <span class="token function">handleLogin</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 点击登录按钮的时候 触发表单验证</span>
+      <span class="token comment">// validate表单效验插件() $refs操作sel-form组件实例实现验证 通过this.$refs.名称 访问组件实例</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>loginForm<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token parameter">valid</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 防止用户不输入内容 点击登录 先服务器提交数据</span>
+        <span class="token comment">// 如果通过效验(true) 就像服务器提交数据</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>valid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'表单验证通过'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 如果表单不通过 提示 不提交服务器</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'表单验证不通过'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><ul><li>效验规则的js文件 <code>utils文件夹 validate.js</code></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * Created by PanJiaChen on 16/11/18.
+ */</span>
+
+<span class="token comment">// -------------------------- 表单验证功能</span>
+<span class="token comment">/**
+ * @param {string} path
+ * @returns {Boolean}
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">isExternal</span> <span class="token punctuation">(</span><span class="token parameter">path</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(https?:|mailto:|tel:)</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+ * @param {string} str
+ * @returns {Boolean}
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">validUsername</span> <span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 设置手机号正则表达式</span>
+  <span class="token keyword">const</span> valid_map <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^1[34578]\d{9}$</span><span class="token regex-delimiter">/</span></span>
+  <span class="token comment">// 设置正则表达式检测 trim()去除用户输入的两侧空格 再进行效验</span>
+  <span class="token keyword">return</span> valid_map<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>总结：遵循ElementUI的表单验证规则；自定义验证规则要熟悉</p></blockquote> <h2 id="登录基本功能-login文件夹-index-js"><a href="#登录基本功能-login文件夹-index-js" class="header-anchor">#</a> 登录基本功能  <code>login文件夹 index.js</code></h2> <p><a href="https://element.eleme.cn/#/zh-CN/component/form#form-biao-dan" target="_blank" rel="noopener noreferrer">饿了么ui表单<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://github.com/yiminghe/async-validator" target="_blank" rel="noopener noreferrer">表单验证validate<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://www.npmjs.com/package/js-cookie" target="_blank" rel="noopener noreferrer">第三方包js-cookie<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <blockquote><p><strong><code>目标</code></strong> 实现基本的登录功能</p> <p><code>插件</code> <a href="https://element.eleme.cn/#/zh-CN/component/form#form-biao-dan" target="_blank" rel="noopener noreferrer">饿了么ui表单<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> <a href="https://github.com/yiminghe/async-validator" target="_blank" rel="noopener noreferrer">表单验证validate<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> <a href="https://www.npmjs.com/package/js-cookie" target="_blank" rel="noopener noreferrer">第三方包js-cookie<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></blockquote> <h3 id="设置axios通用的接口模块-和基础url地址-utils文件夹-request-js"><a href="#设置axios通用的接口模块-和基础url地址-utils文件夹-request-js" class="header-anchor">#</a> 设置axios通用的接口模块 和基础url地址 <code>utils文件夹 request.js</code></h3> <blockquote><p>基础url地址:  http://ihrm-java.itheima.net/api</p></blockquote> <ul><li>设置通用接口 方便后接口调用</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+<span class="token comment">// 基准路径</span>
+<span class="token keyword">const</span> baseURL <span class="token operator">=</span> <span class="token string">'http://ihrm-java.itheima.net/api/'</span>
+
+<span class="token comment">// 创建一个axios实例对象</span>
+<span class="token keyword">const</span> instance <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// baseURL: process.env.VUE_APP_BASE_API</span>
+  baseURL<span class="token operator">:</span> baseURL<span class="token punctuation">,</span>
+  <span class="token comment">// 超时,如果超过10秒，后端没有返回数据，那么就报错</span>
+  timeout<span class="token operator">:</span> <span class="token number">10000</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">instance</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// 请求方式</span>
+    method<span class="token operator">:</span> options<span class="token punctuation">.</span>method <span class="token operator">||</span> <span class="token string">'GET'</span><span class="token punctuation">,</span>
+    <span class="token comment">// 请求地址</span>
+    url<span class="token operator">:</span> options<span class="token punctuation">.</span>url<span class="token punctuation">,</span>
+    <span class="token comment">// post/put 请求体传递的参数</span>
+    data<span class="token operator">:</span> options<span class="token punctuation">.</span>data<span class="token punctuation">,</span>
+    <span class="token comment">// get 请求传参</span>
+    params<span class="token operator">:</span> options<span class="token punctuation">.</span>params<span class="token punctuation">,</span>
+    <span class="token comment">// 请求头</span>
+    headers<span class="token operator">:</span> options<span class="token punctuation">.</span>headers
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="设置登录功能的api接口-api文件夹-里面-user-js"><a href="#设置登录功能的api接口-api文件夹-里面-user-js" class="header-anchor">#</a> 设置登录功能的api接口 <code>api文件夹 里面 user.js</code></h3> <ul><li>设置一个登录使用的api接口</li> <li>完成登录模块之后，我们需要对登录接口进行封装, 登录请求应该单独封装到一个模块中, 便于维护和管理</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 登录请求</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">login</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// 请求登录的方式</span>
+    method<span class="token operator">:</span> <span class="token string">'post'</span><span class="token punctuation">,</span>
+    url<span class="token operator">:</span> <span class="token string">'/sys/login'</span><span class="token punctuation">,</span>
+    data<span class="token operator">:</span> data
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="设置cookie插件utils文件夹-auth-js"><a href="#设置cookie插件utils文件夹-auth-js" class="header-anchor">#</a> 设置cookie插件<code>utils文件夹 auth.js</code></h3> <p><a href="https://www.npmjs.com/package/js-cookie" target="_blank" rel="noopener noreferrer">第三方包js-cookie<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <blockquote><p><strong><code>目标</code></strong> 封装通用的token操作模块</p> <p>本地三个储存：Cookie/sessionStorage/localStorage</p> <p>Cookie的问题：</p> <ol><li><p>本地存储的数据量有限制 4K  1K = 1024B(Byte) 1Byte = 8bit</p></li> <li><p>不安全（存储在客户端）</p></li></ol> <p>特点：发送请求时会自动携带Cookie；没有浏览器的兼容问题；</p> <p>Cookie的类型：会话Cookie（浏览器一旦关闭就失效了）；持久Cookie（可以设置有效期）</p></blockquote> <ul><li>导入<a href="https://www.npmjs.com/package/js-cookie" target="_blank" rel="noopener noreferrer">第三方包js-cookie<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>操作cookie 设置在工具文件
+<ul><li><code>getToken</code> 获取cookie</li> <li><code>setToken</code> 储存cookie</li> <li><code>removeToken</code> 删除cookie</li></ul></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 导入第三方包js-cookie 操作cookie (用那种方法导入那种方法名)</span>
+<span class="token keyword">import</span> Cookies <span class="token keyword">from</span> <span class="token string">'js-cookie'</span>
+<span class="token comment">// cookie的储存的名称(在cookie缓存里储存的名称)</span>
+<span class="token keyword">const</span> TokenKey <span class="token operator">=</span> <span class="token string">'vue_admin_template_token'</span>
+<span class="token comment">// 获取指定的cookie</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">getToken</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Cookies<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>TokenKey<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 设置指定的cookie(储存token时候使用)</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">setToken</span> <span class="token punctuation">(</span><span class="token parameter">token</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Cookies<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>TokenKey<span class="token punctuation">,</span> token<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 删除指定的cookie</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">removeToken</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Cookies<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>TokenKey<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>总结：</p> <ol><li>原生js可以操作Cookie，但是很麻烦</li> <li>所以可以基于<a href="https://www.npmjs.com/package/js-cookie" target="_blank" rel="noopener noreferrer">第三方包js-cookie<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>操作cookie，比较简单</li></ol> <h3 id="vuex组件的actions-获取登录异步数据-modules文件夹的-user-js"><a href="#vuex组件的actions-获取登录异步数据-modules文件夹的-user-js" class="header-anchor">#</a> Vuex组件的<code>actions:</code>获取登录异步数据 <code>modules文件夹的 user.js</code></h3> <ul><li>登录案例无需储存数据 只需要设置 async函数同步获取数据</li> <li>判断如果登录成功 返回一个状态位(成功true 不成功false)</li> <li><code>context.commit</code> 把数据储存到state里面</li> <li>在<code>mutations</code> 数据获取中 把token储存到cookie里面(没有cookie token代替)
+<ul><li>cookie是 <a href="https://www.npmjs.com/package/js-cookie" target="_blank" rel="noopener noreferrer">第三方包js-cookie<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 导入登录的api接口</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> login <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../api/user'</span>
+<span class="token comment">// 导入存储和获取的cookie的组件(第三方包js-cookie)</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> setToken<span class="token punctuation">,</span> getToken <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../utils/auth'</span>
+<span class="token comment">// 用户模块</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  namespaced<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  state<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 从浏览器缓存中 读取cookie值 如果没有 赋值为null 防止报错</span>
+    token<span class="token operator">:</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token keyword">null</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  mutations<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">updateToken</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> payload</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 接收异步获取的数据</span>
+      state<span class="token punctuation">.</span>token <span class="token operator">=</span> payload
+      <span class="token comment">// 把获取到的token值(目前没cookie) 存储到cookie缓存中去</span>
+      <span class="token function">setToken</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// 异步获取数据</span>
+  actions<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 实现异步登录 获取服务器的返回值 并且储存token</span>
+    <span class="token keyword">async</span> <span class="token function">login</span> <span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> payload</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> ret <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">login</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ret<span class="token punctuation">.</span>data<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">10000</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 登录成功，缓存服务器返回的token(储存到 Vuex的state里面)</span>
+          context<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'updateToken'</span><span class="token punctuation">,</span> ret<span class="token punctuation">.</span>data<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+          <span class="token comment">// 如果登录成功 返回一个成功状态位</span>
+          <span class="token keyword">return</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 登录失败 返回一个失败状态位</span>
+          <span class="token keyword">return</span> <span class="token boolean">false</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 登录失败(这个是网络错误) 返回一个失败状态位</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>总结</p> <ol><li>封装登录接口api</li> <li>封装调用接口的Action方法</li> <li>组件中把Action映射为函数并且调用方法实现登录</li></ol> <h3 id="登录vue文件-导入vuex异步获取的登录信息-login文件夹-index-js"><a href="#登录vue文件-导入vuex异步获取的登录信息-login文件夹-index-js" class="header-anchor">#</a> 登录vue文件 导入Vuex异步获取的登录信息 <code>login文件夹 index.js</code></h3> <ul><li>使用了第三方表单验证 <a href="https://github.com/yiminghe/async-validator" target="_blank" rel="noopener noreferrer">表单验证validate<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li>mapActions 映射 actions 异步数据获取</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 导入表单验证js文件</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> validUsername <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/validate'</span>
+<span class="token comment">// 导入Vuex的Actions 映射</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> mapActions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+
+methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 导入(映射)Vuex的 actions异步数据获取方法(Vuex入口文件user里面的login异步获取登录数据方法)</span>
+    <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token string">'user'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'login'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+   <span class="token function">handleLogin</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 点击登录按钮的时候 触发表单验证</span>
+      <span class="token comment">// validate表单效验插件() $refs操作sel-form组件实例实现验证 通过this.$refs.名称 访问组件实例</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>loginForm<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token parameter">valid</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 防止用户不输入内容 点击登录 先服务器提交数据</span>
+        <span class="token comment">// 如果通过效验(true) 就向服务器提交数据</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>valid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 如果完成了输入效验 把账号密码 上传到服务器 判读是否正确</span>
+          <span class="token keyword">const</span> ret <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token comment">// 调用Vuex的异步获取登录数据声明的actions方法(映射Vuex方法)</span>
+           mobile<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>loginForm<span class="token punctuation">.</span>username<span class="token punctuation">,</span> <span class="token comment">// 获取用户输入的账号密码 左侧是后端规定的属性名 上传到服务器比对</span>
+           password<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>loginForm<span class="token punctuation">.</span>password
+          <span class="token punctuation">}</span><span class="token punctuation">)</span>
+          <span class="token comment">// 判断Vuex返回的状态位(自设置的 如果登录成功 返回的true 不成功返回false)</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>ret<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 如果返回true 说明登录成功 跳转到主页面</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'/dashboard'</span><span class="token punctuation">)</span>
+          <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 否则就是false 说明登录失败 提示用户 (饿了么ui提供的弹窗)</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>$message<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'账号密码输入错误'</span><span class="token punctuation">)</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 如果表单不通过 提示用户 不提交服务器 (饿了么ui提供的弹窗)</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>$message<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'请输入正确的用户名密码'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre></div><p>总结：封装token的基本操作方法，本地缓存采用cookie</p> <ol><li>首次登陆时，缓存token</li> <li>页面打开时，从缓存读取token并初始化state中的token</li></ol> <h2 id="axios响应拦截器-utils-文件夹-request-js"><a href="#axios响应拦截器-utils-文件夹-request-js" class="header-anchor">#</a> axios响应拦截器 <code>utils 文件夹 request.js</code></h2> <blockquote><p><code>目标</code>: 处理响应拦截器</p> <p>axios返回的数据中默认增加了一层**<code>data的包裹</code>**, 每次我们都要 res.data.data, 太麻烦, 所以我们需要在这里处理下。</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 响应拦截器</span>
+instance<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 对响应数据做点什么：去掉axios默认包装的data属性</span>
+  <span class="token keyword">return</span> response<span class="token punctuation">.</span>data
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token parameter">error</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 对响应错误做点什么</span>
+  <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><blockquote><p>总结：通过响应拦截器优化数据的获取</p></blockquote> <h2 id="基于全局vuex-设置路由守卫-permission-js"><a href="#基于全局vuex-设置路由守卫-permission-js" class="header-anchor">#</a> 基于全局Vuex  设置路由守卫 <code>permission.js</code></h2> <br> <blockquote><p><strong><font color="#ff3040">目标 </font></strong>：根据全局Vuex 获取token 处理路由组件的访问权限问题 (没有token的用户, 不让你进系统的)</p> <p><strong><font color="#ff3040">步骤</font></strong> :  从Vuex中读取 token值 判断是否持有token 让其访问权限内容 如果用户在白名单(游客页面) 不进行操作</p> <p><strong><font color="#ff3040">路径</font></strong> :  登录路径 <code>/login</code> 首页路径<code>/dashboard</code> 白名单路径<code>'/login', '/404', '/qita'</code></p></blockquote> <p><img src="https://tva1.sinaimg.cn/large/005INI3Xly8grtqo20yraj30kw07fgmc.jpg" alt="image-20210216132052672"></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// axios的路由导航守卫 配合Vue-router 实现登录权限功能(在router上设置axios导航守卫)</span>
+<span class="token comment">// 导入Vue-router方法 (在Vue组件内需要 this.$router 组件外直接router 使用即可)</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router/index'</span>
+<span class="token comment">// 导入Vuex(获取其全局token值)</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store/index'</span>
+<span class="token comment">// 创建一个路径白名单 里面填写的是路径 (允许用户游客模式访问一些内容 比如登录页 404 没必要验证)</span>
+<span class="token keyword">const</span> white <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'/login'</span><span class="token punctuation">,</span> <span class="token string">'/404'</span><span class="token punctuation">,</span> <span class="token string">'/qita'</span><span class="token punctuation">]</span>
+<span class="token comment">// 创建路由导航守卫]</span>
+router<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> <span class="token keyword">from</span><span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">//! 读取Vuex全局组件 判断是否存在token</span>
+  <span class="token comment">// 从Vuex全局组件中 读取保存的token(储存在getters里面)</span>
+  <span class="token keyword">const</span> token <span class="token operator">=</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>token
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span>
+  <span class="token comment">// 如果存在token</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>token<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 如果存在token 并且当前在登录页 让其跳转到主页</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>to<span class="token punctuation">.</span>path <span class="token operator">===</span> <span class="token string">'/login'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// to 表示要跳转到哪里去</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token string">'/dashboard'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 如果不在登录页面上 直接通过 不做处理(因为已经登录访问 无需再跳转)</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 如果不存在token 判断是否在白名单中(游客可以访问的路径)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>white<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>to<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// includes()是数组方法 检测是否包含指定内容</span>
+      <span class="token comment">// 在白名单里面，放行通过即可</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 如果不在白名单里面 跳转到登录页面</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>总结：导航守卫要拦截素有请求的路由链接</p> <ol><li>判断是否登录</li> <li>判断是否为白名单</li></ol> <h2 id="关于基准路径的配置"><a href="#关于基准路径的配置" class="header-anchor">#</a> 关于基准路径的配置</h2> <blockquote><p>注意：<code>.env.development</code>和<code>.env.production</code> 文件用于配置开发环境和生产环境的基准url地址</p></blockquote> <ul><li>.env.development 开发环境</li> <li>.env.production 生产环境</li> <li><code>#</code> 是注释的意思</li></ul> <blockquote><p>.env.development 开发环境 配置文件</p></blockquote> <ul><li>不设置固定的url地址 只设置末尾地址 这样默认就是 <code>localhost:</code>地址拼接</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># just a flag</span>
+ENV <span class="token operator">=</span> <span class="token string">'development'</span>
+
+<span class="token comment"># base api</span>
+<span class="token comment"># VUE_APP_BASE_API = 'http://ihrm-java.itheima.net/api/'</span>
+VUE_APP_BASE_API <span class="token operator">=</span> <span class="token string">'/api/'</span>
+
+</code></pre></div><blockquote><p>axios封装通用的接口模块 <code>utils文件夹 request.js</code></p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 创建一个axios实例对象</span>
+<span class="token keyword">const</span> instance <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// 基准路径 通过 开发环境 和 生产环境 文件进行配置(开发和生产单独设置 方便区分 脚手架方法需要重启)</span>
+  baseURL<span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_BASE_API</span><span class="token punctuation">,</span>
+  <span class="token comment">// baseURL: baseURL,</span>
+  <span class="token comment">// 超时,如果超过10秒，后端没有返回数据，那么就报错</span>
+  timeout<span class="token operator">:</span> <span class="token number">10000</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><blockquote><p>总结：为了灵活配置接口的基准路径，可以基于配置文件的方式，在开发和生产环境分别切换到不同的地址。这种方式好处就是代码在开发和上线时修改比较容易</p></blockquote></div> <footer class="page-edit" style="display:none;"><!----> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">2021/6/26 下午3:51:51</span></div></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.d452100b.js" defer></script><script src="/assets/js/5.208c645a.js" defer></script><script src="/assets/js/1.28c8b51a.js" defer></script><script src="/assets/js/52.2aee986e.js" defer></script>
+  </body>
+</html>
