@@ -7,6 +7,8 @@ categories: 杂项
 sticky: 2
 autoIgnore: true
 subSidebar: false
+tags:
+ - 🥳🎉🎉
 ---
 
 ::: tip 欢迎 🥳  ! 
