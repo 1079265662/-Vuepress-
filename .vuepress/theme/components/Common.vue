@@ -9,7 +9,7 @@
       </transition>
       <div :class="{ hide: firstLoad || !isHasKey }">
         <div v-if="all" class="wrapper-main" :style="{
-            backgroundImage: `url( ${cover ? cover : 'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-zxkgeg.jpg' } )`,
+            backgroundImage: `url( ${cover} )`,
             backgroundPositionX: 'center',
             backgroundPositionY: 'center',
             backgroundSize: 'cover',
@@ -124,11 +124,8 @@ export default {
       isHasKey: true,
       isHasPageKey: true,
       firstLoad: true,
-      // 随机图片
-      images: [
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9m9jq1-min.jpg',
-        'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-zxkgeg.jpg'
-      ]
+      //设置图片数量
+      imageNumber: 6
     };
   },
 
@@ -144,20 +141,17 @@ export default {
       );
     },
     cover () {
-      if (this.images) {
-        return (
-          // this.$themeConfig.covers[new Date().getDay()] ||
-          // "https://pan.zealsay.com/zealsay/cover/1.jpg"
-          this.images[Math.round(Math.random() * this.images.length)]
-
-        );
-      }
+      return (
+        // this.$themeConfig.covers[new Date().getDay()] ||
+        `https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_${Math.floor((Math.random() * this.imageNumber) + 1)}.jpg`
+      );
     },
+    // 其他页图片
     pageCover () {
       return (
-        this.$page.frontmatter.cover ||
-        this.$themeConfig.covers[new Date().getDay()] ||
-        "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-zxkgeg.jpg"
+        // this.$page.frontmatter.cover ||
+        // this.$themeConfig.covers[new Date().getDay()] ||
+        "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_4.jpg"
       );
     },
     shouldShowNavbar () {
