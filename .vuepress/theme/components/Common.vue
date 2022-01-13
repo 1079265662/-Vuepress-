@@ -149,7 +149,7 @@ export default {
     // 其他页图片
     pageCover () {
       return (
-        // this.$page.frontmatter.cover ||
+        this.$page.frontmatter.cover ||
         // this.$themeConfig.covers[new Date().getDay()] ||
         "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_4.jpg"
       );
