@@ -1,6 +1,6 @@
 ---
 title: Vscode快速设置文档
-date: 2022-01-10
+date: 2022-01-14
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-wq37kp-min.jpg
 tags:
  - Vscode
@@ -14,13 +14,22 @@ Vscode快速设置文档 涉及到settings和eslint<br>
 
 <!-- more -->
 
+## 如何设置Vscode?
+
+* 第一波找到左下角的齿轮
+
+![image-20220114111717240](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220114111717240.png)
+
+* 然后进入后在搜索框搜索settings 点击进入即可
+
+![image-20220114111929918](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220114111929918.png)
+
 ## settings设置
 
 * 这个是Vscode设置的`settings`保存后会根据`eslint`格式保存 很方便
 
 ```json
 {
-    "emmet.triggerExpansionOnTab": true,
     "workbench.startupEditor": "newUntitledFile",
     "workbench.iconTheme": "vscode-icons",
     "window.menuBarVisibility": "default",
@@ -47,7 +56,7 @@ Vscode快速设置文档 涉及到settings和eslint<br>
     },
     "workbench.colorTheme": "Default Dark+",
     "git.ignoreWindowsGit27Warning": true,
-    // #每次保存的时候自动格式化 
+    // 每次保存的时候自动格式化 
     "editor.formatOnSave": true,
     // #每次保存的时候将代码按eslint格式进行修复
     // "eslint.autoFixOnSave": true,
@@ -92,6 +101,10 @@ Vscode快速设置文档 涉及到settings和eslint<br>
             // "end_with_newline": false
         }
     },
+    // 设置不同颜色括号
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    // 设置颜色
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     // 底部菜单
@@ -149,7 +162,7 @@ Vscode快速设置文档 涉及到settings和eslint<br>
     },
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
-    },
+    }
 }
 
 ```
@@ -360,4 +373,8 @@ module.exports = {
 }
 
 ```
+
+## 展示效果
+
+![image-20220114111118349](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220114111118349.png)
 

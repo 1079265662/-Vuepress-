@@ -1369,15 +1369,16 @@ export function getTokenTime () {
 
 
 
-## token续签
+## token续签两种实现方式
 
-* token续签有两种方式 其实全部的token续签都涉及到了axios的请求拦截器 通过拦截器去实现token的续签 
-  * <font color =#ff3040>注意: 如果你把token的续签根据(`ReFresh_token或者token过期时间戳`)储存到session中那么页面关闭后会自动销毁 也就不具备续签性了</font>
-* 通常都会在`utils`里的`request.js`中进行续签处理
+* token续签有两种方式 其实全部的token续签都涉及到了axios的请求拦截器`response.use()` 通过请求拦截器去实现token的续签 
+* 通常都会在`utils`里的`request.js`中进行续签处理 (二次封装axios文件)
 
-### 双token机制
+### 双token续签机制
 
 * 第一种是双token `ReFresh_token` 和 `用户token` 当`用户token`过期后 拿`ReFresh_token`去续签 `ReFresh_token`一般有效期是半年 该token不具备任何数据 只是作为续签凭证 如果`ReFresh_token`过期了 就需要重新登录了 这种方式是相对安全的 因为`用户token`时间只有五分钟 
+
+* 双token续签机制 总流程图
 
   ![image-20210605115451235](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/VaQ6uA7POdc8qJv.png)
 
@@ -1462,9 +1463,11 @@ export function getTokenTime () {
   
   ```
 
-### 单token机制
+### 单token时间戳续签机制
 
 * 第二种是企业常用的 单`用户token` 当用户登录的时候 接口会返回一个`token过期时间戳` 前端把时间戳储存session中 每当请求接口的时候 需要电脑当前时间去计算后端返回`token过期时间戳` 如果小于10分钟(或者其他) 就会进行续签操作 替换一个新的`用户token`并且更新`token过期时间戳` 这种方式相对后端来说简单 安全性不如第一种 因为`用户token` 有效期通常为8小时甚至更长 因为后端是不会把过期token续签的 所以时间设置太短的话 用户临时不操作就会过期重新登录
+
+* 单token时间戳续签 总流程图
 
   ![image-20220111163947060](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220111163947060.png)
 
@@ -1517,7 +1520,7 @@ export function getTokenTime () {
 
 > 续签token的数据结构
 
-续签token的数据结构: [续签token的数据结构json](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E7%BB%AD%E7%AD%BEtoken%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.json)
+* 续签token的数据结构: [续签token的数据结构json](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E7%BB%AD%E7%AD%BEtoken%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.json)
 
 ```js
 // token续签
