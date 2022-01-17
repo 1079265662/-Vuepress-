@@ -189,7 +189,7 @@ module.exports = {
   //it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
     "vue/max-attributes-per-line": [2, {
-      "singleline": 20, // 单行最长
+      "singleline": 30, // 单行最长
       "multiline": {
         "max": 1,
         "allowFirstLine": false

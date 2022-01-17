@@ -226,7 +226,7 @@ ws.onclose = function(evt) {
 1. 聊天组件路由配置
 2. 实现基本的布局效果
 
-## 小智同学聊天功能 `xiaozhi.vue`
+### 小智同学聊天功能 `xiaozhi.vue`
 
 [WebSocket](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket) 和 [socket.io-client](https://www.npmjs.com/package/socket.io-client) 实时通讯 介绍
 
@@ -313,13 +313,4 @@ methods: {
     this.ws.close()
   }
 }
-```
-
-- 关闭链接 (节省内存)
-
-```js
-  destroyed () {
-    // 释放socket链接资源（告诉服务器断开连接）
-    this.ws.close() // close() 用于关闭浏览器窗口。
-  }
 ```
