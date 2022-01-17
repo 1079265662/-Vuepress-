@@ -22,6 +22,8 @@ export default {
 
 <style lang="stylus">
 .sidebar {
+  box-shadow: var(--box-shadow);
+
   &&::-webkit-scrollbar {
     width: 0;
     height: 0;

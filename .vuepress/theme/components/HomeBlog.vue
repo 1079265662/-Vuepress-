@@ -417,31 +417,23 @@ export default {
 }
 
 .bounce-enter-active {
-  animation: bounce-in 5s 3s infinite;
+  animation: bounce-in 2s infinite;
 }
 
 /* .bounce-leave-active { */
 /* animation: bounce-in 4s 2s reverse; */
 /* } */
 @keyframes bounce-in {
-  0% {
+  0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
 
-  20% {
-    transform: translateY(0);
+  40% {
+    transform: translateY(-30px);
   }
 
-  50% {
-    transform: translateY(-20px);
-  }
-
-  80% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(0);
+  60% {
+    transform: translateY(-15px);
   }
 }
 
@@ -453,8 +445,8 @@ export default {
 .down-arrow:after {
   content: '';
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-right: 3px solid #ffffff;
   border-top: 3px solid #ffffff;
   -webkit-transform: rotate(135deg); /* 箭头方向可以自由切换角度 */

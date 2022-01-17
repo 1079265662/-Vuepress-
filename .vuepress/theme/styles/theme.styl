@@ -204,7 +204,7 @@ th, td
 ::-webkit-scrollbar
   width: 5px;
   height: 5px;
-  display:none
+  // display:none
 
 ::-webkit-scrollbar-track-piece
   // background-color: rgba(0, 0, 0, 0.2);
@@ -240,3 +240,20 @@ th, td
   font-family: 'Long Cang', cursive !important;
 .playball
   font-family:'Playball',cursive !important;
+
+// 取消100vw的副作用
+html {
+  overflow-y: scroll;
+}
+
+:root {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100vw;
+  // 鼠标样式
+  cursor: url('https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/arrow.cur'),auto;
+}
+ 

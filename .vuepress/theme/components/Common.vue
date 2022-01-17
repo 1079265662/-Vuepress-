@@ -125,7 +125,7 @@ export default {
       isHasPageKey: true,
       firstLoad: true,
       //设置图片数量
-      imageNumber: 6
+      imageNumber: 8
     };
   },
 

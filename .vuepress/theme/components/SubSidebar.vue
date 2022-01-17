@@ -3,12 +3,12 @@ import { isActive } from "@theme/helpers/utils";
 
 export default {
   computed: {
-    headers() {
+    headers () {
       return this.$showSubSideBar ? this.$page.headers : [];
     },
   },
   methods: {
-    isLinkActive(header) {
+    isLinkActive (header) {
       const active = isActive(this.$route, this.$page.path + "#" + header.slug);
       if (active) {
         setTimeout(() => {
@@ -18,7 +18,7 @@ export default {
       return active;
     },
   },
-  render(h) {
+  render (h) {
     return h(
       "ul",
       {
@@ -103,4 +103,3 @@ export default {
   }
 }
 </style>
-

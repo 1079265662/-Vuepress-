@@ -3,7 +3,6 @@ title: 关于本播客
 date: 2021-05-20
 permalink: '/other/'
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/6-min.png
-categories: 杂项
 sticky: 2
 autoIgnore: true
 subSidebar: false
