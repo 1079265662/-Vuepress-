@@ -1,11 +1,6 @@
 <template>
   <div class="abstract-wrapper">
-    <NoteAbstractItem
-      v-for="(item) in currentPageData"
-      :key="item.path"
-      :item="item"
-      :currentPage="currentPage"
-      :currentTag="currentTag" />
+    <NoteAbstractItem v-for="(item) in currentPageData" :key="item.path" :item="item" :currentPage="currentPage" :currentTag="currentTag" />
   </div>
 </template>
 
@@ -26,6 +21,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.abstract-wrapper
-  width 100%
+.abstract-wrapper {
+  width: 100%;
+}
 </style>

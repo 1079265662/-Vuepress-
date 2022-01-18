@@ -1,43 +1,167 @@
 <template>
-  <!-- 公共布局 -->
-  <Common :sidebar="false">
-    <div class="container">
+  <div @scroll="scrollGet($event)">
+    <!-- 第一次盒子 -->
+    <div class="arrowRe">
+      <Common :sidebar="false">
+        <div class="container">
 
-      <div class="author-social">
-        <ModuleTransition delay="0.04" duration="0.5">
-          <div class="personal-img">
-            <img class="personal-radius" v-if="recoShowModule || $themeConfig.authorAvatar" :src="$withBase($themeConfig.authorAvatar)" alt="author-avatar">
-          </div>
-        </ModuleTransition>
+          <div class="author-social">
+            <ModuleTransition delay="0.04" duration="0.5">
+              <div class="personal-img">
+                <img class="personal-radius" v-if="recoShowModule || $themeConfig.authorAvatar" :src="$withBase($themeConfig.authorAvatar)" alt="author-avatar">
+              </div>
+            </ModuleTransition>
 
-        <ModuleTransition delay="0.04" duration="0.5">
-          <div v-if="recoShowModule" class="socials">
-            <a v-if="socials.github" :href="socials.github" title="github" target="_blank"><i class="iconfont big reco-github black"></i></a>
-            <a v-if="socials.gitlab" :href="socials.gitlab" title="gitlab" target="_blank"><i class="iconfont big reco-gitlab coral"></i></a>
-            <a v-if="socials.gitee" :href="socials.gitee" title="gitee" target="_blank"><i class="iconfont big reco-mayun crimson"></i></a>
-            <a v-if="socials.jianshu" :href="socials.jianshu" title="简书" target="_blank"><i class="iconfont big reco-jianshu indianred"></i></a>
-            <a v-if="socials.zhihu" :href="socials.zhihu" title="知乎" target="_blank"><i class="iconfont big reco-zhihu lightskyblue"></i></a>
-            <a v-if="socials.toutiao" :href="socials.toutiao" title="头条" target="_blank"><i class="iconfont big reco-toutiao lightsalmon"></i></a>
-            <a v-if="socials.juejin" :href="socials.juejin" title="掘金" target="_blank"><i class="iconfont big reco-juejin dodgerblue"></i></a>
-            <a v-if="socials.segmentfault" :href="socials.segmentfault" title="思否" target="_blank"><i class="iconfont big reco-sf forestgreen"></i></a>
-            <a v-if="socials.csdn" :href="socials.csdn" title="CSDN" target="_blank"><i class="iconfont big reco-csdn indianred"></i></a>
-            <a v-if="socials.wechat" :href="socials.wechat" title="微信" target="_blank"><i class="iconfont big reco-wechat forestgreen"></i></a>
-            <a v-if="socials.qq" :href="socials.qq" title="QQ" target="_blank"><i class="iconfont big reco-qq lightskyblue"></i></a>
-            <h1 class="longcang">{{ $themeConfig.info }}</h1>
+            <ModuleTransition delay="0.04" duration="0.5">
+              <div v-if="recoShowModule" class="socials">
+                <a v-if="socials.github" :href="socials.github" title="github" target="_blank"><i class="iconfont big reco-github black"></i></a>
+                <a v-if="socials.gitlab" :href="socials.gitlab" title="gitlab" target="_blank"><i class="iconfont big reco-gitlab coral"></i></a>
+                <a v-if="socials.gitee" :href="socials.gitee" title="gitee" target="_blank"><i class="iconfont big reco-mayun crimson"></i></a>
+                <a v-if="socials.jianshu" :href="socials.jianshu" title="简书" target="_blank"><i class="iconfont big reco-jianshu indianred"></i></a>
+                <a v-if="socials.zhihu" :href="socials.zhihu" title="知乎" target="_blank"><i class="iconfont big reco-zhihu lightskyblue"></i></a>
+                <a v-if="socials.toutiao" :href="socials.toutiao" title="头条" target="_blank"><i class="iconfont big reco-toutiao lightsalmon"></i></a>
+                <a v-if="socials.juejin" :href="socials.juejin" title="掘金" target="_blank"><i class="iconfont big reco-juejin dodgerblue"></i></a>
+                <a v-if="socials.segmentfault" :href="socials.segmentfault" title="思否" target="_blank"><i class="iconfont big reco-sf forestgreen"></i></a>
+                <a v-if="socials.csdn" :href="socials.csdn" title="CSDN" target="_blank"><i class="iconfont big reco-csdn indianred"></i></a>
+                <a v-if="socials.wechat" :href="socials.wechat" title="微信" target="_blank"><i class="iconfont big reco-wechat forestgreen"></i></a>
+                <a v-if="socials.qq" :href="socials.qq" title="QQ" target="_blank"><i class="iconfont big reco-qq lightskyblue"></i></a>
+                <h1 class="longcang">{{ $themeConfig.info }}</h1>
+              </div>
+            </ModuleTransition>
           </div>
-        </ModuleTransition>
+        </div>
+      </Common>
+      <!-- 底部跳转 -->
+      <div class="arrowSS">
+        <a href="#anchorSS" class="arrowSS_style"></a>
       </div>
-
     </div>
-  </Common>
+    <!-- 第二层盒子 -->
+    <div id="anchorSS" class="secondClass">
+      <div id="box">
+        <!-- 个人资料卡片 -->
+        <div class="meBox">
+          <!-- 头像 -->
+          <div class="headPhoto">
+            <img style="border-radius: 50%;" v-if="recoShowModule || $themeConfig.authorAvatar" :src="$withBase($themeConfig.authorAvatar)">
+          </div>
+          <!-- 介绍 -->
+          <div class="meBox-title">
+            <p>I'm liukaili</p>
+            <div class="fg"></div>
+          </div>
+          <div class="meBox-text">
+            <p>干这种无聊的事情我最拿手了</p>
+            <p>播客的大部分内容很基础</p>
+            <p>错别字也很多谨慎阅读</p>
+            <p>希望对你有用!</p>
+            <a href="https://gitee.com/n0ts" target="_blank">此页面借鉴</a>
+          </div>
+          <!-- 两个按钮 -->
+          <div class="meBox-Button">
+            <a href="#">返回上层</a>
+            <a @click="remaKe" :style="this.removeFirstDiv || this.removeSecondDiv ? 'cursor: pointer;' : 'cursor:wait'">重新显示</a>
+          </div>
+        </div>
+        <!-- 伪终端介绍 -->
+        <div id="cmdBox">
+          <!-- 第一个终端 -->
+          <div :class="!removeFirstDiv ? 'cmd' : 'cmd opDiv'" :style="!toppingFirst ? 'z-index: 1;' : '  z-index: 4;'">
+            <!-- 三个按钮 -->
+            <div class="click">
+              <div class="red" @click="greenClick(1)"></div>
+              <div class="yellow" @click="yellowClick(1)"></div>
+              <div class="green" @click="redClick(1)"></div>
+            </div>
+            <!-- 顶部标题 -->
+            <div class="title">
+              <span>liukaili - bash</span>
+            </div>
+            <!-- 终端内文字 -->
+            <div class="cmdText">
+              <span style="color: rgb(0, 190, 0);">root@liukaili</span>
+              <span style="color: blue;">~</span>
+              <span style="color: rgb(39, 39, 39);">./tianqi.sh</span>
+              <br />
+              <p>北京🌞晴 -7℃~3℃ 东北风 3级 <span style="margin: 0;padding: 1px 2px;border-radius: 3px;line-height: 16px;color: #fff;background-color: #eec50b;">良</span></p>
+              <span style="color: rgb(0, 190, 0);">root@liukaili</span>
+              <span style="color: blue;">~</span>
+              <span style="color: rgb(39, 39, 39);">cat /me.txt</span>
+              <p>爱好计算机 职业前端 喜欢Vue</p>
+              <p>喜欢开源 希望做出有用的组件开源出去</p>
+              <p>正在学前端动画 想制作一个前端个人简历</p>
+              <p>歪比歪比 歪比巴布</p>
+              <span style="color: rgb(0, 190, 0);">root@liukaili</span>
+              <span style="color: blue;">~</span>
+              <span style="color: rgb(39, 39, 39);">sudo rm -rf /过去的自己/*</span>
+              <br />
+              <span style="color: rgb(0, 190, 0);">root@liukaili</span>
+              <span style="color: blue;">~</span>
+              <span v-if="this.boxFirstDown" class="line" style="color: rgb(39, 39, 39);">
+                shutdown -r now
+              </span>
+            </div>
+          </div>
+          <!-- 第二个终端 -->
+          <div :class="!removeSecondDiv ? 'cmd cmd2' : 'cmd cmd2 opDiv'" :style="!toppingSecond ? 'z-index: 2;' : '  z-index: 5;'">
+            <!-- 三个按钮 -->
+            <div class="click">
+              <div class="red" @click="greenClick(2)"></div>
+              <div class="yellow" @click="yellowClick(2)"></div>
+              <div class="green" @click="redClick(2)"></div>
+            </div>
+            <!-- 顶部标题 -->
+            <div class="title">
+              <span>liukaili - bash</span>
+            </div>
+            <!-- 终端内文字 -->
+            <div class="cmdText">
+              <span style="color: rgb(0, 190, 0);">root@liukaili</span>
+              <span style="color: blue;">~</span>
+              <span style="color: rgb(39, 39, 39);">./links.sh</span>
+              <p>我的其他站点：</p>
+              <ul class="ul">
+                <li><a href="https://gitee.com/liu_kaili" target="_blank">gitee</a></li>
+                <li><a href="https://github.com/1079265662" target="_blank">github</a></li>
+                <li><a href="#">简历🚫</a></li>
+              </ul>
+              <span style="color: rgb(0, 190, 0);">root@liukaili</span>
+              <span style="color: blue;">~</span>
+              <span v-if="this.boxSecondDown" class="line" style="color: rgb(39, 39, 39);">
+                shutdown -r now
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import Common from '@theme/components/Common'
 import ModuleTransition from '@theme/components/ModuleTransition'
 import moduleTransitonMixin from '@theme/mixins/moduleTransiton'
+//导入字体效果
+import './font/FiraCode.css'
 export default {
   name: 'About',
+  data () {
+    return {
+      // 删除第一个盒子
+      removeFirstDiv: false,
+      // 删除第二个盒子
+      removeSecondDiv: false,
+      // 置顶第一个盒子
+      toppingFirst: false,
+      // 置顶第二个盒子
+      toppingSecond: false,
+      // 第一个盒子启动关机
+      boxFirstDown: false,
+      // 第二个盒子启动关机
+      boxSecondDown: false,
+    }
+  },
   mixins: [moduleTransitonMixin],
   components: { Common, ModuleTransition },
   computed: {
@@ -45,14 +169,96 @@ export default {
       return this.$themeConfig.socials
     }
   },
-  methods: {},
+  created () {
+  },
+  mounted () {
+  },
+  methods: {
+    // 红色按钮
+    redClick (e) {
+      // 判断是否是第一个盒子
+      if (e === 1) {
+        this.removeFirstDiv = true
+      } else {
+        this.removeSecondDiv = true
+      }
+
+    },
+    // 黄色按钮
+    yellowClick (e) {
+      // 判断是否是第一个盒子
+      if (e === 1) {
+        this.toppingFirst = !this.toppingFirst
+      } else {
+        this.toppingSecond = !this.toppingSecond
+      }
+    },
+    // 绿色按钮
+    greenClick (e) {
+      // 判断是否是第一个盒子
+      if (e === 1) {
+        this.boxFirstDown = true
+        setTimeout(() => {
+          this.removeFirstDiv = true
+        }, 2500);
+
+      } else {
+        this.boxSecondDown = true
+        setTimeout(() => {
+          this.removeSecondDiv = true
+        }, 2500);
+      }
+    },
+    // 重置
+    remaKe () {
+      if (this.removeFirstDiv || this.removeSecondDiv) {
+        // 删除第一个盒子
+        this.removeFirstDiv = false,
+          // 删除第二个盒子
+          this.removeSecondDiv = false,
+          // 置顶第一个盒子
+          this.toppingFirst = false,
+          // 置顶第二个盒子
+          this.toppingSecond = false,
+          // 第一个盒子启动关机
+          this.boxFirstDown = false,
+          // 第二个盒子启动关机
+          this.boxSecondDown = false
+      }
+    }
+  },
   watch: {}
 }
 </script>
 
 <style src="../styles/theme.styl" lang="stylus"></style>
-
+<style src="./css/aboutSecond.css" scoped></style>
 <style lang="stylus" scoped>
+.arrowRe {
+  height: 100vh;
+}
+
+/* 包裹箭头效果的盒子 */
+.arrowSS {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: bounce-inSS 2s infinite; /* 启动动画特效 */
+}
+
+/* 箭头效果的盒子 */
+.arrowSS_style {
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-right: 3px solid $textColor;
+  border-top: 3px solid $textColor;
+  -webkit-transform: rotate(135deg); /* 箭头方向可以自由切换角度 */
+  transform: rotate(135deg);
+  cursor: pointer;
+}
+
 .personal-radius {
   border-radius: 50%;
   transition: all 1.35s;
@@ -124,7 +330,6 @@ export default {
 .author-social {
   position: relative;
   display: flex;
-  height: 100vh;
   flex-direction: column;
   text-align: center;
   margin-top: -23rem;
@@ -712,6 +917,21 @@ span {
 
   .scroll-down {
     display: none;
+  }
+}
+
+/* 箭头动画 */
+@keyframes bounce-inSS {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-30px);
+  }
+
+  60% {
+    transform: translateY(-15px);
   }
 }
 </style>

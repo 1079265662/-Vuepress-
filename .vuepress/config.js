@@ -68,8 +68,8 @@ module.exports = {
         text: "关于播客",
         icon: "reco-other",
         items: [
-          { text: "关于我", link: "/other/", icon: "reco-account" },
-          { text: "联系我", link: "/about/", icon: "reco-mail" },
+          { text: "关于我", link: "/about/", icon: "reco-mail" },
+          { text: "联系我", link: "/other/", icon: "reco-account" }
         ],
       },
     ],
@@ -152,7 +152,7 @@ module.exports = {
     record: "暂无备案号 ", //icp备案
     startYear: "2021 ",
     info:
-      "你看100遍她的视频，她不是你的，你敲100遍vue代码，知识就是你的，该醒醒了，我们的目标是学习vue！😅",
+      "真是每个人都有长处 你干这种无聊的事情最拿手了😅",
     socials: {
       github: "https://github.com/1079265662", //github
       gitlub: false, //gitlub
