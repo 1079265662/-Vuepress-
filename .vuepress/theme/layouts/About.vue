@@ -174,8 +174,9 @@ export default {
   mounted () {
   },
   methods: {
-    // 红色按钮
+    // 绿色按钮
     redClick (e) {
+      if (this.boxFirstDown || this.boxSecondDown) return
       // 判断是否是第一个盒子
       if (e === 1) {
         this.removeFirstDiv = true
@@ -193,7 +194,7 @@ export default {
         this.toppingSecond = !this.toppingSecond
       }
     },
-    // 绿色按钮
+    // 红色按钮
     greenClick (e) {
       // 判断是否是第一个盒子
       if (e === 1) {
