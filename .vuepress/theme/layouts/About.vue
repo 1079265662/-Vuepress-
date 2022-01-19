@@ -6,13 +6,13 @@
         <div class="container">
 
           <div class="author-social">
-            <ModuleTransition delay="0.04" duration="0.5">
+            <ModuleTransition delay="0.04" duration="0.2">
               <div class="personal-img">
                 <img class="personal-radius" v-if="recoShowModule || $themeConfig.authorAvatar" :src="$withBase($themeConfig.authorAvatar)" alt="author-avatar">
               </div>
             </ModuleTransition>
 
-            <ModuleTransition delay="0.04" duration="0.5">
+            <ModuleTransition delay="0.04" duration="0.2">
               <div v-if="recoShowModule" class="socials">
                 <a v-if="socials.github" :href="socials.github" title="github" target="_blank"><i class="iconfont big reco-github black"></i></a>
                 <a v-if="socials.gitlab" :href="socials.gitlab" title="gitlab" target="_blank"><i class="iconfont big reco-gitlab coral"></i></a>
@@ -246,8 +246,8 @@ export default {
 
 /* 箭头效果的盒子 */
 .arrowSS_style {
-  margin: 0 auto;
   display: block;
+  margin: 0 auto;
   width: 25px;
   height: 25px;
   border-right: 3px solid $textColor;
