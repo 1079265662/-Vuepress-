@@ -235,20 +235,18 @@ export default {
 <style src="./css/aboutSecond.css" scoped></style>
 <style lang="stylus" scoped>
 .arrowRe {
+  position: relative;
   height: 100vh;
 }
 
 /* 包裹箭头效果的盒子 */
 .arrowSS {
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   animation: bounce-inSS 2s infinite; /* 启动动画特效 */
 }
 
 /* 箭头效果的盒子 */
 .arrowSS_style {
+  margin: 0 auto;
   display: block;
   width: 25px;
   height: 25px;

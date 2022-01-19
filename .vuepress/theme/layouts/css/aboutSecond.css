@@ -81,7 +81,7 @@
   width: 14ch;
   white-space: nowrap;
   overflow: hidden;
-  animation: typing 3.2s steps(23, end) infinite alternate, blink-caret 0.7s infinite normal;
+  animation: typing 2.3s steps(23) infinite alternate, blink-caret 0.7s infinite normal;
   margin: -30px 0 0 90px;
   transition: all 0.3s;
 }
@@ -399,6 +399,7 @@
   .cmd {
     width: 90%;
     margin: 0 auto;
+    height: 310px;
   }
 
   .cmd2 {
@@ -412,6 +413,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     margin: 0 auto;
     z-index: 1;
+    height: 330px;
   }
 }
 span {
@@ -435,7 +437,7 @@ li {
   white-space: nowrap; /* 文字不换行 */
   overflow: hidden; /* 多余的文字内容隐藏 */
   vertical-align: bottom;
-  animation: broderss 0.7s infinite normal, widths 2s steps(13); /* 重点 steps() */
+  animation: broderss 0.7s infinite normal, widths 2s steps(15); /* 重点 steps() */
 }
 /* 边框闪烁动画 模拟指针闪烁 */
 @keyframes broderss {
