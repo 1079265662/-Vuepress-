@@ -3,7 +3,6 @@ title: RABC权限学习记录文档
 date: 2022-01-11
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/vue.jpg
 tags:
- - Vue
  - axios
  - RABC
 categories: RABC
@@ -18,7 +17,7 @@ RABC权限学习记录文档 从头到尾学习文档<br>
 
 ## 权限流程图
 
-* [整体权限的流程总结图pdf](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E6%95%B4%E4%BD%93%E8%AE%BF%E9%97%AE%E9%89%B4%E6%9D%83%E6%B5%81%E7%A8%8B.pdf)
+* [整体权限的流程总结图pdf](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B.pdf)
 * [本地仓库地址](https://gitee.com/liu_kaili/mine-project-advanced-revision)
 * [项目体验地址](http://element-admin.ynitmk.cn/)  账户 admin  密码 1234
 
@@ -1037,8 +1036,10 @@ RABC权限学习记录文档 从头到尾学习文档<br>
    * `childNodes[循环索引值].children` 只要节点含有层级 就把每层进行递归处理
 
 ```js
-    // 分配权限的属性结构查询 处理数据 能实现权限勾选
-    async assignRole (row) {
+// 判断是否是末级的js方法
+import leafUtils from '@/utils/leafUtils'    
+// 分配权限的属性结构查询 处理数据 能实现权限勾选
+  async assignRole (row) {
       // 防止this指向的不是vue实例对象
       const that = this
       this.roleId = row.id
@@ -1046,62 +1047,60 @@ RABC权限学习记录文档 从头到尾学习文档<br>
         roleId: row.id,
         userId: this.$store.getters.userId
       }
-      // 掉接口获取数据
       const res = await getAssignTreeApi(parm)
       if (res && res.code == 200) {
-        // -------------------------------------------  正式开始处理数据
         // 当前登录用户所拥有的所有权限
         const menuList = res.data.listmenu
         // 当前被分配的角色所拥有的权限
         const selectIds = res.data.checkList
-        // 通过一次递归 判断是否末级(设置末级状态位)
+        // 进行一次递归 提取出末级的递归方法变量
         const { setLeaf } = leafUtils()
-        // 通过二次递归 处理勾选数据
+        // 判断是否末级(设置末级状态位) setLeaf实际上是递归的方法
         const newMenuList = setLeaf(menuList)
-        // 赋值二次递归后的最终数据 ( 已经勾选好的数据 )
+        // 把处理好的末级树形结构赋值给页面 渲染出来(需替换成自己的)
         this.assignTreeData = newMenuList
-        console.log(newMenuList)
+        // 准备第二次递归 勾选树形结构的内容
         this.$nextTick(() => {
-          // 这里通过ref绑定的树形结构 拿到里面的数据(assignTree.children) 这路装着属性结构的数据 注意要this.$nextTick渲染后再调用
+          // 这里通过ref绑定处理好末级的树形结构 注意要this.$nextTick渲染后再调用 nodes是通过vue实例拿到的渲染好的树形结构
           const nodes = that.$refs.assignTree.children
-          // 调用递归处理 nodes是通过vue实例拿到的树形结构 selectIds是当前角色用户选中权限的id合集 (权限选中数组) that是当前内容的this指向 防止this指错
+          // 进行第二次递归处理 nodes是通过vue实例拿到的树形结构 selectIds是当前角色用户选中权限的id合集 (权限选中数组) that是当前内容的this指向 防止this指错
           that.setChild(nodes, selectIds, that)
           console.log(nodes)
         })
       }
-      console.log(res)
+      // 打开弹出层(需替换成自己的)
+      this.assignDialog.visible = true
+      this.assignDialog.title = '为【' + row.name + '】分配权限'
     },
-    setChild (childNodes, selectIds, that) {
+   setChild (childNodes, selectIds, that) {
       // 这里不要使用this 要使用上个方法传来的that 以防止this指向错误
       // 判断树形结构是否存在且不小于0
       if (childNodes && childNodes.length > 0) {
         // eslint-disable-next-line no-lone-blocks
-        {
-          // 遍历树形结构 需要调用element getNode()方法 拿到每个node (每个节点的内容 也就是包含一级二级三级都拿出来)
-          for (let j = 0; j < childNodes.length; j++) {
-            // 拿到树形结构中的每个node (每个节点的内容 也就是包含一级二级三级都拿出来)
-            var node = that.$refs.assignTree.getNode(childNodes[j])
-            // 判断(权限选中数组)是否存在 且长度不小于0
-            if (selectIds && selectIds.length > 0) {
-              // 遍历(权限选中数组) 那存储的所有权限选中id 去树形结构每个节点中的id其匹配
-              for (let h = 0; h < selectIds.length; h++) {
-                // 如果匹配到了相同的id 说明具备该权限 需要处于选中状态
-                if (selectIds[h] == childNodes[j].id) {
-                  // 这里来判断是否为末级 (通过第一次遍历修改open状态)
-                  if (childNodes[j].open) {
-                    // 通过调用element setChecked()方法 把未勾选变成已勾选状态 node是一级二级三级都拿出来
-                    that.$refs.assignTree.setChecked(node, true)
-                    // 不用return返回 打断即可
-                    break
-                  }
+        // 遍历树形结构 需要调用element getNode()方法 拿到每个node (每个节点的内容 也就是包含一级二级三级都拿出来)
+        for (let j = 0; j < childNodes.length; j++) {
+          // 拿到树形结构中的每个node (每个节点的内容 也就是包含一级二级三级都拿出来)
+          var node = that.$refs.assignTree.getNode(childNodes[j])
+          // 判断(权限选中数组)是否存在 且长度不小于0
+          if (selectIds && selectIds.length > 0) {
+            // 遍历(权限选中数组) 那存储的所有权限选中id 去树形结构每个节点中的id其匹配
+            for (let h = 0; h < selectIds.length; h++) {
+              // 如果匹配到了相同的id 说明具备该权限 需要处于选中状态
+              if (selectIds[h] == childNodes[j].id) {
+                // 这里来判断是否为末级 (通过第一次遍历修改open状态)
+                if (childNodes[j].open) {
+                  // 通过调用element setChecked()方法 把未勾选变成已勾选状态 node是一级二级三级都拿出来
+                  that.$refs.assignTree.setChecked(node, true)
+                  // 不用return返回 打断即可
+                  break
                 }
               }
             }
-            // 这里进行判断 如果节点存在children(二级三级) 就继续递归
-            if (childNodes[j].children) {
-              // 携带所需要的参数childNodes[j](每层数据) selectIds(权限选中数组) that(当前指向)
-              that.setChild(childNodes[j].children, selectIds, that)
-            }
+          }
+          // 这里进行判断 如果节点存在children(二级三级) 就继续递归
+          if (childNodes[j].children) {
+            // 携带所需要的参数childNodes[j](每层数据) selectIds(权限选中数组) that(当前指向)
+            that.setChild(childNodes[j].children, selectIds, that)
           }
         }
       }
@@ -1626,4 +1625,10 @@ service.interceptors.request.use(
 
 
 ```
+
+## 备注
+
+* 角色管理中用到的两个递归 第一个递归是判断是否末级 第二个递归是判断是否勾选 其实这里不太需要判断是否末级 你可以要求后端返回末级的时候不要带**children** 然后判断children即可知道是否末级 所以就不需要第一次末级递归 这样可以增强性能
+
+![image-20220120164054492](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220120164054492.png)
 

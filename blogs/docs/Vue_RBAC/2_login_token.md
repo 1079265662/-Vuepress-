@@ -3,9 +3,8 @@ title: 续签token的流程
 date: 2022-01-09
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/vue.jpg
 tags:
- - token续签
  - axios
- - RABC
+ - token续签
 categories: RABC
 ---
 
