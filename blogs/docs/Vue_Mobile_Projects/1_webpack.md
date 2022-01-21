@@ -28,7 +28,7 @@ vue create 项目名称(英文)
 
 ## 选择相关选项
 
-![image-20201226222041526](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/TjiWdDF5kBKzeOb.png)
+![image-20220121140334209](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220121140334209.png)
 
 - Babel：es6 转 es5
 
@@ -105,3 +105,4 @@ cd mytest
 npm run serve
 ```
 
+xi
