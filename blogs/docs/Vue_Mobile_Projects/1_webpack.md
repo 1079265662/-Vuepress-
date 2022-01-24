@@ -1,5 +1,5 @@
 ---
-title: 0. Vue移动端 脚手架自定义
+title: 0. Vue使用脚手架搭建项目
 date: 2021-06-01
 cover: https://cdn.jsdelivr.net/gh/Mu-Yan/Mu-Yan.github.io/blogsImg/4.jpg
 tags:
@@ -9,12 +9,18 @@ categories: Vue移动头条项目
 ---
 
 ::: tip 介绍
-Vue移动端脚手架自定义(Vue 2.0)<br>
+Vue使用脚手架搭建项目的具体流程<br>
 :::
 
 <!-- more -->
 
 ## 创建Vue脚手架
+
+* 注意你需要全局安装[Vue脚手架](https://cli.vuejs.org/zh/)
+
+```bash
+npm install -g @vue/cli
+```
 
 * 目录只能用英文
 
@@ -49,7 +55,9 @@ vue create 项目名称(英文)
 
 ## 选中css预处理
 
-![image-20201226222421230](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/b5jxOgYuHzmS8h3.png)
+* 我喜欢用scss
+
+![image-20220124142608680](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220124142608680.png)
 
 ## 选择代码校验规范
 
