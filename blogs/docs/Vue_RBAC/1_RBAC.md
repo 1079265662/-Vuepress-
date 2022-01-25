@@ -967,7 +967,7 @@ RABC权限学习记录文档 从头到尾学习文档<br>
 
 * 删除操作 需要携带删除的角色`id`(要删除角色的id)
 
-### 分配权限思路
+### **分配权限思路**
 
 ![image-20211230184150455](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211230184150455.png)
 
@@ -989,7 +989,7 @@ RABC权限学习记录文档 从头到尾学习文档<br>
 
 * 分配权限查询接口结构: [分配权限查询接口结构json](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E5%88%86%E9%85%8D%E6%9D%83%E9%99%90%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3%E7%BB%93%E6%9E%84.json)
 
-### 分配权限递归代码
+### **分配权限递归代码**
 
 * 分配权限如果前端处理的话 需要两次递归(设置回选) 这样才能实现符合条件的权限勾选状态
 
@@ -1107,7 +1107,7 @@ import leafUtils from '@/utils/leafUtils'
     },
 ```
 
-### 权限分配提交按钮
+### **权限分配提交按钮**
 
 * 分配角色的树形结构实际上提交的是勾选上内容(层级)的id 它分为两种id
 
@@ -1139,7 +1139,7 @@ import leafUtils from '@/utils/leafUtils'
 
 ![](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20211231174020671.png)
 
-### 用户管理左侧菜单
+### **用户管理左侧菜单**
 
 * 用户管理为二合一 左侧菜单栏是显示每个层级部门并且选中后右侧显示对应的角色权限
 
@@ -1152,7 +1152,7 @@ import leafUtils from '@/utils/leafUtils'
 * 用户管理左侧菜单数据结构json:  [用户管理左侧菜单数据结构](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%B7%A6%E4%BE%A7%E8%8F%9C%E5%8D%95%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.json)
 * 这里实际上和 [机构管理树形结构json](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E7%BB%93%E6%9E%84%E7%AE%A1%E7%90%86%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84.json) 结构是一致的 都是树形结构 一层一层的
 
-### 用户管理右侧菜单
+### **用户管理右侧菜单**
 
 * 右侧菜单展示的是该部门下的所有的用户
 
@@ -1190,7 +1190,7 @@ import leafUtils from '@/utils/leafUtils'
 
 * 这里分为真删假删 根据业务 需要携带 `id`给后端 删除对应的条目数据
 
-### 用户管理右侧菜单分配角色展示效果
+### **用户管理右侧菜单分配角色展示效果**
 
 * 通过获取到所有用户的角色内容后 相对的也能获取到用户的`id` 这样可以通过`id`来查询用户拥有的角色 也可以分配对应的角色
 * 这里是设计的时候只能获取单个角色 如果多角色也可以实现
@@ -1373,7 +1373,7 @@ export function getTokenTime () {
 * token续签有两种方式 其实全部的token续签都涉及到了axios的请求拦截器`response.use()` 通过请求拦截器去实现token的续签 
 * 通常都会在`utils`里的`request.js`中进行续签处理 (二次封装axios文件)
 
-### 双token续签机制
+### **双token续签机制**
 
 * 第一种是双token `ReFresh_token` 和 `用户token` 当`用户token`过期后 拿`ReFresh_token`去续签 `ReFresh_token`一般有效期是半年 该token不具备任何数据 只是作为续签凭证 如果`ReFresh_token`过期了 就需要重新登录了 这种方式是相对安全的 因为`用户token`时间只有五分钟 
 
@@ -1462,7 +1462,7 @@ export function getTokenTime () {
   
   ```
 
-### 单token时间戳续签机制
+### **单token时间戳续签机制**
 
 * 第二种是企业常用的 单`用户token` 当用户登录的时候 接口会返回一个`token过期时间戳` 前端把时间戳储存session中 每当请求接口的时候 需要电脑当前时间去计算后端返回`token过期时间戳` 如果小于10分钟(或者其他) 就会进行续签操作 替换一个新的`用户token`并且更新`token过期时间戳` 这种方式相对后端来说简单 安全性不如第一种 因为`用户token` 有效期通常为8小时甚至更长 因为后端是不会把过期token续签的 所以时间设置太短的话 用户临时不操作就会过期重新登录
 
