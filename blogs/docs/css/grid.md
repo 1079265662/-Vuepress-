@@ -1,7 +1,7 @@
 ---
 title: Grid布局的学习记录
 date: 2022-01-25
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_2.png
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9meo78.jpg
 tags:
  - Css
 categories: Css
