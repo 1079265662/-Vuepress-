@@ -1,5 +1,5 @@
 ---
-title: VueUse插件方法合集
+title: VueUse 插件方法合集
 date: 2021-07-15
 cover: https://i.loli.net/2021/07/20/AiD6cUJyrtXVIC4.jpg
 tags:

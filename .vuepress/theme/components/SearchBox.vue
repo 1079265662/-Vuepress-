@@ -165,6 +165,8 @@ export default {
     border-radius: 6px;
     padding: 0.4rem;
     list-style-type: none;
+    max-height: 330px;
+    overflow-y: auto;
 
     &.align-right {
       right: 0;

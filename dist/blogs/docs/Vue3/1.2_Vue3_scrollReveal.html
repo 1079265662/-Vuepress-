@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vue3 scrollRevea组件使用方法 | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?61498f37b83812e7b85952d5feaaab47";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.1c75615b.css" as="style"><link rel="preload" href="/assets/js/app.60e32789.js" as="script"><link rel="preload" href="/assets/js/5.e6fb2106.js" as="script"><link rel="preload" href="/assets/js/1.0bb3dd52.js" as="script"><link rel="preload" href="/assets/js/32.aafa785e.js" as="script"><link rel="prefetch" href="/assets/js/10.988ddcf1.js"><link rel="prefetch" href="/assets/js/11.2c6f107e.js"><link rel="prefetch" href="/assets/js/12.6ddd2dbd.js"><link rel="prefetch" href="/assets/js/13.ffc63a13.js"><link rel="prefetch" href="/assets/js/14.812668b7.js"><link rel="prefetch" href="/assets/js/15.5e2ad861.js"><link rel="prefetch" href="/assets/js/16.4c0d2e7c.js"><link rel="prefetch" href="/assets/js/17.1967b187.js"><link rel="prefetch" href="/assets/js/18.62f55292.js"><link rel="prefetch" href="/assets/js/19.9fe55d77.js"><link rel="prefetch" href="/assets/js/20.fc7cba17.js"><link rel="prefetch" href="/assets/js/21.55ef4223.js"><link rel="prefetch" href="/assets/js/22.3b0831b9.js"><link rel="prefetch" href="/assets/js/23.503804a8.js"><link rel="prefetch" href="/assets/js/24.29105c7c.js"><link rel="prefetch" href="/assets/js/25.db6f83d6.js"><link rel="prefetch" href="/assets/js/26.38c0b832.js"><link rel="prefetch" href="/assets/js/27.f23e5685.js"><link rel="prefetch" href="/assets/js/28.5761a446.js"><link rel="prefetch" href="/assets/js/29.709dafe3.js"><link rel="prefetch" href="/assets/js/3.4e5d0e6c.js"><link rel="prefetch" href="/assets/js/30.130f1c74.js"><link rel="prefetch" href="/assets/js/31.53dc64b2.js"><link rel="prefetch" href="/assets/js/33.7e8a4f7a.js"><link rel="prefetch" href="/assets/js/34.1faf7191.js"><link rel="prefetch" href="/assets/js/35.ff1c0c78.js"><link rel="prefetch" href="/assets/js/36.24e08ae1.js"><link rel="prefetch" href="/assets/js/37.d149eb3d.js"><link rel="prefetch" href="/assets/js/38.5a4a4bca.js"><link rel="prefetch" href="/assets/js/39.866a4c4e.js"><link rel="prefetch" href="/assets/js/4.0067ce26.js"><link rel="prefetch" href="/assets/js/40.65e0ce55.js"><link rel="prefetch" href="/assets/js/41.2cf6bbe1.js"><link rel="prefetch" href="/assets/js/42.284430ec.js"><link rel="prefetch" href="/assets/js/43.ecabc0c0.js"><link rel="prefetch" href="/assets/js/44.511921ff.js"><link rel="prefetch" href="/assets/js/45.849908a1.js"><link rel="prefetch" href="/assets/js/46.b1096eb2.js"><link rel="prefetch" href="/assets/js/47.21dcfab7.js"><link rel="prefetch" href="/assets/js/48.24bd4c78.js"><link rel="prefetch" href="/assets/js/49.a80eff88.js"><link rel="prefetch" href="/assets/js/50.35abb58f.js"><link rel="prefetch" href="/assets/js/51.0b983cbe.js"><link rel="prefetch" href="/assets/js/52.9e686aa7.js"><link rel="prefetch" href="/assets/js/53.4e00681f.js"><link rel="prefetch" href="/assets/js/54.2d4935fd.js"><link rel="prefetch" href="/assets/js/55.03060c66.js"><link rel="prefetch" href="/assets/js/56.f8d0fb17.js"><link rel="prefetch" href="/assets/js/57.30121a15.js"><link rel="prefetch" href="/assets/js/58.51379421.js"><link rel="prefetch" href="/assets/js/59.929cbcd3.js"><link rel="prefetch" href="/assets/js/6.b813653c.js"><link rel="prefetch" href="/assets/js/60.b0c97e13.js"><link rel="prefetch" href="/assets/js/61.e228165b.js"><link rel="prefetch" href="/assets/js/62.b760bbd6.js"><link rel="prefetch" href="/assets/js/63.230f18e6.js"><link rel="prefetch" href="/assets/js/64.274eb69a.js"><link rel="prefetch" href="/assets/js/65.40fbd6b3.js"><link rel="prefetch" href="/assets/js/66.e4e4dc64.js"><link rel="prefetch" href="/assets/js/67.d7975861.js"><link rel="prefetch" href="/assets/js/68.8a75dd43.js"><link rel="prefetch" href="/assets/js/69.bdba289f.js"><link rel="prefetch" href="/assets/js/7.d057457a.js"><link rel="prefetch" href="/assets/js/70.ffceb4a5.js"><link rel="prefetch" href="/assets/js/71.4babafac.js"><link rel="prefetch" href="/assets/js/72.4e993b6e.js"><link rel="prefetch" href="/assets/js/73.7c8ded91.js"><link rel="prefetch" href="/assets/js/74.55832b73.js"><link rel="prefetch" href="/assets/js/75.96e79b27.js"><link rel="prefetch" href="/assets/js/76.37e0ee8f.js"><link rel="prefetch" href="/assets/js/77.87a975d1.js"><link rel="prefetch" href="/assets/js/78.f22ad1f0.js"><link rel="prefetch" href="/assets/js/79.257229ce.js"><link rel="prefetch" href="/assets/js/8.b1f53c13.js"><link rel="prefetch" href="/assets/js/80.6dc38b6f.js"><link rel="prefetch" href="/assets/js/81.b1ec8ddf.js"><link rel="prefetch" href="/assets/js/82.8472509a.js"><link rel="prefetch" href="/assets/js/83.de9527e9.js"><link rel="prefetch" href="/assets/js/84.0848b02f.js"><link rel="prefetch" href="/assets/js/85.1a962e0a.js"><link rel="prefetch" href="/assets/js/86.0981d254.js"><link rel="prefetch" href="/assets/js/87.9a9842c3.js"><link rel="prefetch" href="/assets/js/88.72d3bac2.js"><link rel="prefetch" href="/assets/js/89.93e54fd2.js"><link rel="prefetch" href="/assets/js/9.4652c675.js"><link rel="prefetch" href="/assets/js/90.0718150d.js"><link rel="prefetch" href="/assets/js/91.3f4bb7eb.js"><link rel="prefetch" href="/assets/js/92.cd0eab12.js"><link rel="prefetch" href="/assets/js/93.98e2f34f.js"><link rel="prefetch" href="/assets/js/94.fc1f848e.js"><link rel="prefetch" href="/assets/js/95.38fcac81.js"><link rel="prefetch" href="/assets/js/96.a3ed912e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1c75615b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-ec75d12e><div data-v-ec75d12e><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-ec75d12e data-v-ec75d12e><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-89477f7e data-v-ec75d12e data-v-ec75d12e><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div> <div class="hide" data-v-ec75d12e><div data-v-ec75d12e><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-dp278m.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-ec75d12e><header class="navbar" data-v-ec75d12e><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/animation/" class="nav-link"><i class="iconfont undefined"></i>
+  animation
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-ec75d12e></div> <aside class="sidebar" data-v-ec75d12e><div class="personal-info-wrapper" data-v-03833281 data-v-ec75d12e><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>81</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>32</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/animation/" class="nav-link"><i class="iconfont undefined"></i>
+  animation
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Vue3</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/Vue3/1.1.1_Vue_study.html" class="sidebar-link">Vue3 学习手册(博客版)</a></li><li><a href="/blogs/docs/Vue3/1.1_Vue3_install.html" class="sidebar-link">Vue3 install插件机制</a></li><li><a href="/blogs/docs/Vue3/1.2_Vue3_scrollReveal.html" aria-current="page" class="active sidebar-link">Vue3 scrollRevea组件使用方法</a></li><li><a href="/blogs/docs/Vue3/9_VueUse.html" class="sidebar-link">VueUse 插件方法合集</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-89477f7e data-v-ec75d12e><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>Vue3 scrollRevea组件使用方法</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div></div> <div data-v-ec75d12e><main class="page"><div class="page-title" style="display:none;"><h1 class="title">Vue3 scrollRevea组件使用方法</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2022-01-26</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/Vue3/1.2_Vue3_scrollReveal.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>Vue3</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>Vue3 使用scrollReveal组件 结尾有Vue2的方法<br></p></div> <h2 id="scrollreveal组件是什么"><a href="#scrollreveal组件是什么" class="header-anchor">#</a> scrollReveal组件是什么</h2> <ul><li><a href="https://scrollrevealjs.org/" target="_blank" rel="noopener noreferrer">scrollReveal<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 是一个非常牛逼的组件 他可以实现页面的懒加载显示效果 并且具备十分养眼的动画淡出移动等等 非常非常牛</li> <li>你在页面上常见的那种滑动到某个位置 动画显示的效果 大部分都是通过<a href="https://scrollrevealjs.org/" target="_blank" rel="noopener noreferrer">scrollReveal<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>组件实现的</li></ul> <blockquote><p>我们看看实际效果吧</p></blockquote> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/04onm-qtuws.gif" alt="04onm-qtuws"></p> <h2 id="在vue3中使用"><a href="#在vue3中使用" class="header-anchor">#</a> 在Vue3中使用</h2> <ul><li>使用方式和Vue2没有太大差别 也就是Vue2在<code>data</code>声明中的内容 需要在Vue3的<code>reactive()</code>声明</li></ul> <blockquote><p>第一步 下载并安装scrollReveal</p></blockquote> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> scrollreveal
+</code></pre></div><blockquote><p>第二步  scrollReveal引入到组件中</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> scrollReveal <span class="token keyword">from</span> <span class="token string">'scrollreveal'</span>
+</code></pre></div><blockquote><p>第三步 在Vue3的 reactive()中声明</p></blockquote> <ul><li>Vue2中是在<code>data()</code>中声明的 但是到了Vue3呢需要在<code>reactive()</code>中声明 记得要引入<code>reactive()</code>哦</li></ul> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token comment">// 1.引入的scrollReveal组件</span>
+<span class="token keyword">import</span> scrollReveal <span class="token keyword">from</span> <span class="token string">'scrollreveal'</span>
+<span class="token comment">// 2.引入Vue3的reactive()响应式声明 和 onMounted()页面加载声明周期</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> reactive<span class="token punctuation">,</span>onMounted <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">setup</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token function">reactive</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token comment">// 3.在reactive()中声明scrollReveal组件</span>
+      scrollReveal<span class="token operator">:</span> <span class="token function">scrollReveal</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token comment">// 4.设置scrollReveal的方法</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">retScroll</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// reveal()的类名可以为id (#reveal-top) 也可以为class(.reveal-top) 名称随意 并且也支持并集class写法 注意必须设置类否则无法使用</span>
+      data<span class="token punctuation">.</span>scrollReveal<span class="token punctuation">.</span><span class="token function">reveal</span><span class="token punctuation">(</span><span class="token string">'#reveal-top'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 动画的时长</span>
+        duration<span class="token operator">:</span> <span class="token number">600</span><span class="token punctuation">,</span>
+        <span class="token comment">// 延迟时间</span>
+        delay<span class="token operator">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+        <span class="token comment">// 动画开始的位置，'bottom', 'left', 'top', 'right'</span>
+        origin<span class="token operator">:</span> <span class="token string">'bottom'</span><span class="token punctuation">,</span>
+        <span class="token comment">// 回滚的时候是否再次触发动画</span>
+        reset<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token comment">// 延时执行方式（always（一直延时执行），once（只延时执行一次），onload（只在加载时延时执行））</span>
+        <span class="token comment">// // useDelay: 'onload',</span>
+        <span class="token comment">// 在移动端是否使用动画</span>
+        mobile<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token comment">// 滚动的距离，单位可以用%，rem等</span>
+        distance<span class="token operator">:</span> <span class="token string">'10px'</span><span class="token punctuation">,</span>
+        <span class="token comment">// 其他可用的动画效果</span>
+        opacity<span class="token operator">:</span> <span class="token number">0.001</span><span class="token punctuation">,</span>
+        <span class="token comment">// 执行速度 线性函数啥的</span>
+        easing<span class="token operator">:</span> <span class="token string">'cubic-bezier(0.5, 0, 0, 1)'</span><span class="token punctuation">,</span>
+        <span class="token comment">// 执行方式（缩放）</span>
+        scale<span class="token operator">:</span> <span class="token number">0.9</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 5.页面加载声明周期</span>
+    <span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 6.启动scrollReveal的方法</span>
+      <span class="token function">retScroll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><blockquote><p>第四步 在template模板中 绑定你设置的class或者id类</p></blockquote> <ul><li>高度要高一点 你要是一个屏幕都能看完 还懒加载锤子</li></ul> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>reveal-top<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>你好<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>reveal-top<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>你好<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="在vue2中使用"><a href="#在vue2中使用" class="header-anchor">#</a> 在Vue2中使用</h2> <ul><li>不多说了奥 自己看代码块吧</li></ul> <div class="language-html extra-class"><pre class="language-html"><code>// npm安装scrollReveal
+npm install scrollreveal
+
+// 引入到组件中
+import scrollReveal from ‘scrollreveal’;
+
+// 在data中注册
+data () {
+  return {
+    scrollReveal: scrollReveal()
+  }
+}
+
+// 项目中执行，自定义类名。
+mounted() {
+  this.scrollReveal.reveal('.reveal-top', {
+    // 动画的时长
+    duration: 2000,
+    // 延迟时间
+    delay: 500,
+    // 动画开始的位置，'bottom', 'left', 'top', 'right'
+    origin: 'top',
+    // 回滚的时候是否再次触发动画
+    reset: false,
+    // 在移动端是否使用动画
+    mobile: false,
+    // 滚动的距离，单位可以用%，rem等
+    distance: '200px',
+    // 其他可用的动画效果
+    opacity: 0.001,
+    easing: 'linear',
+    scale: 0.9,
+  });
+},
+// 将自定义的类名添加到html代码中
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>reveal-top<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>img<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>reveal-top<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>img<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="scrollreveal的api介绍"><a href="#scrollreveal的api介绍" class="header-anchor">#</a> scrollreveal的api介绍</h2> <ul><li><a href="https://scrollrevealjs.org/api/reveal.html" target="_blank" rel="noopener noreferrer">scrollReveal<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 很强大需要多探索才能使用他强大的特效 播客的特效只是基本特效 如果有兴趣 可以去官方查阅</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 属性：（默认）</span>
+           delay<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>                                <span class="token comment">// 延时时间</span>
+           distance<span class="token operator">:</span> <span class="token string">'0px'</span><span class="token punctuation">,</span>                         <span class="token comment">// 执行距离</span>
+           duration<span class="token operator">:</span> <span class="token number">600</span><span class="token punctuation">,</span>                           <span class="token comment">// 执行时长</span>
+           easing<span class="token operator">:</span> <span class="token string">'cubic-bezier(0.5, 0, 0, 1)'</span><span class="token punctuation">,</span>    <span class="token comment">// 执行速度</span>
+           interval<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>                             <span class="token comment">// 执行间隔（时间）</span>
+           opacity<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>                              <span class="token comment">// 执行方式（透明度）</span>
+           origin<span class="token operator">:</span> <span class="token string">'bottom'</span><span class="token punctuation">,</span>                        <span class="token comment">// 执行方式（偏移 top:自上而下,bottom:自下而上,left:自左往右,right:自右往左.）</span>
+           rotate<span class="token operator">:</span> <span class="token punctuation">{</span>                                <span class="token comment">// 执行方式（旋转）</span>
+               x<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>                                <span class="token comment">// x</span>
+               y<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>                                <span class="token comment">// y</span>
+               z<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>                                <span class="token comment">// z</span>
+           <span class="token punctuation">}</span><span class="token punctuation">,</span>
+           scale<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>                                <span class="token comment">// 执行方式（缩放）</span>
+           cleanup<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>                          <span class="token comment">// 暂时不知道是什么东西</span>
+           container<span class="token operator">:</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">,</span>     <span class="token comment">// 执行容器（后跟元素，填写后只有容器内的元素执行动画）</span>
+           desktop<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>                           <span class="token comment">// 是否在电脑上面执行</span>
+           mobile<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>                            <span class="token comment">// 是否在手机上面执行</span>
+           reset<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>                            <span class="token comment">// 是否重复执行（）</span>
+           useDelay<span class="token operator">:</span> <span class="token string">'always'</span><span class="token punctuation">,</span>                      <span class="token comment">// 延时执行方式（always（一直延时执行），once（只延时执行一次），onload（只在加载时延时执行））</span>
+           viewFactor<span class="token operator">:</span> <span class="token number">0.0</span><span class="token punctuation">,</span>                         <span class="token comment">// 视图显示元素百分之多少的时候执行动画（单位：小数，例：0.50 在元素展示超过百分之五十的时候，执行动画）</span>
+           viewOffset<span class="token operator">:</span> <span class="token punctuation">{</span>                            <span class="token comment">// 视图偏移（把视图抽象成元素移动）</span>
+               top<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+               right<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+               bottom<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+               left<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token punctuation">}</span><span class="token punctuation">,</span>
+           <span class="token function-variable function">afterReset</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">el</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>            <span class="token comment">// 重置之后（视图内看不到元素之后，退场动画执行结束之后）</span>
+           <span class="token function-variable function">afterReveal</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">el</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>           <span class="token comment">// 执行之后（动画已经执行完毕（已完成））</span>
+           <span class="token function-variable function">beforeReset</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">el</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>           <span class="token comment">// 重置之前（视图内看不到元素之后，退场动画执行结束之前）</span>
+           <span class="token function-variable function">beforeReveal</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">el</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>          <span class="token comment">// 执行之前（动画开始执行（未完成时））　</span>
+　　
+</code></pre></div><h2 id="参考文献"><a href="#参考文献" class="header-anchor">#</a> 参考文献</h2> <p><a href="https://www.cnblogs.com/Strangers/p/14867162.html" target="_blank" rel="noopener noreferrer">vue使用scrollReveal滚动插件<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://www.cnblogs.com/fzkbk/p/14750242.html" target="_blank" rel="noopener noreferrer">scrollreveal.js中文api<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.60e32789.js" defer></script><script src="/assets/js/5.e6fb2106.js" defer></script><script src="/assets/js/1.0bb3dd52.js" defer></script><script src="/assets/js/32.aafa785e.js" defer></script>
+  </body>
+</html>
