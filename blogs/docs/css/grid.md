@@ -23,6 +23,10 @@ Grid布局的学习记录<br>
 * `flex`布局是轴线布局，只能指定"项目"针对轴线的位置，可以看作是**一维布局**。`grid`布局则是将容器划分成"行"和"列"，产生单元格，然后指定"项目所在"的单元格，可以看作是**二维布局**。`grid`布局远比 `flex`布局强大。
 * `grid`+`flex`才是顶级之配 `flot`狗都不用 什么你说ie 不存在的 这是什么浏览器
 
+> 学习视频
+
+* 我是在 [b站这里](https://www.bilibili.com/video/BV1Bk4y197xm?from=search&seid=24652100936285353&spm_id_from=333.337.0.0) 学习的grid布局
+
 ## grid和flex容器和单元格概念
 
 * `grid`布局有两个基本概念
@@ -38,7 +42,7 @@ Grid布局的学习记录<br>
 
 ![image-20220124172955556](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220124172955556.png)
 
-* 我们不光摇动行高列宽的概念 还要懂网格线的概念
+* 我们不光要懂行高列宽的概念 还要懂网格线的概念
   * 下图是一个 4 x 4 的网格，共有5根水平网格线和5根垂直网格线。
 
 ![image-20220124173220734](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220124173220734.png)
