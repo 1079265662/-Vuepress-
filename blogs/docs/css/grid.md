@@ -50,6 +50,7 @@ Grid布局的学习记录<br>
 * <font color =#ff3040>注意: </font>
   * 设为网格布局以后，容器子元素（项目）的`float`、`display: inline-block`、`display: table-cell`、`vertical-align`和`column-*`等设置都将失效
   * grid布局只对项目生效，项目只能是容器的一级子元素，子元素并不生效
+  * 设置grid布局后 内部单元格不建议使用`margin`来实现间距 可以使用`gap`来实现间距 或者使用`box-sizing: border-box;` + `padding`
 
 
 
