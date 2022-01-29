@@ -48,12 +48,23 @@ scss css扩展语言在Vue项目中的使用<br>
 }       
 ```
 
-## scss的深度选择器
+## Vu2scss的深度选择器
 
 * sass中替换原类名 deep(深度选择器)
   * sass中 deep方法是 `::v-deep` 而 less里面的方法是 `/deep/`
 
 ![image-20210706214001467](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/WIbiCK6arP4HT13.png)
+
+## Vue3的深度选择器
+
+* Vue3深度选择器是.:deep(类名)
+* <font color =#ff3040>注意: 不要在()前面加空格</font>
+
+```css
+:deep(.hvr-sweep-to-top:before) {
+  background: red;
+}
+```
 
 ## scss的自定义变量
 
@@ -263,6 +274,20 @@ module.exports = {
 ```js
 // 在main.js中导入全局css
 import './styles/main.scss'
+```
+
+## 导入字体库
+
+* 通过`@font-face` 设置路径`src` 和 名称`font-family`
+
+```css
+@font-face {
+  font-family: "斗鱼追光体";
+  src: url("./font/douyuFont-2.otf");
+}
+.demo{
+	font-family: "斗鱼追光体"
+}
 ```
 
 ## 参考文献
