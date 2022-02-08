@@ -69,7 +69,8 @@ Vscode快速设置文档 涉及到settings和eslint<br>
     "eslint.codeAction.showDocumentation": {
         "enable": false
     },
-    "vetur.validation.template": true,
+    // 关闭v-model检测
+    "vetur.validation.template": false,
     // "eslint.run": "onType",
     // "eslint.options": {
     //     "extensions": [".js",".vue"]
@@ -164,7 +165,6 @@ Vscode快速设置文档 涉及到settings和eslint<br>
         "editor.defaultFormatter": "vscode.html-language-features"
     }
 }
-
 ```
 
 ## eslint设置
