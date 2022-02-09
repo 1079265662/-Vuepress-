@@ -123,7 +123,7 @@
               <ul class="ul">
                 <li><a href="https://gitee.com/liu_kaili" target="_blank">gitee</a></li>
                 <li><a href="https://github.com/1079265662" target="_blank">github</a></li>
-                <li><a href="#">简历🚫</a></li>
+                <li><a href="https://liukaili-resume.netlify.app/">简历🚫</a></li>
               </ul>
               <span style="color: rgb(0, 190, 0);">root@liukaili</span>
               <span style="color: blue;">~</span>

@@ -122,13 +122,19 @@ module.exports = {
       {
         title: "去看电影 🎬︎",
         desc: "太好看啦 🔞",
-        logo: "https://i.loli.net/2021/05/17/NWjePTC9BLD48tl.jpg",
+        logo: "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/yaoshui.jpg",
         link: "https://cms.zhuanma.co/",
       },
       {
         title: "我的GitHub 🧱",
         desc: "记录我搬砖的网站🧱",
-        logo: "https://i.loli.net/2021/05/18/Cw4FEmbWIKROu7l.jpg",
+        logo: "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/github.jpg",
+        link: "https://github.com/1079265662",
+      },
+      {
+        title: "我的个人简历页🥵",
+        desc: "🥵",
+        logo: "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/liuhan.jpg",
         link: "https://github.com/1079265662",
       },
     ],
