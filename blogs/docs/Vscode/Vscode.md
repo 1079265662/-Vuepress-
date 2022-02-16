@@ -198,7 +198,7 @@ module.exports = {
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline": "off",
     // 设置name时候自动转大小写  ["error", "PascalCase" | "kebab-case"]
-    "vue/name-property-casing": ["error", "kebab-case"],
+    "vue/name-property-casing": ["error", "PascalCase"],
     "vue/no-v-html": "off",
     'accessor-pairs': 2,
     'arrow-spacing': [2, {
@@ -371,7 +371,7 @@ module.exports = {
     }],
     'array-bracket-spacing': [2, 'never'] // 不允许数组括号内的空格
   }
-
+}
 ```
 
 ## 展示效果
