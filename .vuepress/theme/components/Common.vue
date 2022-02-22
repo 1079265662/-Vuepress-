@@ -123,9 +123,7 @@ export default {
       isSidebarOpen: false,
       isHasKey: true,
       isHasPageKey: true,
-      firstLoad: true,
-      //设置图片数量
-      imageNumber: 8
+      firstLoad: true
     };
   },
 
@@ -141,17 +139,15 @@ export default {
       );
     },
     cover () {
+      console.log();
       return (
-        // this.$themeConfig.covers[new Date().getDay()] ||
-        `https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_${Math.floor((Math.random() * this.imageNumber) + 1)}.jpg`
+        this.$themeConfig.covers[Math.floor(Math.random() * this.$themeConfig.covers.length)]
       );
     },
     // 其他页图片
     pageCover () {
       return (
-        this.$page.frontmatter.cover ||
-        // this.$themeConfig.covers[new Date().getDay()] ||
-        "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_4.jpg"
+        this.$themeConfig.covers[Math.floor(Math.random() * this.$themeConfig.covers.length)]
       );
     },
     shouldShowNavbar () {
