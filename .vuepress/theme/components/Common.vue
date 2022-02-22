@@ -141,13 +141,13 @@ export default {
     cover () {
       console.log();
       return (
-        this.$themeConfig.covers[Math.floor(Math.random() * this.$themeConfig.covers.length)]
+        this.$themeConfig.covers[Math.floor(Math.random() * this.$themeConfig.covers.length)] || 'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_1.jpg'
       );
     },
     // 其他页图片
     pageCover () {
       return (
-        this.$themeConfig.covers[Math.floor(Math.random() * this.$themeConfig.covers.length)]
+        this.$page.frontmatter.cover || this.$themeConfig.covers[Math.floor(Math.random() * this.$themeConfig.covers.length)]
       );
     },
     shouldShowNavbar () {
