@@ -119,12 +119,15 @@ instance.interceptors.request.use((config) => { // config是发送的数据
   // 返回处理后的数据
   return config
 }, (err) => {
+   // 提示网络错误 可以拦截到网络错误 接口报错
+  Message.error($t.login.errorWeb)
   // 如果请求拦截器错误 返回打印错误信息
   return Promise.reject(err)
 })
 
 // 响应拦截器 (处理后端返回的数据)
 instance.interceptors.response.use((response) => {
+   // 这里可以判断token是否失效 然后进行处理操作
   // 去除axios自带的一层data
   return response.data
 }, (err) => {
@@ -133,10 +136,11 @@ instance.interceptors.response.use((response) => {
     // ---------------------- 应该续签token 但是后端没做(按需设置)
       
     // 进行清除操作
-      
     // 刷新跳转
     window.location.href = '/login'
   }
+   // 提示网络错误 可以拦截到网络错误 接口报错
+  Message.error($t.login.errorWeb)
   // 打印响应拦截器的错误信息
   return Promise.reject(err)
 })
