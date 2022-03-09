@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TypeScript 学习记录 | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?61498f37b83812e7b85952d5feaaab47";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.6f92cd8b.css" as="style"><link rel="preload" href="/assets/js/app.005384be.js" as="script"><link rel="preload" href="/assets/js/5.e6fb2106.js" as="script"><link rel="preload" href="/assets/js/1.903fcf53.js" as="script"><link rel="preload" href="/assets/js/27.8fa96553.js" as="script"><link rel="prefetch" href="/assets/js/10.988ddcf1.js"><link rel="prefetch" href="/assets/js/100.71fa282d.js"><link rel="prefetch" href="/assets/js/101.ce10ba72.js"><link rel="prefetch" href="/assets/js/102.ba3566ac.js"><link rel="prefetch" href="/assets/js/103.e0cc05f9.js"><link rel="prefetch" href="/assets/js/104.e9f749e8.js"><link rel="prefetch" href="/assets/js/105.2442c96f.js"><link rel="prefetch" href="/assets/js/106.e23c5d29.js"><link rel="prefetch" href="/assets/js/107.11a10f2e.js"><link rel="prefetch" href="/assets/js/108.faf181ae.js"><link rel="prefetch" href="/assets/js/11.797d66dd.js"><link rel="prefetch" href="/assets/js/12.e2145805.js"><link rel="prefetch" href="/assets/js/13.1656b167.js"><link rel="prefetch" href="/assets/js/14.26c4008f.js"><link rel="prefetch" href="/assets/js/15.1bf86ce2.js"><link rel="prefetch" href="/assets/js/16.81b30c09.js"><link rel="prefetch" href="/assets/js/17.27ab251c.js"><link rel="prefetch" href="/assets/js/18.930dee58.js"><link rel="prefetch" href="/assets/js/19.19034ef2.js"><link rel="prefetch" href="/assets/js/20.d049a7e3.js"><link rel="prefetch" href="/assets/js/21.dc0f614a.js"><link rel="prefetch" href="/assets/js/22.b1489831.js"><link rel="prefetch" href="/assets/js/23.1b1d3791.js"><link rel="prefetch" href="/assets/js/24.2faf1c32.js"><link rel="prefetch" href="/assets/js/25.c9c379e7.js"><link rel="prefetch" href="/assets/js/26.30b61b2e.js"><link rel="prefetch" href="/assets/js/28.c515a7c4.js"><link rel="prefetch" href="/assets/js/29.e79425c3.js"><link rel="prefetch" href="/assets/js/3.4e5d0e6c.js"><link rel="prefetch" href="/assets/js/30.33fce385.js"><link rel="prefetch" href="/assets/js/31.ffd26936.js"><link rel="prefetch" href="/assets/js/32.90b0079d.js"><link rel="prefetch" href="/assets/js/33.cfe3e44e.js"><link rel="prefetch" href="/assets/js/34.4e06c1e6.js"><link rel="prefetch" href="/assets/js/35.67d4146d.js"><link rel="prefetch" href="/assets/js/36.b4cd167d.js"><link rel="prefetch" href="/assets/js/37.0bd0bf33.js"><link rel="prefetch" href="/assets/js/38.ee3595b3.js"><link rel="prefetch" href="/assets/js/39.2ff13afb.js"><link rel="prefetch" href="/assets/js/4.0067ce26.js"><link rel="prefetch" href="/assets/js/40.7ef57d32.js"><link rel="prefetch" href="/assets/js/41.fd287b70.js"><link rel="prefetch" href="/assets/js/42.14cdc772.js"><link rel="prefetch" href="/assets/js/43.305f0dcc.js"><link rel="prefetch" href="/assets/js/44.dfa323a9.js"><link rel="prefetch" href="/assets/js/45.10ec9c04.js"><link rel="prefetch" href="/assets/js/46.a4cdac78.js"><link rel="prefetch" href="/assets/js/47.638a7990.js"><link rel="prefetch" href="/assets/js/48.af62567a.js"><link rel="prefetch" href="/assets/js/49.37ef63ac.js"><link rel="prefetch" href="/assets/js/50.5ecc7534.js"><link rel="prefetch" href="/assets/js/51.d5cc1834.js"><link rel="prefetch" href="/assets/js/52.82a7c4c3.js"><link rel="prefetch" href="/assets/js/53.c6632b7f.js"><link rel="prefetch" href="/assets/js/54.b8d7b80b.js"><link rel="prefetch" href="/assets/js/55.6fe197e7.js"><link rel="prefetch" href="/assets/js/56.260b2ed1.js"><link rel="prefetch" href="/assets/js/57.d234c0a3.js"><link rel="prefetch" href="/assets/js/58.bb4bca0e.js"><link rel="prefetch" href="/assets/js/59.9f32d033.js"><link rel="prefetch" href="/assets/js/6.b813653c.js"><link rel="prefetch" href="/assets/js/60.d972b59a.js"><link rel="prefetch" href="/assets/js/61.5fc353c2.js"><link rel="prefetch" href="/assets/js/62.d9adc3a8.js"><link rel="prefetch" href="/assets/js/63.7da93df6.js"><link rel="prefetch" href="/assets/js/64.6873b13f.js"><link rel="prefetch" href="/assets/js/65.caa7bc07.js"><link rel="prefetch" href="/assets/js/66.54ddf535.js"><link rel="prefetch" href="/assets/js/67.4b275f81.js"><link rel="prefetch" href="/assets/js/68.8d7bdce3.js"><link rel="prefetch" href="/assets/js/69.2a176410.js"><link rel="prefetch" href="/assets/js/7.2fe5d1d4.js"><link rel="prefetch" href="/assets/js/70.c9cab003.js"><link rel="prefetch" href="/assets/js/71.4c6221af.js"><link rel="prefetch" href="/assets/js/72.85a39c3b.js"><link rel="prefetch" href="/assets/js/73.7b753a4c.js"><link rel="prefetch" href="/assets/js/74.2b291be5.js"><link rel="prefetch" href="/assets/js/75.ee8c511a.js"><link rel="prefetch" href="/assets/js/76.a267e1eb.js"><link rel="prefetch" href="/assets/js/77.815202da.js"><link rel="prefetch" href="/assets/js/78.b3d237f9.js"><link rel="prefetch" href="/assets/js/79.dda202f5.js"><link rel="prefetch" href="/assets/js/8.b1f53c13.js"><link rel="prefetch" href="/assets/js/80.1f8ff681.js"><link rel="prefetch" href="/assets/js/81.4dfe4caa.js"><link rel="prefetch" href="/assets/js/82.09d9ce95.js"><link rel="prefetch" href="/assets/js/83.a3ae733b.js"><link rel="prefetch" href="/assets/js/84.187192ec.js"><link rel="prefetch" href="/assets/js/85.84efc88c.js"><link rel="prefetch" href="/assets/js/86.c123832d.js"><link rel="prefetch" href="/assets/js/87.dae7c214.js"><link rel="prefetch" href="/assets/js/88.cb9d247c.js"><link rel="prefetch" href="/assets/js/89.a04e1e1a.js"><link rel="prefetch" href="/assets/js/9.4652c675.js"><link rel="prefetch" href="/assets/js/90.b55e1d14.js"><link rel="prefetch" href="/assets/js/91.ceccb895.js"><link rel="prefetch" href="/assets/js/92.d6921307.js"><link rel="prefetch" href="/assets/js/93.8bb56fb6.js"><link rel="prefetch" href="/assets/js/94.c74f3f0f.js"><link rel="prefetch" href="/assets/js/95.314d48b5.js"><link rel="prefetch" href="/assets/js/96.3950b38b.js"><link rel="prefetch" href="/assets/js/97.d67bbfdc.js"><link rel="prefetch" href="/assets/js/98.3c88122b.js"><link rel="prefetch" href="/assets/js/99.3cafb0a1.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6f92cd8b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-57e19720><div data-v-57e19720><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-57e19720 data-v-57e19720><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-89477f7e data-v-57e19720 data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div> <div class="hide" data-v-57e19720><div data-v-57e19720><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_10.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-57e19720><header class="navbar" data-v-57e19720><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-57e19720></div> <aside class="sidebar" data-v-57e19720><div class="personal-info-wrapper" data-v-03833281 data-v-57e19720><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>93</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>34</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Type Script</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/TypeScript/1_TypeScript.html" aria-current="page" class="active sidebar-link">TypeScript 学习记录</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-89477f7e data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>TypeScript 学习记录</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div></div> <div data-v-57e19720><main class="page"><div class="page-title" style="display:none;"><h1 class="title">TypeScript 学习记录</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2022-03-01</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/TypeScript/1_TypeScript.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>TypeScript</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>TypeScript学习记录<br></p></div> <h2 id="ts的作用是什么"><a href="#ts的作用是什么" class="header-anchor">#</a> ts的作用是什么</h2> <ul><li>ts可以帮助我们进行一个强类型检测 让js变成了一个十分严格的强类型语言</li> <li>我们开发可以通过<code>eslint</code>来规范我们的书写方式 配合 <code>ts</code>来规范我们的类型 让你的<code>Vue</code>或者其他的语言更具备工程化</li> <li>当你设置ts后 就会内置类型检查 如果类型不一致 将会报错</li></ul> <blockquote><p>举个例子</p></blockquote> <ul><li>我们知道<code>number</code>类型和<code>string</code>类型 在js中可以用 <code>+=</code> 但是他不是相加 是拼接 js并不知道他俩类型是否不一样 可能就会造成错误</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> ret <span class="token operator">=</span> <span class="token number">100</span> <span class="token comment">// 我们声明一个number类型的值</span>
+ret <span class="token operator">+=</span> <span class="token string">'100'</span> <span class="token comment">// 让其增加100 但是我们100如果是字符串类型 那么会被拼接而非相加</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>ret<span class="token punctuation">)</span> <span class="token comment">// 100100</span>
+</code></pre></div><ul><li>通过以上的例子我们就知道bug怎么诞生了吧 那么如果这个值是后端返回的 你更无法操控得知 就会造成数据的bug</li></ul> <blockquote><p>ts的类型检测</p></blockquote> <ul><li>如果你规定了ts类型(<code>any</code>除外) 当你输入不符合的类型时候 会进行报错</li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220301142532649.png" alt="image-20220301142532649"></p> <h2 id="安装ts"><a href="#安装ts" class="header-anchor">#</a> 安装ts</h2> <p>我们想直接用ts 而非框架中 就需要单独安装运行环境 <code>ts-node</code></p> <ul><li>下载ts 并全局安装</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> -g typescript
+</code></pre></div><ul><li>下载ts封装的运行环境 并全局安装 让我们用<code>ts-node</code>命令 就能启动ts</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> -g ts-node
+</code></pre></div><ul><li>在文件下创建ts配置文件 没有特殊需求 不用管 使用默认配置即可</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code>tsc --init
+</code></pre></div><ul><li>运行我们的ts 文件</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code>ts-node demo.ts
+</code></pre></div><h2 id="ts的基本数据类型"><a href="#ts的基本数据类型" class="header-anchor">#</a> ts的基本数据类型</h2> <ul><li>基本数据类型大家都懂奥 就是什么布尔啊数字什么的</li> <li>命名的方式: <code>let 变量名: 类型 = 类型规范的值</code></li></ul> <h3 id="布尔型-boolean"><a href="#布尔型-boolean" class="header-anchor">#</a> <strong>布尔型 <code>boolean</code></strong></h3> <ul><li>关键 <code>boolean</code></li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">let</span> b<span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token boolean">false</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+b <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+
+<span class="token comment">// false</span>
+<span class="token comment">// true</span>
+</code></pre></div><h3 id="数字类型-number"><a href="#数字类型-number" class="header-anchor">#</a> <strong>数字类型 <code>number</code></strong></h3> <ul><li>关键字 <code>number</code></li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">let</span> num<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+
+<span class="token comment">// 1</span>
+</code></pre></div><h3 id="字符串-string"><a href="#字符串-string" class="header-anchor">#</a> <strong>字符串 <code>string</code></strong></h3> <ul><li>关键字 <code>string</code></li> <li><code>string</code>如果你不定义 默认值是<code>undefined</code></li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">let</span> str<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">'str'</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
+<span class="token keyword">let</span> str1<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">&quot;str1&quot;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>str1<span class="token punctuation">)</span>
+
+<span class="token comment">// str</span>
+<span class="token comment">// str1</span>
+</code></pre></div><h3 id="数组-array"><a href="#数组-array" class="header-anchor">#</a> <strong>数组 <code>Array</code></strong></h3> <ul><li><p>关键字 <code>Array&lt;数据类型&gt; 数据类型[]</code></p></li> <li><p>指定类型的数组 <code>变量名: number/string[]</code></p> <ul><li><code>number</code>类型的数组 还是<code>string</code>类型的数组</li></ul></li> <li><p>泛型表示的数组 <code>变量名: Array&lt;number/string&gt;</code></p></li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token comment">// 指定类型表示的数组</span>
+<span class="token keyword">let</span> arr1<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+<span class="token keyword">let</span> arrStr<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">]</span>
+
+<span class="token comment">// 泛型表示的数组</span>
+<span class="token keyword">let</span> arr2<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">]</span>
+<span class="token keyword">let</span> arr3<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">,</span> arrStr<span class="token punctuation">,</span> arr2<span class="token punctuation">,</span> arr3<span class="token punctuation">)</span>
+
+<span class="token comment">// [ 1, 2, 3 ] [ 'a', 'b' ] [ 'a', 'b' ] [ 1 , 2 ]</span>
+</code></pre></div><h3 id="元组-tuple"><a href="#元组-tuple" class="header-anchor">#</a> <strong>元组 <code>tuple</code></strong></h3> <ul><li>没有关键字 只有定义方式 定义指定的数据类型 <code>[number, string, boolean]</code></li> <li>指定几个 就只能输入几个 而且类型必须和规定的一致</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">let</span> tuple<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">]</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>tuple<span class="token punctuation">)</span>
+
+<span class="token comment">// ['a', 1, false]</span>
+</code></pre></div><h3 id="枚举-enum"><a href="#枚举-enum" class="header-anchor">#</a> <strong>枚举 <code>enum</code></strong></h3> <ul><li>关键字 <code>enum</code></li> <li>枚举可以分为:
+<ul><li>数字枚举 数字形枚举是递增的枚举 从上到下的递增 你也可以给其赋值 不赋值的话就是递增 默认从<code>0</code> 开始</li> <li>字符串枚举 字符串不支持递增 也就是声明了一个字符串的内容 你枚举里面的所有内容 都需要设置内容</li> <li>混合枚举(异构枚举) 字符串和数字声明后都可以塞入枚举 但是不推荐</li> <li>const枚举</li></ul></li></ul> <blockquote><p>数字枚举</p></blockquote> <ul><li>如果不设置值 默认是从0开始 设置值 就会从值开始递增</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">enum</span> Play <span class="token punctuation">{</span>
+  <span class="token constant">UP</span><span class="token punctuation">,</span> <span class="token comment">// 0</span>
+  <span class="token constant">DOWN</span><span class="token punctuation">,</span> <span class="token comment">// 1</span>
+  <span class="token constant">LEFT</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token comment">// 3</span>
+  <span class="token constant">RIGHT</span> <span class="token comment">// 4</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>字符串枚举</p></blockquote> <ul><li>字符串枚举 字符串不支持递增 也就是声明了一个字符串的内容 你枚举里面的所有内容 都需要设置内容</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">enum</span> Play <span class="token punctuation">{</span>
+  <span class="token constant">UP</span> <span class="token operator">=</span> <span class="token string">'你好'</span><span class="token punctuation">,</span> <span class="token comment">// 你好</span>
+  <span class="token constant">DOWN</span> <span class="token operator">=</span> <span class="token string">'我好'</span><span class="token punctuation">,</span> <span class="token comment">// 我好</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>混合枚举(异构枚举)</p></blockquote> <ul><li>TypeScript 支持 Enum 的枚举成员既可以是 number 也可以是 string ，但是并不建议这样做。</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">enum</span> Check <span class="token punctuation">{</span>
+    No <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// 0</span>
+    Yes <span class="token operator">=</span> <span class="token string">'YES'</span> <span class="token comment">// YES</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>const 枚举</p></blockquote> <ul><li>在大多数情况下，枚举是一个完全有效的解决方案。 然而，有时要求更严格。 为了避免在访问枚举值时支付额外生成的代码和额外的间接费用，可以使用 const 枚举。 const枚举是在我们的枚举上使用 const 修饰符定义的：</li> <li>const 枚举允许内部进行计算 其他的枚举 并不支持计算</li></ul> <div class="language- extra-class"><pre class="language-text"><code>const enum Enum {
+  A = 1, // 1
+  B = A * 3 // 3
+}
+</code></pre></div><ul><li>const 枚举还支持外部调用</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token comment">// 声明一个const 枚举</span>
+<span class="token keyword">const</span> <span class="token keyword">enum</span> Direction <span class="token punctuation">{</span>
+  Up<span class="token punctuation">,</span> <span class="token comment">// 0</span>
+  Down<span class="token punctuation">,</span> <span class="token comment">// 1</span>
+  Left<span class="token punctuation">,</span> <span class="token comment">// 2</span>
+  Right<span class="token punctuation">,</span> <span class="token comment">//3</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 在外部调用cosnt 枚举</span>
+<span class="token keyword">let</span> directions <span class="token operator">=</span> <span class="token punctuation">[</span>
+  Direction<span class="token punctuation">.</span>Up<span class="token punctuation">,</span>
+  Direction<span class="token punctuation">.</span>Down<span class="token punctuation">,</span>
+  Direction<span class="token punctuation">.</span>Left<span class="token punctuation">,</span>
+  Direction<span class="token punctuation">.</span>Right<span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>directions<span class="token punctuation">)</span> <span class="token comment">// [ 0, 1, 2, 3 ]</span>
+</code></pre></div><blockquote><p>枚举的同数据源比较</p></blockquote> <ul><li>枚举的作用可以用来比较相同的源头数据 也就是想全等<code>===</code>就必须是同数据源 不同数据源就算数据一样 也不会为<code>true</code></li> <li>枚举的判断是逻辑性判断 而非值的判断</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">enum</span> Play <span class="token punctuation">{</span>
+  <span class="token constant">UP</span><span class="token punctuation">,</span>
+  <span class="token constant">DOWN</span><span class="token punctuation">,</span>
+  <span class="token constant">LEFT</span><span class="token punctuation">,</span>
+  <span class="token constant">RIGHT</span>
+<span class="token punctuation">}</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Play<span class="token punctuation">.</span><span class="token constant">UP</span><span class="token punctuation">,</span> Play<span class="token punctuation">.</span><span class="token constant">DOWN</span><span class="token punctuation">)</span>
+
+<span class="token keyword">enum</span> Play1 <span class="token punctuation">{</span>
+  <span class="token constant">UP</span><span class="token punctuation">,</span>
+  <span class="token constant">DOWN</span><span class="token punctuation">,</span>
+  <span class="token constant">LEFT</span><span class="token punctuation">,</span>
+  <span class="token constant">RIGHT</span>
+<span class="token punctuation">}</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Play1<span class="token punctuation">.</span><span class="token constant">UP</span><span class="token punctuation">,</span> Play1<span class="token punctuation">.</span><span class="token constant">DOWN</span><span class="token punctuation">)</span>
+
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Play1<span class="token punctuation">.</span><span class="token constant">UP</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 可以比较的 同源 true</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Play1<span class="token punctuation">.</span><span class="token constant">UP</span> <span class="token operator">===</span> Play1<span class="token punctuation">.</span><span class="token constant">UP</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 不可比较的 非同源 fasle</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Play1<span class="token punctuation">.</span><span class="token constant">UP</span> <span class="token operator">===</span> Play<span class="token punctuation">.</span><span class="token constant">UP</span><span class="token punctuation">)</span>
+
+</code></pre></div><ul><li>非同源报错</li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220301142432107.png" alt="image-20220301142432107"></p> <h3 id="任意数据类型-any"><a href="#任意数据类型-any" class="header-anchor">#</a> <strong>任意数据类型 <code>any</code></strong></h3> <ul><li>关键字 <code>any</code></li> <li><font color="#ff3040">注意: 任意数据类型不会进行类型检测 相当于使用了原js声明</font></li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">let</span> a<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+a <span class="token operator">=</span> <span class="token string">'a'</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+
+<span class="token comment">// 1</span>
+<span class="token comment">// a</span>
+</code></pre></div><h3 id="空数据类型-void"><a href="#空数据类型-void" class="header-anchor">#</a> <strong>空数据类型 <code>void</code></strong></h3> <ul><li>关键字<code>void</code></li> <li>空数据类型通常用于 方法 有很多方法不需要<code>return</code>返回 这个时候方法就是空值</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">function</span> <span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+  <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'我啥也不返回'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="空-null-undefined"><a href="#空-null-undefined" class="header-anchor">#</a> <strong>空 <code>null &amp; undefined</code></strong></h3> <ul><li><code>string</code>默认值是 <code>undefined</code></li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token comment">// 默认值是 undefined</span>
+<span class="token keyword">let</span> str<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
+</code></pre></div><h3 id="定义但未使用-never"><a href="#定义但未使用-never" class="header-anchor">#</a> **定义但未使用 <code>never</code> **</h3> <ul><li>我们在开发中 会用到<code>eslint</code> 来规范我们的代码 这个时候 我们定义一个值 但未使用 那么<code>eslint</code>会进行报错 防止报错我们可以注释 也可以使用ts的<code>never</code> 告诉其数据未定义 防止报错</li> <li><code>never</code>不代表任何数据类型 不可以直接使用 使用之前 需要替换成其他正常的数据类型</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">let</span> a<span class="token operator">:</span> <span class="token builtin">never</span> <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token comment">// 这个时候会报错 我们需要把never改成我们已经定义值的数据类型</span>
+</code></pre></div><ul><li>报错提示</li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220301142333999.png" alt="image-20220301142333999"></p> <h3 id="对象-object"><a href="#对象-object" class="header-anchor">#</a> <strong>对象 <code>Object</code></strong></h3> <ul><li>万物皆对象 什么都可以塞进对象中</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">let</span> abc<span class="token operator">:</span> Object <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> <span class="token string">'你好'</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> <span class="token keyword">undefined</span>
+<span class="token punctuation">}</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>abbc<span class="token punctuation">)</span> <span class="token comment">// { a: 1, b: 2, c: '你好', d: null, f: undefined }</span>
+</code></pre></div><h2 id="ts的接口-interface"><a href="#ts的接口-interface" class="header-anchor">#</a> ts的接口 <code>interface</code></h2> <ul><li>关键字 <code>interface</code></li> <li>说到接口：在面向对象的编程中，接口是一种规范的定义，它定义了行为和动作的规范，在程序设计里面，接口起到一种限制和规范的作用。接口定义了某一批类所需要遵守的规范，接口不关心这些类的内部状态数据，也不关心这些类里方法的实现细节，它只规定这批类里必须提供某些方法，提供这些方法的类就可以满足实际需要。 typescrip中的接口类似于java，同时还增加了更灵活的接口类型，包括属性、函数、可索引和类等！</li> <li><code>interface</code> 不光可以声明 还可以继承<code>extends</code> 提升代码的延展性</li> <li><code>interface</code> 可以设置可选参数(可有可无) <code>?: 类型</code></li> <li><code>interface</code> 的值可以多次赋值声明符合条件的值 除非设置只读属性 <code>readonly</code></li></ul> <h3 id="一般声明的接口"><a href="#一般声明的接口" class="header-anchor">#</a> <strong>一般声明的接口</strong></h3> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">interface</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 通过接口 声明数据</span>
+<span class="token keyword">let</span> user<span class="token operator">:</span> IUser <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'hanyun'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">32</span> <span class="token punctuation">}</span>
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span>
+<span class="token comment">// { name: 'hanyun', age: 32 }</span>
+</code></pre></div><h3 id="接口的继承-extends"><a href="#接口的继承-extends" class="header-anchor">#</a> <strong>接口的继承 <code>extends</code></strong></h3> <ul><li><code>interface</code> 不光可以声明 还可以继承接口欧<code>extends</code> 提升代码的延展性</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token comment">// 接口A</span>
+<span class="token keyword">interface</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 继承接口A的接口B</span>
+<span class="token keyword">interface</span> <span class="token class-name">IStudent</span> <span class="token keyword">extends</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 通过接口 声明接口B的数据</span>
+<span class="token keyword">let</span> user<span class="token operator">:</span> IStudent <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'hanyun'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span> 
+<span class="token comment">// { name: 'hanyun', age: 32, CET4: false }</span>
+</code></pre></div><h3 id="接口中的可选参数"><a href="#接口中的可选参数" class="header-anchor">#</a> <strong>接口中的可选参数 <code>?:</code></strong></h3> <ul><li><code>interface</code> 可以设置可选参数(可有可无) <code>?: 类型</code></li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token comment">// 接口A</span>
+<span class="token keyword">interface</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 继承接口A的接口B</span>
+<span class="token keyword">interface</span> <span class="token class-name">IStudent</span> <span class="token keyword">extends</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+   <span class="token comment">// 设置可选参数</span>
+  <span class="token constant">CET6</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 通过接口 声明数据</span>
+<span class="token keyword">let</span> student1<span class="token operator">:</span> IStudent <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'hanyun'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+<span class="token keyword">let</span> student2<span class="token operator">:</span> IStudent <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'hanyun'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token constant">CET6</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>student1<span class="token punctuation">,</span> student2<span class="token punctuation">)</span>
+<span class="token comment">// { name: 'hanyun', age: 32 }</span>
+<span class="token comment">// { name: 'hanyun', age: 32, CET4: true } { name: 'hanyun', age: 32, CET4: true, CET6: true }</span>
+
+</code></pre></div><h3 id="只读属性-readonly"><a href="#只读属性-readonly" class="header-anchor">#</a> <strong>只读属性 <code>readonly</code></strong></h3> <ul><li><code>interface</code> 的值可以多次赋值声明符合条件的值 可以设置只读属性 <code>readonly</code> 防止数据二次修改</li></ul> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token comment">// 接口A</span>
+<span class="token keyword">interface</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 继承接口A的接口B</span>
+<span class="token keyword">interface</span> <span class="token class-name">IStudent</span> <span class="token keyword">extends</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 设置一个只读的属性</span>
+  <span class="token keyword">readonly</span> <span class="token constant">DNA</span><span class="token operator">:</span> <span class="token builtin">string</span>
+  <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+  <span class="token comment">// 设置一个可选参数</span>
+  <span class="token constant">CET6</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 通过接口 声明数据</span>
+<span class="token keyword">let</span> student1<span class="token operator">:</span> IStudent <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'hanyun'</span><span class="token punctuation">,</span> <span class="token constant">DNA</span><span class="token operator">:</span> <span class="token string">'aaaaa'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+<span class="token keyword">let</span> student2<span class="token operator">:</span> IStudent <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'hanyun'</span><span class="token punctuation">,</span> <span class="token constant">DNA</span><span class="token operator">:</span> <span class="token string">'assasaaaaa'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token constant">CET6</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// 修改的非只读数据</span>
+student1<span class="token punctuation">.</span><span class="token constant">CET6</span> <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>student1<span class="token punctuation">,</span> student2<span class="token punctuation">)</span>
+
+<span class="token comment">// 不可以修改只读数据 会报错</span>
+student1<span class="token punctuation">.</span><span class="token constant">DNA</span> <span class="token operator">=</span> <span class="token string">&quot;mdakldmak&quot;</span>
+<span class="token comment">// 接口A</span>
+<span class="token keyword">interface</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 继承接口A的接口B</span>
+<span class="token keyword">interface</span> <span class="token class-name">IStudent</span> <span class="token keyword">extends</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 设置一个只读的属性</span>
+  <span class="token keyword">readonly</span> <span class="token constant">DNA</span><span class="token operator">:</span> <span class="token builtin">string</span>
+  <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+  <span class="token comment">// 设置一个可选参数</span>
+  <span class="token constant">CET6</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 通过接口 声明数据</span>
+<span class="token keyword">let</span> student1<span class="token operator">:</span> IStudent <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'hanyun'</span><span class="token punctuation">,</span> <span class="token constant">DNA</span><span class="token operator">:</span> <span class="token string">'aaaaa'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+<span class="token keyword">let</span> student2<span class="token operator">:</span> IStudent <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'hanyun'</span><span class="token punctuation">,</span> <span class="token constant">DNA</span><span class="token operator">:</span> <span class="token string">'assasaaaaa'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token constant">CET4</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token constant">CET6</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// 修改的非只读数据</span>
+student1<span class="token punctuation">.</span><span class="token constant">CET6</span> <span class="token operator">=</span> <span class="token boolean">true</span>
+
+<span class="token comment">// 不可以修改只读数据 会报错</span>
+student1<span class="token punctuation">.</span><span class="token constant">DNA</span> <span class="token operator">=</span> <span class="token string">&quot;mdakldmak&quot;</span>
+</code></pre></div><ul><li>报错提示</li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220301094210191.png" alt="image-20220301094210191"></p> <h1 id="未完待续"><a href="#未完待续" class="header-anchor">#</a> 未完待续...</h1></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.005384be.js" defer></script><script src="/assets/js/5.e6fb2106.js" defer></script><script src="/assets/js/1.903fcf53.js" defer></script><script src="/assets/js/27.8fa96553.js" defer></script>
+  </body>
+</html>

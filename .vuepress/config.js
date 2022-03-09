@@ -205,13 +205,16 @@ module.exports = {
       },
     ],
     covers: [
-      // 可以按天数 7条添加
+      // 图片
       "https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_1.jpg",
       'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_2.jpg',
       'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_3.jpg',
       'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_4.jpg',
       'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_5.jpg',
-      'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_6.jpg'
+      'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_6.jpg',
+      'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_11.jpg',
+      'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_9.png',
+      'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_image/banner_10.jpg'
     ],
     codeTheme: "tomorrow",
   },
