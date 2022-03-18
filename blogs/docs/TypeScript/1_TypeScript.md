@@ -1,7 +1,7 @@
 ---
 title: TypeScript 学习记录
-date: 2022-03-01
-cover: 
+date: 2022-03-18
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-6og5gx.jpg
 tags:
  - TypeScript
 categories: TypeScript
@@ -331,6 +331,7 @@ console.log(abbc) // { a: 1, b: 2, c: '你好', d: null, f: undefined }
 * `interface` 不光可以声明 还可以继承`extends` 提升代码的延展性 
 * `interface` 可以设置可选参数(可有可无) `?: 类型`
 * `interface` 的值可以多次赋值声明符合条件的值 除非设置只读属性 `readonly`
+* 适合 作为依据规定内容的类型 重在于约束
 
 ### **一般声明的接口**
 
@@ -451,4 +452,342 @@ student1.DNA = "mdakldmak"
 
 
 
-# 未完待续...
+## ts的类 `class`
+
+* 类(Class)：定义了一件事物的抽象特点，包含它的属性和方法 
+  * Class类可以 继承`extends` 继承其他的class类
+  * Class类可以和接口`interface`一起使用 来定义Class类的内容 接口声明的变量 Class类也需要声明 否则会报错
+  * Class类可以设置 抽象类`abstract` 抽象类就是可以声明方法 不单单是变量
+  * Class类的修饰符 可以规定四种修饰符 来限制数据 如果你不写修饰符 默认是`public` 公开
+    * `public` 公开 公开的值可以在本类、子类和实例(外部)中进行赋值修改
+    * `protected` 受保护 受保护的值可以在本类进行修改和赋值 也可以在子类中赋值修改 但是实例(外部)不可以修改
+    * `private` 私有 私有的值只能在类内部赋值修改 限制属性只能在本类中访问 子类和实例(外部)不能访问( 不能用 不能继承 )
+    * `readonly` 只读 只读的值只能在本类赋值修改 也可以被子类继承 但不可以在子类和实例(外部)赋值修改
+
+### **声明class**
+
+* 关键字 class 声明
+
+```typescript
+class Child {
+
+}
+```
+
+### **类的继承 `extends`**
+
+* 关键字 `extends` 继承其他的class类
+
+```typescript
+// 类1
+class Father {
+
+}
+
+// 类2继承类1
+class Child extends Father {
+
+
+}
+```
+
+### **类与接口 `interface`**
+
+* Class类可以和接口`interface`一起使用 来定义Class类的内容 接口声明的变量 Class类也需要声明 否则会报错
+
+```typescript
+// 接口
+interface IMan {
+  name: string
+}
+// 类1使用接口的定义
+class Father implements IMan {
+  name: string
+}
+
+// 类2继承类1 其中就包含接口的定义 因为类1已经声明了
+class Child extends Father {
+
+}
+```
+
+* 如果你不按照接口`interface`的定义 会出现报错
+
+![image-20220310175524018](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220310175524018.png)
+
+### **抽象类**
+
+* Class类可以设置 抽象类`abstract` 抽象类就是可以声明方法 不单单是变量
+
+```typescript
+// 类1定义抽象类
+abstract class Man {
+  say(): string {
+    return '我是 abstract class'
+  }
+}
+// 类2继承类1
+class Child extends Man {
+}
+// 声明抽象类2
+let child = new Child()
+// 打印抽象类2
+let str=child.say()
+console.log(str)
+// 我是 abstract class
+```
+
+### 类的修饰符
+
+Class类的修饰符 可以规定四种修饰符 来限制数据 如果你不写修饰符 默认是`public` 公开
+
+* `public` 公开 公开的值可以在本类、子类和实例(外部)中进行赋值修改
+* `protected` 受保护 受保护的值可以在本类进行修改和赋值 也可以在子类中赋值修改 但是实例(外部)不可以修改
+* `private` 私有 私有的值只能在类内部赋值修改 限制属性只能在本类中访问 子类和实例(外部)不能访问( 不能用 不能继承 )
+* `readonly` 只读 只读的值只能在本类赋值修改 也可以被子类继承 但不可以在子类和实例(外部)赋值修改
+
+```typescript
+class Man {
+  // 受保护
+  protected gender: string
+}
+class User extends Man {
+  // 公开
+  public name: string
+  // 受保护
+  setGender() {
+    this.gender = 'man'
+  }
+  // 私有
+  private DNA: string = 'aaaa'
+  // 只读
+  readonly age: number = 1
+}
+let user = new User()
+
+// 这里是对的 公开的值允许赋值和修改
+user.name = 'Tom'
+// 这里是错误的 受保护的值在外面(实例)不可以赋值修改 但是在子类里面是可以修改赋值的
+// user.gender = 'man'
+
+// 这里是错误的 私有的值是不可以修改和继承的
+// user.DNA = 'aaaaa'
+
+// 这里是错误的 只读的值 不能修改 可以再本类中赋值修改
+// user.age = 10
+
+```
+
+### 类的赋值断言 `!:`
+
+* class和泛型一起使用的时候 往往没办法直接规定类型或者赋值 那么就会出现报错提醒 我们需要添加`!:`赋值断言 让其不报错 设置默认为空
+
+```typescript
+// 设置class类的泛型
+class UserX<T>{
+  info: T; // class类设置泛型的时候 需要添加赋值断言 防止因为未赋值进行报错
+}
+// 
+let myUser = new UserX<IInfo>()
+console.log(myUser); // UserX{}
+```
+
+* 使用泛型未赋值类class的报错
+
+![image-20220318145503126](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220318145503126.png)
+
+##  ts的函数 `function`
+
+* ts的函数就是js中的方法 分为两种函数: 具名函数和命名函数
+
+### **具名函数**
+
+* `function` 带有名称的为具名函数
+
+```typescript
+// 具名函数
+function say() {
+  console.log('say')
+}
+// 调用具名函数
+say() // say
+```
+
+### **命名函数**
+
+* `function` 不带名名称的为命名函数 需要变量来声明 他也支持箭头函数的声明方式
+
+```typescript
+// 命名函数
+// 箭头函数的命名函数
+let speak = () => {
+  console.log('speak')
+}
+// function的命名函数
+let speak1 = function () {
+  console.log('speak1')
+}
+// 调用命名函数
+speak() // speak
+speak1() // speak1
+```
+
+### **函数指定类型**
+
+* ts中的函数的参数可以声明类型 规定传入指定参数类型 支持全部的ts基本数据类型
+
+```typescript
+function say23(str: string) {
+  console.log(str)
+}
+say23('需要传入指定的ts基本数据类型') // 需要传入指定的ts基本数据类型
+```
+
+* 如果你声明了类型 不传值 就会报错
+
+![image-20220315174246157](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220315174246157.png)
+
+### **函数可选参数**
+
+* ts中可以规定指定参数类型后 可以让其成为可选参数 这样就算不传参数 也不会报错
+
+```typescript
+function say33(str?: string) {
+  if (str) {
+    console.log(str)
+  }
+}
+// 可以不传参参数
+say33() // 不做处理为 undefined
+// 可以传参 需要和指定类型一致
+say33('需要传入指定的ts基本数据类型')
+```
+
+### **函数默认参数**
+
+* ts中可以规定指定参数类型后 设置指定参数类型的默认值 传参后会替换默认值
+
+```typescript
+function say2(str: string = 'haha') { // 设置参数类型的默认值 需要和规定类型一致
+  console.log(str)
+}
+// 不传参那就是默认值
+say2()
+// 传参那就会替换成参数
+say2('我覆盖了默认参数')
+```
+
+* 默认值数据类型不正确的报错
+
+<img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220315175332690.png" alt="image-20220315175332690" style="zoom:200%;" />
+
+### **函数返回值类型**
+
+* 函数方法中会进行`return`返回数据 可以给`return`的值规定指定数据类型 
+* 如果不规定类型(不写) 默认都可以接收
+
+```typescript
+// 不设置返回值的数据类型  默认什么类型都可以返回
+function say2(str44: string) {
+  console.log(str44);
+  // 返回数字类型
+  return 123
+}
+// 接收返回值
+let str44 = say2('不设置返回值类型')
+console.log(str44)
+
+// 设置返回值的数据类型 只能接收字符串
+function say4(str33: string): string { // 规定字符串类型
+  console.log(str33);
+  // 返回指定字符串类型
+  return '规定类型的返回'
+}
+let str33 = say4('设置返回值的类型')
+// 接收返回值
+console.log(str33)
+```
+
+## 泛型 `<T>`
+
+* 泛型是指在预先定义函数`function`、接口`interface`或者类`class`的时候，不预先指定数据的类型，而是在使用的时候指定。
+* 通俗的来讲 泛型就是声明的时候 不定义任何类型 我在外部使用的时候再规定 这可以让你的语法具备极强的可扩展性
+
+### 函数参数使用泛型
+
+* 函数`function` 定义参数泛型  外部传参时候定义类型
+
+```typescript
+// 定义泛型函数
+function say<T>(str: T) {
+  console.log(str)
+}
+// 给泛型函数定义类型并传参
+say<number>(1) // 1
+say<boolean>(false) // false错误的提示
+```
+
+* 如果你规定了泛型 在外部使用的时候没有定义 就会有错误提示
+
+![image-20220318133609950](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220318133609950.png)
+
+### **函数参数和接口使用泛型**
+
+* 函数`function` 定义参数泛型 配合接口`interface` 定义的类型使用
+
+```typescript
+// 定义函数参数泛型
+function say<T>(str: T) {
+  console.log(str)
+}
+// 定义接口并设置类型
+interface IIUser {
+  name: string
+}
+// 泛型函数使用接口约束的类型
+say<IIUser>({ name: 'Tom' }) // { name: 'Tom' }
+```
+
+* 如果泛型函数 使用接口定义的类型不一致 就会有错误提示
+
+![image-20220318141719795](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220318141719795.png)
+
+### 函数参数和返回值使用泛型
+
+* 函数`function` 参数和返回值都可定义泛型 配合接口`interface` 定义的类型使用
+
+```typescript
+// 定义接口并设置类型
+interface IUser {
+  name: string
+}
+// 定义函数 参数和返回值都是泛型
+function say1<T>(str: T): T {
+  return str
+}
+// 使用定义的接口 参数和返回值都为接口约束的类型
+let strx = say1<IUser>({ name: 'Jack' })
+console.log(strx) // { name: 'Jack' }
+```
+
+### 类class 使用泛型
+
+* 类`class` 设置泛型(注意赋值断言) 配合接口`interface` 定义的类型使用
+
+```typescript
+// 定义接口并设置类型
+interface IInfo {
+  name: string,
+  age: number
+}
+// 设置class类的泛型
+class UserX<T>{
+  info!: T; // class类设置泛型的时候 需要添加赋值断言 防止因为未赋值进行报错
+}
+// 声明方法使用类
+let myUser = new UserX<IInfo>()
+// 依据接口约束给class类赋值
+myUser.info = { name: '刘凯利', age: 22 }
+console.log(myUser); // UserX { info: { name: '刘凯利', age: 22 } }
+```
+

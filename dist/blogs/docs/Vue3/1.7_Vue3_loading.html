@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vue3页面首次进入加载页 | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?61498f37b83812e7b85952d5feaaab47";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.6f92cd8b.css" as="style"><link rel="preload" href="/assets/js/app.f8d4204a.js" as="script"><link rel="preload" href="/assets/js/5.e6fb2106.js" as="script"><link rel="preload" href="/assets/js/1.903fcf53.js" as="script"><link rel="preload" href="/assets/js/40.c4f351df.js" as="script"><link rel="prefetch" href="/assets/js/10.988ddcf1.js"><link rel="prefetch" href="/assets/js/100.4a2da4b6.js"><link rel="prefetch" href="/assets/js/101.f5d877bf.js"><link rel="prefetch" href="/assets/js/102.8720f887.js"><link rel="prefetch" href="/assets/js/103.5c5a1fb8.js"><link rel="prefetch" href="/assets/js/104.7321fc7d.js"><link rel="prefetch" href="/assets/js/105.cc02696b.js"><link rel="prefetch" href="/assets/js/106.6305f94d.js"><link rel="prefetch" href="/assets/js/107.9f814815.js"><link rel="prefetch" href="/assets/js/108.496ca30f.js"><link rel="prefetch" href="/assets/js/109.72a052b3.js"><link rel="prefetch" href="/assets/js/11.c08a7700.js"><link rel="prefetch" href="/assets/js/110.452413b4.js"><link rel="prefetch" href="/assets/js/12.1d343e35.js"><link rel="prefetch" href="/assets/js/13.c81b214c.js"><link rel="prefetch" href="/assets/js/14.9fcd295f.js"><link rel="prefetch" href="/assets/js/15.4909f640.js"><link rel="prefetch" href="/assets/js/16.6c582002.js"><link rel="prefetch" href="/assets/js/17.61eb5737.js"><link rel="prefetch" href="/assets/js/18.31b8db13.js"><link rel="prefetch" href="/assets/js/19.9bc65e0e.js"><link rel="prefetch" href="/assets/js/20.7fd8d954.js"><link rel="prefetch" href="/assets/js/21.b00a33c9.js"><link rel="prefetch" href="/assets/js/22.5af55c6b.js"><link rel="prefetch" href="/assets/js/23.ae4d4b04.js"><link rel="prefetch" href="/assets/js/24.ee9da8bf.js"><link rel="prefetch" href="/assets/js/25.e6f466b6.js"><link rel="prefetch" href="/assets/js/26.95023ae4.js"><link rel="prefetch" href="/assets/js/27.3fbe9eef.js"><link rel="prefetch" href="/assets/js/28.aa27c5e7.js"><link rel="prefetch" href="/assets/js/29.22211ebf.js"><link rel="prefetch" href="/assets/js/3.4e5d0e6c.js"><link rel="prefetch" href="/assets/js/30.0e3e2e41.js"><link rel="prefetch" href="/assets/js/31.9e220d41.js"><link rel="prefetch" href="/assets/js/32.70d670d9.js"><link rel="prefetch" href="/assets/js/33.87ba9101.js"><link rel="prefetch" href="/assets/js/34.5247bf08.js"><link rel="prefetch" href="/assets/js/35.f2fd3f72.js"><link rel="prefetch" href="/assets/js/36.61c19296.js"><link rel="prefetch" href="/assets/js/37.51f5fc8f.js"><link rel="prefetch" href="/assets/js/38.ee3595b3.js"><link rel="prefetch" href="/assets/js/39.058a4e08.js"><link rel="prefetch" href="/assets/js/4.0067ce26.js"><link rel="prefetch" href="/assets/js/41.008bdeed.js"><link rel="prefetch" href="/assets/js/42.cfbdbd04.js"><link rel="prefetch" href="/assets/js/43.df063091.js"><link rel="prefetch" href="/assets/js/44.85a0b3f7.js"><link rel="prefetch" href="/assets/js/45.f495d73f.js"><link rel="prefetch" href="/assets/js/46.57f22354.js"><link rel="prefetch" href="/assets/js/47.1fea3bdd.js"><link rel="prefetch" href="/assets/js/48.aee2e4bc.js"><link rel="prefetch" href="/assets/js/49.c8c174ab.js"><link rel="prefetch" href="/assets/js/50.227423f8.js"><link rel="prefetch" href="/assets/js/51.f9ac8b55.js"><link rel="prefetch" href="/assets/js/52.4bd60f55.js"><link rel="prefetch" href="/assets/js/53.d3a97054.js"><link rel="prefetch" href="/assets/js/54.5862ce30.js"><link rel="prefetch" href="/assets/js/55.8a774b57.js"><link rel="prefetch" href="/assets/js/56.94cf670b.js"><link rel="prefetch" href="/assets/js/57.16a1cfcf.js"><link rel="prefetch" href="/assets/js/58.a6dd53f4.js"><link rel="prefetch" href="/assets/js/59.c5be9327.js"><link rel="prefetch" href="/assets/js/6.b813653c.js"><link rel="prefetch" href="/assets/js/60.b8045234.js"><link rel="prefetch" href="/assets/js/61.2a104a34.js"><link rel="prefetch" href="/assets/js/62.2a20689b.js"><link rel="prefetch" href="/assets/js/63.357da9f9.js"><link rel="prefetch" href="/assets/js/64.cc393451.js"><link rel="prefetch" href="/assets/js/65.5c36abea.js"><link rel="prefetch" href="/assets/js/66.e8d9eac7.js"><link rel="prefetch" href="/assets/js/67.5af0a01e.js"><link rel="prefetch" href="/assets/js/68.32bf589a.js"><link rel="prefetch" href="/assets/js/69.d3914efb.js"><link rel="prefetch" href="/assets/js/7.2fe5d1d4.js"><link rel="prefetch" href="/assets/js/70.8335a3aa.js"><link rel="prefetch" href="/assets/js/71.22c75cf3.js"><link rel="prefetch" href="/assets/js/72.3bfa5253.js"><link rel="prefetch" href="/assets/js/73.2f9ac069.js"><link rel="prefetch" href="/assets/js/74.1a534f82.js"><link rel="prefetch" href="/assets/js/75.db957d62.js"><link rel="prefetch" href="/assets/js/76.9724f5dd.js"><link rel="prefetch" href="/assets/js/77.93973780.js"><link rel="prefetch" href="/assets/js/78.74de2cb3.js"><link rel="prefetch" href="/assets/js/79.3c3a662c.js"><link rel="prefetch" href="/assets/js/8.b1f53c13.js"><link rel="prefetch" href="/assets/js/80.44eeebb2.js"><link rel="prefetch" href="/assets/js/81.85196cf0.js"><link rel="prefetch" href="/assets/js/82.073c7e3b.js"><link rel="prefetch" href="/assets/js/83.43c74b60.js"><link rel="prefetch" href="/assets/js/84.8c41c423.js"><link rel="prefetch" href="/assets/js/85.636b95f2.js"><link rel="prefetch" href="/assets/js/86.36a48463.js"><link rel="prefetch" href="/assets/js/87.16f206b6.js"><link rel="prefetch" href="/assets/js/88.5fbd606c.js"><link rel="prefetch" href="/assets/js/89.b74ebac8.js"><link rel="prefetch" href="/assets/js/9.4652c675.js"><link rel="prefetch" href="/assets/js/90.a82d8d59.js"><link rel="prefetch" href="/assets/js/91.3b84f72c.js"><link rel="prefetch" href="/assets/js/92.d60f3bd1.js"><link rel="prefetch" href="/assets/js/93.4a5317ac.js"><link rel="prefetch" href="/assets/js/94.9e0a2e40.js"><link rel="prefetch" href="/assets/js/95.56c43947.js"><link rel="prefetch" href="/assets/js/96.286ea44e.js"><link rel="prefetch" href="/assets/js/97.7b08f3be.js"><link rel="prefetch" href="/assets/js/98.56aee4c2.js"><link rel="prefetch" href="/assets/js/99.7f64a3b5.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6f92cd8b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-57e19720><div data-v-57e19720><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-57e19720 data-v-57e19720><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-89477f7e data-v-57e19720 data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div> <div class="hide" data-v-57e19720><div data-v-57e19720><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-m9md18.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-57e19720><header class="navbar" data-v-57e19720><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-57e19720></div> <aside class="sidebar" data-v-57e19720><div class="personal-info-wrapper" data-v-03833281 data-v-57e19720><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>95</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>34</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Vue3</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/Vue3/1.1.1_Vue_study.html" class="sidebar-link">Vue3 学习手册(博客版)</a></li><li><a href="/blogs/docs/Vue3/1.1.2_Vue_setup.html" class="sidebar-link">Vue3 setup语法糖</a></li><li><a href="/blogs/docs/Vue3/1.1_Vue3_install.html" class="sidebar-link">Vue3 install插件机制</a></li><li><a href="/blogs/docs/Vue3/1.2_Vue3_scrollReveal.html" class="sidebar-link">Vue3 scrollRevea组件使用方法</a></li><li><a href="/blogs/docs/Vue3/1.3_Vue3_svg.html" class="sidebar-link">Vue3 使用svg图像文件</a></li><li><a href="/blogs/docs/Vue3/1.4_Vue3_typewriter.html" class="sidebar-link">Vue3 打字机特效</a></li><li><a href="/blogs/docs/Vue3/1.5_Vue3_number.html" class="sidebar-link">Vue3 数字滚动特效</a></li><li><a href="/blogs/docs/Vue3/1.6_Vue3_build.html" class="sidebar-link">Vue3 和 Vue cil4的打包记录</a></li><li><a href="/blogs/docs/Vue3/1.7_Vue3_loading.html" aria-current="page" class="active sidebar-link">Vue3页面首次进入加载页</a></li><li><a href="/blogs/docs/Vue3/9_VueUse.html" class="sidebar-link">VueUse 插件方法合集</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-89477f7e data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>Vue3页面首次进入加载页</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div></div> <div data-v-57e19720><main class="page"><div class="page-title" style="display:none;"><h1 class="title">Vue3页面首次进入加载页</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2022-03-17</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/Vue3/1.7_Vue3_loading.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>Vue3</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>Vue3 页面首次进入加载页 友好的实现加载等待<br></p></div> <h2 id="加载页的实现思路"><a href="#加载页的实现思路" class="header-anchor">#</a> 加载页的实现思路</h2> <ul><li>Vue文件的加载顺序是 <code>index.html</code> -&gt; 请求页面资源 -&gt; <code>App.vue</code> -&gt;页面的其他内容</li> <li>我们可以在<code>index.html</code> 写一个加载效果 然后当页面请求完毕资源后 在 <code>App.vue</code> 中做处理 隐藏在<code>index.html</code>的加载效果</li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220317171636997.png" alt="image-20220317171636997"></p> <blockquote><p>加载页样式浏览</p></blockquote> <ul><li>快速浏览效果 <a href="https://codepen.io/1079265662/pen/dyJGyJr" target="_blank" rel="noopener noreferrer">地址!<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/zpbq9-0k4my.gif" alt="zpbq9-0k4my"></p> <h2 id="实现代码"><a href="#实现代码" class="header-anchor">#</a> 实现代码</h2> <ul><li>第一步 先要在<code>index.html</code> 写一个加载效果
+<ul><li><font color="#ff3040">注意: <code>&lt;style&gt;</code> 标签要写在<code>&lt;head&gt;</code>里面 这样页面css样式会提前加载 防止出现样式延迟</font></li></ul></li></ul> <div class="language-html extra-class"><pre class="language-html"><code><span class="token comment">&lt;!-- 样式 --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+    <span class="token selector">:root</span> <span class="token punctuation">{</span>
+      <span class="token property">--main-clr</span><span class="token punctuation">:</span> <span class="token function">rgb</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 127<span class="token punctuation">,</span> 255<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token property">--font-clr</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">#loading-mask</span> <span class="token punctuation">{</span>
+      <span class="token property">position</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
+      <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+      <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+      <span class="token property">user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+      <span class="token property">z-index</span><span class="token punctuation">:</span> 2147483647<span class="token punctuation">;</span>
+      <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+      <span class="token property">background</span><span class="token punctuation">:</span> #2098d1<span class="token punctuation">;</span>
+      <span class="token property">transition</span><span class="token punctuation">:</span> 0.55s ease-in-out 0.16s<span class="token punctuation">;</span>
+      <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+      <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+      <span class="token property">cursor</span><span class="token punctuation">:</span> wait<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.container</span> <span class="token punctuation">{</span>
+      <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+      <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+      <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+      <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.txt</span> <span class="token punctuation">{</span>
+      <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+      <span class="token property">top</span><span class="token punctuation">:</span> 3rem<span class="token punctuation">;</span>
+      <span class="token property">font-family</span><span class="token punctuation">:</span> sans-serif<span class="token punctuation">;</span>
+      <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--font-clr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.support</span> <span class="token punctuation">{</span>
+      <span class="token property">width</span><span class="token punctuation">:</span> 2rem<span class="token punctuation">;</span>
+      <span class="token property">height</span><span class="token punctuation">:</span> 2rem<span class="token punctuation">;</span>
+      <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+      <span class="token property">animation</span><span class="token punctuation">:</span> rotation 3.8s linear infinite<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.support:nth-child(1)</span> <span class="token punctuation">{</span>
+      <span class="token property">animation-delay</span><span class="token punctuation">:</span> 0.15s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.support:nth-child(2)</span> <span class="token punctuation">{</span>
+      <span class="token property">animation-delay</span><span class="token punctuation">:</span> 0.3s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.support:nth-child(3)</span> <span class="token punctuation">{</span>
+      <span class="token property">animation-delay</span><span class="token punctuation">:</span> 0.45s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.support:nth-child(4)</span> <span class="token punctuation">{</span>
+      <span class="token property">animation-delay</span><span class="token punctuation">:</span> 0.6s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.support:nth-child(5)</span> <span class="token punctuation">{</span>
+      <span class="token property">animation-delay</span><span class="token punctuation">:</span> 0.75s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.support:nth-child(6)</span> <span class="token punctuation">{</span>
+      <span class="token property">animation-delay</span><span class="token punctuation">:</span> 0.9s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token atrule"><span class="token rule">@keyframes</span> rotation</span> <span class="token punctuation">{</span>
+      <span class="token selector">0%</span> <span class="token punctuation">{</span>
+        <span class="token property">opacity</span><span class="token punctuation">:</span> 0.8<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token selector">30%</span> <span class="token punctuation">{</span>
+        <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>180deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token selector">40%</span> <span class="token punctuation">{</span>
+        <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>360deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token selector">80%</span> <span class="token punctuation">{</span>
+        <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>720deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token property">opacity</span><span class="token punctuation">:</span> 0.8<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token selector">81%</span> <span class="token punctuation">{</span>
+        <span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token selector">100%</span> <span class="token punctuation">{</span>
+        <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>0deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token selector">.dot</span> <span class="token punctuation">{</span>
+      <span class="token property">width</span><span class="token punctuation">:</span> 6px<span class="token punctuation">;</span>
+      <span class="token property">height</span><span class="token punctuation">:</span> 6px<span class="token punctuation">;</span>
+      <span class="token property">border-radius</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+      <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--font-clr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+      <span class="token property">top</span><span class="token punctuation">:</span> 37px<span class="token punctuation">;</span>
+      <span class="token property">left</span><span class="token punctuation">:</span> 7px<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- 设置加载页 --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>loading-mask<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>container<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>support<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>dot<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>support<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>dot<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>support<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>dot<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>support<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>dot<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>support<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>dot<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>support<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>dot<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>txt<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Please wait<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token comment">&lt;!-- 内容页 --&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>app<span class="token punctuation">&quot;</span></span> <span class="token style-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token style language-css"><span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span><span class="token property">transition</span><span class="token punctuation">:</span> 0.25s ease-in-out 0.16s<span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token comment">&lt;!-- built files will be auto injected --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><ul><li>第二步 在<code>App.vue</code> 中取消页面的加载页
+<ul><li>当资源加载完毕后 自然会进入到<code>App.vue</code> 这时候我们隐藏吊加载页</li> <li><font color="#ff3040">注意: <code>display: none</code> 用不了过度效果 我们可以用 <code>opacity: 0</code> + <code>pointer-events: none</code> 来实现障眼法隐藏 这样他既可以过度隐藏 也不会妨碍我们进行交互</font></li> <li>我们用原生js 操控css的时候 需要处理<code>-</code>把其转换为驼峰即可 例如: <code>pointer-events: none</code> 转化为 <code>pointerEvents = 'none'</code></li></ul></li></ul> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token comment">// 导入Vue3生命周期</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> onMounted <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">setup</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 延时处理</span>
+      <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 显示页面内容</span>
+        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'app'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>opacity <span class="token operator">=</span> <span class="token number">1</span>
+        <span class="token comment">// 隐藏加载页的内容</span>
+        <span class="token comment">// document.getElementById('loading-mask').style.transform = 'translateY(-100vh)'</span>
+        <span class="token comment">// document.getElementById('loading-mask').style.height = '0px'</span>
+        <span class="token comment">// 障眼法 实现过度隐藏</span>
+        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'loading-mask'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>opacity <span class="token operator">=</span> <span class="token string">'0'</span>
+        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'loading-mask'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>pointerEvents <span class="token operator">=</span> <span class="token string">'none'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.f8d4204a.js" defer></script><script src="/assets/js/5.e6fb2106.js" defer></script><script src="/assets/js/1.903fcf53.js" defer></script><script src="/assets/js/40.c4f351df.js" defer></script>
+  </body>
+</html>
