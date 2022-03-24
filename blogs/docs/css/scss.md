@@ -107,7 +107,7 @@ import './styles/main.scss'
 * <font color=#ff3040>注意: 混入的`@mixin`一般需要通过`@import`导入或注册全局样式 否则不同的scss文件混入是无法一起使用的</font>
 * sass混入(导出)全局样式 `@mixin` 接收(导入)全局样式是 `@include`
 
-![image-20210621202711224](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/9OnxNqmYL2etDAo.png)
+![image-20220323122134536](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220323122134536.png)
 
 ## scss的选择器 &
 
@@ -200,8 +200,8 @@ ul {
 
 * **css中`>`是:**
 
-  * css3特有的选择器，A>B 表示选择A元素的所有子B元素。
-  * 与 A B的区别在于，A B 选择所有后代元素，而A>B只选择一代。
+  * css3特有的选择器，.class1 > .class2 表示选择A元素的所有子B元素。
+  * 与 .class1 .class2 的区别在于，.class1 .class2 选择所有后代元素，而A>B只选择一代。
 
 ## 在项目中使用全局变量
 
