@@ -34,7 +34,7 @@ sticky: 2
   const instance = axios.create({
     // baseURL是axios属性 用来声明url基础路径(比对上面声明的常量)
     baseURL: baseURL,
-    // 设置响应超时 建议不设置 或者设置时间较长 会影响一些较大的文件下载
+    // 设置响应超时 建议不设置 或者设置时间较长 会影响一些较大的文件下载 服务器会设置相应时间 不需要前端设置
     // timeout: 10000
   })
   ```
@@ -56,6 +56,7 @@ sticky: 2
 - 设置axios的 请求拦截器`response.use()` 和 响应拦截器`response.use()`
 - `transformRequest`是axios请求处理(比拦截器还早) 通常会把数据转换为json格式 并且在headers(请求头)中做一些处理
 - `paramsSerializer`是处理你向后端传递的数据 是一个负责向后端传递数据时序列化的函数 通常搭配qs把前端传递的数组序列化
+- qs 序列化需要 `npm i qs`
 
 ```js
   // 导入qs序列化
@@ -91,8 +92,8 @@ import router from '@/router'
 import qs from 'qs'
 
 // 请求的基准路径 常量保存并且支持导出
-export const baseURL = ''
-// 更规范的调用 通过process.env调用
+export const baseURL = process.env.VUE_APP_BASE_API
+// 更规范的调用 通过process.env调用 依据环境 替换对应的根路径
 // const baseURL = process.env.VUE_APP_BASE_API
 
 // 创建独立的axios的实例
@@ -113,14 +114,14 @@ instance.interceptors.request.use((config) => { // config是发送的数据
   if (token) {
     //! config是发送的数据 headers是axios请求头
     config.headers['token'] = getToken()
-    // 也可以这样写
+    // 也可以这样写 不推荐 会造成headers默认值缺失
     // config.headers.token= getToken()
   }
   // 返回处理后的数据
   return config
 }, (err) => {
    // 提示网络错误 可以拦截到网络错误 接口报错
-  Message.error($t.login.errorWeb)
+  Message.error('网络错误')
   // 如果请求拦截器错误 返回打印错误信息
   return Promise.reject(err)
 })
@@ -128,19 +129,19 @@ instance.interceptors.request.use((config) => { // config是发送的数据
 // 响应拦截器 (处理后端返回的数据)
 instance.interceptors.response.use((response) => {
    // 这里可以判断token是否失效 然后进行处理操作
+   // if(token) ..... token失效进行处理
   // 去除axios自带的一层data
   return response.data
 }, (err) => {
   // 处理token的过期操作
-  if (err.response && err.response.status === 401) {
-    // ---------------------- 应该续签token 但是后端没做(按需设置)
-      
-    // 进行清除操作
-    // 刷新跳转
-    window.location.href = '/login'
-  }
+  // if (err.response && err.response.status === 401) {
+   // ---------------------- 应该续签token 但是后端没做(按需设置)
+   // 进行清除操作
+   // 刷新跳转
+   // window.location.href = '/login'
+ // }
    // 提示网络错误 可以拦截到网络错误 接口报错
-  Message.error($t.login.errorWeb)
+  Message.error('网络错误')
   // 打印响应拦截器的错误信息
   return Promise.reject(err)
 })
@@ -167,7 +168,6 @@ export default (options) => {
 //! 这里是不光携带token还需要其他请求头参数的特殊封装
 // 名称要和api接口名称一致
 const http = {
-    
   //! 这里是特殊的post请求 通常需要携带参数
   // transformRequest是axios请求处理(拦截器还早) 允许在向服务器发送前，修改请求数据
   // 这里是只能提交json数据 需要在请求头数据类型中设置类型为json
@@ -355,7 +355,7 @@ const instance = axios.create({
   // 基准路径 通过 开发环境 和 生产环境 文件进行配置(开发和生产单独设置 方便区分 脚手架方法需要重启)
   baseURL: process.env.VUE_APP_BASE_API,
   // baseURL: baseURL,
-  // 超时,如果超过10秒，后端没有返回数据，那么就报错
+  // 超时,如果超过10秒，后端没有返回数据，那么就报错 建议关闭 下载的话容易出问题 服务器自带响应时间 无需前端设置
   timeout: 10000
 })
 ```
