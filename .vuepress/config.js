@@ -175,33 +175,33 @@ module.exports = {
     },
     mottos: [
       {
-        zh: "并非它们轻而易举，而是它们困难重重。",
-        en: "not because they are easy,but because they are hard!",
+        zh: "致敬你探索的脚步 抵达更远的远方。",
+        en: "",
       },
       // 可以按天数 7条添加
       {
-        zh: "并非它们轻而易举，而是它们困难重重。",
-        en: "not because they are easy,but because they are hard!.",
+        zh: "致敬你探索的脚步 抵达更远的远方。",
+        en: ".",
       },
       {
-        zh: "并非它们轻而易举，而是它们困难重重。",
-        en: "not because they are easy,but because they are hard!.",
+        zh: "致敬你探索的脚步 抵达更远的远方。",
+        en: ".",
       },
       {
-        zh: "并非它们轻而易举，而是它们困难重重。",
-        en: "not because they are easy,but because they are hard!.",
+        zh: "致敬你探索的脚步 抵达更远的远方。",
+        en: ".",
       },
       {
-        zh: "并非它们轻而易举，而是它们困难重重。",
-        en: "not because they are easy,but because they are hard!.",
+        zh: "致敬你探索的脚步 抵达更远的远方。",
+        en: ".",
       },
       {
-        zh: "并非它们轻而易举，而是它们困难重重。",
-        en: "not because they are easy,but because they are hard!.",
+        zh: "致敬你探索的脚步 抵达更远的远方。",
+        en: ".",
       },
       {
-        zh: "并非它们轻而易举，而是它们困难重重。",
-        en: "not because they are easy,but because they are hard!.",
+        zh: "致敬你探索的脚步 抵达更远的远方。",
+        en: ".",
       },
     ],
     covers: [

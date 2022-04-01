@@ -206,6 +206,7 @@ ul {
 ## 在项目中使用全局变量
 
 * 我们在做项目的时候规范一点的话都会用到scss提供的全局变量的颜色 这样有利于页面的颜色的统一性 并且后期迭代十分的方便 上文介绍了
+* <font color =#ff3040>sass-loader 的版本不同 所对应的全局变量属性名也不同 详细看版本问题的记录</font>
 
 > 第一步 创建一个scss全局变量文件 `common.scss`
 
@@ -251,6 +252,14 @@ module.exports = {
 }
 ```
 
+### **sass-loader 版本问题**
+
+* sass-loader v8以前的版本 属性名为 `data`
+* sass-loader v8到v10的版本 属性名为 `prependData`
+* sass-loader v10以后的版本 属性名为 `additionalData`
+
+![image-20220330184039951](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220330184039951.png)
+
 ## 在项目中导入通用样式
 
 * 上面我们介绍了全局变量 那么我们做项目的时候 肯定也少不了通用样式 有时候多个页面用相同的样式 你还复制粘贴 多捞哦 通用样式配合全局变量舒服的一
@@ -276,6 +285,49 @@ module.exports = {
 import './styles/main.scss'
 ```
 
+## 项目中使用全局scss
+
+* 通常可以把清浮动 设置字体超出隐藏的样式设置为全局样式 方便调用
+
+> 创建全局sass
+
+* 通常在`styles`文件夹下面创建
+
+```scss
+// 全局scss
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+```
+
+> 导入全局sacc
+
+* 在Vue的入口文件`main.js`导入全局scss即可
+
+```js
+// 到入全局样式
+import '@/styles/index.scss'
+```
+
+## 清除默认样式
+
+* npm下载清除默认样式包
+
+```bash
+npm i reset-css
+```
+
+* 在Vue的入口文件`main.js`中导入
+
+```js
+// 导入清除默认样式css
+import 'reset-css'
+```
+
 ## 导入字体库
 
 * 通过`@font-face` 设置路径`src` 和 名称`font-family`
@@ -297,3 +349,6 @@ import './styles/main.scss'
 [vue-cli4配置scss全局变量](https://blog.csdn.net/qq_23447231/article/details/109139195)
 
 [vue-cli4.x 使用 scss 并配置全局变量使用](https://blog.csdn.net/weixin_44463883/article/details/109675792)
+
+[sass-loder版本问题](https://www.cnblogs.com/xzybk/p/14379861.html)
+
