@@ -78,6 +78,8 @@ sticky: 2
 >
 > <font color =#ff3040>注意: 封装分为 携带token请求头的通用封装 和 携带token还需要其他请求头参数的特殊封装</font>
 
+* 这里是适用于elementui提示的axios二次封装
+
 ```js
 // 封装通用的接口调用模块
 // 导入axios组件
@@ -87,10 +89,10 @@ import store from '@/store'
 // 获取toekn
 import { getToken } from '@/utils/auth'
 // 导入Vue router 实例化
-import router from '@/router'
 // 导入序列化函数
 import qs from 'qs'
-
+// 导入elementui提示组件
+import { Message } from 'element-ui'
 // 请求的基准路径 常量保存并且支持导出
 export const baseURL = process.env.VUE_APP_BASE_API
 // 更规范的调用 通过process.env调用 依据环境 替换对应的根路径
@@ -120,7 +122,7 @@ instance.interceptors.request.use((config) => { // config是发送的数据
   // 返回处理后的数据
   return config
 }, (err) => {
-   // 提示网络错误 可以拦截到网络错误 接口报错
+  // 提示网络错误 可以拦截到网络错误 接口报错
   Message.error('网络错误')
   // 如果请求拦截器错误 返回打印错误信息
   return Promise.reject(err)
@@ -128,19 +130,19 @@ instance.interceptors.request.use((config) => { // config是发送的数据
 
 // 响应拦截器 (处理后端返回的数据)
 instance.interceptors.response.use((response) => {
-   // 这里可以判断token是否失效 然后进行处理操作
-   // if(token) ..... token失效进行处理
+  // 这里可以判断token是否失效 然后进行处理操作
+  // if(token) ..... token失效进行处理
   // 去除axios自带的一层data
   return response.data
 }, (err) => {
   // 处理token的过期操作
   // if (err.response && err.response.status === 401) {
-   // ---------------------- 应该续签token 但是后端没做(按需设置)
-   // 进行清除操作
-   // 刷新跳转
-   // window.location.href = '/login'
- // }
-   // 提示网络错误 可以拦截到网络错误 接口报错
+  // ---------------------- 应该续签token 但是后端没做(按需设置)
+  // 进行清除操作
+  // 刷新跳转
+  // window.location.href = '/login'
+  // }
+  // 提示网络错误 可以拦截到网络错误 接口报错
   Message.error('网络错误')
   // 打印响应拦截器的错误信息
   return Promise.reject(err)
@@ -159,9 +161,9 @@ export default (options) => {
     // 动态判断请求的方式(es6规则: 对象的键可以是动态的变量)
     // 如果不是data请求 那么就赋值params请求
     // api掉接口的时候 传递数据的属性名(键) 全部为data:{} (不管是那种方式)
-    [options.method.toUpperCase() === 'GET' ? 'params' : 'data']: options.data, // toUpperCase转换为大写(请求为小写也可)
+    [options.method.toUpperCase() === 'GET' ? 'params' : 'data']: options.data // toUpperCase转换为大写(请求为小写也可)
     // 设置请求头(一般用于跨域问题 和 传输token)
-   // headers: options.headers // 不建议覆盖之前的headers 会出现问题 建议单独处理具备其他请求头的接口
+    // headers: options.headers // 不建议覆盖之前的headers 会出现问题 建议单独处理具备其他请求头的接口
   })
 }
 
