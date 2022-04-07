@@ -22,3 +22,31 @@ autoIgnore: true
 > 框架选择
 
 Vue3.2 + Vue cli5 + three.js 
+
+## 导入three.js
+
+* 第一步 npm下载three.js
+
+```bash
+npm install --save three
+```
+
+* 第二步 在Vue3中使用three某个功能
+  * three.js在Vue3中可以使用结构 来调用某些控件(方法)
+
+```vue
+// Scene()创建一个新的场景对象。
+<script setup>
+// 导入Vue组合API
+import { onMounted } from 'vue'
+// 结构three.js内容 使用Scene()方法
+import { Scene } from 'three'
+const sceneDemo = () => {
+  console.log(sceneDemo)
+}
+onMounted(() => {
+  ret()
+})
+</script>
+```
+
