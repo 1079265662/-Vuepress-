@@ -25,7 +25,7 @@ Uncaught (in promise) TypeError: 'get' on proxy: property 'modelViewMatrix' is a
 ## 问题解析
 
 * 第一感觉不是赋值操作的问题 可能是Vue3`proxy`对象代理的问题 我们知道Vue2是通过`defineproperty`的方式 实现的双向绑定(响应式数据) Vue3则采取更先进的es6方法`proxy` 很可能是Vue3的响应式数据 和 three.js的相关数据结构 出现了冲突
-* 通过我查询资料后 在该[文章](https://cdmana.com/2022/03/202203041738342602.html) 验证了我的猜想 那他的决绝方法是 在three.js源码中进行修改 我认为这种修改方式不可取 这种npm包的修改配置 是一种高危且无用的方式 再次npm后 你修改的内容会丢失
+* 通过我查询资料后 在该[文章](https://cdmana.com/2022/03/202203041738342602.html) 验证了我的猜想 那他的解决方法是 在three.js源码中进行修改 我认为这种修改方式不可取 修改npm包是一种高危且无用的方式 再次npm后 你修改的内容会丢失
 * 进一步的查询后在[stackoverflow论坛中](https://stackoverflow.com/questions/65693108/threejs-component-working-in-vuejs-2-but-not-3#comment116149963_65693108) 我发现实际上`Scene()场景对象` 和 `Mesh()网格模型对象`是一种数据结构 不需要双向绑定 也不需要响应式 
 * 在该文章的最后得出最佳答案 使用Vue的[toRaw()方法](https://staging-cn.vuejs.org/api/reactivity-advanced.html#toraw)  这个方法可以让我们储存的`proxy`对象 取消其代理特性 转换成普通对象 当然 也就失去了Vue3的响应式哦
 * 还有一种 也是最暴力 最简单的方式 就是声明全局变量 不在Vue3中声明 感觉有点不优雅 不是很想用
@@ -62,7 +62,6 @@ const box = () => {
   const mesh = toRaw(content.mesh)
 }
 onMounted(() => {
-  // 渲染threejs的立体几何对象
   box()
 })
 

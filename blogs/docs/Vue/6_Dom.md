@@ -22,8 +22,8 @@ categories: Vue
 
 > 内部实现图
 
-![image-20210617220504251](https://tva4.sinaimg.cn/large/005INI3Xly8grlm6byn5fj30gv07g3yf.jpg)
+![image-20210617220504251](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grlm6byn5fj30gv07g3yf.jpg)
 
 > 虚拟Dom 实现代码
 
-![](https://tva4.sinaimg.cn/large/005INI3Xly8grlm7lpnhnj30hr0dtju6.jpg)
+![](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grlm7lpnhnj30hr0dtju6.jpg)
