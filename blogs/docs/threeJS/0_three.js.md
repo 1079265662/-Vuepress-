@@ -90,7 +90,7 @@ export default {
 
 > 先来一个小案例
 
-* <font color =ff3040>注意: `Scene()场景对象` 和 `Mesh()网格模型对象`  需要使用`toRaw()`取消其代理 其他的元素正常写即可 否则会报错</font>
+* <font color =ff3040>注意: `Scene()场景对象` 和 `Mesh()网格模型对象`  需要使用`toRaw()`取消其代理 其他的元素正常写即可 否则会报错 详细[看这里](./2_three.js_vue3_error.md)</font>
 
 ```vue
 <template>
