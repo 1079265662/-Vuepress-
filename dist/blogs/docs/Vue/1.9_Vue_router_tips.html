@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vue2刷新跳转进行提示 | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?61498f37b83812e7b85952d5feaaab47";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.6f92cd8b.css" as="style"><link rel="preload" href="/assets/js/app.334c0b70.js" as="script"><link rel="preload" href="/assets/js/5.e6fb2106.js" as="script"><link rel="preload" href="/assets/js/1.903fcf53.js" as="script"><link rel="preload" href="/assets/js/61.816de02c.js" as="script"><link rel="prefetch" href="/assets/js/10.988ddcf1.js"><link rel="prefetch" href="/assets/js/100.30a5be20.js"><link rel="prefetch" href="/assets/js/101.738cc15c.js"><link rel="prefetch" href="/assets/js/102.3d59bcd2.js"><link rel="prefetch" href="/assets/js/103.9e8ab026.js"><link rel="prefetch" href="/assets/js/104.5ee762ad.js"><link rel="prefetch" href="/assets/js/105.072b3c3a.js"><link rel="prefetch" href="/assets/js/106.4b103c50.js"><link rel="prefetch" href="/assets/js/107.a84da2ed.js"><link rel="prefetch" href="/assets/js/108.efab69b1.js"><link rel="prefetch" href="/assets/js/109.e86bf3a1.js"><link rel="prefetch" href="/assets/js/11.f2e7cf3a.js"><link rel="prefetch" href="/assets/js/110.df86e06c.js"><link rel="prefetch" href="/assets/js/111.c0e56d5b.js"><link rel="prefetch" href="/assets/js/112.d9dd2641.js"><link rel="prefetch" href="/assets/js/113.e1d5ed3c.js"><link rel="prefetch" href="/assets/js/114.e4107a2c.js"><link rel="prefetch" href="/assets/js/115.9bf48682.js"><link rel="prefetch" href="/assets/js/116.d9500458.js"><link rel="prefetch" href="/assets/js/117.11ef8bfe.js"><link rel="prefetch" href="/assets/js/118.afb8f74a.js"><link rel="prefetch" href="/assets/js/119.be8e6781.js"><link rel="prefetch" href="/assets/js/12.355b85c3.js"><link rel="prefetch" href="/assets/js/120.a9574285.js"><link rel="prefetch" href="/assets/js/13.ffc63a13.js"><link rel="prefetch" href="/assets/js/14.d847f54e.js"><link rel="prefetch" href="/assets/js/15.f15d2c84.js"><link rel="prefetch" href="/assets/js/16.e306e0e8.js"><link rel="prefetch" href="/assets/js/17.b33bc22b.js"><link rel="prefetch" href="/assets/js/18.8ccd1a64.js"><link rel="prefetch" href="/assets/js/19.b7f332d3.js"><link rel="prefetch" href="/assets/js/20.7c41be4b.js"><link rel="prefetch" href="/assets/js/21.74966cb3.js"><link rel="prefetch" href="/assets/js/22.e846e0e6.js"><link rel="prefetch" href="/assets/js/23.c4395c97.js"><link rel="prefetch" href="/assets/js/24.cdde8c00.js"><link rel="prefetch" href="/assets/js/25.03452e62.js"><link rel="prefetch" href="/assets/js/26.712ef093.js"><link rel="prefetch" href="/assets/js/27.3f5b7a90.js"><link rel="prefetch" href="/assets/js/28.5dac6f54.js"><link rel="prefetch" href="/assets/js/29.2edd4ce4.js"><link rel="prefetch" href="/assets/js/3.4e5d0e6c.js"><link rel="prefetch" href="/assets/js/30.ae849c9f.js"><link rel="prefetch" href="/assets/js/31.99c3e7a8.js"><link rel="prefetch" href="/assets/js/32.b51844a2.js"><link rel="prefetch" href="/assets/js/33.a79dc778.js"><link rel="prefetch" href="/assets/js/34.f1aff0a2.js"><link rel="prefetch" href="/assets/js/35.eb9cf255.js"><link rel="prefetch" href="/assets/js/36.0b9243b8.js"><link rel="prefetch" href="/assets/js/37.650b6e56.js"><link rel="prefetch" href="/assets/js/38.957101a3.js"><link rel="prefetch" href="/assets/js/39.45a42361.js"><link rel="prefetch" href="/assets/js/4.0067ce26.js"><link rel="prefetch" href="/assets/js/40.1ca15e14.js"><link rel="prefetch" href="/assets/js/41.bdf3e559.js"><link rel="prefetch" href="/assets/js/42.da72a9da.js"><link rel="prefetch" href="/assets/js/43.2ea04b5c.js"><link rel="prefetch" href="/assets/js/44.1d8b170f.js"><link rel="prefetch" href="/assets/js/45.899add1e.js"><link rel="prefetch" href="/assets/js/46.ffb53d0b.js"><link rel="prefetch" href="/assets/js/47.4390c738.js"><link rel="prefetch" href="/assets/js/48.663f8109.js"><link rel="prefetch" href="/assets/js/49.def36829.js"><link rel="prefetch" href="/assets/js/50.2da01218.js"><link rel="prefetch" href="/assets/js/51.eae51df7.js"><link rel="prefetch" href="/assets/js/52.4f95c597.js"><link rel="prefetch" href="/assets/js/53.86d67fdb.js"><link rel="prefetch" href="/assets/js/54.4182a09b.js"><link rel="prefetch" href="/assets/js/55.048cf6ef.js"><link rel="prefetch" href="/assets/js/56.c4c49b64.js"><link rel="prefetch" href="/assets/js/57.05e52770.js"><link rel="prefetch" href="/assets/js/58.887de0c5.js"><link rel="prefetch" href="/assets/js/59.ef25d480.js"><link rel="prefetch" href="/assets/js/6.b813653c.js"><link rel="prefetch" href="/assets/js/60.fac5c202.js"><link rel="prefetch" href="/assets/js/62.396cb59b.js"><link rel="prefetch" href="/assets/js/63.fd8d7ee5.js"><link rel="prefetch" href="/assets/js/64.5e6382c3.js"><link rel="prefetch" href="/assets/js/65.f7aefb86.js"><link rel="prefetch" href="/assets/js/66.b34eb858.js"><link rel="prefetch" href="/assets/js/67.b7cf22d9.js"><link rel="prefetch" href="/assets/js/68.79c8c81b.js"><link rel="prefetch" href="/assets/js/69.1b6d9233.js"><link rel="prefetch" href="/assets/js/7.2fe5d1d4.js"><link rel="prefetch" href="/assets/js/70.4c831931.js"><link rel="prefetch" href="/assets/js/71.cb4aa459.js"><link rel="prefetch" href="/assets/js/72.d4c2e4db.js"><link rel="prefetch" href="/assets/js/73.56d20601.js"><link rel="prefetch" href="/assets/js/74.1ef43269.js"><link rel="prefetch" href="/assets/js/75.ca9f3bcd.js"><link rel="prefetch" href="/assets/js/76.bea2016d.js"><link rel="prefetch" href="/assets/js/77.e133b2d0.js"><link rel="prefetch" href="/assets/js/78.33de6d91.js"><link rel="prefetch" href="/assets/js/79.c8e194db.js"><link rel="prefetch" href="/assets/js/8.b1f53c13.js"><link rel="prefetch" href="/assets/js/80.62f171a9.js"><link rel="prefetch" href="/assets/js/81.23490fb7.js"><link rel="prefetch" href="/assets/js/82.0990be6d.js"><link rel="prefetch" href="/assets/js/83.1f2abea3.js"><link rel="prefetch" href="/assets/js/84.beddc7e8.js"><link rel="prefetch" href="/assets/js/85.b591c05f.js"><link rel="prefetch" href="/assets/js/86.2c85d6f8.js"><link rel="prefetch" href="/assets/js/87.c7d7815f.js"><link rel="prefetch" href="/assets/js/88.d14a08de.js"><link rel="prefetch" href="/assets/js/89.4098fa40.js"><link rel="prefetch" href="/assets/js/9.4652c675.js"><link rel="prefetch" href="/assets/js/90.d99304d2.js"><link rel="prefetch" href="/assets/js/91.a80b5d28.js"><link rel="prefetch" href="/assets/js/92.7a7d1891.js"><link rel="prefetch" href="/assets/js/93.3bd5d0fd.js"><link rel="prefetch" href="/assets/js/94.0f1bce64.js"><link rel="prefetch" href="/assets/js/95.04662dc3.js"><link rel="prefetch" href="/assets/js/96.230733b7.js"><link rel="prefetch" href="/assets/js/97.a45a66e5.js"><link rel="prefetch" href="/assets/js/98.bce1724b.js"><link rel="prefetch" href="/assets/js/99.1c7acff6.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6f92cd8b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-57e19720><div data-v-57e19720><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-57e19720 data-v-57e19720><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-89477f7e data-v-57e19720 data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div> <div class="hide" data-v-57e19720><div data-v-57e19720><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-k75977.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-57e19720><header class="navbar" data-v-57e19720><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/three.js/" class="nav-link"><i class="iconfont undefined"></i>
+  three.js
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-57e19720></div> <aside class="sidebar" data-v-57e19720><div class="personal-info-wrapper" data-v-03833281 data-v-57e19720><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>105</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>37</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue移动头条项目/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue移动头条项目
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/three.js/" class="nav-link"><i class="iconfont undefined"></i>
+  three.js
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Vue</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/Vue/1.1_Vue_what.html" class="sidebar-link">Vue 渐进式编程的介绍</a></li><li><a href="/blogs/docs/Vue/1.2_Vue_Tour.html" class="sidebar-link">Vue2 tour的使用记录</a></li><li><a href="/blogs/docs/Vue/1.2_Vue_menu.html" class="sidebar-link">Vue2 右键/左键点击菜单</a></li><li><a href="/blogs/docs/Vue/1.3_Vue_fun.html" class="sidebar-link">App.vue中的id问题</a></li><li><a href="/blogs/docs/Vue/1.4_Vue_height.html" class="sidebar-link">Vue2中动态计算高度代替100vh</a></li><li><a href="/blogs/docs/Vue/1.5_Vue_checkbox.html" class="sidebar-link">Vue2元素选中的样式</a></li><li><a href="/blogs/docs/Vue/1.6_components.html" class="sidebar-link">Vue2组件相关内容</a></li><li><a href="/blogs/docs/Vue/1.7_new_Vue.html" class="sidebar-link">Vue使用脚手架搭建项目</a></li><li><a href="/blogs/docs/Vue/1.8_Vue_clear.html" class="sidebar-link">Vue2重置data()中的数据</a></li><li><a href="/blogs/docs/Vue/1.9_Vue_router_tips.html" aria-current="page" class="active sidebar-link">Vue2刷新跳转进行提示</a></li><li><a href="/blogs/docs/Vue/2.2_Vue_Athours.html" class="sidebar-link">Vue 的杂项</a></li><li><a href="/blogs/docs/Vue/2.3_Vue_eslint.html" class="sidebar-link">记录常用的Vue eslint规则</a></li><li><a href="/blogs/docs/Vue/2_Vuex.html" class="sidebar-link">Vuex 的食用方法</a></li><li><a href="/blogs/docs/Vue/3.1_Vue_echarts.html" class="sidebar-link">Vue中的echarts使用方法</a></li><li><a href="/blogs/docs/Vue/3_Vue_install.html" class="sidebar-link">Vue2 install插件案例</a></li><li><a href="/blogs/docs/Vue/4_Vue_lazy.html" class="sidebar-link">Vue路由和组件的按需加载</a></li><li><a href="/blogs/docs/Vue/6_Dom.html" class="sidebar-link">Vue底层的虚拟Dom树</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-89477f7e data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>Vue2刷新跳转进行提示</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div></div> <div data-v-57e19720><main class="page"><div class="page-title" style="display:none;"><h1 class="title">Vue2刷新跳转进行提示</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2022-05-08</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/Vue/1.9_Vue_router_tips.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>Vue</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>Vue2刷新和跳转时 用浏览器自带弹窗提示用户<br></p></div> <h2 id="提示需求"><a href="#提示需求" class="header-anchor">#</a> 提示需求</h2> <ul><li>一些特定页面 比如填写一些表单的时候 我们会进行刷新和路由切换的提示 防止客户不小心关掉和刷新页面 导致填写的数据丢失</li> <li>在Vue2 中我们通过<code>mixin</code>来实现 这样页面导入即可使用 相当于公共方法</li> <li>页面跳转和刷新 需要用到不同的两个方法
+<ul><li><font color="#ff3040">页面跳转</font> 我们用Vue Router的<code>beforeRouteLeave()</code>方法 他可以直接在Vue的<code>&lt;script&gt;</code>标签中使用 无需单独在<code>methods</code>中声明一个方法</li> <li><font color="#ff3040">页面刷新</font>  我们用js的方法<code>window.onbeforeunload</code> 他是可以帮我们判断用户是否要刷新页面 但是注意 需要在<code>destroyed ()</code>页面销毁声明周期中 销毁该页面的刷新监控方法 防止污染其他页面</li></ul></li></ul> <blockquote><p>mixin 写一个刷新跳转</p></blockquote> <ul><li>起个名字叫<code>onbeforeunload.js</code></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * @author 刘凯利
+ * @function 阻止刷新提示保存
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 刷新阻止</span>
+  <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 进行刷新提示</span>
+    window<span class="token punctuation">.</span><span class="token function-variable function">onbeforeunload</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      e <span class="token operator">=</span> e <span class="token operator">||</span> window<span class="token punctuation">.</span>event
+      <span class="token comment">// 兼容IE8和Firefox 4之前的版本</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span>returnValue <span class="token operator">=</span> <span class="token string">'关闭提示'</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+</span>
+      <span class="token keyword">return</span> <span class="token string">'关闭提示'</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">destroyed</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 销毁刷新提示 防止其他页面出现</span>
+    window<span class="token punctuation">.</span>onbeforeunload <span class="token operator">=</span> <span class="token keyword">null</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// 切换路由阻止</span>
+  <span class="token function">beforeRouteLeave</span> <span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> <span class="token keyword">from</span><span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> answer <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">confirm</span><span class="token punctuation">(</span><span class="token string">'系统可能不会保存您所做的更改。'</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>answer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>在使用的页面 导入mixin并使用</p></blockquote> <ul><li>mixin使用详情看<a href="../Vue3/1.8_Vue3_mixin">这里</a></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> onbeforeunload <span class="token keyword">from</span> <span class="token string">'@/mixin/onbeforeunload'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  mixins<span class="token operator">:</span> <span class="token punctuation">[</span>onbeforeunload<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.334c0b70.js" defer></script><script src="/assets/js/5.e6fb2106.js" defer></script><script src="/assets/js/1.903fcf53.js" defer></script><script src="/assets/js/61.816de02c.js" defer></script>
+  </body>
+</html>

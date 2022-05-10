@@ -1,6 +1,6 @@
 ---
 title: JS实用小技巧
-date: 2021-08-21
+date: 2022-05-10
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-o3lpzl.jpg
 tags:
  - JavaScript
@@ -21,6 +21,8 @@ JS日常总结的使用小技巧 <br>
 
 > 假设如果 succ对象中 存在confirm数据 则进行一些操作
 
+* `?.`就算原数据没有 也不回报错 会返回`undefined` 而不是直接报错
+
 ```js
     if(succ?.confirm){
 	// 如果 succ对象中存在confirm数据 则进行一些操作
@@ -39,66 +41,40 @@ JS日常总结的使用小技巧 <br>
 ```js
       // err 和 succ 对应两个返回的数据 对应其索引值(下标)
       const [err, succ] = await uni.requestPayment(payParams)
+      console.log(err) // null
+ 	  console.log(succ); // {......}
 ```
 
-## 把后端返回的数据 转换成对象使用
+## 声明方法结构传值
 
-* 通常我们获取到后端返回的数据类型是这样的
+疑问: 有时候我们会封装一些通用方法 通用方法如果需要传参过多 会导致非常难管理 有些参数我不想传 想用默认值 我们可不可以指定传参呢 
 
-![image-20210822231515067](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210822231515067.png)
-
-* 如果有特殊需求 需要把其转换成对象
-
-![image-20210822231619762](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210822231619762.png)
-
-> 转换方法
-
-* 通过箭头函数把后端返回的数据转换成对象 箭头函数的参数就是转换成对象后的后端数据
-
-```vue
-       // goods是我们需要转换的数据
-       <block v-for="(goods, i) in cart" :key="i">
-       // 箭头函数里面的参数(goods) 就是转换成对象后的后端数据
-         <view @click="()=> bindClick(goods)" ></view>
-       </block>
-
-```
-
-* 我们可以用这种方法 使用一些字符串数组方法
+解答: 我们可以给方法传入对象`Object` 然后再声明的方法中解构对象 这样就可以实现我们 按需传值 而非传统的无序排列传参
 
 ```js
- goods.goods_id // 读取转换成对象的后端数据
+// 声明一个通用方法
+/**
+ * @example this.$addNull(array,name,id)
+ * @author 刘凯利
+ * @function 添加空的可选值 id为0
+ * @param {Object} obj 参数合集
+ * @param {Array} obj.array 要添加的数组
+ * @param {String} obj.id 渲染id
+ * @param {String} obj.name 名称
+ */
+export default function addNull (obj) {
+  // 结构传参的对象
+  const { array, id, name  } = obj
+  ... 方法干的事情
+}
+
+// 外部使用该方法
+addNull({
+    // 传递array 参数
+    array: [2333,3333],
+    // 不想传id 直接传name
+    name: '不传id'
+})
 ```
 
-## 倒计时样式设置
-
-* 我们一般提交完毕数据 或者 登录成功后 会用倒计时方式通知用户即将跳转到某个页面 这个时候就需要`setInterval()` 定时器通知用户即将跳转
-
-<img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20210917193701640.png" alt="image-20210917193700300" style="zoom: 33%;" />
-
-* `setInterval()` 使用的时候会有一秒的延迟(异步方法) 所以我们需要在定时器开始前 进行一次提示
-* 这里用`alert()`弹窗效果
-
-```js
-          // 设置定时器的秒数
-          const TIME_COUNT = 3;
-          // 提前显示弹窗 防止定时器延迟显示
-          alert(`提交成功3秒进入积分榜`)
-          if (!this.timer) {
-            this.count = TIME_COUNT;
-            this.show = false;
-            this.timer = setInterval(() => {
-              if (this.count > 1 && this.count <= TIME_COUNT) {
-                this.count--;
-                alert(`提交成功${this.count}秒进入积分榜`)
-              } else {
-                this.show = true;
-                clearInterval(this.timer);
-                this.timer = null;
-                // 这里是倒计时结束执行的事件 可以添加跳转到其他页面
-                  // 这里可以写一些跳转逻辑
-              }
-            }, 1000);
-          } 
-```
-
+* 通过方法内 解构参数对象 实现按需传参的需求

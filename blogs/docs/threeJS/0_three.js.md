@@ -185,13 +185,13 @@ export default {
 </style>
 ```
 
-## three.js辅助内容
+## 辅助控件插件
 
 * 记录非three.js核心的内容 这些基本上都是控件之类的 用来提供页面中的交互效果 
 
 ### 轨道控制器 OrbitControls
 
-* 听起来感觉很牛逼的感觉 实际上就是相机围绕目标进行轨道运动的效果 [官方介绍](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls)
+* 听起来感觉很牛逼的感觉 实际上就是相机围绕目标进行轨道运动的效果 实现来拖拽和放大缩小模型 [官方介绍](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls)
 * <font color=#ff3040>注意: 使用轨道控制器之前 需要开启`requestAnimationFrame()`动画 否则轨道控制器会失效 [详细看这里](./1.1_three.js_js)</font>
 
 ```js
@@ -290,7 +290,7 @@ const updateCamera = () => {
 }
 ```
 
-## three.js中常用Object3D方法
+## 常用Object3D方法
 
 * 这是Three.js中大部分对象的基类，提供了一系列的属性和方法来对三维空间中的物体进行操纵。详细看这里[三维物体（Object3D）](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D)
 * 请注意，可以通过.add( object )方法来将对象进行组合，该方法将对象添加为子对象，但为此最好使用Group（来作为父对象）
@@ -302,4 +302,32 @@ const updateCamera = () => {
 ```js
 物体的网格对象(Mesh).rotateY(速度(0.1)) // rotateX rotateY rotateZ
 ```
+
+## 导入外部加载的模型 GLTFLoader
+
+* 我们在做threejs的时候会引入大量3D模型 通过是`gltf/glb`格式的文件 代替我们前端渲染的复杂模型 我们前端只需要写交互即可 我记录了有关[gltf格式的信息](./3_gltf)
+* 我们可以使用官方的控件 [GLTFLoader](https://threejs.org/docs/index.html?q=GLTFLoader#examples/zh/loaders/GLTFLoader) 来实现加载`gltf/glb` 格式的文件 获取其模型对象 通过添加场景 光源 相机 渲染器后 直接在页面中显示
+  * 获取完模型对象后 需要把模型对象`add`到声明的场景中去
+* <font color =#ff3040>注意: GLTFLoader支持地址`url` 如果你想在Vue cli上本地加载 需要在`public`文件夹下 存放本地的`gltf/glb` 并且只支持 绝对路径 不支持相对路径</font>
+* 我们通常在Vue cli上使用GLTFLoader加载会用`process.env.BASE_URL` 脚手架提供的获取环境路径方法 以防止出现位置bug
+
+```js
+// 引入gltf模型加载库GLTFLoader.js
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+const model = new THREE.Group();//声明一个组对象，用来添加加载成功的三维场景
+const loader = new GLTFLoader(); //创建一个GLTF加载器
+loader.load(`${process.env.BASE_URL}model/model.gltf`, function (gltf) {//gltf加载成功后返回一个对象
+    console.log('控制台查看gltf对象结构', gltf);
+    //gltf.scene可以包含网格模型Mesh、光源Light等信息，至于gltf.scene是否包含光源，要看.gltf文件中是否有光源信息
+    console.log('gltf对象场景属性', gltf.scene);
+    //把gltf.scene中的所有模型添加到model组对象中
+    model.add(gltf.scene);
+})
+const scene = new THREE.Scene();
+scene.add(model);// 把三维模型添加到场景中
+```
+
+* Vue cil 脚手架的下载文件路径(用来存放`gltf/glb` 等需要下载的本地文件) 
+
+![image-20220510183547946](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220510183547946.png)
 

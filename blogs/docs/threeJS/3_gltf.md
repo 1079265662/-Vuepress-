@@ -1,7 +1,7 @@
 ---
 title: GLTF格式简介
 date: 2022-05-07
-cover: 
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-dpzjzg.jpg
 tags:
  - three.js
 categories: three.js
@@ -23,6 +23,8 @@ GLTF格式简介 包含软件的支持程度<br>
 GLTF格式是新2015发布的三维模型格式，随着物联网、WebGL、5G的进一步发展，会有越来越多的互联网项目Web端引入3D元素，你可以把GLTF格式的三维模型理解为.jpg、.png格式的图片一样，现在的网站，图片基本是标配，对于以后的网站来说如果需要展示一个场景，使用3D来替换图片表达也是很正常的事情。图片有很多格式，对于三维模型自然也是如此，Web开发的时候图片会有常用格式，对于Web3D开发也一样，肯定会根据需要选择一个常见的大家都熟悉的格式，随时时间的发展，GLTF必然称为一个极为重要的标准格式。
 
 不仅three.js，其它的WebGL三维引擎cesium、babylonjs都对gltf格式有良好的的支持。
+
+实际上GLTF会帮助我们在three.js创建场景对象 three.js会解析这些内容 最终在页面生成建模(GLTF)给我们的效果 省去了开发用three.js进行建模的操作 我们只需要设置 相机 和 光源 还有交互效果即可
 
 ## GLTF版本
 
