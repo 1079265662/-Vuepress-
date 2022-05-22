@@ -35,3 +35,7 @@
 * 真正意义上实现了图片随机效果 只需要在`Config`中的`covers`设置即可
   * 修改文件`Common.vue`
 
+## 2022.5.20
+
+* 原`jsdelivr`挂载的 代码css样式文件容易出现请求失败的问题 已把css文件挂载到个人oss中 [腾讯OSS地址](https://console.cloud.tencent.com/cos/bucket/setting?type=object&tab=objectDetail&bucket=jinyanlong-1305883696&path=%252Fcss%252Fprism-tomorrow.css&region=ap-hongkong)
+  * 修改文件`-Vuepress-\.vuepress\theme\helpers\other.js`

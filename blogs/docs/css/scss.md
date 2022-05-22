@@ -342,6 +342,16 @@ import 'reset-css'
 }
 ```
 
+## scss中使用calc带入变量
+
+* 需求: 用css3中的`calc`计算属性 使用scss变量 进行计算 `calc(100vh - #{scss变量})`
+
+```scss
+$widthScss: 20px;
+
+width: calc(100% - #{$widthScss});
+```
+
 ## 参考文献
 
 [sass与scss的区别](https://blog.csdn.net/baozhuona/article/details/78570683)
@@ -351,4 +361,6 @@ import 'reset-css'
 [vue-cli4.x 使用 scss 并配置全局变量使用](https://blog.csdn.net/weixin_44463883/article/details/109675792)
 
 [sass-loder版本问题](https://www.cnblogs.com/xzybk/p/14379861.html)
+
+[Sass/Scss中使用calc带入变量](https://blog.csdn.net/mouday/article/details/107769157?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-107769157-blog-103187855.pc_relevant_paycolumn_v3&spm=1001.2101.3001.4242.1&utm_relevant_index=3)
 
