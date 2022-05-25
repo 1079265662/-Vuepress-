@@ -18,7 +18,7 @@ categories: three.js
 
 * 刚学three.js 我想把我的`Scene()场景对象` 和 `Mesh()网格模型对象` 放入Vue3的data()中(准确的是`reactive()`中) 这样我可以在多个方法中进行调用 当我赋值完毕后 在方法中调用 出现了以下报错
 
-```
+```js
 Uncaught (in promise) TypeError: 'get' on proxy: property 'modelViewMatrix' is a read-only and non-configurable data property on the proxy target but the proxy did not return its actual value (expected '#<Matrix4>' but got '[object Object]')
 ```
 
@@ -35,7 +35,11 @@ Uncaught (in promise) TypeError: 'get' on proxy: property 'modelViewMatrix' is a
 ## 问题解决
 
 * 我们先通过`reactive()`声明储存 然后通过`toRaw()`取消`proxy`代理特性 即可优雅使用
-* <font color =ff3040>注意: 只有`Scene()场景对象` 和 `Mesh()网格模型对象` 需要使用`toRaw()`取消其代理 其他的声明正常写即可</font>
+* 需要取消代理的对象
+  * Scene() 场景对象
+  * Mesh() 网格模型对象
+  * Group() 导入模型
+
 
 ```vue
 <script setup>
@@ -69,6 +73,41 @@ onMounted(() => {
 ```
 
 * 问题解决 全局变量解决办法就不写了 那个很简单 你在外面声明一个变量即可
+
+## 最佳问题解决
+
+* 如果我们每次都需要使用`toRaw`进行取消代理 在配合Vue3的`composition API` 那么我们岂不是非常麻烦吗 如果这个模型在很多方法多个文件中使用 那无疑是非常麻烦的 
+* 使用Vue3的 `shallowReactive()` 响应式API 该API只会代理最外层的响应式 `property` 的值会被原样存储和暴露 并非使用的是`proxy`代理
+* 几乎的所有的three.js声明的 结构对象 都可以用`shallowReactive()` 来进行浅层代理
+
+```vue
+<script setup>
+// 导入Vue组合API
+import { onMounted, shallowReactive, toRaw } from 'vue'
+// 导入three
+import * as THREE from 'three'
+// 声明需要的参数
+const content = shallowReactive({
+  // 声明场景对象Scene
+  scene: null,
+  // 声明网格模型mesh
+  mesh: null,
+})
+//! 开始threejs的渲染步骤
+const box = () => {
+  // 创建场景对象Scene
+  content.scene = new THREE.Scene()
+  // 网格模型对象Mesh
+  content.mesh = new THREE.Mesh()
+}
+onMounted(() => {
+  box()
+})
+
+</script>
+```
+
+* 使用`shallowReactive()`浅层代理 解决了three.js对`proxy`的支持问题
 
 ## 参考文献
 

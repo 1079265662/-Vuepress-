@@ -185,11 +185,23 @@ export default {
 </style>
 ```
 
+## three.js相关控件
+
+* 记录three.js的相关控件学习笔记 因为文章过长 以单独文章作为记录 通过学习
+
+* 相关控件包括
+
+  ☑️ [`Material` 材质](./3_three.js_Material.md)
+
+  - [ ] `Camera` 相机
+  - [ ] `Light` 光源
+  - [ ] `Matrix` 欧拉角
+
 ## 辅助控件插件
 
 * 记录非three.js核心的内容 这些基本上都是控件之类的 用来提供页面中的交互效果 
 
-### 轨道控制器 OrbitControls
+### **轨道控制器 OrbitControls**
 
 * 听起来感觉很牛逼的感觉 实际上就是相机围绕目标进行轨道运动的效果 实现来拖拽和放大缩小模型 [官方介绍](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls)
 * <font color=#ff3040>注意: 使用轨道控制器之前 需要开启`requestAnimationFrame()`动画 否则轨道控制器会失效 [详细看这里](./1.1_three.js_js)</font>
@@ -227,7 +239,7 @@ const OrbitControlsF = () => {
 </script>
 ```
 
-### 开启XYZ轴辅助线 THREE.AxesHelper()
+### **开启XYZ轴辅助线 THREE.AxesHelper()**
 
 * 开启XYZ轴辅助线可以帮助我们调试物体的位置 [官方介绍](https://threejs.org/docs/index.html?q=AxesHelper#api/zh/helpers/AxesHelper)
 * `THREE.AxesHelper(轴线长度 默认是1)`
@@ -243,50 +255,43 @@ const coordinate = () => {
 }
 ```
 
-## 自适应页面的尺寸
+## 优化相关
+
+* 记录three.js的相关优化 
+
+### **自适应页面的尺寸**
 
 * 通过`window.onresize`监听页面尺寸是否改变 重新给画布赋值 并更新摄像机投影矩阵
+* 修改了相机参数 需要用到`updateProjectionMatrix`方法 进行参数更新
 
 ```js
-// 声明需要的参数
-const content = reactive({
-  // 宽高
+// 导入Vue组合API
+import { reactive } from 'vue'
+// 代理渲染的参数
+const contentCamera = reactive({
+  // 渲染宽度
   width: window.innerWidth,
+  // 渲染高度
   height: window.innerHeight,
-  // 相机的渲染尺寸
-  cameraSize: 200,
-  // 声明场景对象Scene
-  scene: null,
-  // 声明网格模型mesh
-  mesh: null,
-  // 声明相机camera
-  camera: null,
-  // 创建渲染器对象
-  renderer: null,
-  // 创建动画
-  animation: null,
-  // 动画速度
-  speed: 0.1
-})  
-// 随页面尺寸进行渲染
-const updateCamera = () => {
-  // 监听页面尺寸是否修改
-  window.onresize = () => {
-    // 获取新的尺寸数据
-    content.width = window.innerWidth
-    content.height = window.innerHeight
-    // 重新渲染场景
-    content.renderer.setSize(content.width, content.height)
-    // 更新相机参数 不更新相机参数 会导致相机内容拉伸
-    const k = content.width / content.height // Three.js输出的Canvas画布宽高比
-    const s = content.cameraSize// 控制相机渲染空间左右上下渲染范围，s越大，相机渲染范围越大
-    content.camera.left = -s * k
-    content.camera.right = s * k
-    content.camera.top = s
-    content.camera.bottom = -s
-    // 更新相机参数后执行
-    content.camera.updateProjectionMatrix()
-  }
+  // 渲染范围
+  size: 100
+})
+// 监听页面尺寸是否修改
+window.onresize = () => {
+  // 获取新的尺寸数据
+  contentCamera.width = window.innerWidth
+  contentCamera.height = window.innerHeight
+  // 重新渲染场景
+  renderer.setSize(contentCamera.width, contentCamera.height)
+  // 更新相机参数 不更新相机参数 会导致相机内容拉伸
+  const k = contentCamera.width / contentCamera.height // Three.js输出的Canvas画布宽高比
+  const s = contentCamera.size// 控制相机渲染空间左右上下渲染范围，s越大，相机渲染范围越大
+  camera.left = -s * k
+  camera.right = s * k
+  camera.top = s
+  camera.bottom = -s
+  // 更新相机参数后执行
+  camera.updateProjectionMatrix()
 }
 ```
 
@@ -331,3 +336,81 @@ scene.add(model);// 把三维模型添加到场景中
 
 ![image-20220510183547946](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220510183547946.png)
 
+### **异步加载**
+
+* `.loadAsync` 可以支持异步加载[详细](https://threejs.org/docs/index.html?q=TextureLoader#api/zh/loaders/Loader.loadAsync) 异步加载使用的`promise`方法 需要通过`then`和`catch`获取其异步加载状态
+
+```js
+loader.loadAsync(`${process.env.BASE_URL}model/model.gltf`, (gltf) => { // gltf加载成功后返回一个对象 该对象是模型信息
+      console.log('控制台查看gltf对象结构', gltf)
+      // gltf.scene可以包含网格模型Mesh、光源Light等信息，至于gltf.scene是否包含光源，要看.gltf文件中是否有光源信息
+      console.log('gltf对象场景属性', gltf.scene)
+    }).then(() => {
+    ... 调用成功的方法
+    }).catch(()=>{
+    ... 调用失败的方法
+})
+```
+
+### **颜色偏差问题**
+
+* 通过`GLTFLoader`导入的gltf文件 大概率会出现颜色偏差问题 是因为three.js的默认颜色空间是 线性颜色空间`THREE.LinearEncoding` gltf的颜色空间是sRGB
+* 通过three.js的[纹理常量Textures](https://threejs.org/docs/index.html?q=PlaneGeometry#api/zh/constants/Textures) 了解到需要在 创建渲染器`WebGLRenderer`的时候进行颜色空间的处理
+
+```js
+const renderer = new THREE.WebGLRenderer({
+  antialias: true // 开启锯齿
+})
+renderer.outputEncoding = THREE.sRGBEncoding// 解决加载gltf格式模型纹理贴图和原图不一样问题
+```
+
+* sRGB 如果我们导入了非gltf的模型 比如`TextureLoader`方法导入的PNG和JPG图片 那么你已经设置渲染器`WebGLRenderer`的颜色空间为sRGB 那么`TextureLoader`的图片也需要设置`sRGB ` [材质设置颜色空间方法](https://threejs.org/docs/index.html?q=PlaneGeometry#api/zh/textures/Texture.encoding) 如过导入了`map`纹理贴图 需要`map.encoding`
+
+```js
+// 创建纹理贴图
+var texture = new THREE.TextureLoader().load( './scene/model_img3.png' );//加载纹理贴图
+// 创建一个平面缓冲几何体(面)
+var geometry = new THREE.PlaneGeometry(185, 260);
+// 创建一个网格朗伯材质
+var material = new THREE.MeshLambertMaterial({ 
+    // 设置渲染面
+    side: THREE.DoubleSide ,
+    // 设置纹理贴图
+    map:texture,
+});
+//设置纹理贴图编码方式和WebGL渲染器一致  如过导入了map纹理贴图 需要map.encoding
+material.map.encoding = THREE.sRGBEncoding;
+//  声明网格模型 导入平面缓冲几何体(面)和网格材质
+var plane = new THREE.Mesh(geometry, material);
+```
+
+## 导入纹理 TextureLoader
+
+* 纹理一般是指我们常见的在一些第三方程序中创建的图像，如PNG和JPG类型的图。我们把这张图片放在立方体上。（我通常称为`贴图`）。我们需要做的就是创建一个TextureLoader。调用它的load方法，同时传入图像的URL，并将材质的 map 属性设置为该方法的返回值
+* 该方法通常是配合`MeshBasicMaterial`方法 进行加载基础网格材质
+
+```js
+  const texture = new THREE.TextureLoader().load('https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E5%B0%8Fmao.jpg')
+```
+
+## 使用网格基础材质 MeshBasicMaterial
+
+* 最基本的材质是 `MeshBasicMaterial`。你能够把颜色`color`作为参数传进去来生成一个实心的带颜色对象，没有阴影，也不受光照影响。你也能够通过把透明度`opacity`作为参数传进去来调整透明度以及设置透明`transparent`为`true`。
+* 详情[看这里](https://threejs.org/docs/index.html?q=MeshLambertMaterial#api/zh/materials/MeshBasicMaterial) 如果我们想给基础材质 导入图片或gif等 可以配合`TextureLoader` 导入后 在[map](https://threejs.org/docs/index.html?q=MeshLambertMaterial#api/zh/materials/MeshBasicMaterial.map)方法中进行纹理导入 最后在网格对象`Mesh`中导入
+  * 如果要修改渲染面 请看[这里]( https://threejs.org/docs/index.html?q=MeshLambertMaterial#api/zh/materials/Material.side) 通过`side`设置
+
+```js
+  // 创建一个立方体
+  const geometry = new THREE.BoxGeometry(100, 100, 100) 
+  // 创建图片网格材质
+  const texture = new THREE.TextureLoader().load('https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E5%B0%8Fmao.jpg')
+  // 创建网格材质
+  const skyBoxMaterial = new THREE.MeshLambertMaterial({
+      // 设置纹理贴图
+    map: texture,
+      // 设置渲染面: 
+    side: THREE.DoubleSide
+  })
+  // 声明网格模型 导入创建的立方体和网格材质
+  content.mesh = new THREE.Mesh(geometry, skyBoxMaterial)
+```
