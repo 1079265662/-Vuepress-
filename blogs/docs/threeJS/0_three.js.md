@@ -185,7 +185,7 @@ export default {
 </style>
 ```
 
-## three.js相关控件
+## three.js相关控件介绍
 
 * 记录three.js的相关控件学习笔记 因为文章过长 以单独文章作为记录 通过学习
 
@@ -196,6 +196,62 @@ export default {
   - [ ] `Camera` 相机
   - [ ] `Light` 光源
   - [ ] `Matrix` 欧拉角
+
+## Camera相机参数设置
+
+* `Camera`相机可以当成一双眼睛 通过`Camera`可以设置相机的角度距离参数 这样页面刚进来的时候 就可以在合适的区域内进行观看
+* 在three.js中 没有单位的概念 只有数字 没有任何单位的概念
+* <font color =#ff3040>注意: 在大多数属性发生改变之后，你将需要调用[.updateProjectionMatrix](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/cameras/OrthographicCamera.updateProjectionMatrix)来使得这些改变生效。</font>
+
+> 声明相机
+
+* 假如我们设置一个[正交相机（OrthographicCamera）](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/cameras/OrthographicCamera)声明相机需要一些构造参数 可以去官方看看
+
+![image-20220529192741664](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220529192741664.png)
+
+```js
+const width = window.innerWidth; //窗口文档显示区的宽度
+const height = window.innerHeight; //窗口文档显示区的高度
+// Three.js输出的Cnavas画布宽高比
+const k = width / height; 
+// 根据你想要渲染的粮仓范围设置相机渲染范围大小
+const s = 100;
+// -s * k, s * k, s, -s, 1, 1000定义了一个长方体渲染空间，渲染空间外的模型不会被渲染 
+const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+```
+
+### **相机位置 .position(x,y,z)**
+
+* 通过[.position](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D.position) 我们可以设置相机的默认的角度(三维向量`Vector3`) 分别代表(x,y,z)
+
+```js
+camera.position.set(292, 223, 185);//通过相机控件OrbitControls旋转相机，选择一个合适场景渲染角度
+```
+
+* 通常我们不会随便设置相机位置 我们可以搭配相机控件 `OrbitControls` 来获取合适的相机`.position`角度 
+
+```js
+// 渲染循环
+function render() {
+  renderer.render(scene, camera); //执行渲染操作
+  requestAnimationFrame(render); //请求再次执行渲染函数render，渲染下一帧
+  console.log(camera.position);//通过相机控件OrbitControls旋转相机，选择一个合适场景渲染角度
+}
+```
+
+### 相机指向坐标系 .lookAt(x,y,z)
+
+* 通过[.lookAt](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D.lookAt) 我们可以设置相机在Three.js坐标系中的渲染位置 也就通过`AxesHelper`的到的Three.js坐标轴为准的渲染的位置分量
+
+```js
+camera.lookAt(0, 0, 0); //相机指向Three.js坐标系原点
+```
+
+* 通常我们我们很依赖 模型提供的坐标系 如果模型到导出的坐标系符合需求 那我们可以不用设置具体参数 设置0即可
+  * 我们可以告诉建模师(美术) 把坐标原点放到我们需要的区域
+* 如果我们设置了轨道控制器 `OrbitControls` 那么`.lookAt`参数不会生效 取默认值为0 
+
+![image-20220529201212577](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220529201212577.png)
 
 ## 辅助控件插件
 
@@ -239,7 +295,7 @@ const OrbitControlsF = () => {
 </script>
 ```
 
-### **开启XYZ轴辅助线 THREE.AxesHelper()**
+### **开启XYZ轴辅助线 AxesHelper**
 
 * 开启XYZ轴辅助线可以帮助我们调试物体的位置 [官方介绍](https://threejs.org/docs/index.html?q=AxesHelper#api/zh/helpers/AxesHelper)
 * `THREE.AxesHelper(轴线长度 默认是1)`
