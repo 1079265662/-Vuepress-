@@ -191,67 +191,12 @@ export default {
 
 * 相关控件包括
 
-  ☑️ [`Material` 材质](./3_three.js_Material.md)
+  ☑️ [`Material` 材质](./3_1_three.js_Material.md)
 
-  - [ ] `Camera` 相机
+  ☑️`Camera` [相机](./3_2_three.js_Camera.md)
+  
   - [ ] `Light` 光源
   - [ ] `Matrix` 欧拉角
-
-## Camera相机参数设置
-
-* `Camera`相机可以当成一双眼睛 通过`Camera`可以设置相机的角度距离参数 这样页面刚进来的时候 就可以在合适的区域内进行观看
-* 在three.js中 没有单位的概念 只有数字 没有任何单位的概念
-* <font color =#ff3040>注意: 在大多数属性发生改变之后，你将需要调用[.updateProjectionMatrix](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/cameras/OrthographicCamera.updateProjectionMatrix)来使得这些改变生效。</font>
-
-> 声明相机
-
-* 假如我们设置一个[正交相机（OrthographicCamera）](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/cameras/OrthographicCamera)声明相机需要一些构造参数 可以去官方看看
-
-![image-20220529192741664](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220529192741664.png)
-
-```js
-const width = window.innerWidth; //窗口文档显示区的宽度
-const height = window.innerHeight; //窗口文档显示区的高度
-// Three.js输出的Cnavas画布宽高比
-const k = width / height; 
-// 根据你想要渲染的粮仓范围设置相机渲染范围大小
-const s = 100;
-// -s * k, s * k, s, -s, 1, 1000定义了一个长方体渲染空间，渲染空间外的模型不会被渲染 
-const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
-```
-
-### **相机位置 .position(x,y,z)**
-
-* 通过[.position](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D.position) 我们可以设置相机的默认的角度(三维向量`Vector3`) 分别代表(x,y,z)
-
-```js
-camera.position.set(292, 223, 185);//通过相机控件OrbitControls旋转相机，选择一个合适场景渲染角度
-```
-
-* 通常我们不会随便设置相机位置 我们可以搭配相机控件 `OrbitControls` 来获取合适的相机`.position`角度 
-
-```js
-// 渲染循环
-function render() {
-  renderer.render(scene, camera); //执行渲染操作
-  requestAnimationFrame(render); //请求再次执行渲染函数render，渲染下一帧
-  console.log(camera.position);//通过相机控件OrbitControls旋转相机，选择一个合适场景渲染角度
-}
-```
-
-### 相机指向坐标系 .lookAt(x,y,z)
-
-* 通过[.lookAt](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D.lookAt) 我们可以设置相机在Three.js坐标系中的渲染位置 也就通过`AxesHelper`的到的Three.js坐标轴为准的渲染的位置分量
-
-```js
-camera.lookAt(0, 0, 0); //相机指向Three.js坐标系原点
-```
-
-* 通常我们我们很依赖 模型提供的坐标系 如果模型到导出的坐标系符合需求 那我们可以不用设置具体参数 设置0即可
-  * 我们可以告诉建模师(美术) 把坐标原点放到我们需要的区域
-* 如果我们设置了轨道控制器 `OrbitControls` 那么`.lookAt`参数不会生效 取默认值为0 
-
-![image-20220529201212577](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220529201212577.png)
 
 ## 辅助控件插件
 
@@ -311,46 +256,6 @@ const coordinate = () => {
 }
 ```
 
-## 优化相关
-
-* 记录three.js的相关优化 
-
-### **自适应页面的尺寸**
-
-* 通过`window.onresize`监听页面尺寸是否改变 重新给画布赋值 并更新摄像机投影矩阵
-* 修改了相机参数 需要用到`updateProjectionMatrix`方法 进行参数更新
-
-```js
-// 导入Vue组合API
-import { reactive } from 'vue'
-// 代理渲染的参数
-const contentCamera = reactive({
-  // 渲染宽度
-  width: window.innerWidth,
-  // 渲染高度
-  height: window.innerHeight,
-  // 渲染范围
-  size: 100
-})
-// 监听页面尺寸是否修改
-window.onresize = () => {
-  // 获取新的尺寸数据
-  contentCamera.width = window.innerWidth
-  contentCamera.height = window.innerHeight
-  // 重新渲染场景
-  renderer.setSize(contentCamera.width, contentCamera.height)
-  // 更新相机参数 不更新相机参数 会导致相机内容拉伸
-  const k = contentCamera.width / contentCamera.height // Three.js输出的Canvas画布宽高比
-  const s = contentCamera.size// 控制相机渲染空间左右上下渲染范围，s越大，相机渲染范围越大
-  camera.left = -s * k
-  camera.right = s * k
-  camera.top = s
-  camera.bottom = -s
-  // 更新相机参数后执行
-  camera.updateProjectionMatrix()
-}
-```
-
 ## 常用Object3D方法
 
 * 这是Three.js中大部分对象的基类，提供了一系列的属性和方法来对三维空间中的物体进行操纵。详细看这里[三维物体（Object3D）](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D)
@@ -358,11 +263,39 @@ window.onresize = () => {
 
 ### **旋转角度 rotateX rotateY rotateZ**
 
-* 旋转X Y Z轴的角度 让内容朝某个方向转起来
+* [.rotateXYZ](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotateX) 旋转X Y Z轴的角度 让内容朝某个方向转起来
 
 ```js
 物体的网格对象(Mesh).rotateY(速度(0.1)) // rotateX rotateY rotateZ
 ```
+
+### 遍历object3D对象
+
+* [.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse) 可以遍历模型(`glb` `glft`)的object3D对象数据
+
+```js
+    const model = new THREE.Group()// 声明一个组对象，用来添加加载成功的三维场景
+    const loader = new GLTFLoader() // 创建一个GLTF加载器
+    loader.loadAsync(`${process.env.BASE_URL}model/model.glb`, (gltf) => { // gltf加载成功后返回一个对象
+    }).then((gltf) => {
+      // 递归遍历gltf.scene，批量更改所有Mesh的材质
+      gltf.scene.traverse(function (object) {
+        console.log(object)
+        if (object.type === 'Mesh') {
+          // MeshLambertMaterial：受光照影响   MeshBasicMaterial：不受光照影响
+          object.material = new THREE.MeshLambertMaterial({
+            map: object.material.map, // 获取原来材质的颜色贴图属性值
+            color: object.material.color // 读取原来材质的颜色
+            // side: THREE.DoubleSide,//围墙需要设置双面显示
+          })
+        }
+      })
+      // 把gltf.scene中的所有模型添加到model组对象中
+      model.add(gltf.scene)
+    })
+```
+
+
 
 ## 导入外部加载的模型 GLTFLoader
 
@@ -439,6 +372,37 @@ material.map.encoding = THREE.sRGBEncoding;
 //  声明网格模型 导入平面缓冲几何体(面)和网格材质
 var plane = new THREE.Mesh(geometry, material);
 ```
+
+### 批量使用模型材质
+
+* 我们可以使用模型提供的材质 通过[.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse)方法 遍历object3D对象方法把模型文件`glb`或`glft`的材质遍历出来使用
+
+```js
+
+    const model = new THREE.Group()// 声明一个组对象，用来添加加载成功的三维场景
+    const loader = new GLTFLoader() // 创建一个GLTF加载器
+    loader.loadAsync(`${process.env.BASE_URL}model/model.glb`, (gltf) => { // gltf加载成功后返回一个对象
+    }).then((gltf) => {
+      // 递归遍历gltf.scene，批量更改所有Mesh的材质
+      gltf.scene.traverse(function (object) {
+        console.log(object)
+        if (object.type === 'Mesh') {
+          // MeshLambertMaterial：受光照影响   MeshBasicMaterial：不受光照影响
+          object.material = new THREE.MeshLambertMaterial({
+            map: object.material.map, // 获取原来材质的颜色贴图属性值
+            color: object.material.color // 读取原来材质的颜色
+            // side: THREE.DoubleSide,//围墙需要设置双面显示
+          })
+        }
+      })
+      // 把gltf.scene中的所有模型添加到model组对象中
+      model.add(gltf.scene)
+    })
+```
+
+
+
+
 
 ## 导入纹理 TextureLoader
 

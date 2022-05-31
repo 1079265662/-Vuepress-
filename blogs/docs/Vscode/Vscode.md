@@ -22,7 +22,7 @@ Vscode快速设置文档 涉及到settings和eslint<br>
 
 * 然后进入后在搜索框搜索settings 点击进入即可
 
-![image-20220114111929918](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220114111929918.png)
+![image-20220531105505332](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220531105505332.png)
 
 ## settings设置
 
