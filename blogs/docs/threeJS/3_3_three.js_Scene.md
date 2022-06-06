@@ -1,6 +1,6 @@
 ---
 title: three.js 之 Scene
-date: 2022-06-04
+date: 2022-06-03
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-28ve6mX.jpg
 tags:
  - three.js
