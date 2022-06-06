@@ -1,6 +1,6 @@
 ---
 title: three.js 获取三维模型的节点 
-date: 2022-06-06
+date: 2022-06-05
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zvv3d.jpg
 tags:
  - three.js

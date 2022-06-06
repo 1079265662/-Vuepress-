@@ -1,6 +1,6 @@
 ---
 title: three.js 之 Renderer
-date: 2022-06-04
+date: 2022-06-06
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-6o3qx7.png
 tags:
  - three.js

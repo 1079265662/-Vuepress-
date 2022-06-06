@@ -1,6 +1,6 @@
 ---
 title: three.js 之 世界坐标
-date: 2022-06-04=6
+date: 2022-06-06
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-nmkyk1.jpg
 tags:
  - three.js
