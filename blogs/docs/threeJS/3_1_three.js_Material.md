@@ -8,7 +8,7 @@ categories: three.js
 ---
 
 ::: tip 介绍
-three.js 之 Material 该文章为转载备份文章 <br>
+three.js 之 Material 材质 <br>
 :::
 
 <!-- more -->
@@ -23,8 +23,10 @@ three.js 之 Material 该文章为转载备份文章 <br>
 
 最基本的材质是 `MeshBasicMaterial`。你能够把颜色`color`作为参数传进去来生成一个实心的带颜色对象，没有阴影，也不受光照影响。你也能够通过把透明度`opacity`作为参数传进去来调整透明度以及设置透明`transparent`为`true`。
 
+* 基础材质 不具备光照反射效果 不具备立体感 所以看起来更像是2d
+
 ```js
-var material = new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true, opacity: 0.5});
+const material = new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true, opacity: 0.5});
 ```
 
 ![basic material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639070)
@@ -34,7 +36,7 @@ var material = new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true, 
 `MeshNormalMaterial`是另一种材质。它会根据面的法线或朝向使用不同的颜色来渲染网格的面。
 
 ```haxe
-var material = new THREE.MeshNormalMaterial();
+const material = new THREE.MeshNormalMaterial();
 ```
 
 ![normal material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639071)
@@ -43,8 +45,10 @@ var material = new THREE.MeshNormalMaterial();
 
 `MeshLambertMaterial`能够反光，可以让几何物体产生暗淡的表面。在大部分 3D 应用中，朗伯都是一种常用的材质。就像之前，我们可以调整颜色。我们可以通过 `emissive` 属性来给材质添加亮色。
 
+* 他的其他名字叫 `漫反射材质` 他具备光照反射效果 具备立体感 同时消耗性能较低
+
 ```js
-var material = new THREE.MeshLambertMaterial({color: 0xff0000, transparent: true, opacity: 0.5});
+const material = new THREE.MeshLambertMaterial({color: 0xff0000, transparent: true, opacity: 0.5});
 ```
 
 ![lambert material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639072)
@@ -53,8 +57,10 @@ var material = new THREE.MeshLambertMaterial({color: 0xff0000, transparent: true
 
 就像朗伯材质，`MeshPhongMaterial`也是会反光的，但是它会给表面添加金属光泽，反光强度更大。你可以添加高光色和调整材质 `shininess`属性来改变反光的强度。
 
+* 他的其他名字叫 `高光网格材质` 是`PBR材质`和`漫反射` 材质的折中材质 渲染的效果也不错
+
 ```js
-var material = new THREE.MeshPhongMaterial({shininess: 1});
+const material = new THREE.MeshPhongMaterial({shininess: 1});
 ```
 
 ![phong material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639071)
@@ -63,8 +69,12 @@ var material = new THREE.MeshPhongMaterial({shininess: 1});
 
 `MeshStandardMaterial`的主要目标是将`MeshLambertMaterial`和`MeshPhoneMaterial`结合成一种材质。它有粗糙度和金属性的材质并且改变这些属性能够创建暗淡或者金属性光泽的表秒。
 
+* 他的学名也叫 `PBR材质` 是一种非常写实的材质 立体感很棒 渲染的效果非常好 同时消耗性能较大 
+  * `粗糙度` 和 `金属度` 是该材质的典型内容
+* 通常我们加载的`gltf`和`glb`默认会使用`PBR`材质
+
 ```js
-var material = new THREE.MeshStandardMaterial({metalness: 0, roughness: 0.5});
+const material = new THREE.MeshStandardMaterial({metalness: 0, roughness: 0.5});
 ```
 
 ![standard material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639073)
@@ -74,7 +84,7 @@ var material = new THREE.MeshStandardMaterial({metalness: 0, roughness: 0.5});
 另一种不同的材质是`MeshDepthMaterial`，它会对网格对象的灰度级别从黑到白绘制，根据内容的所在的深度不同。
 
 ```js
-var material = new THREE.MeshDepthMaterial();
+const material = new THREE.MeshDepthMaterial();
 ```
 
 ![depth material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639072)
@@ -86,10 +96,10 @@ var material = new THREE.MeshDepthMaterial();
 如果要画直接，我们必须使用`LineBasicMaterial`。这个和`MeshBasicMaterial`差不多。还有 `LineDashedMaterial`，它能够让你设置直线中点的大小和间距。为了让短划线起作用，你需要在geometry中调用`computeLineDistance`。
 
 ```js
-var material = new THREE.LineDashedMaterial({dashSize: 2, gapSize: 2});
+const material = new THREE.LineDashedMaterial({dashSize: 2, gapSize: 2});
 geometry.computeLineDistances();
 
-var line = new THREE.Line(geometry, material);
+const line = new THREE.Line(geometry, material);
 ```
 
 ![line material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639074)
@@ -100,8 +110,8 @@ var line = new THREE.Line(geometry, material);
 跟画线类似，点的话需要使用 `PointsMaterial`
 
 ```js
-var material = new THREE.PointsMaterial({color: 0xF3FFE2});
-var points = new THREE.Points(geometry, material);
+const material = new THREE.PointsMaterial({color: 0xF3FFE2});
+const points = new THREE.Points(geometry, material);
 ```
 
 ![points material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639076)
@@ -111,8 +121,8 @@ var points = new THREE.Points(geometry, material);
 另一种特殊的材质是`SpriteMaterial`，它能够使用纹理贴图，并且应用于雪碧材质上。Sprite是一种总是面向镜头的特殊平面.
 
 ```js
-var material = new THREE.SpriteMaterial({map: "mytexture.png"});
-var sprite = new THREE.Sprite(material);
+const material = new THREE.SpriteMaterial({map: "mytexture.png"});
+const sprite = new THREE.Sprite(material);
 ```
 
 ![sprite material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639077)

@@ -8,12 +8,12 @@ categories: three.js
 ---
 
 ::: tip 介绍
-three.js 之 Camera该文章为转载备份文章 <br>
+three.js 之 Camera 相机 <br>
 :::
 
 <!-- more -->
 
-## 相机Camera的内容
+## 相机Camera的作用
 
 查看 Three.js 的文档，可以看到 [Camera](https://threejs.org/docs/index.html#api/zh/cameras/Camera) 是一个抽象类，一般不直接使用，其他类型的 Camera 实现了这个抽象类。有
 
@@ -34,11 +34,13 @@ var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
 var camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
 ```
 
-> 透视相机 和 正交相机
+> 透视相机 和 正交相机的区别图
 
 ![在这里插入图片描述](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/aHR0cDovL3d3dy53ZWl4aXl1ZS5jb20vd29yZHByZXNzL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE5LzA4LzMzMy0xMDI0eDQyNy5wbmc)
 
-![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/threejs60%E6%8A%95%E5%BD%B1.jpg)
+> 其他相机
+
+![image-20220606145127687](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220606145127687.png)
 
 ## [PerspectiveCamera ](https://threejs.org/docs/index.html?q=PerspectiveCamera#api/zh/cameras/PerspectiveCamera)透视相机
 
@@ -204,7 +206,23 @@ tick()
 
 ![v2-658ad7429ff462798328098b7966dcc6_b](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/v2-658ad7429ff462798328098b7966dcc6_b.gif)
 
-## Camera相机参数设置
+## ArrayCamera 阵列相机
+
+[ArrayCamera](https://threejs.org/docs/index.html?q=ArrayCamera#api/zh/cameras/ArrayCamera) 可以帮我们方便的在一张画布上渲染多个相机视角，这有点像在监控室的大屏幕上看多个摄像头或者是在同一台电脑上玩多人游戏时的分屏显示。
+
+## StereoCamera 立体相机
+
+[StereoCamera ](https://threejs.org/docs/index.html?q=StereoCamera#api/zh/cameras/StereoCamera)立体相机，这个相机很好玩，我们可以很简单的将场景渲染出需要带VR / 3D眼镜才可以观看到的立体效果。
+
+![image-20220606145331665](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220606145331665.png)
+
+
+
+## CubeCamera 立方体相机
+
+[CubeCamera](https://threejs.org/docs/index.html?q=CubeCamera#api/zh/cameras/CubeCamera)必须配合[WebGLCubeRenderTarget](https://threejs.org/docs/index.html?q=WebGLCubeRenderTarget#api/zh/renderers/WebGLCubeRenderTarget)一起使用，这个相机主要用于将当前场景的画面实时渲染成一个六面图（全景图的一种），用于创建类似镜面反射的效果。
+
+## Camera 相机参数设置
 
 * `Camera`相机可以当成一双眼睛 通过`Camera`可以设置相机的角度距离参数 这样页面刚进来的时候 就可以在合适的区域内进行观看
 * 在three.js中 没有单位的概念 只有数字 没有任何单位的概念
@@ -294,8 +312,89 @@ window.onresize = () = >{
 
 渲染区域尺寸变化，相机的相关参数自然也需要变化，改变相机的参数后，注意需要执行相机对象`.updateProjectionMatrix ()`方法更新相机对象的投影矩阵`.projectionMatrix`，之所以需要手动更新，是因为Threejs为了提高渲染效率，Threejs系统每次执行渲染器`WebGLRenderer`渲染方法`.rener()`的时候不会读取相机相关的参数重新计算一次投影矩阵`.projectionMatrix`，Threejs系统只会首次渲染的时候计算一次投影矩阵，所以当你改变影响相机投影矩阵的属性，自然需要调用`.updateProjectionMatrix ()`更新相机对象的投影矩阵`.projectionMatrix`。
 
+## **预置的相机控制器**
+
+下面为大家介绍一下具体有哪些内置的相机控制器，以及它们分别提供怎样的功能
+
+### **陀螺仪控制器(被删除)**
+
+* DeviceOrientationControls 绝大多数当下主流的移动设备都支持，用倾斜旋转手机的方式来控制我们的相机镜头。利用这个控制器可以很容易的创造出类似VR眼镜那样的体验。
+
+### **飞行控制器 和 第一人称控制器**
+
+* [FlyControls](https://threejs.org/docs/index.html?q=FlyControls#examples/zh/controls/FlyControls)，[FirstPersonControls](https://threejs.org/docs/index.html?q=FirstPersonControls#examples/zh/controls/FirstPersonControls) 这两个控制器提供的功能极为相似，都可以很容易的实现类似人在场景中移动的效果。在开发一些比如VR看房，虚拟展厅，虚拟世界探索游戏等需求时很常用。
+
+### **指针锁定控制器**
+
+* [PointerLockControls](https://threejs.org/docs/index.html?q=PointerLockControls#examples/zh/controls/PointerLockControls) 使用这个控制器会隐藏鼠标指针，相机镜头会跟随mousemove事件旋转看向不同的方位，就像真正的射击游戏那样。当我们需要创建一个第一人称的3D游戏时，这个控制器是最佳选择。
+
+### **环轨控制器(轨道控制器)**
+
+* [OrbitControls](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls) 我们刚才其实已经手写过了这个控制器的核心逻辑。当然，这个内置的控制器比我们刚才写的要完善很多，比如让我们可以通过拖拽旋转镜头，使用滚轮放大或缩小等等。这个控制器不允许世界颠倒，这是它和下面轨迹球控制器的区别。
+
+###  **轨迹球控制器**
+
+* [TrackballControls](https://threejs.org/docs/index.html?q=TrackballControls#examples/zh/controls/TrackballControls) 轨迹球控制器，和环轨控制器的效果极为相似，区别是取消了垂直镜头的区间限制，允许世界颠倒。
+
+## **使用环轨控制器 OrbitControls**
+
+现在让我们修改一下代码，来用一下这个环轨控制器。
+
+### **导入轨道控制器(轨道控制器)**
+
+虽然Three.js为我们提供了这些开箱即用的控制器，但毕竟不是所有时候都需要它们，所以为了减少Three.js库的代码量，它们并不在three.min.js中，我们需要单独引入这些控制器类。
+
+* 工程化下 我们npm three.js后 直接导入指定控件即可 比如[OrbitControls](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls) 他在 `three/examples/jsm/controls/OrbitControls.js`中
+
+```js
+// 工程化下 直接导入OrbitControls
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+```
+
+* 注意，我们在创建OrbitControls类时无需`THREE.`前缀。实例化时需要传递两个参数，相机对象和画布对象。
+
+```js
+const controls = new OrbitControls(camera, canvas)
+```
+
+* 现在我们可以使用鼠标左键拖拽来旋转相机，还可以使用鼠标滚轮来放大或缩小。这比我们自己手写可简单多了对吧。
+
+### **改变初始视角 target**
+
+* 环轨控制器默认情况下会看向场景的中心点，我们可以通过改变 `target` 属性来改变初始视角的位置。
+
+```js
+const controls = new OrbitControls(camera, canvas)
+controls.target.y = 2
+```
+
+### **添加移动过度效果 enableDamping**
+
+* 当我们设置`enableDamping`参数为true时，鼠标拖拽移动时会带有缓动效果，让用户交互体验更加丝滑。除了将`enableDamping`设置为true，我们还应该在tick函数中添加`controls.update()`，刷新控制器的数值表现。
+
+```js
+// Controls
+const controls = new OrbitControls(camera, canvas)
+// 使用过度效果
+controls.enableDamping = true
+
+// ...
+
+const tick = () =>
+{
+    // ...
+
+    // Update controls
+    controls.update()
+
+    // ...
+}
+```
+
 ## 参考文献
 
 [Three.js 之相机 Camera](https://zhuanlan.zhihu.com/p/510877492)
+
+[Three.js里的相机和镜头控制 | 《Three.js零基础直通06》](https://mp.weixin.qq.com/s?__biz=Mzg3MTUyNzQzNg==&mid=2247487835&idx=1&sn=0f4822c38abafcf572cb412cb32aa67c&chksm=cefc7438f98bfd2ef88798c5bb353b7ce3106cc607e4b497c5231c9262c055bb759619648875&scene=178&cur_album_id=2405559566127480834#rd)
 
 [Three.js零基础入门教程(郭隆邦)](http://www.yanhuangxueyuan.com/Three.js/)

@@ -79,19 +79,46 @@ export default {
 
 * 在three.js中[三维物体（Object3D）](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D)作为基类API 可以提供很多关于坐标和三维物体有关的方法
 
+### **关于颜色设置**
+
+three.js支持十六进制的颜色设置 和 字符串类型的css风格颜色
+
+* 十六进制的颜色设置
+
+```js
+// 创建渲染器对象 
+const renderer = new THREE.WebGLRenderer({
+  antialias: true // 开启锯齿
+	})
+    // 设置渲染器背景颜色
+renderer.setClearColor(0x00577)
+```
+
+* css风格颜色
+  * <font color =#ff3040>注意: css风格的颜色 需要是字符串格式的才可以</font>
+
+```js
+// 创建渲染器对象 
+const renderer = new THREE.WebGLRenderer({
+  antialias: true // 开启锯齿
+	})
+    // 设置渲染器背景颜色 类型要为字符串格式
+renderer.setClearColor('#00577')
+```
+
 ## three.js的渲染步骤
 
 * three.js的三大组件之一 必要元素
   1. 创建场景对象`Scene`
-     * 创建网格模型 `Mesh`
-     * 光源设置(非必选) `DirectionalLight`
-  2. 相机设置 `Camera`
-  3. 创建渲染对象 (绑定页面的元素) `WebGLRenderer`
+     * 创建网格模型(材质) [`Material` 材质](./3_1_three.js_Material.md)
+     * 光源设置(非必选) DirectionalLight
+  2. 相机设置 `Camera` [相机](./3_2_three.js_Camera.md)
+  3. 创建渲染对象 (绑定页面的元素) [WebGLRenderer](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer)
 * 创建场景+ 相机 是组成three.js的重要步骤 他俩完成后 然后通过three.js插入到页面的元素中(以`canvas`方式绘制)
 
 > 先来一个小案例
 
-* <font color =ff3040>注意: `Scene()场景对象` 和 `Mesh()网格模型对象`  需要使用`toRaw()`取消其代理 其他的元素正常写即可 否则会报错 详细[看这里](./2_three.js_vue3_error.md)</font>
+* <font color =ff3040>注意: `Scene()场景对象` 和 `Mesh()网格模型对象`  需要使用`toRaw()`取消其代理 或使用`shallowReactive()`代理 其他的元素正常写即可 否则会报错 详细[看这里](./2_three.js_vue3_error.md)</font>
   * 在Vue3中 如果我们想在指定区域渲染 需要通过`ref`选中该元素的Dom 然后通过`appendChild(.domElement)` 进行渲染
 
 ```vue
@@ -185,7 +212,7 @@ export default {
 </style>
 ```
 
-## three.js相关控件介绍
+## three.js相关内容介绍
 
 * 记录three.js的相关控件学习笔记 因为文章过长 以单独文章作为记录 通过学习
 
@@ -195,7 +222,14 @@ export default {
 
   ☑️`Camera` [相机](./3_2_three.js_Camera.md)
   
+  ☑️`Scene` [场景](./3_3_three.js_Scene.md)
+  
+  ☑️`Renderer` [渲染器](./3_4_three.js_Renderer.md)
+  
   - [ ] `Light` 光源
+  
+  ☑️`Dom` [模型节点](./2_1_three.js_Dom.md)
+  
   - [ ] `Matrix` 欧拉角
 
 ## 辅助控件插件
@@ -260,6 +294,11 @@ const coordinate = () => {
 
 * 这是Three.js中大部分对象的基类，提供了一系列的属性和方法来对三维空间中的物体进行操纵。详细看这里[三维物体（Object3D）](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D)
 * 请注意，可以通过.add( object )方法来将对象进行组合，该方法将对象添加为子对象，但为此最好使用Group（来作为父对象）
+* 任意的3D对象都有4个用于变换的属性
+  - `position` (在三个轴向上移动)
+  - `scale` (在三个轴向上缩放)
+  - `rotation` (在三个轴向上旋转)
+  - `quaternion` (四元数，也是用于处理旋转的)
 
 ### **旋转角度 rotateX rotateY rotateZ**
 
@@ -269,9 +308,49 @@ const coordinate = () => {
 物体的网格对象(Mesh).rotateY(速度(0.1)) // rotateX rotateY rotateZ
 ```
 
-### 遍历object3D对象
+### **获取模型的坐标**
 
-* [.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse) 可以遍历模型(`glb` `glft`)的object3D对象数据
+*  [.getWorldPosition](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.getWorldPosition) 方法可以获取到模型的坐标 他可以用来获取世界坐标 可以通过`.getObjectByName()`获取模型的name 然后再使用该方法 获取其世界坐标
+* `Vector3`是threejs的三维向量对象,可以通过`Vector3`对象表示一个顶点的xyz坐标，顶点的法线向量。
+
+```js
+// 声明一个三维向量用来保存世界坐标
+const worldPosition = new THREE.Vector3();
+// 执行getWorldPosition方法把模型的世界坐标保存到参数worldPosition中
+mesh.getWorldPosition(worldPosition);
+```
+
+### **设置一个组 Group**
+
+* 我们可以把声明的网格模型对象放到一个集合中 也就组[Group](https://threejs.org/docs/index.html?q=group#api/zh/objects/Group) 这样我们可以给组内的网格模型进行批量的操作
+* Group也继承自`Object3D`类，因此可以使用`Object3D`类的属性和方法，例如位置，比例，旋转，四元数和`lookAt`都可以作用在Group上。
+
+```js
+//创建一个立方体几何对象Geometry
+const geometry = new THREE.BoxGeometry(50, 50, 50); 
+// 材质对象Material
+const material = new THREE.MeshLambertMaterial({
+    color: 0x0000ff,//材质颜色
+});
+
+//网格模型对象Mesh
+const mesh = new THREE.Mesh(geometry, material); 
+//创建组对象
+const group = new THREE.Group();
+// 把网格模型放到组对象里面
+group.add(mesh);
+
+// 创建场景对象Scene
+var scene = new THREE.Scene();
+//把group中的模型添加到场景中
+scene.add(group);
+```
+
+### **批量替换threejs结构(遍历object3D对象)**
+
+* [.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse) 可以递归遍历object3D对象 我们可以通过判断来批量替换网格模型中的材质 等等...
+  * 如果替换的是网格模型的材质 一定要把`color`也替换上 否则会显示默认的白色模型
+
 
 ```js
     const model = new THREE.Group()// 声明一个组对象，用来添加加载成功的三维场景
@@ -280,9 +359,9 @@ const coordinate = () => {
     }).then((gltf) => {
       // 递归遍历gltf.scene，批量更改所有Mesh的材质
       gltf.scene.traverse(function (object) {
-        console.log(object)
+          // 进行判读 是否为网格模型Mesh
         if (object.type === 'Mesh') {
-          // MeshLambertMaterial：受光照影响   MeshBasicMaterial：不受光照影响
+          // 替换漫反射材质
           object.material = new THREE.MeshLambertMaterial({
             map: object.material.map, // 获取原来材质的颜色贴图属性值
             color: object.material.color // 读取原来材质的颜色
@@ -434,3 +513,125 @@ var plane = new THREE.Mesh(geometry, material);
   // 声明网格模型 导入创建的立方体和网格材质
   content.mesh = new THREE.Mesh(geometry, skyBoxMaterial)
 ```
+
+## 创建2D元素(Css2) 
+
+* 通过three.js扩展库 `CSS2DObject`可以实现把**HTML元素**和三维元素相结合 并且具备`Object3D`的一些方法 可以使用`.position` 属性等等....
+* 当我们设置 `CSS2DObject`2D元素后 需要通过的[CSS2DRenderer](https://threejs.org/docs/index.html?q=Object#examples/zh/renderers/CSS2DRenderer) 2D渲染器渲染出来 否则没有效果
+
+> 在工程化下导入2D元素 
+
+* threejs扩展库CSS2DRenderer.js提供了两个构造函数CSS2渲染器 `THREE.CSS2DRenderer`、CSS2模型对象 `THREE.CSS2DObject`。
+
+```js
+// 导入2D模型对象 和 2D模型渲染器
+import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js'
+```
+
+### **创建CSS2模型对象 `CSS2DObject`**
+
+* CSS2模型对象 `CSS2DObject`作用是把HTML元素设计的UI包装为一个类似threejs网格模型 `Mesh`的模型对象，可以设置 `.position`属性，具备Object3D的一些方法 可以通过 `.add()方法`插入到场景中
+
+```JavaScript
+/**
+ * HTML元素编写一个UI效果作为模型标签
+ */
+const div = document.createElement('div');
+div.innerHTML = '立方体';
+div.style.padding = '10px';
+div.style.color = '#fff';
+div.style.backgroundColor = 'rgba(25,25,25,0.5)';
+div.style.borderRadius = '5px'
+// div.style.position = 'absolute';//不需要设置绝对定位
+
+//HTML元素标签作为参数创建一个CSS2模型对象CSS2DObject
+//你可以把CSS2DObject模型对象类比为网格模型Mesh 具备Object3D的一些方法，一样具有position属性
+//CSS2DObject模型对象不具有角度和缩放.scale属性
+const label = new THREE.CSS2DObject(div);
+//设置模型对象CSS2DObject在场景位置
+//标签标注boxMesh模型所以复制boxMesh的位置
+label.position.copy(boxMesh.position);
+//适当偏移标签
+label.position.y += 30
+scene.add(label);//CSS2模型标签插入到场景中
+```
+
+### **创建CSS2渲染器 `CSS2DRenderer`**
+
+* CSS2渲染器 `THREE.CSS2DRenderer`和常用的WebGL渲染器 `WebGLRenderer`一样都是渲染器，只是渲染技术不同，WebGL渲染器 `WebGLRenderer`解析渲染threejs模型对象的时候会调用底层的WebGL API，CSS2渲染器 `THREE.CSS2DRenderer`功能是渲染与threejs场景中网格模型绑定的HTML元素。
+
+* CSS2渲染器 `.domElement`、`.setSize()`、`.render()`等方法和属性功能和WebGL渲染器相同。webgl渲染器的部分属性和方法CSS3渲染是不具备的，比如设置背景颜色的方法 `.setClearColor()`(Css渲染器没有)。
+* <font color =#ff3040>注意: 2D渲染器的`.setSize`依赖`WebGLRenderer`场景渲染器的宽度高度 需要和其保持一致 否则会出现偏移问题 无论如何 他俩的宽高应该都是一个作用域的值(相同)</font>
+* <font color =#ff3040>注意: `CSS2DRenderer`只能用于2D场景 像Css3中的`transform`这种3D属性 需要使用[CSS3DRenderer](https://threejs.org/docs/index.html?q=CSS3#examples/zh/renderers/CSS3DRenderer)</font>
+
+```JavaScript
+// 创建一个CSS2渲染器CSS2DRenderer
+var labelRenderer = new THREE.CSS2DRenderer();
+// .setSize的值 应该和WebGLRenderer场景渲染器的宽度高度一致 否则会出现偏移问题
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = 'absolute';
+// 避免renderer.domElement影响HTMl标签定位，设置top为0px
+labelRenderer.domElement.style.top = '0px';
+labelRenderer.domElement.style.left = '0px';
+//设置.pointerEvents=none，以免模型标签HTML元素遮挡鼠标选择场景模型
+labelRenderer.domElement.style.pointerEvents = 'none';
+document.body.appendChild(labelRenderer.domElement);
+//渲染场景中的HTMl元素包装成的CSS2模型对象
+labelRenderer.render(scene, camera);
+```
+
+### **2D渲染器自适应**
+
+* 有时候我们需要随着页面进行自适应操作 我们可以使用`.setSize` 方法重新设置渲染的输出尺寸 使用方法和场景渲染器一样 
+*  相机也需要重置哦
+
+```js
+ // 创建一个CSS2渲染器CSS2DRenderer
+  const labelRenderer = new CSS2DRenderer()
+ // 设置渲染器的尺寸(需要和其他渲染器宽高一致)
+  labelRenderer.setSize(window.innerWidth, window.innerHeight)
+  // 监听页面尺寸是否修改
+  window.onresize = () => {
+    const width = window.innerWidth
+    const height = window.innerHeight
+    // 重置2D渲染器输出画布canvas尺寸
+    labelRenderer.setSize(width, height)
+    // 全屏情况下：设置观察范围长宽比aspect为窗口宽高比
+    camera.aspect = width / height
+    // 渲染器执行render方法的时候会读取相机对象的投影矩阵属性projectionMatrix
+    // 但是不会每渲染一帧，就通过相机的属性计算投影矩阵(节约计算资源)
+    // 如果相机的一些属性发生了变化，需要执行updateProjectionMatrix ()方法更新相机的投影矩阵
+    camera.updateProjectionMatrix()
+  }
+```
+
+### **Vue cli中问题**
+
+* 当我们在Vue脚手架切换路由的时候 页面上的2D渲染器产生的标签并不会随着路由切换而隐藏(销毁) 
+* 原因是three.js的 `CSS2DRenderer`生成的标签直接就是挂在真实的DOM上，并非是Vue的虚拟DOM上，所以在页面切换的时候，这个标签并不会随着切换而消失。而是一直在页面的body上面
+
+![image-20220606200111409](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220606200111409.png)
+
+> 解决办法
+
+* Vue3提供了组件销毁后的生命周期`onUnmounted()` Vue2是`beforeDestroy()` 我们通过原生方法:  [.removeChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/removeChild) 在DOM中删除(销毁)一个子节点的方法 来销毁2D渲染器产生的标签
+
+```js
+// 假设变量labelRenderer为CSS2DRenderer创建的2D渲染器
+// Vue3
+onUnmounted(() => {
+    // 销毁CSS2DRenderer创建的2D渲染器
+  document.body.removeChild(labelRenderer.domElement)
+})
+// Vue2
+beforeDestroy() {
+    // 销毁CSS2DRenderer创建的2D渲染器
+    document.body.removeChild(labelRenderer.domElement)
+}
+```
+
+##  参考文献
+
+[Three.js零基础入门教程(郭隆邦)](http://www.yanhuangxueyuan.com/Three.js/)
+
+[vue-cli + three.js 解决页面跳转时Css2dObject遗留在dom的问题](https://blog.csdn.net/qq_37338983/article/details/106461004)
