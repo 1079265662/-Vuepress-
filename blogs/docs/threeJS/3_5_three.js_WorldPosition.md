@@ -34,6 +34,8 @@ three.js 之 世界坐标 <br>
 * `Vector3`是threejs的三维向量对象,可以通过`Vector3`对象表示一个顶点的xyz坐标，顶点的法线向量。
 
 ```js
+// 声明网格模型对象Mesh
+const mesh = new THREE.Mesh(网格模型Geometry, 材质对象Material)
 // 声明一个三维向量用来保存世界坐标
 const worldPosition = new THREE.Vector3();
 // 执行getWorldPosition方法把模型的世界坐标保存到参数worldPosition中
