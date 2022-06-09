@@ -75,7 +75,137 @@ loader.load("./scene/scene.gltf", function (gltf) {
 1. 需要进行交互的模型 一定要独立绘制 并且名称需要唯一
 2. 需要交互的不同模型 建议创建父级名称进行归类
 
-![image-20220605155233753](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220605155233753.png)
+![image-20220609175247508](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220609175247508.png)
+
+## 鼠标交互 射线拾取操作
+
+通过[.getObjectByName](https://threejs.org/docs/index.html?q=Object3D#api/zh/core/Object3D.getObjectByName)筛选出需要交互的模型 然后通过Object3D[.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse)方法遍历递归出他们的网格模型`Mesh` 最后通过 [Raycaster光摄投线](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster)的方法进行鼠标拾取（在三维空间中计算出鼠标移过了什么物体）判断是否点击的是需要交互的网格模型节点 如果是 那么就给选中的网格模型节点进行一些交互效果
+
+> 射线拾取网格模型——四步走
+
+1. 获取需要鼠标交互的网格模型集合(父对象) [.getObjectByName](https://threejs.org/docs/index.html?q=Object3D#api/zh/core/Object3D.getObjectByName)
+2. 坐标转化(鼠标单击的屏幕坐标转WebGL标准设备坐标)
+3. 射线生成计算 (通过鼠标单击位置+相机参数计算射线值)
+4. 射线拾取计算[.intersectObjects](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObjects)
+
+
+
+### **获取需要鼠标交互的网格模型集合**
+
+* 通常需要交互的网格模型会放入[Group](https://threejs.org/docs/index.html?q=Group#api/zh/objects/Group)集合中( 建模自带 或者 手动创建[Group](https://threejs.org/docs/index.html?q=Group#api/zh/objects/Group) ) 
+* 通过[.getObjectByName](https://threejs.org/docs/index.html?q=Object3D#api/zh/core/Object3D.getObjectByName)筛选出需要交互的模型 然后通过Object3D的[.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse)方法遍历递归出他们的网格模型`Mesh`
+
+```js
+// 声明一个储存需要交互的网格模型的数组
+const granaryArr = []
+loader.load("建模文件.glb", function (gltf) {//gltf加载成功后返回一个对象
+    // // 所有需要交互的网格模型父对象名称：'粮仓'
+    const group = gltf.scene.getObjectByName('粮仓');
+    //console.log('粮仓', group);
+    group.traverse(function (obj) {
+        if (obj.type === 'Mesh') {
+            granaryArr.push(obj);
+        }
+    })
+    model.add(gltf.scene);
+})
+```
+
+
+
+### **坐标转化**
+
+* 鼠标单击canvas画布，通过返回事件对象属性 `window.event.clientX`和 `window.event.clientY`鼠标单机位置的屏幕坐标,然后把屏幕坐标转化为WebGL标准设备坐标，WebGL标准设备坐标坐标范围[-1,1]。
+  * WebGL标准设备坐标公式:
+    * 宽: ( 当前鼠标宽 / 当前设备的宽 )  * 2 - 1
+    * 高: -( 当前鼠标高 / 当前设备的高 )  * 2 + 1
+
+```JavaScript
+  const Sx = window.event.clientX // 鼠标单击位置横坐标
+  const Sy = window.event.clientY // 鼠标单击位置纵坐标
+  //屏幕坐标转WebGL标准设备坐标
+  const x = (Sx / window.innerWidth) * 2 - 1; //WebGL标准设备横坐标
+  const y = -(Sy / window.innerHeight) * 2 + 1; //WebGL标准设备纵坐标
+```
+
+### **射线生成计算`.setFromCamera()`**
+
+把鼠标单击位置坐标和相机参数作为 [.setFromCamera](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.setFromCamera)方法的参数，计算射线投射器 `Raycaster`的射线属性 `.ray`值。
+
+```JavaScript
+//创建一个射线投射器`Raycaster`
+const raycaster = new THREE.Raycaster();
+//通过鼠标单击位置标准设备坐标和相机参数计算射线投射器`Raycaster`的射线属性.ray
+raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
+```
+
+### **射线拾取计算(`.intersectObjects()`方法)**
+
+通过 [.intersectObjects](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObjects)方法可以计算出来射线相交的网格模型。
+
+```JavaScript
+//返回.intersectObjects()参数中射线选中的网格模型对象
+// 未选中对象返回空数组[],选中一个数组1个元素，选中两个数组两个元素
+const intersects = raycaster.intersectObjects([boxMesh, sphereMesh, cylinderMesh]);
+```
+
+### **整体写法**Vue3
+
+* 我们需要记录 上一次所选中的网格模型对象 当选择下一个的时候 让原来那个恢复未选中的样式效果
+* 修改材质颜色的时候 需要用 颜色(Color)的[color.set](https://threejs.org/docs/index.html?q=color#api/zh/math/Color.set) 方法进行材质颜色修改
+* <font color =#ff3040> 注意: 如果材质是一张贴图 将无法修改</font>
+
+```vue
+<template>
+  <div>
+    <!-- 渲染模板 -->
+    <div ref="stateDom" @click="checked" />
+  </div>
+</template>
+<script setup>
+// 引入Three.js
+import * as THREE from 'three'
+// 导入Vue组合API
+import { reactive } from 'vue'
+import { camera } from './settings/RendererCamera.js'
+// 获取需要交互的模型对象集合
+import { contentModel } from './settings/model.js'
+// 储存选中的网格模型对象
+const context = reactive({
+  chooseMesh: null
+})
+// 绑定渲染模板的点击事件
+const checked = () => {
+  // 判断上次是否有选过网格模型对象
+  if (context.chooseMesh) {
+    context.chooseMesh.material.color.set('#ffffff')// 把上次选中的mesh设置为原来的颜色
+  }
+  const Sx = window.event.clientX // 鼠标单击位置横坐标
+  const Sy = window.event.clientY // 鼠标单击位置纵坐标
+  // 屏幕坐标转WebGL标准设备坐标
+  const x = (Sx / window.innerWidth) * 2 - 1 // WebGL标准设备横坐标
+  const y = -(Sy / window.innerHeight) * 2 + 1 // WebGL标准设备纵坐标
+  // 创建一个射线投射器Raycaster
+  const raycaster = new THREE.Raycaster()
+  // 通过鼠标单击位置标准设备坐标和相机参数计算射线投射器Raycaster的射线属性.ray
+  raycaster.setFromCamera(new THREE.Vector2(x, y), camera)
+  // 返回.intersectObjects()参数中射线选中的网格模型对象
+  // 未选中对象返回空数组[],选中一个数组1个元素，选中两个数组两个元素
+  const intersects = raycaster.intersectObjects(contentModel.granaryArr)
+  console.log(intersects)
+  // console.log("射线器返回的对象", intersects);
+  // console.log("射线投射器返回的对象 点point", intersects[0].point);
+  // console.log("射线投射器的对象 几何体",intersects[0].object.geometry.vertices)
+  // intersects.length大于0说明，说明选中了模型
+  if (intersects.length > 0) {
+    context.chooseMesh = intersects[0].object
+    context.chooseMesh.material.color.set('#00ffff')// 选中改变颜色，这样材质颜色贴图.map和color颜色会相乘
+  }
+}
+</script>
+```
+
+
 
 ## 参考文献
 

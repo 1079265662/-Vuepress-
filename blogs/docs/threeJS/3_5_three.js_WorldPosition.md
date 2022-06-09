@@ -18,7 +18,7 @@ three.js 之 世界坐标 <br>
 1. 世界坐标: 相对于three.js场景`scene`的xyz的坐标系
 2. 局部坐标: 相对于模型自身的xyz的坐标系
 
-![image-20220605193230284](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220605193230284.png)
+![image-20220609105555886](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220609105555886.png)
 
 * <font color =#ff3040>注意: 局部坐标依赖模型导出时自身的坐标 最好和建模约定好 自身坐标是从底部还是从顶部开始 下图的模型就是底部的几何中心坐标</font>
 
