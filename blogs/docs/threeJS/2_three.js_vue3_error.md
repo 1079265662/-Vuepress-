@@ -77,8 +77,8 @@ onMounted(() => {
 ## 最佳问题解决
 
 * 如果我们每次都需要使用`toRaw`进行取消代理 在配合Vue3的`composition API` 那么我们岂不是非常麻烦吗 如果这个模型在很多方法多个文件中使用 那无疑是非常麻烦的 
-* 使用Vue3的 `shallowReactive()` 响应式API 该API只会代理最外层的响应式 `property` 的值会被原样存储和暴露 并非使用的是`proxy`代理
-* 几乎的所有的three.js声明的 结构对象 都可以用`shallowReactive()` 来进行浅层代理
+* 使用Vue3的[shallowReactive()](https://staging-cn.vuejs.org/api/reactivity-advanced.html#shallowreactive)响应式API 该API只会代理最外层的响应式 `property` 的值会被原样存储和暴露 并非使用的是`proxy`代理
+* 几乎的所有的three.js声明的 结构对象 都可以用[shallowReactive()](https://staging-cn.vuejs.org/api/reactivity-advanced.html#shallowreactive) 来进行浅层代理
 
 ```vue
 <script setup>
@@ -107,7 +107,7 @@ onMounted(() => {
 </script>
 ```
 
-* 使用`shallowReactive()`浅层代理 解决了three.js对`proxy`的支持问题
+* 使用[shallowReactive()](https://staging-cn.vuejs.org/api/reactivity-advanced.html#shallowreactive)浅层代理 解决了three.js对`proxy`的支持问题
 
 ## 参考文献
 

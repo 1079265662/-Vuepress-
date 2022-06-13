@@ -293,16 +293,59 @@ const coordinate = () => {
 ## 常用Object3D方法
 
 * 这是Three.js中大部分对象的基类，提供了一系列的属性和方法来对三维空间中的物体进行操纵。详细看这里[三维物体（Object3D）](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D)
+
 * 请注意，可以通过.add( object )方法来将对象进行组合，该方法将对象添加为子对象，但为此最好使用Group（来作为父对象）
-* 任意的3D对象都有4个用于变换的属性
-  - `position` (在三个轴向上移动)
-  - `scale` (在三个轴向上缩放)
+
+* 任意的3D对象具备的 `Vector3`三维向量 四位向量
+  - [.position(Vector3) ](https://threejs.org/docs/?q=ob#api/zh/core/Object3D.position)(在三个轴向上移动 通常也是模型的世界坐标位置)
+  - [.scale(Vector3)](https://threejs.org/docs/?q=ob#api/zh/core/Object3D.scale) (在三个轴向上缩放)
   - `rotation` (在三个轴向上旋转)
   - `quaternion` (四元数，也是用于处理旋转的)
+  
+* 以上的方法都涉及到 `x,y,z`轴的(还有`w`) 进行修改时候需要用到以下方法 
 
-### **旋转角度 rotateX rotateY rotateZ**
+  > 假设以`.position`模型世界坐标位置为例
 
-* [.rotateXYZ](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotateX) 旋转X Y Z轴的角度 让内容朝某个方向转起来
+  * [.add(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.add) 将传入的向量v和这个向量相加 可以对x y z 轴进行相加处理
+
+  ```js
+  const coordinate = new THREE.Vector3(200, 50, 50)
+  Object3D.position.add(coordinate)
+  ```
+
+  * [.copy(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.copy) 将所传入`Vector3`的x、y和z属性复制给这一`Vector3`。覆盖原有的 x y z
+
+  ```js
+  const coordinate = new THREE.Vector3(200, 50, 50)
+  Object3D.position.copy(coordinate)
+  ```
+
+  * [.set(number)](https://threejs.org/docs/?q=Vector3#api/zh/math/Vector3.set) 设置该向量的x、y 和 z 分量。覆盖原有的 x y z 不用 `Vector3`用数字设置即可
+
+    ```js
+    Object3D.position.set(0, 0, 0)
+    ```
+
+  * [.clone(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.clone) 返回一个新的`Vector3`，其具有和当前这个向量相同的x、y和z。复制一份 x y z 不修改原数据
+
+  ```js
+  const ret = Object3D.position.clone() 
+  console.log(ret) // ret里面包含Vector3
+  ```
+
+  * 也可以直接赋值数字
+
+  ```js
+  	Object3D.position.x = 20;
+      Object3D.position.y = 20;
+      Object3D.position.z = 2;
+  ```
+
+  
+
+### **旋转角度 .rotateX rotateY rotateZ** 
+
+* [.rotate](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotateX) 旋转X Y Z轴的角度 让内容朝某个方向转起来
 
 ```js
 物体的网格对象(Mesh).rotateY(速度(0.1)) // rotateX rotateY rotateZ     
@@ -334,7 +377,7 @@ var scene = new THREE.Scene();
 scene.add(group);
 ```
 
-### **批量替换threejs结构(遍历object3D对象)**
+### **遍历Object3D对象 .traverse**
 
 * [.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse) 可以递归遍历object3D对象 我们可以通过判断来批量替换网格模型中的材质 等等...
   * 如果替换的是网格模型的材质 一定要把`color`也替换上 否则会显示默认的白色模型
@@ -361,6 +404,24 @@ scene.add(group);
       model.add(gltf.scene)
     })
 ```
+
+### **设置渲染顺序 .renderOrder **
+
+* Object3D对象 在渲染器`render`中有先后渲染顺序 默认是0 他类似于css中的`z-index` 通过[.renderOrder](https://threejs.org/docs/#api/zh/core/Object3D.renderOrder) 进行渲染顺序 [scene graph](https://en.wikipedia.org/wiki/Scene_graph)（场景图)默认值会被该设置覆盖
+
+```js
+Object3D对象.renderOrder = 12 // 任意层数
+```
+
+### **修改Object3D对象中的元素样式**
+
+* 如果我们的`Object3D`对象是通过js的Dom元素生成的 那么会存在`element`Dom属性 然后再通过`.style`就可以修改Dom元素的样式
+
+```js
+Object3D.element.style.opacity = 1 // 显示标签
+```
+
+
 
 ## 二维向量（Vector2）和 三维向量（Vector3）
 

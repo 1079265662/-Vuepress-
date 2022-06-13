@@ -1,7 +1,7 @@
 ---
 title: three.js 之 Renderer
 date: 2022-06-06
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-6o3qx7.png
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-dp7gkm-min.png
 tags:
  - three.js
 categories: three.js
@@ -16,6 +16,8 @@ three.js 之 Renderer 渲染器 <br>
 ## 渲染器renderer的作用
 
 `three.js渲染器` 分为很多类型的渲染器 用到再记录
+
+不同类型的渲染器只能存在一个 多个会被覆盖
 
 * [WebGLRenderer 场景渲染器](https://threejs.org/docs/index.html?q=web#api/zh/renderers/WebGLRenderer) 最常用的渲染器 可以渲染网格模型
 * [CSS2DRenderer 2D渲染器](https://threejs.org/docs/examples/zh/renderers/CSS2DRenderer.html) 2D渲染器可以让你的元素渲染成2D效果 CSS2对象模型是`CSS2DObject`
@@ -144,8 +146,9 @@ import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRe
 function tag (name) {
   // 创建div元素(作为标签)
   const div = document.createElement('div');
-  // 给元素设置一个class 方便设置样式
+  // 给标签插入内容(依据传来的参数)
   div.innerHTML = name;
+  // 给元素设置一个class 方便设置样式
   div.classList.add('tag');
   //div元素包装为CSS2模型对象CSS2DObject
   const label = new CSS2DObject(div);
@@ -179,15 +182,42 @@ document.body.appendChild(labelRenderer.domElement);
 labelRenderer.render(场景scene, 相机camera);
 ```
 
+### **把CSS2DObject对象添加到three.js中**
+
+three.js会把元素Dom重新渲染成 three.js的[Object3D](https://threejs.org/docs/?q=Object3D#api/zh/core/Object3D)对象 这样就可以和网格模型进行交互 并且支持部分(区分2D和3D方法)[Object3D](https://threejs.org/docs/?q=Object3D#api/zh/core/Object3D)对象方法
+
+<font color = ff3040>注意: 必须要把CSS2DObject对象添加到场景`scene` 或 `Group组对象`中去 否则不会被three.js进行渲染</font>
+
+* 声明到`Group`组对象
+
+```js
+const model = new THREE.Group()// 声明一个组对象，用来添加加载成功的三维场景
+const label = tag() // 假设label是CSS2DObject的内容
+model.add(label) // CSS2DObject内容插入model组对象中
+```
+
+* 声明到`scene`场景中
+
+```js
+// 声明场景对象
+const scene = new THREE.Scene()
+const label = tag() // 假设label是CSS2DObject的内容
+scene.add(ambient) // CSS2DObject内容插入scene场景对象中
+```
+
 > 渲染效果
 
 * `CSS2DRenderer`的标签本身的大小不会缩放也不会旋转，始终面对屏幕
 
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/e06645802f2742eda25815e6d7a91628.gif)
 
-## CSS3DRenderer 3D(CSS3)渲染器
+* 2D渲染器生成的html元素 [transform](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform)元素不是[matrix3d()](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/matrix3d)
 
-* 他和`CSS2DRenderer`2D渲染器差不多 不过他可以使用 [三维向量（Vector3）](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3)[.scale.set()](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.scale)局部缩放属性
+![image-20220610122035918](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220610122035918.png)
+
+## CSS3DRenderer 3D(CSS3)渲染器 
+
+* 他和`CSS2DRenderer`2D渲染器差不多 不过他可以使用 [三维向量（Vector3）](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3)[.scale.set()](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.scale)局部缩放属性 和 [.rotate](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotateX) 旋转X Y Z轴属性
 
 > 在工程化下导入three.js CSS3渲染器 CSS3对象模型 CSS3精灵模型
 
@@ -210,18 +240,19 @@ import { CSS3DRenderer, CSS3DSprite, CSS3DObject  } from 'three/examples/jsm/ren
 function tag (name) {
   // 创建div元素(作为标签)
   const div = document.createElement('div');
-  // 给元素设置一个class 方便设置样式
+  // 给标签插入内容(依据传来的参数)
   div.innerHTML = name;
+  // 给元素设置一个class 方便设置样式
   div.classList.add('tag');
   //div元素包装为CSS3模型对象CSS3DObject
   const label = new CSS3DObject(div);
   //避免HTML标签遮挡三维场景的鼠标事件
   div.style.pointerEvents = 'none';
   //缩放CSS3DObject模型对象
-  label.scale.set(0.2, 0.2, 0.2);//根据相机渲染范围控制HTML 3D标签尺寸
-  label.rotateY(Math.PI / 2);//控制HTML标签CSS3对象姿态角度
+  label.scale.set(0.2, 0.2, 0.2); //根据相机渲染范围控制HTML 3D标签尺寸
+  label.rotateY(Math.PI / 2); //控制HTML标签CSS3对象姿态角度
   // label.rotateX(-Math.PI/2);
-  return label;//返回CSS3模型标签      
+  return label; //返回CSS3模型标签      
 }
 ```
 
@@ -230,6 +261,10 @@ function tag (name) {
 * `CSS3DObject`CSS3对象模型的标签 缩放的时候跟着鼠标缩放变大变小，场景旋转的时候，它会跟着场景渲染器一起旋转 **但不会面对屏幕**
 
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/bd0cf6acd7414a0aafe75fb838a371e4.gif)
+
+* 3D渲染器生成的html元素 [transform](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform)元素是[matrix3d()](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/matrix3d)3D 转换效果
+
+![image-20220610122217013](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220610122217013.png)
 
 ### **创建 CSS3精灵对象模型 `CSS3DSprite`**
 
@@ -240,17 +275,18 @@ function tag (name) {
 function tag (name) {
   // 创建div元素(作为标签)
   const div = document.createElement('div');
-  // 给元素设置一个class 方便设置样式
+  // 给元素设置一个class 方便设置样式(依据传来的参数)
   div.innerHTML = name;
+  // 给元素设置一个class 方便设置样式
   div.classList.add('tag');
   //div元素包装为CSS3模型对象CSS3DSprite
   const label = new CSS3DSprite(div);
-  div.style.pointerEvents = 'none';//避免HTML标签遮挡三维场景的鼠标事件
+  div.style.pointerEvents = 'none'; //避免HTML标签遮挡三维场景的鼠标事件
   //缩放CSS3DSprite模型对象
-  label.scale.set(0.2, 0.2, 0.2);//根据相机渲染范围控制HTML 3D标签尺寸
-  label.rotateY(Math.PI / 2);//控制HTML标签CSS3对象姿态角度
+  label.scale.set(0.2, 0.2, 0.2); //根据相机渲染范围控制HTML 3D标签尺寸
+  label.rotateY(Math.PI / 2); //控制HTML标签CSS3对象姿态角度
   // label.rotateX(-Math.PI / 2);
-  return label;//返回CSS3模型标签      
+  return label; //返回CSS3模型标签      
 }
 ```
 
@@ -279,6 +315,29 @@ document.body.appendChild(labelRenderer.domElement);
 labelRenderer.render(场景scene, 相机camera);
 // 在元素上绘制canvas
 document.body.appendChild(labelRenderer.domElement);
+```
+
+### **把CSS3DObject对象添加到three.js中**
+
+three.js会把元素Dom重新渲染成 three.js的[Object3D](https://threejs.org/docs/?q=Object3D#api/zh/core/Object3D)对象 这样就可以和网格模型进行交互 并且支持部分(区分2D和3D方法)[Object3D](https://threejs.org/docs/?q=Object3D#api/zh/core/Object3D)对象方法
+
+<font color = ff3040>注意: 必须要把CSS3DObject对象添加到场景`scene` 或 `Group组对象`中去 否则不会被three.js进行渲染</font>
+
+* 声明到`Group`组对象
+
+```js
+const model = new THREE.Group()// 声明一个组对象，用来添加加载成功的三维场景
+const label = tag() // 假设label是CSS3DObject的内容
+model.add(label) // CSS2DObject内容插入model组对象中
+```
+
+* 声明到`scene`场景中
+
+```js
+// 声明场景对象
+const scene = new THREE.Scene()
+const label = tag() // 假设label是CSS3DObject的内容
+scene.add(ambient) // CSS3DObject内容插入scene场景对象中
 ```
 
 ## 2D、3D、3DSprite(精灵)渲染器的相关问题
@@ -334,6 +393,70 @@ beforeDestroy() {
     // 销毁CSS2DRenderer创建的2D渲染器
    document.body.removeChild(labelRenderer.domElement)
 }
+```
+
+### **把Vue组件转换为CSS2DObject**
+
+把Vue写好的组件 转换为`CSS2DObject` 或者 `CSS3DObject` 让其成为three.js的内容
+
+* 第一步导入组件 给其绑定`id` 方便选中其Dom节点
+
+```vue
+<template>
+  <div>
+    <!-- 渲染模板 -->
+    <div ref="stateDom" style="position: relative;" @click="checked">
+      <!-- 导入详细信息card -->
+      <tagCards id="messageTag" />
+    </div>
+  </div>
+</template>
+```
+
+* 第二步封装一个把Dom节点转换成`CSS2DObject` js方法 (通常单独js文件 里面包含`CSS2DRenderer ` 2D渲染器)
+  * 注意 需要`CSS2DRenderer ` 2D渲染器 这里就不写了
+
+```js
+const tagCard = (domID) => {
+  // 获取需要转换
+  const dom = document.getElementById(domID)
+  // dom元素包装为CSS2模型对象CSS2DObject
+  const label = new CSS2DObject(dom)
+  dom.style.pointerEvents = 'none'// 避免HTML标签遮挡三维场景的鼠标事件
+  return label// 返回CSS2模型标签
+}
+```
+
+* 第三步 在页面的`onMounted`中进行`CSS2DObject` 转换
+  * 可以使用`nextTick()` 确保Dom渲染完毕
+
+```vue
+<template>
+  <div>
+    <!-- 渲染模板 -->
+    <div ref="stateDom" style="position: relative;" @click="checked">
+      <!-- 导入详细信息card -->
+      <tagCards id="messageTag" />
+    </div>
+  </div>
+</template>
+<script setup>
+const context = reactive({
+    // 储存转换好的CSS2DObject
+  messageTag: null
+})
+onMounted(() => {
+    // 确保Dom渲染完毕
+  nextTick(() => {
+      // 通过id把Dom转换为CSS2DObject
+      context.messageTag = tagCard('messageTag')
+      //! 很关键 需要把转换好的CSS2DObject添加到 场景scene 或 Group组对象中
+      model.add(context.messageTag)
+      // 设置渲染顺序和css的z-index一样 设置高一点防止被覆盖
+      context.messageTag.renderOrder = 12
+  })
+})
+</script>
 ```
 
 ##  参考文献
