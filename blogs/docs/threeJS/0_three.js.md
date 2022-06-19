@@ -226,6 +226,8 @@ export default {
   
   ☑️`Renderer` [场景渲染器、2D、3D渲染器](./3_4_three.js_Renderer.md)
   
+  ☑️`Loader` [加载器](./3_6_three.js_Loader.md)
+  
   - [ ] `Light` 光源
   
   ☑️`Dom` [模型节点](./2_1_three.js_Dom.md)
@@ -322,9 +324,9 @@ const coordinate = () => {
 
   * [.set(number)](https://threejs.org/docs/?q=Vector3#api/zh/math/Vector3.set) 设置该向量的x、y 和 z 分量。覆盖原有的 x y z 不用 `Vector3`用数字设置即可
 
-    ```js
-    Object3D.position.set(0, 0, 0)
-    ```
+  ```js
+  Object3D.position.set(0, 0, 0)
+  ```
 
   * [.clone(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.clone) 返回一个新的`Vector3`，其具有和当前这个向量相同的x、y和z。复制一份 x y z 不修改原数据
 
@@ -333,22 +335,25 @@ const coordinate = () => {
   console.log(ret) // ret里面包含Vector3
   ```
 
-  * 也可以直接赋值数字
+  * 也可以直接赋值或者进行运算符处理指定坐标
 
   ```js
+   // 赋值操作
   	Object3D.position.x = 20;
       Object3D.position.y = 20;
       Object3D.position.z = 2;
+  // 相加相减操作
+  	Object3D.position.x += 20;
+      Object3D.position.y -= 20;
   ```
-
   
 
 ### **旋转角度 .rotateX rotateY rotateZ** 
 
-* [.rotate](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotateX) 旋转X Y Z轴的角度 让内容朝某个方向转起来
+* [.](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotateX) 旋转X Y Z轴的角度 让内容朝某个方向转起来
 
 ```js
-物体的网格对象(Mesh).rotateY(速度(0.1)) // rotateX rotateY rotateZ     
+物体的网格对象(Mesh).rotateY(0.1) // rotateX rotateY rotateZ     
 ```
 
 ### **设置一个组 Group**
@@ -410,7 +415,17 @@ scene.add(group);
 * Object3D对象 在渲染器`render`中有先后渲染顺序 默认是0 他类似于css中的`z-index` 通过[.renderOrder](https://threejs.org/docs/#api/zh/core/Object3D.renderOrder) 进行渲染顺序 [scene graph](https://en.wikipedia.org/wiki/Scene_graph)（场景图)默认值会被该设置覆盖
 
 ```js
-Object3D对象.renderOrder = 12 // 任意层数
+Object3D.renderOrder = 12 // 任意层数
+```
+
+### 移除Object3D对象 .remove
+
+* [ .remove](https://threejs.org/docs/index.html?q=remove#api/zh/core/Object3D.remove) 移除Object3D对象 也可以移除在页面创建的Object3D模型对象
+* [Group](https://threejs.org/docs/index.html?q=Group#api/zh/objects/Group) 组对象也可以使用
+
+```js
+Object3D.remove(被删Object3D对象)
+Group.remove(被删Object3D对象)
 ```
 
 ### **修改Object3D对象中的元素样式**
@@ -425,10 +440,10 @@ Object3D.element.style.opacity = 1 // 显示标签
 
 ## 二维向量（Vector2）和 三维向量（Vector3）
 
-* **[二维向量（Vector2）](https://threejs.org/docs/index.html?q=Vector2#api/zh/math/Vector2)** 
+* **[二维向量（Vector2）](https://threejs.org/docs/index.html?q=Vector2#api/zh/math/Vector2)** x y 轴
   * 表示2D [vector](https://en.wikipedia.org/wiki/Vector_space)（二维向量）的类。 一个二维向量是一对有顺序的数字（标记为x和y），可用来表示很多事物
   * `CSS2DObject` CSS2对象模型
-*  [三维向量（Vector3）](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3)
+*  [三维向量（Vector3）](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3) x y z轴
   * 该类表示的是一个三维向量（3D [vector](https://en.wikipedia.org/wiki/Vector_space)）。 一个三维向量表示的是一个有顺序的、三个为一组的数字组合（标记为x、y和z）， 可被用来表示很多事物
   * `CSS3DObject` CSS3对象模型、`CSS3DSprite` CSS3精灵模型
 * 如果你需要设置 x, y, z轴的值 就要使用三维向量（Vector3）[.set ](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.set)进行赋值修改
@@ -436,6 +451,51 @@ Object3D.element.style.opacity = 1 // 显示标签
 ```js
 二维三维可用向量.scale.set(0.3, 0.3, 0.3) // 设置xyz的值 需要.set设置
 ```
+
+* 三维向量和二维向量 都需要用到以下修改值的方法 
+
+  > 假设以`.position`模型世界坐标位置为例
+
+  * [.add(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.add) 将传入的向量v和这个向量相加 可以对x y z 轴进行相加处理
+
+  ```js
+  const coordinate = new THREE.Vector3(200, 50, 50)
+  Object3D.position.add(coordinate)
+  ```
+
+  * [.copy(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.copy) 将所传入`Vector3`的x、y和z属性复制给这一`Vector3`。覆盖原有的 x y z
+
+  ```js
+  const coordinate = new THREE.Vector3(200, 50, 50)
+  Object3D.position.copy(coordinate)
+  ```
+
+  * [.set(number)](https://threejs.org/docs/?q=Vector3#api/zh/math/Vector3.set) 设置该向量的x、y 和 z 分量。覆盖原有的 x y z 不用 `Vector3`用数字设置即可
+
+  ```js
+  Object3D.position.set(0, 0, 0)
+  ```
+
+  * [.clone(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.clone) 返回一个新的`Vector3`，其具有和当前这个向量相同的x、y和z。复制一份 x y z 不修改原数据
+
+  ```js
+  const ret = Object3D.position.clone() 
+  console.log(ret) // ret里面包含Vector3
+  ```
+
+  * 也可以直接赋值或者进行运算符处理指定坐标
+
+  ```js
+   // 赋值操作
+  	Object3D.position.x = 20;
+      Object3D.position.y = 20;
+      Object3D.position.z = 2;
+  // 相加相减操作
+  	Object3D.position.x += 20;
+      Object3D.position.y -= 20;
+  ```
+
+### 
 
 ### **获取模型的坐标**
 
@@ -447,120 +507,6 @@ Object3D.element.style.opacity = 1 // 显示标签
 const worldPosition = new THREE.Vector3();
 // 执行getWorldPosition方法把模型的世界坐标保存到参数worldPosition中
 mesh.getWorldPosition(worldPosition);
-```
-
-## 导入外部加载的模型 GLTFLoader
-
-* 我们在做threejs的时候会引入大量3D模型 通过是`gltf/glb`格式的文件 代替我们前端渲染的复杂模型 我们前端只需要写交互即可 我记录了有关[gltf格式的信息](./3_gltf)
-* 我们可以使用官方的控件 [GLTFLoader](https://threejs.org/docs/index.html?q=GLTFLoader#examples/zh/loaders/GLTFLoader) 来实现加载`gltf/glb` 格式的文件 获取其模型对象 通过添加场景 光源 相机 渲染器后 直接在页面中显示
-  * 获取完模型对象后 需要把模型对象`add`到声明的场景中去
-* <font color =#ff3040>注意: GLTFLoader支持地址`url` 如果你想在Vue cli上本地加载 需要在`public`文件夹下 存放本地的`gltf/glb` 并且只支持 绝对路径 不支持相对路径</font>
-* 我们通常在Vue cli上使用GLTFLoader加载会用`process.env.BASE_URL` 脚手架提供的获取环境路径方法 以防止出现位置bug
-
-```js
-// 引入gltf模型加载库GLTFLoader.js
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-const model = new THREE.Group();//声明一个组对象，用来添加加载成功的三维场景
-const loader = new GLTFLoader(); //创建一个GLTF加载器
-loader.load(`${process.env.BASE_URL}model/model.gltf`, function (gltf) {//gltf加载成功后返回一个对象
-    console.log('控制台查看gltf对象结构', gltf);
-    //gltf.scene可以包含网格模型Mesh、光源Light等信息，至于gltf.scene是否包含光源，要看.gltf文件中是否有光源信息
-    console.log('gltf对象场景属性', gltf.scene);
-    //把gltf.scene中的所有模型添加到model组对象中
-    model.add(gltf.scene);
-})
-const scene = new THREE.Scene();
-scene.add(model);// 把三维模型添加到场景中
-```
-
-* Vue cil 脚手架的下载文件路径(用来存放`gltf/glb` 等需要下载的本地文件) 
-
-![image-20220510183547946](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220510183547946.png)
-
-### **异步加载**
-
-* `.loadAsync` 可以支持异步加载[详细](https://threejs.org/docs/index.html?q=TextureLoader#api/zh/loaders/Loader.loadAsync) 异步加载使用的`promise`方法 需要通过`then`和`catch`获取其异步加载状态
-
-```js
-loader.loadAsync(`${process.env.BASE_URL}model/model.gltf`, (gltf) => { // gltf加载成功后返回一个对象 该对象是模型信息
-      console.log('控制台查看gltf对象结构', gltf)
-      // gltf.scene可以包含网格模型Mesh、光源Light等信息，至于gltf.scene是否包含光源，要看.gltf文件中是否有光源信息
-      console.log('gltf对象场景属性', gltf.scene)
-    }).then(() => {
-    ... 调用成功的方法
-    }).catch(()=>{
-    ... 调用失败的方法
-})
-```
-
-### **颜色偏差问题**
-
-* 通过`GLTFLoader`导入的gltf文件 大概率会出现颜色偏差问题 是因为three.js的默认颜色空间是 线性颜色空间`THREE.LinearEncoding` gltf的颜色空间是sRGB
-* 通过three.js的[纹理常量Textures](https://threejs.org/docs/index.html?q=PlaneGeometry#api/zh/constants/Textures) 了解到需要在 创建渲染器`WebGLRenderer`的时候进行颜色空间的处理
-
-```js
-const renderer = new THREE.WebGLRenderer({
-  antialias: true // 开启锯齿
-})
-renderer.outputEncoding = THREE.sRGBEncoding// 解决加载gltf格式模型纹理贴图和原图不一样问题
-```
-
-* sRGB 如果我们导入了非gltf的模型 比如`TextureLoader`方法导入的PNG和JPG图片 那么你已经设置渲染器`WebGLRenderer`的颜色空间为sRGB 那么`TextureLoader`的图片也需要设置`sRGB ` [材质设置颜色空间方法](https://threejs.org/docs/index.html?q=PlaneGeometry#api/zh/textures/Texture.encoding) 如过导入了`map`纹理贴图 需要`map.encoding`
-
-```js
-// 创建纹理贴图
-var texture = new THREE.TextureLoader().load( './scene/model_img3.png' );//加载纹理贴图
-// 创建一个平面缓冲几何体(面)
-var geometry = new THREE.PlaneGeometry(185, 260);
-// 创建一个网格朗伯材质
-var material = new THREE.MeshLambertMaterial({ 
-    // 设置渲染面
-    side: THREE.DoubleSide ,
-    // 设置纹理贴图
-    map:texture,
-});
-//设置纹理贴图编码方式和WebGL渲染器一致  如过导入了map纹理贴图 需要map.encoding
-material.map.encoding = THREE.sRGBEncoding;
-//  声明网格模型 导入平面缓冲几何体(面)和网格材质
-var plane = new THREE.Mesh(geometry, material);
-```
-
-### 批量修改网格模型材质
-
-* 我们可以使用模型提供的材质 通过[.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse)方法 遍历object3D对象方法把模型文件`glb`或`glft`的材质遍历出来使用
-* 要用`.type` 去判断类型 在three.js 导入`glt `或 `gltf`中 `Mesh`是网格模型对象的属性名(键)
-
-```js
-
-    const model = new THREE.Group()// 声明一个组对象，用来添加加载成功的三维场景
-    const loader = new GLTFLoader() // 创建一个GLTF加载器
-    loader.loadAsync(`${process.env.BASE_URL}model/model.glb`, (gltf) => { // gltf加载成功后返回一个对象
-    }).then((gltf) => {
-      // 递归遍历gltf.scene，批量更改所有Mesh的材质
-      gltf.scene.traverse(object => {
-        if (object.type === 'Mesh') {
-          // MeshLambertMaterial：受光照影响   MeshBasicMaterial：不受光照影响
-          object.material = new THREE.MeshLambertMaterial({
-            map: object.material.map, // 获取原来材质的颜色贴图属性值
-            color: object.material.color // 读取原来材质的颜色
-            // side: THREE.DoubleSide,//围墙需要设置双面显示
-          })
-        }
-      })
-      // 把gltf.scene中的所有模型添加到model组对象中
-      model.add(gltf.scene)
-    })
-```
-
-
-
-## 导入纹理 TextureLoader
-
-* 纹理一般是指我们常见的在一些第三方程序中创建的图像，如PNG和JPG类型的图。我们把这张图片放在立方体上。（我通常称为`贴图`）。我们需要做的就是创建一个TextureLoader。调用它的load方法，同时传入图像的URL，并将材质的 map 属性设置为该方法的返回值
-* 该方法通常是配合`MeshBasicMaterial`方法 进行加载基础网格材质
-
-```js
-  const texture = new THREE.TextureLoader().load('https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E5%B0%8Fmao.jpg')
 ```
 
 ## 使用网格基础材质 MeshBasicMaterial

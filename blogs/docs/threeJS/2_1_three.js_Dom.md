@@ -1,5 +1,5 @@
 ---
-title: three.js 获取三维模型的节点 
+title: three.js 三维模型交互相关
 date: 2022-06-05
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-3zvv3d.jpg
 tags:
@@ -8,7 +8,7 @@ categories: three.js
 ---
 
 ::: tip 介绍
-three.js 获取三维模型的节点 <br>
+three.js 三维模型交互相关的内容<br>
 :::
 
 <!-- more -->
@@ -128,25 +128,34 @@ loader.load("建模文件.glb", function (gltf) {//gltf加载成功后返回一�
   const y = -(Sy / window.innerHeight) * 2 + 1; //WebGL标准设备纵坐标
 ```
 
-### **射线生成计算`.setFromCamera()`**
+### **射线生成计算 `.setFromCamera()`**
 
-把鼠标单击位置坐标和相机参数作为 [.setFromCamera](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.setFromCamera)方法的参数，计算射线投射器 `Raycaster`的射线属性 `.ray`值。
+把鼠标单击位置坐标和相机参数作为 [.setFromCamera(Vector2, Camera)](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.setFromCamera)方法的参数，计算射线投射器 `Raycaster`的射线属性 `.ray`值。
 
 ```JavaScript
 //创建一个射线投射器`Raycaster`
 const raycaster = new THREE.Raycaster();
-//通过鼠标单击位置标准设备坐标和相机参数计算射线投射器`Raycaster`的射线属性.ray
+//通过鼠标单击位置标准设备坐标和相机参数计算射线投射器Raycaster的射线属性 .ray
 raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
 ```
 
-### **射线拾取计算(`.intersectObjects()`方法)**
+### **射线拾取计算 `.intersectObjects()`**
 
-通过 [.intersectObjects](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObjects)方法可以计算出来射线相交的网格模型。
+通过 [.intersectObjects(交互模组集合array)](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObjects)方法可以计算出来射线相交的网格模型。
 
 ```JavaScript
 //返回.intersectObjects()参数中射线选中的网格模型对象
 // 未选中对象返回空数组[],选中一个数组1个元素，选中两个数组两个元素
 const intersects = raycaster.intersectObjects([boxMesh, sphereMesh, cylinderMesh]);
+```
+
+#### **射线拾取获取场景点击坐标**
+
+* 通过射线拾取计算 `.intersectObjects()` 可以获得当前拾取(场景点击)的 x y z坐标 他是一个`Vector3`三维向量 `Object3D`对象可以直接通过[.copy(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.copy) 进行 x y z赋值
+* 有时候会有多个射线拾取 其实是模型重叠 把后面的模型也选中了 **[.renderOrder](https://threejs.org/docs/#api/zh/core/Object3D.renderOrder)**设置渲染顺序即可(不确定) 或者选中第一个对象
+
+```js
+Object3D.position.copy(intersects[0].point) // 选择第一个对象 有时候模型重叠会存在多个对象 但是点击对象通常是第一个
 ```
 
 ### **整体写法**Vue3
@@ -198,14 +207,15 @@ const checked = () => {
   // console.log("射线投射器的对象 几何体",intersects[0].object.geometry.vertices)
   // intersects.length大于0说明，说明选中了模型
   if (intersects.length > 0) {
+      // 赋值被点中的交互模型
     context.chooseMesh = intersects[0].object
+      // 打印当前鼠标点击在场景的坐标 x y z
+    console.log(intersects[0].point)
     context.chooseMesh.material.color.set('#00ffff')// 选中改变颜色，这样材质颜色贴图.map和color颜色会相乘
   }
 }
 </script>
 ```
-
-
 
 ## 参考文献
 

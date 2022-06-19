@@ -23,7 +23,8 @@ three.js 之 Material 材质 <br>
 
 最基本的材质是 `MeshBasicMaterial`。你能够把颜色`color`作为参数传进去来生成一个实心的带颜色对象，没有阴影，也不受光照影响。你也能够通过把透明度`opacity`作为参数传进去来调整透明度以及设置透明`transparent`为`true`。
 
-* 基础材质 不具备光照反射效果 不具备立体感 所以看起来更像是2d
+* 基础材质 不具备光照反射效果 不具备立体感 所以看起来更像是2d 适合图片`png jpg` 常用来实现序列帧动画
+* 适合搭配[PlaneGeometry()](https://threejs.org/docs/index.html?q=PlaneGeometry#api/zh/geometries/PlaneGeometry)平面几何体使用
 
 ```js
 const material = new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true, opacity: 0.5});

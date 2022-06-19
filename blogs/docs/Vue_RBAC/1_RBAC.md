@@ -1638,6 +1638,165 @@ service.interceptors.request.use(
 
 ```
 
+## 记录公司的权限处理
+
+* 公司的后台权限是这种格式的[permission.json](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/json/permission.json) `permission_tree`是未经处理的路由权限集合 `permission_list`是处理好的页面元素权限字段
+* 通常后端是不会给你前端路由所需的完整路由结构 他会返还给你 包含未经处理的路由权限集合 和 处理好的页面元素权限字段 需要[参考Vue element admin](https://panjiachen.github.io/vue-element-admin-site/zh/guide/essentials/router-and-nav.html)的路由权限内容 在前端进行路由权限集合的处理
+  * 后端通常只会给你`page_key`( 路由在前端框架中的相对路径) 你需要自己进行拼接操作的处理 
+
+> 通过Vuex获取和处理路由权限集合
+
+* 通常我们会在Vuex写这种通用性的数据和方法 然后再路由守卫中进行获取和处理的操作
+
+```js
+/**
+ * @author: 刘凯利
+ * @day: 2022.2.11
+ */
+import { constantRoutes } from '@/router'
+//! 获取的用户权限合集
+import { getrolesList } from '@/api/user'
+import { Message } from 'element-ui'
+import Layout from '@/layout'
+// 导入通用提示
+import $t from '@/config'
+/**
+ * 获取后端分配好的路由权限替换简键名渲染路由
+ * @param {Array} routes 是一个空数组 用来储存处理完毕后的路由集合
+ * @param {data} data 后端返回的未经处理的全部路由权限集合
+ * @Notice page_key是路径 level是层级一般判断是否为菜单 并且可以判断是否在面包屑打开(菜单肯定不能打开) type判断是否隐藏菜单
+ */
+export function filterAsyncRoutes (routes, data) {
+  // 进行路由权限的拼接
+  data.forEach(item => {
+    // 截取最后/的内容 用来设置Vue的nama属性
+    const name = item.page_key.substring(item.page_key.lastIndexOf('\/') + 1, item.page_key.length)
+    // 地址重定向
+    let redirectUrl = ''
+    // 判断是否存在子菜单
+    if (item?.children) {
+      // 如果存在 重定向到第一个子菜单中
+      redirectUrl = item.children[0].page_key
+    }
+    // 创建路由的集合对象
+    const menu = {
+      // 页面路径
+      path: item.page_key,
+      // 判断是是否为菜单(无论如何leave为1肯定为菜单) resolve必须要加 必须使用CommonJS导入方式 不可以使用es6 import
+      component: item.level === 1 && item.new_page === 0 ? Layout : resolve => { require(['@/views' + item.page_key], resolve) },
+      // name截取后取首位大写(依据Vue的name进行处理设置)
+      name: name.slice(0, 1).toUpperCase() + name.slice(1),
+      // 判断菜单重定向
+      redirect: item.level === 1 ? redirectUrl : '',
+      // 判断是否隐藏
+      hidden: item.type !== 1,
+      // 是否唯一显示(有待配置)
+      alwaysShow: false,
+      // 路由meta中的内容
+      meta: {
+        // 如果是菜单 进行隐藏处理
+        breadcrumb: item.level === 1,
+        // 菜单标题
+        title: item.name,
+        // 菜单svg图像
+        icon: item.icon,
+        // 取消缓存 (根据需求)
+        noCache: true
+      },
+      // 准备子节点容器
+      children: []
+    }
+    // 判断是否含有子节点
+    if (item.children) {
+      // 如果含有子节点 提取出子节点容器 并拿到数据的子节点再次进行添加
+      filterAsyncRoutes(menu.children, item.children)
+    }
+    // 把集合对象添加到路由集合中
+    routes.push(menu)
+  })
+  // 返回整理好的动态路由数据
+  return routes
+}
+
+const state = {
+  routes: [],
+  // 动态路由的权限
+  addRoutes: [],
+  // 元素(按钮)的权限
+  roles: []
+}
+
+const mutations = {
+  // 元素权限
+  SET_ROLES: (state, roles) => {
+    state.roles = roles
+    // console.log(roles)
+  },
+  // 路由权限
+  SET_ROUTES: (state, routes) => {
+    state.addRoutes = routes
+    // 把过滤出来有权限的路由添加到不需要权限的路由里面去
+    state.routes = constantRoutes.concat(routes)
+  }
+}
+
+const actions = {
+  /**
+   * 获得后端权限集合 包含未经处理的路由权限集合 和 处理好的页面元素权限字段
+   */
+  generateRoutes ({ commit }, state) {
+    return new Promise((resolve, reject) => {
+      // 存的是有权限的路由，是一个数组
+      getrolesList().then(res => {
+        console.log('3.获取用户权限路由')
+        console.log(res)
+        // 声明一个变量 接收方法返回的动态路由
+        let accessedRoutes
+        if (res.code == 200 || res.code == 20000) {
+          //! 储存元素权限
+          const roles = res.data.permission_list
+          // 如果是空权限 那么往里面添加null字段
+          if (roles.length === 0) {
+            roles.push('null')
+          }
+          // 把元素(按钮)权限储存到session中
+          sessionStorage.setItem('codeList', JSON.stringify(roles))
+          // 在Vuex中储存元素权限
+          commit('SET_ROLES', roles)
+          //! 遍历路由权限
+          // 设置空的数组 传递给方法
+          const ret = []
+          // 把动态路由遍历后储存
+          accessedRoutes = filterAsyncRoutes(ret, res.data.permission_tree)
+          console.log(accessedRoutes)
+          // 还缺少404页面 单独配置并push到动态路由中
+          const asyncRoutes = { path: '*', redirect: '/404', hidden: true }
+          // 把404页面push到动态路由里面 (注意一定要加到末尾 不能使用unshift)
+          accessedRoutes.push(asyncRoutes)
+        } else {
+          Message.error($t.login.errorRolse)
+        }
+        // 在Vuex中储存动态路由
+        commit('SET_ROUTES', accessedRoutes)
+        // 返回动态路由
+        resolve(accessedRoutes)
+      }).catch(error => {
+        reject(error)
+        Message.error($t.login.errorOther)
+      })
+    })
+  }
+}
+
+export default {
+  namespaced: true,
+  state,
+  mutations,
+  actions
+}
+
+```
+
 ## 备注
 
 * 角色管理中用到的两个递归 第一个递归是判断是否末级 第二个递归是判断是否勾选 其实这里不太需要判断是否末级 你可以要求后端返回末级的时候不要带**children** 然后判断children即可知道是否末级 所以就不需要第一次末级递归 这样可以增强性能

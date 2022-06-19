@@ -42,6 +42,26 @@ const worldPosition = new THREE.Vector3();
 mesh.getWorldPosition(worldPosition);
 ```
 
+## 修改html标签的局部坐标
+
+* 有时候我们会写一些html标签 然后通过[CSS2DRenderer 2D渲染器](https://threejs.org/docs/examples/zh/renderers/CSS2DRenderer.html) 或 [CSS3DRenderer 3D渲染器](https://threejs.org/docs/index.html?q=3d#examples/zh/renderers/CSS3DRenderer) 渲染成three.js的`Object3D`对象 这个时候 自身的局部坐标就依赖样式的设置
+  * 比如`position`我们可以设置他的`top`和`left` 这样来代替局部坐标的设置
+
+
+```scss
+.allBox {
+  opacity: 0;
+  width: 500px;
+  height: 400px;
+  position: absolute;
+  top: 150px;
+  left: 200px;
+  color: #fffff;
+  z-index: 99;
+  font-size: 16px;
+}
+```
+
 ##  参考文献
 
 [Three.js零基础入门教程(郭隆邦)](http://www.yanhuangxueyuan.com/Three.js/)
