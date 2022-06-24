@@ -1,11 +1,10 @@
 ---
 title: scss在Vue中的学习
-date: 2022-01-24
+date: 2022-06-21
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/banner_6.jpg
 tags:
  - Vue
  - scss
- - My project
 categories: Css
 ---
 
@@ -57,7 +56,7 @@ scss css扩展语言在Vue项目中的使用<br>
 
 ## Vue3 scss的深度选择器
 
-* Vue3深度选择器是.:deep(类名)
+* Vue3深度选择器是`.:deep(类名)`
 * <font color =#ff3040>注意: 不要在()前面加空格</font>
 
 ```css
@@ -88,8 +87,6 @@ $widthScss: 20px;
 width: calc(100% - #{$widthScss});
 ```
 
-
-
 ## scss的选择器 &
 
 * `&` 在scss中有两种意思
@@ -98,7 +95,7 @@ width: calc(100% - #{$widthScss});
 
     * 交集选择器是 两个类名同时存在时候 才能触发该样式
 
-    ```css
+    ```scss
     .classone.classtwo {background:#090} /** 当两个类名同时存在时候 才能触发该样式 **/
     ```
 
@@ -106,7 +103,7 @@ width: calc(100% - #{$widthScss});
 
     * 后代选择器是元素的后代 无论子元素还是孙元素 都会变为同一个设置样式
 
-    ```css
+    ```scss
     ul em a {color:red;}  /** 这里ul里面的 em a 标签 都会变为红色  **/
     ```
 
