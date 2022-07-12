@@ -1,6 +1,6 @@
 ---
 title: JS的es6 es7 新特性
-date: 2021-07-13
+date: 2022-07-12
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-286rwm-min.jpg
 tags:
  - JavaScript
@@ -104,7 +104,7 @@ const obj = {
 }
 ```
 
-## 展开运算符
+## 展开运算符 (扩展运算符)
 
 * [...](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax) 三个点（...）真名叫`展开运算符`或 `扩展运算符`，是在ES6中新增加的内容，它可以在函数调用/数组构造时，将数组表达式或者`String`在语法层面展开；还可以在构造字面量对象时将对象表达式按照`key`-`value`的方式展开。
 * 只要能被[for...in](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in)迭代(渲染)的内容 都可以使用 展开运算符 ([Symbol ](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol)唯一的标识符 和 [Number](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number)数字类型除外)
@@ -178,7 +178,7 @@ console.log({name : 'keke',age: 12})
 * 可是，这有啥用，你把对象展开了，又变回去，有点自作自受的意思 
 * 展开运算符对于 对象来说通常是用作混入的方法
 
-### 展开运算符的混入
+### **展开运算符的混入**
 
 * 通过`...`展开运算符 可以混入多个对象 
 * 如果存在相同`key`键名(属性名) 取新添加的`key`键名(属性名)
