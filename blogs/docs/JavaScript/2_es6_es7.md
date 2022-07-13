@@ -75,8 +75,7 @@ async 方法名(){
 
 > 演示案例
 
-* xxxxxxxxxx     // 假设这是要格式化16位银行卡的内容    const card_number = 6214831061387673    // 进行格式化    const cardNumberChange = card_number.toString().replace(/(\d{4})(?=\d)/g, "$1 ");​    // 16位银行卡格式正则表达式    const rules = /^([1-9]{1})(\d{15}|\d{18})$/        // 只能输入数字规则    const rulseNumber = /(^-?[0-9][0-9]*(.[0-9]+)?)$/      // 只能存在数字正则表达式        // 去除银行卡空格 校验是否符合16位银行卡格式  (需要先去掉空格)    if (!rules.test(card_number.replace(/\s/g, ""))) {        console.error('错误银行卡格式');    }        //  去除银行卡空格 校验是否只存在数字  (需要先去掉空格)      if (!rulseNumber.test(cardNumberChange.replace(/\s/g, ""))) {        console.error('输入的银行卡号只能包含数字');      }js
-  * 通过字符串绑定的动态属性名 就是直接命名 
+* 通过字符串绑定的动态属性名 就是直接命名 
 
 ```js
 // 创建一个 控制动态属性名的状态位
@@ -211,8 +210,6 @@ console.log({name : 'keke',age: 12})
   // 多个对象的混入
   console.log({ ...Obj, ...Obj2 }) // {name: '小刘', old: '18', hobby: '学习', girl: '没有'}
 ```
-
-
 
 ### **展开内容的存放**
 
