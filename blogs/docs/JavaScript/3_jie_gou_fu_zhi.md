@@ -17,11 +17,31 @@ JS的二次解构赋值使用方法 <br>
 
 * [**解构赋值** ](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)语法是一种 Javascript 表达式。通过**解构赋值，**可以将属性/值从对象/数组中取出，赋值给其他变量。
 
+  * 数组和对象都可以使用解构
+  * 解构出的变量 二次赋值后 不会修改原内容 但是`push`可以修改原内容 (无论是`let`变量 还是`const`常量 都是一样的)
+  
+  ```js
+    let obj = {
+      name: '小刘',
+      old: 12,
+      hobby: ['敲代码']
+    }
+    let { name, old, hobby } = obj
+    
+    // 修改结构出来的变量 会修改结构出来的变量 但不会修改原对象引用的值
+    name = '小王'
+    console.log(name, obj.name) // 小王 小刘 
+  
+    // 往结构出来的变量中进行 push或unshift添加内容 会修改结构出来的变量和原对象引用的值
+    hobby.push('慢跑')
+    hobby.unshift('吃饭')
+    console.log(hobby, obj.hobby) // ['吃饭', '敲代码', '慢跑']
+  ```
+  
   * 如果解构的值为`undefined` 那么他可以被进行赋值 
     * 只有原值为`undefined`才会进行赋值操作
     * `有值` 或 空值`''` 和 `null` 那么将并不会进行赋值操作 还是原值
-
-
+  
   ```js
     const demo = {
       demoObj: undefined,

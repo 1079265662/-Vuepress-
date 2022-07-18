@@ -117,7 +117,7 @@ createApp(App).use(XtxUI).mount('#app')
 </template>
 ```
 
-**注意：**在img上使用使用v-lazyload值为图片地址，不设置src属性。
+<font color =#ff3040>注意：在img上使用使用v-lazyload值为图片地址，不设置src属性。</font>
 
 1. 原生js的API监听DOM元素进入可视区基本使用
 2. Vue3的自定义指令的基本规则

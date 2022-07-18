@@ -31,11 +31,10 @@ Vscode快速设置文档 涉及到settings和eslint<br>
 ```json
 {
     "workbench.startupEditor": "newUntitledFile",
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "office-material-icon-theme",
     "window.menuBarVisibility": "default",
     "workbench.activityBar.visible": true,
     "liveServer.settings.port": 5500,
-    "git.enabled": false,
     "vsicons.dontShowNewVersionMessage": true,
     "workbench.settings.useSplitJSON": true,
     "less.compile": {
@@ -54,7 +53,6 @@ Vscode快速设置文档 涉及到settings和eslint<br>
     "emmet.includeLanguages": {
         "javascript": "html"
     },
-    "workbench.colorTheme": "Default Dark+",
     "git.ignoreWindowsGit27Warning": true,
     // 每次保存的时候自动格式化 
     "editor.formatOnSave": true,
@@ -115,7 +113,7 @@ Vscode快速设置文档 涉及到settings和eslint<br>
         "statusBar.noFolderBackground": "#1e1e1e",
         "statusBar.debuggingBackground": "#1e1e1e"
     },
-    "terminal.integrated.defaultProfile.windows": "C:\\WINDOWS\\System32\\cmd.exe (migrated)",
+    "terminal.integrated.defaultProfile.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
@@ -163,13 +161,17 @@ Vscode快速设置文档 涉及到settings和eslint<br>
     },
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
-    }
+    },
+    "workbench.editor.untitled.hint": "hidden",
+    "settingsSync.ignoredExtensions": [],
+    "workbench.settings.enableNaturalLanguageSearch": false
 }
+
 ```
 
 ## eslint设置
 
-* 为了前端规范性 需要用到`eslint`设置
+* 为了前端规范性 需要用到`eslint`设置  (Vue3 不适用)
 
 ```js
 module.exports = {
