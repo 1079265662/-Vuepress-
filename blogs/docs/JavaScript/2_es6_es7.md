@@ -174,10 +174,10 @@ console.log({name : 'keke',age: 12})
 
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/f1483584-8bb5-4644-84c5-c5a329e06ee4.png)
 
-* 可是，这有啥用，你把对象展开了，又变回去，有点自作自受的意思 
+* 对象结构常用于Vue中的赋值 某些数据直接赋值可能会导致数据出现双向绑定问题(比如父子传值) 所以可以使用这种方式进行对象的结构 (当然前提是对象格式)
 * 展开运算符对于 对象来说通常是用作混入的方法
 
-### **展开运算符的混入**
+### **展开运算符的混入(拼接)**
 
 * 通过`...`展开运算符 可以混入多个对象 
 * 如果存在相同`key`键名(属性名) 取新添加的`key`键名(属性名)
@@ -244,7 +244,11 @@ function add(num1,num2,num3){
 add(...str) // 6
 ```
 
-### **报错问题**
+### **作用到浅拷贝**
+
+* 
+
+### **报错参考**
 
 * 当你语法错误或 展开了无法展开的内容([Symbol ](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol)唯一的标识符) 会报
 
@@ -258,6 +262,12 @@ add(...str) // 6
 
  
 
+## 给方法设置默认值
+
+
+
 ## 参考文献
 
 [展开运算符](http://java18.cn/detailPage?id=2c9ec65b7fee4db0017ffef1d5a90023)
+
+[[ES6就是ES2015 的主要内容 ](https://www.cnblogs.com/lanyueff/p/6252275.html)](https://www.cnblogs.com/lanyueff/p/6252275.html#:~:text=%E5%9B%A0%E4%B8%BA%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC%E7%9A%84ES6%E6%98%AF%E5%9C%A82015%E5%B9%B4%E5%8F%91%E5%B8%83%E7%9A%84%EF%BC%8C%E6%89%80%E4%BB%A5%E5%8F%88%E7%A7%B0ECMAScript%202015%E3%80%82,%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8CES6%E5%B0%B1%E6%98%AFES2015%E3%80%82%20%E8%99%BD%E7%84%B6%E7%9B%AE%E5%89%8D%E5%B9%B6%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%BD%E8%83%BD%E5%85%BC%E5%AE%B9ES6%E5%85%A8%E9%83%A8%E7%89%B9%E6%80%A7%EF%BC%8C%E4%BD%86%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%A4%9A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98%E5%9C%A8%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%BD%93%E4%B8%AD%E5%B7%B2%E7%BB%8F%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ES6%E4%BA%86%E3%80%82)
