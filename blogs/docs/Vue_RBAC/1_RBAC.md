@@ -728,94 +728,57 @@ RABC权限学习记录文档 从头到尾学习文档<br>
 * 路由权限结构
 
 ```js
+export const constantRoutes = [
+  // 设备管理
   {
-    path: '/nested',
+    path: '/equipment',
     component: Layout,
-    name: 'Nested',
+    alwaysShow: true,
+    meta: { title: '设备管理', icon: 'component' },
     redirect: 'noRedirect',
-    meta: {
-      title: '服务板块',
-      icon: 'nested',
-      roles: ['sys:serve']
-    },
     children: [
       {
-        path: 'menuAll',
-        component: () => import('@/views/nested/menu1/index'),
-        name: 'Menu0',
-        meta: {
-          title: '设备管理',
-          icon: 'el-icon-s-help',
-          affix: true,
-          roles: ['sys:equipment']
-        },
-        children: [
-          {
-            path: 'menu1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1',
-            meta: {
-              title: '客户管理',
-              icon: 'kehu',
-              roles: ['sys:client']
-            }
-          },
-          {
-            path: 'menu2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu2',
-            meta: {
-              title: '工区管理',
-              icon: 'clipboard',
-              roles: ['sys:gong']
-            }
-          },
-          {
-            path: 'menu3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu3',
-            meta: {
-              title: '设备管理',
-              icon: 'tab',
-              roles: ['sys:device']
-            }
-          },
-          {
-            path: 'AssemblyChange',
-            component: () => import('@/views/nested/menu1/menu1-3/AssemblyChange'),
-            name: 'AssemblyChange',
-            hidden: true,
-            meta: {
-              title: '设备管理编辑页',
-              noCache: true,
-              roles: ['sys:device']
-            }
-          },
-          {
-            path: 'Assemblymanagement',
-            component: () => import('@/views/nested/menu1/menu1-4/Assemblymanagement'),
-            name: 'Assemblymanagement',
-            hidden: true,
-            meta: {
-              title: '总成管理编辑页',
-              noCache: true,
-              roles: ['sys:assy']
-            }
-          },
-          {
-            path: 'menu4',
-            component: () => import('@/views/nested/menu1/menu1-4'),
-            name: 'Menu4',
-            meta: {
-              title: '总成管理',
-              icon: 'all',
-              roles: ['sys:assy']
-            }
-          }
-        ]
+        path: '/equipment/client',
+        component: () => import('@/views/equipment/client'),
+        name: 'Client',
+        meta: { title: '设备管理', icon: 'wajueji', noCache: true }
+      },
+      {
+        path: '/equipment/client/clientdetails',
+        component: () => import('@/views/equipment/client/clientdetails'),
+        name: 'Clientdetails',
+        hidden: true,
+        meta: { title: '设备详情', noCache: true }
+      },
+      {
+        path: '/equipment/assembly',
+        component: () => import('@/views/equipment/assembly'),
+        name: 'Assembly',
+        meta: { title: '总成管理', icon: 'form', noCache: true }
+      },
+      {
+        path: '/equipment/assembly/assemblydetails',
+        component: () => import('@/views/equipment/assembly/assemblydetails'),
+        name: 'Assemblydetails',
+        hidden: true,
+        meta: { title: '总成详情', noCache: true }
+      },
+      {
+        path: '/equipment/fault',
+        component: () => import('@/views/equipment/fault'),
+        name: 'Fault',
+        meta: { title: '故障停机', icon: 'error', noCache: true }
+      },
+      {
+        path: '/equipment/fault/details',
+        component: () => import('@/views/equipment/fault/details'),
+        name: 'Details',
+        hidden: true,
+        meta: { title: '故障明细', noCache: true }
       }
     ]
-  },
+  }
+]
 ```
 
 ## 机构管理模块(非代码)
@@ -1658,8 +1621,7 @@ import { constantRoutes } from '@/router'
 import { getrolesList } from '@/api/user'
 import { Message } from 'element-ui'
 import Layout from '@/layout'
-// 导入通用提示
-import $t from '@/config'
+
 /**
  * 获取后端分配好的路由权限替换简键名渲染路由
  * @param {Array} routes 是一个空数组 用来储存处理完毕后的路由集合
@@ -1774,7 +1736,7 @@ const actions = {
           // 把404页面push到动态路由里面 (注意一定要加到末尾 不能使用unshift)
           accessedRoutes.push(asyncRoutes)
         } else {
-          Message.error($t.login.errorRolse)
+         Message.error('获取动态路由失败')
         }
         // 在Vuex中储存动态路由
         commit('SET_ROUTES', accessedRoutes)
@@ -1782,7 +1744,7 @@ const actions = {
         resolve(accessedRoutes)
       }).catch(error => {
         reject(error)
-        Message.error($t.login.errorOther)
+        Message.error('获取动态路由失败')
       })
     })
   }

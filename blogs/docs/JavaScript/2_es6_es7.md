@@ -75,7 +75,7 @@ async 方法名(){
 
 > 演示案例
 
-* 通过字符串绑定的动态属性名 就是直接命名 
+* xxxxxxxxxx     // 假设这是要格式化16位银行卡的内容    const card_number = 6214831061387673    // 进行格式化    const cardNumberChange = card_number.toString().replace(/(\d{4})(?=\d)/g, "$1 ");​    // 16位银行卡格式正则表达式    const rules = /^([1-9]{1})(\d{15}|\d{18})$/        // 只能输入数字规则    const rulseNumber = /(^-?[0-9][0-9]*(.[0-9]+)?)$/      // 只能存在数字正则表达式        // 去除银行卡空格 校验是否符合16位银行卡格式  (需要先去掉空格)    if (!rules.test(card_number.replace(/\s/g, ""))) {        console.error('错误银行卡格式');    }        //  去除银行卡空格 校验是否只存在数字  (需要先去掉空格)      if (!rulseNumber.test(cardNumberChange.replace(/\s/g, ""))) {        console.error('输入的银行卡号只能包含数字');      }js
 
 ```js
 // 创建一个 控制动态属性名的状态位
@@ -108,6 +108,7 @@ const obj = {
 * [...](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax) 三个点（...）真名叫`展开运算符`或 `扩展运算符`，是在ES6中新增加的内容，它可以在函数调用/数组构造时，将数组表达式或者`String`在语法层面展开；还可以在构造字面量对象时将对象表达式按照`key`-`value`的方式展开。
 * 只要能被[for...in](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in)迭代(渲染)的内容 都可以使用 展开运算符 ([Symbol ](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol)唯一的标识符 和 [Number](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number)数字类型除外)
 * 被展开的东西，就是一段用逗号分隔的代码，那么从`语法层面`，展开的内容可以放在任何它可以存在的地方。
+* 展开运算符是`浅拷贝` 值会根据引用变化而变化
 
 ### **字符串展开**
 
@@ -146,6 +147,7 @@ const obj = {
 ### **展开对象内容**
 
 * 如果对象通过以上数组 字符串 方式直接展开会报错 不能使用扩展用算符展开 对象的`key`: `value` 的形式
+* 在展开运算符之前 我们通常是使用ES5的[arguments](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/arguments) 进行手动展开的
 
 ```js
 const Obj = {
@@ -244,10 +246,6 @@ function add(num1,num2,num3){
 add(...str) // 6
 ```
 
-### **作用到浅拷贝**
-
-* 
-
 ### **报错参考**
 
 * 当你语法错误或 展开了无法展开的内容([Symbol ](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol)唯一的标识符) 会报
@@ -260,9 +258,26 @@ add(...str) // 6
 
 ![image-20220712201334357](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220712201334357.png)
 
- 
-
 ## 给方法设置默认值
+
+* 在es6中可以给方法在形参中设置默认值` (参数 = 默认值)` 代替之前的[|| 逻辑或赋值 ](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Logical_OR_assignment)参数[虚](https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy)值(`undefined`)时赋值
+* <font color =#ff3040>注意: 不能省略括号 箭头函数只有一个参数的时候 可省略括号 但是赋值默认值的情况 不可省略</font>
+
+```js
+// es6之前使用默认值的方法
+  const animal = type => {
+  // 判断type是否为虚值 如果是那么赋值一个默认值
+    type = type || 'cat'
+    console.log(type)
+  }
+  animal() // 通过 || 判断为虚值(undefined)时候赋值为cat
+
+// es6给方法设置默认值
+  const animal = (type = 'cat') => { // 注意: 不能省略括号 (箭头函数只有一个参数的时候 可省略括号 但是赋值默认值的情况 不可省略)
+    console.log(type)
+  }
+  animal() // cat
+```
 
 
 
@@ -270,4 +285,4 @@ add(...str) // 6
 
 [展开运算符](http://java18.cn/detailPage?id=2c9ec65b7fee4db0017ffef1d5a90023)
 
-[[ES6就是ES2015 的主要内容 ](https://www.cnblogs.com/lanyueff/p/6252275.html)](https://www.cnblogs.com/lanyueff/p/6252275.html#:~:text=%E5%9B%A0%E4%B8%BA%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC%E7%9A%84ES6%E6%98%AF%E5%9C%A82015%E5%B9%B4%E5%8F%91%E5%B8%83%E7%9A%84%EF%BC%8C%E6%89%80%E4%BB%A5%E5%8F%88%E7%A7%B0ECMAScript%202015%E3%80%82,%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8CES6%E5%B0%B1%E6%98%AFES2015%E3%80%82%20%E8%99%BD%E7%84%B6%E7%9B%AE%E5%89%8D%E5%B9%B6%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%BD%E8%83%BD%E5%85%BC%E5%AE%B9ES6%E5%85%A8%E9%83%A8%E7%89%B9%E6%80%A7%EF%BC%8C%E4%BD%86%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%A4%9A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98%E5%9C%A8%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%BD%93%E4%B8%AD%E5%B7%B2%E7%BB%8F%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ES6%E4%BA%86%E3%80%82)
+[ES6就是ES2015 的主要内容 ](https://www.cnblogs.com/lanyueff/p/6252275.html#:~:text=%E5%9B%A0%E4%B8%BA%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC%E7%9A%84ES6%E6%98%AF%E5%9C%A82015%E5%B9%B4%E5%8F%91%E5%B8%83%E7%9A%84%EF%BC%8C%E6%89%80%E4%BB%A5%E5%8F%88%E7%A7%B0ECMAScript%202015%E3%80%82,%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8CES6%E5%B0%B1%E6%98%AFES2015%E3%80%82%20%E8%99%BD%E7%84%B6%E7%9B%AE%E5%89%8D%E5%B9%B6%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%BD%E8%83%BD%E5%85%BC%E5%AE%B9ES6%E5%85%A8%E9%83%A8%E7%89%B9%E6%80%A7%EF%BC%8C%E4%BD%86%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%A4%9A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98%E5%9C%A8%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E5%BD%93%E4%B8%AD%E5%B7%B2%E7%BB%8F%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ES6%E4%BA%86%E3%80%82)
