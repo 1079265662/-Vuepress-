@@ -126,7 +126,7 @@ material.roughness = 0.65
 
 * 这个名字有点绕口，但`Matcap`的确是由`Material`和`Capture`两个单词组合而成，其意思就是材质捕捉。
 
-<img src="https://mmbiz.qpic.cn/mmbiz_png/t1ynS50Irh3vXEzMXfsRpGNKic7fp28KicGsmtJaAdIL6PTFia4vagAQK7fQktELicrd5iaPoW2oIiak1mnHIyRaDUxQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片" style="zoom:80%;" />
+<img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207272009939.png" alt="图片" style="zoom:80%;" />
 
 * 它是一种很棒的材质，效果很不错的同时在性能非常好。
 

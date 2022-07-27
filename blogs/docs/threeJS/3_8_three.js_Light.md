@@ -25,7 +25,7 @@ three.js 之 Loader 几何体<br>
 
 因为我们要使用灯光，所以我们必须使用对灯光有反应的材质。有很多材质对灯光有反应，在前面有关材质的课程中我们已经学习过了。本节中我们将使用`MeshStandardMaterial`，因为它是我们在上一课中看到的最真实的一种。我们将材质的粗糙度`roughness`设置为0.4，这样我们就能观察到光的反射。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/t1ynS50Irh1tajggTYo7eu5ibKBXZjIWngibgnmlVUgckeJpF8C4iaaYsibHYNYKiaasA2Ln8ic9HTnuNmQdNE7UW86Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+<img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207272010649.png" alt="图片" style="zoom:67%;" />
 
 由于我们使用了对光有反应的材质，所以在没有任何灯光的情况下，我们的3D世界将只有一片黑暗！
 
@@ -33,7 +33,7 @@ three.js 之 Loader 几何体<br>
 
 环境光将在场景内的所有几何图形上应用全向照明（其实就是所有颜色的亮度提升）。它的第一个参数是颜色，第二个参数是光照强度。我们可以在实例化的时候直接设置属性，也可以在以后更改它们：
 
-```
+```js
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
 scene.add(ambientLight)
 
@@ -44,11 +44,11 @@ ambientLight.intensity = 0.5
 scene.add(ambientLight)
 ```
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/t1ynS50Irh1tajggTYo7eu5ibKBXZjIWn5PfceldHI65DjvQKXI64pKkrNic79nR1GbXT2xK2n1X0iborZIicic0bOA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)/assets/lessons/15/step-02.png
+<img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207272010244.png" alt="图片" style="zoom:80%;" />
 
 就像我们在前面课程中所学到的，我们可以将灯光的属性添加到调试UI里，这样将极大的方便我们测试不同属性下灯光和材质的表现。
 
-```
+```js
 gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
 ```
 
