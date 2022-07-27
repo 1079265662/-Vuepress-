@@ -1,7 +1,7 @@
 ---
-title: three.js 之 Camera
+title: three.js 之 Camera相机
 date: 2022-05-30
-cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/a52i4-chxgh.jpg
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207271755262.jpg
 tags:
  - three.js
 categories: three.js

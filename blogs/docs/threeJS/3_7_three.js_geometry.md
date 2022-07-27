@@ -1,5 +1,5 @@
 ---
-title: three.js 之 geometry
+title: three.js 之 geometry几何体
 date: 2022-06-19
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-z8ev7o.jpg
 tags:

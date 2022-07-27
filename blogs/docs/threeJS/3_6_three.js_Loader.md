@@ -1,5 +1,5 @@
 ---
-title: three.js 之 Loader
+title: three.js 之 Loader加载器
 date: 2022-06-16
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-q2ypkl.jpg
 tags:

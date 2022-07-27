@@ -1,5 +1,5 @@
 ---
-title: three.js 之 Renderer
+title: three.js 之 Renderer渲染器
 date: 2022-06-06
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-dp7gkm-min.png
 tags:
