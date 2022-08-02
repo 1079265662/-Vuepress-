@@ -228,11 +228,11 @@ export default {
   
   ☑️`Loader` [加载器](./3_6_three.js_Loader.md)
   
-  - [ ] `Light` 光源
+  ☑️`Light` [光源](./3_8_three.js_Light)
   
   ☑️`Dom` [模型节点](./2_1_three.js_Dom.md)
   
-  - [ ] `Matrix` 欧拉角
+  🚫`Matrix` 欧拉角
 
 ## 辅助控件插件
 
@@ -241,7 +241,7 @@ export default {
 ### **轨道控制器 OrbitControls**
 
 * 听起来感觉很牛逼的感觉 实际上就是相机围绕目标进行轨道运动的效果 实现来拖拽和放大缩小模型 [官方介绍](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls)
-* <font color=#ff3040>注意: 使用轨道控制器之前 需要开启`requestAnimationFrame()`动画 否则轨道控制器会失效 [详细看这里](./1.1_three.js_js)</font>
+* <font color=#ff3040>注意: 使用轨道控制器之前 需要开启[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame)动画 否则轨道控制器会失效</font>
 
 ```js
 // 执行动画
