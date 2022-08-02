@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>路由导航守卫(访问权限 白名单) | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?61498f37b83812e7b85952d5feaaab47";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.5146dfaf.css" as="style"><link rel="preload" href="/assets/js/app.fdabb064.js" as="script"><link rel="preload" href="/assets/js/5.cf81efa1.js" as="script"><link rel="preload" href="/assets/js/1.817ad2e8.js" as="script"><link rel="preload" href="/assets/js/85.4f6349cc.js" as="script"><link rel="prefetch" href="/assets/js/10.988ddcf1.js"><link rel="prefetch" href="/assets/js/100.0fb44d77.js"><link rel="prefetch" href="/assets/js/101.cfcd6dcd.js"><link rel="prefetch" href="/assets/js/102.1b7bc70f.js"><link rel="prefetch" href="/assets/js/103.e2987086.js"><link rel="prefetch" href="/assets/js/104.bc52ae8c.js"><link rel="prefetch" href="/assets/js/105.2f9d8b62.js"><link rel="prefetch" href="/assets/js/106.459e0ec5.js"><link rel="prefetch" href="/assets/js/107.ede47d99.js"><link rel="prefetch" href="/assets/js/108.1891946a.js"><link rel="prefetch" href="/assets/js/109.e9fa5346.js"><link rel="prefetch" href="/assets/js/11.d10a069d.js"><link rel="prefetch" href="/assets/js/110.0f3c3a5c.js"><link rel="prefetch" href="/assets/js/111.e4993c89.js"><link rel="prefetch" href="/assets/js/112.66d5b8c9.js"><link rel="prefetch" href="/assets/js/113.3919d766.js"><link rel="prefetch" href="/assets/js/114.0e666a9c.js"><link rel="prefetch" href="/assets/js/115.8b719cd6.js"><link rel="prefetch" href="/assets/js/116.785e5d8b.js"><link rel="prefetch" href="/assets/js/117.0e4c0366.js"><link rel="prefetch" href="/assets/js/118.37bc3b49.js"><link rel="prefetch" href="/assets/js/119.7636d059.js"><link rel="prefetch" href="/assets/js/12.1d343e35.js"><link rel="prefetch" href="/assets/js/120.f817acc8.js"><link rel="prefetch" href="/assets/js/121.48aa7019.js"><link rel="prefetch" href="/assets/js/122.7eda7be7.js"><link rel="prefetch" href="/assets/js/123.fd8fec13.js"><link rel="prefetch" href="/assets/js/124.66b91971.js"><link rel="prefetch" href="/assets/js/125.56dd9b03.js"><link rel="prefetch" href="/assets/js/126.4ac5cc89.js"><link rel="prefetch" href="/assets/js/127.052ac9d9.js"><link rel="prefetch" href="/assets/js/128.31c4cd74.js"><link rel="prefetch" href="/assets/js/129.5af54e5b.js"><link rel="prefetch" href="/assets/js/13.5d54322a.js"><link rel="prefetch" href="/assets/js/130.6e5e296f.js"><link rel="prefetch" href="/assets/js/131.aaa30ac4.js"><link rel="prefetch" href="/assets/js/14.efa08ed1.js"><link rel="prefetch" href="/assets/js/15.a13d6355.js"><link rel="prefetch" href="/assets/js/16.3ede2b54.js"><link rel="prefetch" href="/assets/js/17.2d132f09.js"><link rel="prefetch" href="/assets/js/18.6359e8fd.js"><link rel="prefetch" href="/assets/js/19.ef4f95f9.js"><link rel="prefetch" href="/assets/js/20.095591e2.js"><link rel="prefetch" href="/assets/js/21.eea8d9f7.js"><link rel="prefetch" href="/assets/js/22.720e6d01.js"><link rel="prefetch" href="/assets/js/23.f7eb446e.js"><link rel="prefetch" href="/assets/js/24.077780e2.js"><link rel="prefetch" href="/assets/js/25.694a4286.js"><link rel="prefetch" href="/assets/js/26.d19b5ccc.js"><link rel="prefetch" href="/assets/js/27.048b7fd8.js"><link rel="prefetch" href="/assets/js/28.45233090.js"><link rel="prefetch" href="/assets/js/29.3b5cc3ee.js"><link rel="prefetch" href="/assets/js/3.eaaba6c3.js"><link rel="prefetch" href="/assets/js/30.a3d9ced2.js"><link rel="prefetch" href="/assets/js/31.17ba36e0.js"><link rel="prefetch" href="/assets/js/32.c613e7f5.js"><link rel="prefetch" href="/assets/js/33.94835819.js"><link rel="prefetch" href="/assets/js/34.4d495251.js"><link rel="prefetch" href="/assets/js/35.68d2dc5b.js"><link rel="prefetch" href="/assets/js/36.862a4d9b.js"><link rel="prefetch" href="/assets/js/37.372737ca.js"><link rel="prefetch" href="/assets/js/38.f5cd0ef0.js"><link rel="prefetch" href="/assets/js/39.72893374.js"><link rel="prefetch" href="/assets/js/4.f9a803a5.js"><link rel="prefetch" href="/assets/js/40.718e86aa.js"><link rel="prefetch" href="/assets/js/41.26e762c6.js"><link rel="prefetch" href="/assets/js/42.8172280a.js"><link rel="prefetch" href="/assets/js/43.fdbac84c.js"><link rel="prefetch" href="/assets/js/44.836a4768.js"><link rel="prefetch" href="/assets/js/45.a0d71109.js"><link rel="prefetch" href="/assets/js/46.d87eda7b.js"><link rel="prefetch" href="/assets/js/47.f3a623b6.js"><link rel="prefetch" href="/assets/js/48.67eef9cb.js"><link rel="prefetch" href="/assets/js/49.dd6a07e6.js"><link rel="prefetch" href="/assets/js/50.14ea0f13.js"><link rel="prefetch" href="/assets/js/51.70d65bec.js"><link rel="prefetch" href="/assets/js/52.e7e96c9d.js"><link rel="prefetch" href="/assets/js/53.2c3cf4f7.js"><link rel="prefetch" href="/assets/js/54.1fcd5d0a.js"><link rel="prefetch" href="/assets/js/55.7c8e1a6a.js"><link rel="prefetch" href="/assets/js/56.b44e996a.js"><link rel="prefetch" href="/assets/js/57.5ff5ba7e.js"><link rel="prefetch" href="/assets/js/58.2c111e82.js"><link rel="prefetch" href="/assets/js/59.425f1b4a.js"><link rel="prefetch" href="/assets/js/6.c49aa0a0.js"><link rel="prefetch" href="/assets/js/60.880fd933.js"><link rel="prefetch" href="/assets/js/61.afaf6981.js"><link rel="prefetch" href="/assets/js/62.3b455cc7.js"><link rel="prefetch" href="/assets/js/63.f757a151.js"><link rel="prefetch" href="/assets/js/64.4359ecac.js"><link rel="prefetch" href="/assets/js/65.7ace00fa.js"><link rel="prefetch" href="/assets/js/66.3130dfc4.js"><link rel="prefetch" href="/assets/js/67.cf2aab53.js"><link rel="prefetch" href="/assets/js/68.41bd46cd.js"><link rel="prefetch" href="/assets/js/69.e53e9201.js"><link rel="prefetch" href="/assets/js/7.8bdacd25.js"><link rel="prefetch" href="/assets/js/70.18282708.js"><link rel="prefetch" href="/assets/js/71.78f8583b.js"><link rel="prefetch" href="/assets/js/72.3610a9a4.js"><link rel="prefetch" href="/assets/js/73.7b25e26a.js"><link rel="prefetch" href="/assets/js/74.64649c3c.js"><link rel="prefetch" href="/assets/js/75.15299689.js"><link rel="prefetch" href="/assets/js/76.4fc02e6b.js"><link rel="prefetch" href="/assets/js/77.cb3843ac.js"><link rel="prefetch" href="/assets/js/78.7e9e2b3e.js"><link rel="prefetch" href="/assets/js/79.110de299.js"><link rel="prefetch" href="/assets/js/8.ad2ae975.js"><link rel="prefetch" href="/assets/js/80.225e8e88.js"><link rel="prefetch" href="/assets/js/81.e4610e58.js"><link rel="prefetch" href="/assets/js/82.c3580dc4.js"><link rel="prefetch" href="/assets/js/83.3de008b8.js"><link rel="prefetch" href="/assets/js/84.b9aca541.js"><link rel="prefetch" href="/assets/js/86.a0cbd853.js"><link rel="prefetch" href="/assets/js/87.0e8e3bee.js"><link rel="prefetch" href="/assets/js/88.1e3791df.js"><link rel="prefetch" href="/assets/js/89.1ff128fd.js"><link rel="prefetch" href="/assets/js/9.fb836414.js"><link rel="prefetch" href="/assets/js/90.12054f35.js"><link rel="prefetch" href="/assets/js/91.5f08e1ea.js"><link rel="prefetch" href="/assets/js/92.c662e0b6.js"><link rel="prefetch" href="/assets/js/93.f4b9cb02.js"><link rel="prefetch" href="/assets/js/94.b438bb03.js"><link rel="prefetch" href="/assets/js/95.78a944ea.js"><link rel="prefetch" href="/assets/js/96.5f15a7bd.js"><link rel="prefetch" href="/assets/js/97.1bb7381d.js"><link rel="prefetch" href="/assets/js/98.4ccfa6de.js"><link rel="prefetch" href="/assets/js/99.6179a470.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.5146dfaf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-57e19720><div data-v-57e19720><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-57e19720 data-v-57e19720><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-89477f7e data-v-57e19720 data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div> <div class="hide" data-v-57e19720><div data-v-57e19720><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-57pqv5.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-57e19720><header class="navbar" data-v-57e19720><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/three.js/" class="nav-link"><i class="iconfont undefined"></i>
+  three.js
+</a></li><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-57e19720></div> <aside class="sidebar" data-v-57e19720><div class="personal-info-wrapper" data-v-03833281 data-v-57e19720><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>116</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>33</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/three.js/" class="nav-link"><i class="iconfont undefined"></i>
+  three.js
+</a></li><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Axios</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/axios/1_axios_API.html" class="sidebar-link">axios封装通用的api接口方法</a></li><li><a href="/blogs/docs/axios/axios_async.html" class="sidebar-link">async 同步获取axios数据</a></li><li><a href="/blogs/docs/axios/axios_qingqiulanjieqi.html" class="sidebar-link">axios 请求拦截器</a></li><li><a href="/blogs/docs/axios/axios_router.html" aria-current="page" class="active sidebar-link">路由导航守卫(访问权限 白名单)</a></li><li><a href="/blogs/docs/axios/axios_transform.html" class="sidebar-link">文章id超范围问题</a></li><li><a href="/blogs/docs/axios/axios_xiangyinglanjieqi.html" class="sidebar-link">axios 响应拦截器</a></li><li><a href="/blogs/docs/axios/login_token.html" class="sidebar-link">续签token的流程</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-89477f7e data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>路由导航守卫(访问权限 白名单)</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div></div> <div data-v-57e19720><main class="page"><div class="page-title" style="display:none;"><h1 class="title">路由导航守卫(访问权限 白名单)</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2021-06-26</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/axios/axios_router.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>Vue</span><span class="tag-item" data-v-0efa1f05>Vue Router</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>Vue-router 全局路由导航守卫 设置访问权限 白名单等<br></p></div> <h2 id="全局路由导航守卫-beforeeach"><a href="#全局路由导航守卫-beforeeach" class="header-anchor">#</a> 全局路由导航守卫 <code>beforeEach()</code></h2> <p><a href="https://router.vuejs.org/zh/api/#%E8%B7%AF%E7%94%B1%E5%AF%B9%E8%B1%A1" target="_blank" rel="noopener noreferrer">Vue-router 路由守卫介绍<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <blockquote><p>目标：用户没有登录页面 不让其访问 主页 等内容 让其跳转到登录页</p></blockquote> <ul><li>一般设置在总路由组件中 控制全局的某些指定跳转</li> <li>全局导航守卫有三个参数
+<ul><li>to 表示要跳转到哪里去 (通常用来判断 路由地址 <code>if(to.path === '/login')</code>)</li> <li>from 表示从哪里跳转过来的</li> <li>next 表示具体跳转到哪里 如果不调用 无法看到组件</li></ul></li> <li>==注意: 必须要设置在路由映射生效之后 导出路由之前==</li></ul> <blockquote><p>全局导航守卫案例  路由文件夹<code>router</code>里面 <code>index.js</code></p></blockquote> <ol><li>判断用户是否登录 (判断其token值) 如果没登录 转到登录页
+<ul><li>判断需要两个条件
+<ul><li>需要判断用户是否存在 token值 不存在跳转到登录页面 <code>next('/路径')</code></li> <li>判断是否处于登录页 如果在登录页 无需跳转<code>to.path</code>是判断是否处于某个页面</li></ul></li></ul></li> <li>如果已经登录不管直接 <code>next()</code></li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 设置全局导航守卫(路由跳转到目标组件之前 先经过导航守卫进行效验)</span>
+<span class="token comment">// 判断其token值 如果不存在 转到登录页面 如果已经在登录页面 则判断不需要跳转</span>
+router<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> <span class="token keyword">from</span><span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// to 表示要跳转到哪里去</span>
+  <span class="token comment">// from 表示从哪里跳转过来的</span>
+  <span class="token comment">// next 表示具体跳转到哪里 如果不调用 无法看到组件</span>
+
+  <span class="token comment">// 判断用户是否已经登录</span>
+  <span class="token comment">// 1. 查询用户是否已经登录 把用户token值转换为字符串 (两个token 临时token 和 续费token)</span>
+  <span class="token keyword">const</span> userToken <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>sessionStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'mytoken'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token comment">// 2. 获取字符串整合token 和 两个token的值 (两个token 临时token 和 续费token)</span>
+  <span class="token keyword">const</span> flag <span class="token operator">=</span> userToken <span class="token operator">&amp;&amp;</span> userToken<span class="token punctuation">.</span>token <span class="token operator">&amp;&amp;</span> userToken<span class="token punctuation">.</span>refresh_token<span class="token comment">// 判断是否存在token值 存在返回true</span>
+  <span class="token comment">// 3. 进行token判断 是否存在token 和 是否处于登录页 to.path是判断是否处于某个页面</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>flag <span class="token operator">&amp;&amp;</span> to<span class="token punctuation">.</span>path <span class="token operator">!==</span> <span class="token string">'/Login'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 4. 如果没登录 进入判断进行跳转</span>
+    <span class="token function">next</span><span class="token punctuation">(</span><span class="token string">'/Login'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 5. 如果已经登录 直接next()即可</span>
+    <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/n5NRQfYb9pK36rZ.png" alt="image-20210604171827880"></p> <h2 id="全局路由导航守卫设置-白名单"><a href="#全局路由导航守卫设置-白名单" class="header-anchor">#</a> 全局路由导航守卫设置 白名单</h2> <br> <blockquote><p>需求：有一些组件(白名单)，不登录也可以访问到</p> <p>原理: 在可以访问的组件(路由中) 设置 <code>meta:</code> 属性自定义属性名 设置为true 然后再路由守卫中判断 满足添加就让其访问</p> <p><code>meta:</code>是什么: meta作为一个对象属性{}，被定义在routes的{}下，用于进行权限控制。如普通浏览者和已登陆用户可访问的数据信息不同</p></blockquote> <ol><li>在路由映射中 白名单组件中添加<code>meta:</code>属性自定义属性名为 true</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span> path<span class="token operator">:</span> <span class="token string">'/main'</span><span class="token punctuation">,</span> component<span class="token operator">:</span> Main<span class="token punctuation">,</span> meta<span class="token operator">:</span> <span class="token punctuation">{</span> keepAlive<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> auth<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre></div><ol start="2"><li>导航守卫中判断 如果满足就让其访问(true)</li></ol> <div class="language-js extra-class"><pre class="language-js"><code>router<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> <span class="token keyword">from</span><span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ~ 白名单功实现</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>to<span class="token punctuation">.</span>meta<span class="token punctuation">.</span>auth<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// next() 不做任何行为 让其访问 </span>
+    <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>总结：基于路由映射的<code>meta:</code>配置实现白名单效果。</p> <h2 id="基于全局vuex-设置路由守卫"><a href="#基于全局vuex-设置路由守卫" class="header-anchor">#</a> 基于全局Vuex  设置路由守卫</h2> <br> <blockquote><p><strong><font color="#ff3040">目标 </font></strong>：根据全局Vuex 获取token 处理路由组件的访问权限问题 (没有token的用户, 不让你进系统的)</p> <p><strong><font color="#ff3040">步骤</font></strong> :  从Vuex中读取 token值 判断是否持有token 让其访问权限内容 如果用户在白名单(游客页面) 不进行操作</p> <p><strong><font color="#ff3040">路径</font></strong> :  登录路径 <code>/login</code> 首页路径<code>/dashboard</code> 白名单路径<code>'/login', '/404', '/qita'</code></p></blockquote> <p><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/005INI3Xly8grtqo20yraj30kw07fgmc.jpg" alt="image-20210216132052672"></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// axios的路由导航守卫 配合Vue-router 实现登录权限功能(在router上设置axios导航守卫)</span>
+<span class="token comment">// 导入Vue-router方法 (在Vue组件内需要 this.$router 组件外直接router 使用即可)</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router/index'</span>
+<span class="token comment">// 导入Vuex(获取其全局token值)</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store/index'</span>
+<span class="token comment">// 创建一个路径白名单 里面填写的是路径 (允许用户游客模式访问一些内容 比如登录页 404 没必要验证)</span>
+<span class="token keyword">const</span> white <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'/login'</span><span class="token punctuation">,</span> <span class="token string">'/404'</span><span class="token punctuation">,</span> <span class="token string">'/qita'</span><span class="token punctuation">]</span>
+<span class="token comment">// 创建路由导航守卫]</span>
+router<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> <span class="token keyword">from</span><span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">//! 读取Vuex全局组件 判断是否存在token</span>
+  <span class="token comment">// 从Vuex全局组件中 读取保存的token(储存在getters里面)</span>
+  <span class="token keyword">const</span> token <span class="token operator">=</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>token
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span>
+  <span class="token comment">// 如果存在token</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>token<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 如果存在token 并且当前在登录页 让其跳转到主页</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>to<span class="token punctuation">.</span>path <span class="token operator">===</span> <span class="token string">'/login'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// to 表示要跳转到哪里去</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token string">'/dashboard'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 如果不在登录页面上 直接通过 不做处理(因为已经登录访问 无需再跳转)</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 如果不存在token 判断是否在白名单中(游客可以访问的路径)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>white<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>to<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// includes()是数组方法 检测是否包含指定内容</span>
+      <span class="token comment">// 在白名单里面，放行通过即可</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 如果不在白名单里面 跳转到登录页面</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>总结：导航守卫要拦截素有请求的路由链接</p> <ol><li>判断是否登录</li> <li>判断是否为白名单</li></ol></div> <footer class="page-edit" style="display:none;"><!----> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">2022/1/12 下午7:29:26</span></div></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.fdabb064.js" defer></script><script src="/assets/js/5.cf81efa1.js" defer></script><script src="/assets/js/1.817ad2e8.js" defer></script><script src="/assets/js/85.4f6349cc.js" defer></script>
+  </body>
+</html>
