@@ -247,6 +247,47 @@ addNull({
 
 * 通过方法内 解构参数对象 实现按需传参的需求
 
+## Vue中 通过解构进行快速赋值
+
+* 解构可以方便我们在Vue中的赋值操作 通过解构实现快速赋值 适用于对`Object`对象类型的赋值
+
+```vue
+<script>
+export default {
+  data () {
+    return {
+      // 赋值的数据源
+      tableDetils:{
+         name: '名字'
+         number: 18
+         desc: '介绍' 
+      },
+      // 被赋值的对象
+      formData: {},
+     }
+  },
+  methods: {
+      onOpen () {
+        // 解构我们要赋值的内容 也可以重命名适配被赋值的对象
+        const { desc, name, number: numberOther } = this.tableDetils
+        // 进行对象的赋值
+        this.formData = {
+          // 如果绑定的字段和解构的值一样 就可以用这种方式进行赋值 如果不适配 还可以通过解构重命名再赋值
+          desc, name, numberOther
+        }
+        console.log(this.formData)
+    },
+  }
+}
+</script>
+```
+
+* 打印的结果成功进行了赋值操作
+
+![image-20220803145633085](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202208031456157.png)
+
+
+
 ## 通过解构修改对象的值
 
 * 不建议通过解构赋值修改原值 你还是引用修改把 只推荐修改解构后的值这种做法

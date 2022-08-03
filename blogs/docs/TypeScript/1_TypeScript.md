@@ -713,7 +713,7 @@ console.log(str33)
 * 泛型是指在预先定义函数`function`、接口`interface`或者类`class`的时候，不预先指定数据的类型，而是在使用的时候指定。
 * 通俗的来讲 泛型就是声明的时候 不定义任何类型 我在外部使用的时候再规定 这可以让你的语法具备极强的可扩展性
 
-### 函数参数使用泛型
+### **函数参数使用泛型**
 
 * 函数`function` 定义参数泛型  外部传参时候定义类型
 
@@ -752,7 +752,7 @@ say<IIUser>({ name: 'Tom' }) // { name: 'Tom' }
 
 ![image-20220318141719795](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220318141719795.png)
 
-### 函数参数和返回值使用泛型
+### **函数参数和返回值使用泛型**
 
 * 函数`function` 参数和返回值都可定义泛型 配合接口`interface` 定义的类型使用
 
@@ -770,7 +770,7 @@ let strx = say1<IUser>({ name: 'Jack' })
 console.log(strx) // { name: 'Jack' }
 ```
 
-### 类class 使用泛型
+### **类class 使用泛型**
 
 * 类`class` 设置泛型(注意赋值断言) 配合接口`interface` 定义的类型使用
 

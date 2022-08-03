@@ -109,14 +109,107 @@ renderer.setClearColor('#00577')
 ## three.js的渲染步骤
 
 * three.js的三大组件之一 必要元素
-  1. 创建场景对象`Scene`
-     * 创建网格模型(材质) [`Material` 材质](./3_1_three.js_Material.md)
-     * 光源设置(非必选) DirectionalLight
-  2. 相机设置 `Camera` [相机](./3_2_three.js_Camera.md)
-  3. 创建渲染对象 (绑定页面的元素) [WebGLRenderer](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer)
+  1. 创建场景对象 [Scene](https://threejs.org/docs/index.html?q=Scene#api/zh/scenes/Scene)
+  2. 创建相机 [Camera](https://threejs.org/docs/index.html?q=Camera#api/zh/cameras/Camerad)
+  3. 创建网格模型 [Mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh)
+     *  可包含材质 [Material](./3_1_three.js_Material.md)
+  4. 光源的设置(非必须) [Light](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/Light)
+  5. 创建渲染器 [WebGLRenderer](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer)
+  6. 把渲染器绑定到指定页面元素上(可通过[element.appendChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)进行绑定) 通过[canvas](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API) 渲染[WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
 * 创建场景+ 相机 是组成three.js的重要步骤 他俩完成后 然后通过three.js插入到页面的元素中(以`canvas`方式绘制)
 
-> 先来一个小案例
+> 纯JS的简单案例
+
+* 通过必要步骤 实现three.js基础渲染过程 并把webgl绑定到`body`上
+
+```js
+// 导入three.js
+import * as THREE from 'three'
+
+/**
+ *
+ * @param {*} nameCanvas 接收页面传来的页面Dom元素
+ */
+
+export default function getScene (nameCanvas) {
+  // 1. 创建three.js场景
+  const scene = new THREE.Scene()
+
+  // 2. 创建一个透视相机
+  const camera = new THREE.PerspectiveCamera(
+    // 视觉角度
+    75,
+    // 相机纵横比 取整个屏幕 宽 / 高
+    window.innerWidth / window.innerHeight,
+    // 相机的进截面 (近距离不可见范围)
+    0.1,
+    // 远截面 (远距离不可见范围)
+    1000
+  )
+  // 设置相机的所在位置 通过三维向量Vector3的set()设置其坐标系 (基于世界坐标)
+  camera.position.set(0, 0, 10) // 默认没有参数 需要设置参数
+  // 把相机添加到场景中
+  scene.add(camera)
+
+  // 创建一个在网格模型中展示的几何体
+  const cubeGeometry = new THREE.BoxGeometry(1, 1, 1) // 默认就是1,1,1 宽高深度
+  // 设置该集合体的纹理材质
+  const cubeMaterial = new THREE.MeshBasicMaterial({ color: '#abe2e5' }) // 支持CSS颜色设置方式 但是需要字符串格式
+
+  // 3. 创建一个网格模型 放入创建的几何体和其自身材质 
+  const cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // Mesh(几何体, 纹理材质)
+  // 将几何体添加到场景中
+  scene.add(cube)
+
+  // 4. 创建一个渲染器
+  const renderer = new THREE.WebGLRenderer()
+  // 设置渲染器(画布)的大小 通过setSize()设置
+  renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)
+
+  // 6. 将webgl渲染到指定的页面元素中去 (比如body 也可以设置其他页面Dom元素)
+  nameCanvas.appendChild(renderer.domElement)
+  // 使用渲染器,通过相机将场景渲染出来
+  renderer.render(scene, camera) // render(场景, 相机)
+}
+
+```
+
+* 如果我们想在Vue3中的页面进行webgl的渲染
+  * 注意: 不要在[setup](https://staging-cn.vuejs.org/api/composition-api-setup.html#composition-api-setup)(模板渲染成html前调用) 中直接渲染`webgl` 该生命周期时页面元素还未渲染 会报错 需要在[onMounted](https://staging-cn.vuejs.org/api/composition-api-lifecycle.html#onmounted)(模板渲染成html后调用) 中渲染`webgl `
+
+```vue
+<template>
+  <div>
+    <div ref="stateDom" />
+  </div>
+</template>
+<style lang="scss" scoped>
+</style>
+
+<script setup>
+// 导入Vue组合API
+import { ref, onMounted } from 'vue'
+// 导入webgl 渲染方法
+import getScene from './settings/main'
+// 获取元素的Dom
+const stateDom = ref(null)
+// 在onMounted(模板渲染成html后调用) 中渲染webgl
+onMounted(() => {
+  // 渲染webgl
+  getScene(stateDom.value)
+})
+// 不要在setup(模板渲染成html前调用) 中直接渲染webgl 该生命周期时页面元素还未渲染 会报错
+// getScene(stateDom.value)
+</script>
+<script>
+export default {
+  name: 'MyName'
+}
+</script>
+
+```
+
+> 一个Vue3的代理渲染案例
 
 * <font color =ff3040>注意: `Scene()场景对象` 和 `Mesh()网格模型对象`  需要使用`toRaw()`取消其代理 或使用`shallowReactive()`代理 其他的元素正常写即可 否则会报错 详细[看这里](./2_three.js_vue3_error.md)</font>
   * 在Vue3中 如果我们想在指定区域渲染 需要通过`ref`选中该元素的Dom 然后通过`appendChild(.domElement)` 进行渲染
@@ -418,7 +511,7 @@ scene.add(group);
 Object3D.renderOrder = 12 // 任意层数
 ```
 
-### 移除Object3D对象 .remove
+### **移除Object3D对象 .remove**
 
 * [ .remove](https://threejs.org/docs/index.html?q=remove#api/zh/core/Object3D.remove) 移除Object3D对象 也可以移除在页面创建的Object3D模型对象
 * [Group](https://threejs.org/docs/index.html?q=Group#api/zh/objects/Group) 组对象也可以使用
