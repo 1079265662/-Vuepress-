@@ -112,15 +112,14 @@ renderer.setClearColor('#00577')
   1. 创建场景对象 [Scene](https://threejs.org/docs/index.html?q=Scene#api/zh/scenes/Scene)
   2. 创建相机 [Camera](https://threejs.org/docs/index.html?q=Camera#api/zh/cameras/Camerad)
   3. 创建网格模型 [Mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh)
-     *  可包含材质 [Material](./3_1_three.js_Material.md)
+     *  可包含材质 [Material](https://threejs.org/docs/index.html?q=Material#api/zh/constants/Materials)
   4. 光源的设置(非必须) [Light](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/Light)
   5. 创建渲染器 [WebGLRenderer](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer)
   6. 把渲染器绑定到指定页面元素上(可通过[element.appendChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)进行绑定) 通过[canvas](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API) 渲染[WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
-* 创建场景+ 相机 是组成three.js的重要步骤 他俩完成后 然后通过three.js插入到页面的元素中(以`canvas`方式绘制)
 
 > 纯JS的简单案例
 
-* 通过必要步骤 实现three.js基础渲染过程 并把webgl绑定到`body`上
+* 通过必要步骤 实现three.js基础渲染过程 并把webgl绑定到指定页面元素上(Dom元素上)
 
 ```js
 // 导入three.js
@@ -166,10 +165,10 @@ export default function getScene (nameCanvas) {
   // 设置渲染器(画布)的大小 通过setSize()设置
   renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)
 
-  // 6. 将webgl渲染到指定的页面元素中去 (比如body 也可以设置其他页面Dom元素)
+  // 5. 将webgl渲染到指定的页面元素中去 (比如body 也可以设置其他页面Dom元素)
   nameCanvas.appendChild(renderer.domElement)
   // 使用渲染器,通过相机将场景渲染出来
-  renderer.render(scene, camera) // render(场景, 相机)
+  renderer.render(scene, camera) // 进行渲染需要场景和相机 render(场景, 相机)
 }
 
 ```
@@ -305,7 +304,7 @@ export default {
 </style>
 ```
 
-## three.js相关内容介绍
+## three.js相关内容记录
 
 * 记录three.js的相关控件学习笔记 因为文章过长 以单独文章作为记录 通过学习
 
