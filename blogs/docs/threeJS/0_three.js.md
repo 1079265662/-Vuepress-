@@ -116,6 +116,7 @@ renderer.setClearColor('#00577')
   4. 光源的设置(非必须) [Light](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/Light)
   5. 创建渲染器 [WebGLRenderer](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer)
   6. 把渲染器绑定到指定页面元素上(可通过[element.appendChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)进行绑定) 通过[canvas](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API) 渲染[WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
+  7. 通过[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame) 更新动画API实现实时渲染画布的效果(非必须 通常配合[OrbitControls](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls) 轨道控制器使用)
 
 > 纯JS的简单案例
 
@@ -124,7 +125,8 @@ renderer.setClearColor('#00577')
 ```js
 // 导入three.js
 import * as THREE from 'three'
-
+// 导入轨道控制器
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 /**
  *
  * @param {*} nameCanvas 接收页面传来的页面Dom元素
@@ -155,20 +157,34 @@ export default function getScene (nameCanvas) {
   // 设置该集合体的纹理材质
   const cubeMaterial = new THREE.MeshBasicMaterial({ color: '#abe2e5' }) // 支持CSS颜色设置方式 但是需要字符串格式
 
-  // 3. 创建一个网格模型 放入创建的几何体和其自身材质 
+  // 3. 创建一个网格模型 放入创建的几何体和其自身材质
   const cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // Mesh(几何体, 纹理材质)
   // 将几何体添加到场景中
   scene.add(cube)
 
   // 4. 创建一个渲染器
-  const renderer = new THREE.WebGLRenderer()
+  const renderer = new THREE.WebGLRenderer({
+       antialias: true // 开启锯齿
+  })
   // 设置渲染器(画布)的大小 通过setSize()设置
   renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)
 
   // 5. 将webgl渲染到指定的页面元素中去 (比如body 也可以设置其他页面Dom元素)
   nameCanvas.appendChild(renderer.domElement)
-  // 使用渲染器,通过相机将场景渲染出来
-  renderer.render(scene, camera) // 进行渲染需要场景和相机 render(场景, 相机)
+
+  // 6. 创建创建一个轨道控制器 实现交互渲染
+  const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
+  console.log(controls)
+
+  // 7. 创建更新动画的方法
+  const render = () => {
+    // 使用渲染器,通过相机将场景渲染出来
+    renderer.render(scene, camera) // render(场景, 相机)
+    // 使用动画更新的回调API实现持续更新动画的效果
+    requestAnimationFrame(render)
+  }
+  // 执行创建更新动画的方法
+  render()
 }
 
 ```
@@ -333,18 +349,19 @@ export default {
 ### **轨道控制器 OrbitControls**
 
 * 听起来感觉很牛逼的感觉 实际上就是相机围绕目标进行轨道运动的效果 实现来拖拽和放大缩小模型 [官方介绍](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls)
-* <font color=#ff3040>注意: 使用轨道控制器之前 需要开启[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame)动画 否则轨道控制器会失效</font>
+* <font color=#ff3040>注意: 使用轨道控制器之前 需要开启[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame)更新动画 否则轨道控制器会失效</font>
+* 声明后需要进行执行 否则会报错
 
 ```js
-// 执行动画
-const start = () => {
-  // 获取场景对象
-  const scene = toRaw(content.scene)
-  // 执行渲染
-  content.renderer.render(scene, content.camera)
-    // 开启动画
-  requestAnimationFrame(start)
-}
+  // 7. 创建更新动画的方法
+  const render = () => {
+    // 使用渲染器,通过相机将场景渲染出来
+    renderer.render(scene, camera) // render(场景, 相机)
+    // 使用动画更新的回调API实现持续更新动画的效果
+    requestAnimationFrame(render)
+  }
+  // 执行创建更新动画的方法
+  render()
 ```
 
 > 使用轨道控制器
@@ -352,183 +369,28 @@ const start = () => {
 * 作为控件`OrbitControls`需要单独导入 
 * 使用方法: `new OrbitControls(物体的相机设置, 渲染对象.domElement)`
 
-```vue
-// 导入OrbitControls控件
+```js
+// 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-<script setup>
-// 使用three.js 轨道控制器
-const OrbitControlsF = () => {
-  // 使用轨道控制器
-  // 创建控件对象  控件可以监听鼠标的变化，改变相机对象的属性
-  // 旋转：拖动鼠标左键
-  // 缩放：滚动鼠标中键
-  // 平移：拖动鼠标右键
-  const controls = new OrbitControls(物体的相机设置, 渲染对象.domElement)
-}
-</script>
+// 6. 创建创建一个轨道控制器 实现交互渲染
+const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
+console.log(controls)
 ```
 
-### **开启XYZ轴辅助线 AxesHelper**
+### **开启坐标轴辅助器 AxesHelper**
 
 * 开启XYZ轴辅助线可以帮助我们调试物体的位置 [官方介绍](https://threejs.org/docs/index.html?q=AxesHelper#api/zh/helpers/AxesHelper)
 * `THREE.AxesHelper(轴线长度 默认是1)`
+* 不需要单独导入内置插件 需要通过`.add()`添加到`Scene`场景中使用
 
 ![image-20220424174721556](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220424174721556.png)
 
 ```js
-// 使用three.js三维坐标轴辅助
-const coordinate = () => {
-  // 获取场景对象
-  const scene = toRaw(content.scene)
-  scene.add(new THREE.AxesHelper(249))
-}
+  // 添加坐标轴辅助器
+  const axesHelper = new THREE.AxesHelper(5)
+  // 添加到场景中去
+  scene.add(axesHelper)
 ```
-
-## 常用Object3D方法
-
-* 这是Three.js中大部分对象的基类，提供了一系列的属性和方法来对三维空间中的物体进行操纵。详细看这里[三维物体（Object3D）](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/core/Object3D)
-
-* 请注意，可以通过.add( object )方法来将对象进行组合，该方法将对象添加为子对象，但为此最好使用Group（来作为父对象）
-
-* 任意的3D对象具备的 `Vector3`三维向量 四位向量
-  - [.position(Vector3) ](https://threejs.org/docs/?q=ob#api/zh/core/Object3D.position)(在三个轴向上移动 通常也是模型的世界坐标位置)
-  - [.scale(Vector3)](https://threejs.org/docs/?q=ob#api/zh/core/Object3D.scale) (在三个轴向上缩放)
-  - `rotation` (在三个轴向上旋转)
-  - `quaternion` (四元数，也是用于处理旋转的)
-  
-* 以上的方法都涉及到 `x,y,z`轴的(还有`w`) 进行修改时候需要用到以下方法 
-
-  > 假设以`.position`模型世界坐标位置为例
-
-  * [.add(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.add) 将传入的向量v和这个向量相加 可以对x y z 轴进行相加处理
-
-  ```js
-  const coordinate = new THREE.Vector3(200, 50, 50)
-  Object3D.position.add(coordinate)
-  ```
-
-  * [.copy(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.copy) 将所传入`Vector3`的x、y和z属性复制给这一`Vector3`。覆盖原有的 x y z
-
-  ```js
-  const coordinate = new THREE.Vector3(200, 50, 50)
-  Object3D.position.copy(coordinate)
-  ```
-
-  * [.set(number)](https://threejs.org/docs/?q=Vector3#api/zh/math/Vector3.set) 设置该向量的x、y 和 z 分量。覆盖原有的 x y z 不用 `Vector3`用数字设置即可
-
-  ```js
-  Object3D.position.set(0, 0, 0)
-  ```
-
-  * [.clone(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.clone) 返回一个新的`Vector3`，其具有和当前这个向量相同的x、y和z。复制一份 x y z 不修改原数据
-
-  ```js
-  const ret = Object3D.position.clone() 
-  console.log(ret) // ret里面包含Vector3
-  ```
-
-  * 也可以直接赋值或者进行运算符处理指定坐标
-
-  ```js
-   // 赋值操作
-  	Object3D.position.x = 20;
-      Object3D.position.y = 20;
-      Object3D.position.z = 2;
-  // 相加相减操作
-  	Object3D.position.x += 20;
-      Object3D.position.y -= 20;
-  ```
-  
-
-### **旋转角度 .rotateX rotateY rotateZ** 
-
-* [.](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotateX) 旋转X Y Z轴的角度 让内容朝某个方向转起来
-
-```js
-物体的网格对象(Mesh).rotateY(0.1) // rotateX rotateY rotateZ     
-```
-
-### **设置一个组 Group**
-
-* 我们可以把声明的网格模型对象放到一个集合中 也就组[Group](https://threejs.org/docs/index.html?q=group#api/zh/objects/Group) 这样我们可以给组内的网格模型进行批量的操作
-* Group也继承自`Object3D`类，因此可以使用`Object3D`类的属性和方法，例如位置，比例，旋转，四元数和`lookAt`都可以作用在Group上。
-
-```js
-//创建一个立方体几何对象Geometry
-const geometry = new THREE.BoxGeometry(50, 50, 50); 
-// 材质对象Material
-const material = new THREE.MeshLambertMaterial({
-    color: 0x0000ff,//材质颜色
-});
-
-//网格模型对象Mesh
-const mesh = new THREE.Mesh(geometry, material); 
-//创建组对象
-const group = new THREE.Group();
-// 把网格模型放到组对象里面
-group.add(mesh);
-
-// 创建场景对象Scene
-var scene = new THREE.Scene();
-//把group中的模型添加到场景中
-scene.add(group);
-```
-
-### **遍历Object3D对象 .traverse**
-
-* [.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse) 可以递归遍历object3D对象 我们可以通过判断来批量替换网格模型中的材质 等等...
-  * 如果替换的是网格模型的材质 一定要把`color`也替换上 否则会显示默认的白色模型
-
-
-```js
-    const model = new THREE.Group()// 声明一个组对象，用来添加加载成功的三维场景
-    const loader = new GLTFLoader() // 创建一个GLTF加载器
-    loader.loadAsync(`${process.env.BASE_URL}model/model.glb`, (gltf) => { // gltf加载成功后返回一个对象
-    }).then((gltf) => {
-      // 递归遍历gltf.scene，批量更改所有Mesh的材质
-      gltf.scene.traverse(function (object) {
-          // 进行判读 是否为网格模型Mesh
-        if (object.type === 'Mesh') {
-          // 替换漫反射材质
-          object.material = new THREE.MeshLambertMaterial({
-            map: object.material.map, // 获取原来材质的颜色贴图属性值
-            color: object.material.color // 读取原来材质的颜色
-            // side: THREE.DoubleSide,//围墙需要设置双面显示
-          })
-        }
-      })
-      // 把gltf.scene中的所有模型添加到model组对象中
-      model.add(gltf.scene)
-    })
-```
-
-### **设置渲染顺序 .renderOrder **
-
-* Object3D对象 在渲染器`render`中有先后渲染顺序 默认是0 他类似于css中的`z-index` 通过[.renderOrder](https://threejs.org/docs/#api/zh/core/Object3D.renderOrder) 进行渲染顺序 [scene graph](https://en.wikipedia.org/wiki/Scene_graph)（场景图)默认值会被该设置覆盖
-
-```js
-Object3D.renderOrder = 12 // 任意层数
-```
-
-### **移除Object3D对象 .remove**
-
-* [ .remove](https://threejs.org/docs/index.html?q=remove#api/zh/core/Object3D.remove) 移除Object3D对象 也可以移除在页面创建的Object3D模型对象
-* [Group](https://threejs.org/docs/index.html?q=Group#api/zh/objects/Group) 组对象也可以使用
-
-```js
-Object3D.remove(被删Object3D对象)
-Group.remove(被删Object3D对象)
-```
-
-### **修改Object3D对象中的元素样式**
-
-* 如果我们的`Object3D`对象是通过js的Dom元素生成的 那么会存在`element`Dom属性 然后再通过`.style`就可以修改Dom元素的样式
-
-```js
-Object3D.element.style.opacity = 1 // 显示标签
-```
-
-
 
 ## 二维向量（Vector2）和 三维向量（Vector3）
 
@@ -586,8 +448,6 @@ Object3D.element.style.opacity = 1 // 显示标签
   	Object3D.position.x += 20;
       Object3D.position.y -= 20;
   ```
-
-### 
 
 ### **获取模型的坐标**
 
