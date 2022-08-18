@@ -1,7 +1,7 @@
 
 var a_idx = 0;
 
-function getRandomColor(max, min) {
+function getRandomColor (max, min) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 jQuery(document).ready(function ($) {

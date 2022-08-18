@@ -69,12 +69,38 @@ categories: three.js
       Object3D.position.y -= 20;
   ```
 
-### **旋转角度 .rotateX rotateY rotateZ** 
+### 旋转角度 
 
-* [.](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotateX) 旋转X Y Z轴的角度 让内容朝某个方向转起来
+* [.rotateX() .rotateY() .rotateZ()](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotateX) 旋转三个轴的角度 让内容朝某个方向转起来
 
 ```js
 物体的网格对象(Mesh).rotateY(0.1) // rotateX rotateY rotateZ     
+```
+
+* [.rotation(X, Y, Z, 'order')](https://threejs.org/docs/index.html#api/zh/core/Object3D.rotation) 整合旋转三个轴的角度 他的参数的类是[欧拉角（Euler）](https://threejs.org/docs/index.html#api/zh/math/Euler.order)
+  * `order`可以设置旋转的顺序 默认值为 'XYZ'，这意味着对象将首先是 绕X轴旋转，然后是Y轴，最后是Z轴。其他可能性包括: 'YZX'， 'ZXY'， 'XZY'， 'YXZ'和'ZYX'。这些**必须是大写字母。**
+
+```js
+Mesh.rotation.set(1, 0, 0, 'ZYX')  
+```
+
+* 也可以直通过`.rotation` 进行直接的赋值处理指定的旋转坐标
+
+```js
+Mesh.rotation.x += 0.1
+Mesh.rotation.y += 0.1
+Mesh.rotation.z += 0.1
+```
+
+### **缩放比例**
+
+* [.scale(Vector3)](https://threejs.org/docs/index.html#api/zh/core/Object3D.scale) 在三个轴向上缩放 默认的XYZ值为`1`
+
+```js
+  // 创建一个网格模型 放入创建的几何体和其自身材质
+  const cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // Mesh(几何体, 纹理材质)
+  // 进行缩放
+  cube.scale.set(2, 1, 1)
 ```
 
 ### **设置一个组 Group**
@@ -155,5 +181,26 @@ Group.remove(被删Object3D对象)
 
 ```js
 Object3D.element.style.opacity = 1 // 显示标签
+```
+
+## 按照屏幕刷新率进行移动
+
+* 通过[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame) 方法可以让浏览器自动的播放动画 但是有时候浏览器会因为某些原因会进行跳帧 从而感觉动画不是很流畅 
+* 可以通过`requestAnimationFrame`返回值`毫秒帧率 / 1000`的方式获取每秒的帧率 然后手动设置动画效果 这样动画就会很流畅 并根据刷新率进行自适应的动画
+
+```js
+  // 7. 创建更新动画的方法
+  const render = (time) => { // requestAnimationFrame 会返回一个毫秒帧率
+    // 毫秒帧率 / 1000 得到秒帧率 % 5 可以限制其最大移动距离 距离超过5就会重置移动距离
+    const run = time / 1000 % 5
+    // 设置没秒移动1距离
+    cube.position.x = run * 1
+    // 使用渲染器,通过相机将场景渲染出来
+    renderer.render(scene, camera) // render(场景, 相机)
+    // 使用动画更新的回调API实现持续更新动画的效果
+    requestAnimationFrame(render)
+  }
+  // 执行创建更新动画的方法
+  render()
 ```
 

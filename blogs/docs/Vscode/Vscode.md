@@ -164,7 +164,9 @@ Vscode快速设置文档 涉及到settings和eslint<br>
     },
     "workbench.editor.untitled.hint": "hidden",
     "settingsSync.ignoredExtensions": [],
-    "workbench.settings.enableNaturalLanguageSearch": false
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "tabnine.experimentalAutoImports": true,
+    "liveServer.settings.AdvanceCustomBrowserCmdLine": ""
 }
 
 ```

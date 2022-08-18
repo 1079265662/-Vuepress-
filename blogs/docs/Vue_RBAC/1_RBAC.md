@@ -1004,7 +1004,6 @@ import leafUtils from '@/utils/leafUtils'
 // 分配权限的属性结构查询 处理数据 能实现权限勾选
   async assignRole (row) {
       // 防止this指向的不是vue实例对象
-      const that = this
       this.roleId = row.id
       const parm = {
         roleId: row.id,
@@ -1025,9 +1024,9 @@ import leafUtils from '@/utils/leafUtils'
         // 准备第二次递归 勾选树形结构的内容
         this.$nextTick(() => {
           // 这里通过ref绑定处理好末级的树形结构 注意要this.$nextTick渲染后再调用 nodes是通过vue实例拿到的渲染好的树形结构
-          const nodes = that.$refs.assignTree.children
-          // 进行第二次递归处理 nodes是通过vue实例拿到的树形结构 selectIds是当前角色用户选中权限的id合集 (权限选中数组) that是当前内容的this指向 防止this指错
-          that.setChild(nodes, selectIds, that)
+          const nodes = this.$refs.assignTree.children
+          // 进行第二次递归处理 nodes是通过vue实例拿到的树形结构 selectIds是当前角色用户选中权限的id合集 (权限选中数组) 
+          this.setChild(nodes, selectIds, this)
           console.log(nodes)
         })
       }

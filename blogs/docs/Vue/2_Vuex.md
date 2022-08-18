@@ -1167,6 +1167,60 @@ import store from '../store/index'
     store.commit('user/deluserInfo') // 操作 user文件里面的 deluserInfo 方法
 ```
 
+## Vuex注意事项
+
+* 在Vue2 `data`使用 `vuex`数据后，不具备响应式的问题
+
+```js
+data() {
+ return {
+ // 在data中直接使用vuex的数据 并不具备响应式
+  tableData: this.$store.state.AdminInfo
+  }
+}
+```
+
+* `template` 中使用`vuex`的 `tableData`数据
+
+```vue
+<el-table :data="tableData" class="tablePst">
+ <el-table-column label="登录名" prop="loginname"></el-table-column>
+ <el-table-column label="真实姓名" prop="realname"></el-table-column>
+</el-table>
+```
+
+* 当`vuex`中的数据更新后 模板中并不更新 不具备响应式
+
+> **问题**
+
+* 要解决问题，就得理解`Vue`生命周期，页面加载前 `tableData` 获取 `store` 里的值赋给自己，这样 `tableData` 只有一初始值，后续`vuex`中状态发生改变，并不会再次赋值给 `tableData` ，除非页面刷新重新加载，组件生命周期重新开始，才能拿到最新的值
+
+> **解决**
+
+1.去掉组件中 `tableData` 的状态，在模板中直接使用 `$store.state.AdminInfo` 这样就能随时拿到最新的状态值了
+
+```vue
+<el-table :data="$store.state.AdminInfo" class="tablePst">
+ <el-table-column label="登录名" prop="loginname"></el-table-column>
+ <el-table-column label="真实姓名" prop="realname"></el-table-column>
+</el-table>
+```
+
+2.使用`mapState`或者`mapGetters`,把vuex中的状态暴露给组件，再使用，具体见文档 [vuex mapState官方文档.](https://vuex.vuejs.org/zh/guide/state.html#mapstate-辅助函数)
+
+```vue
+<script>
+// 导入mapGetters状态管理 暴露给组件
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+   // 通过mapGetters获取vuex中的
+    ...mapGetters(['roles']),
+  },
+ }
+</script>
+```
+
 
 
 # Vue3 中的Vuex
