@@ -183,6 +183,36 @@ Group.remove(被删Object3D对象)
 Object3D.element.style.opacity = 1 // 显示标签
 ```
 
+## 使用时间跟踪
+
+* 通过设置[Clock](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock) 可以跟踪动画渲染的时间 并且可以通过时间跟踪设置动画的一些行为 时钟设置后自动开启
+  * [.getElapsedTime()](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.getElapsedTime) 获取启动后的秒数 通常可以通过他设置一些动画的行为
+
+```js
+  // 设置一个时钟
+  const clock = new THREE.Clock()
+    // 7. 创建更新动画的方法
+  const render = (time) => { // time会返回一个毫秒帧率
+    // 获取渲染的更新时间
+    const runClock = clock.getElapsedTime()
+    //限制其最大移动距离 超过会重置移动距离
+    const run = runClock % 5
+    // 设置没秒移动1距离
+    cube.position.x = run * 1
+    // 设置旋转
+    cube.rotation.x += 0.1
+    // cube.rotation.x += 0.1
+    // 使用渲染器,通过相机将场景渲染出来
+    renderer.render(scene, camera) // render(场景, 相机)
+    // 使用动画更新的回调API实现持续更新动画的效果
+    requestAnimationFrame(render)
+  }
+  // 执行创建更新动画的方法
+  render()
+```
+
+
+
 ## 按照屏幕刷新率进行移动
 
 * 通过[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame) 方法可以让浏览器自动的播放动画 但是有时候浏览器会因为某些原因会进行跳帧 从而感觉动画不是很流畅 
