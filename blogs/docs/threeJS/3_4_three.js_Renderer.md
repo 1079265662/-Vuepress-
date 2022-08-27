@@ -49,7 +49,7 @@ renderer.setSize(window.innerWidth, window.innerHeight) // 设置渲染区域尺
 renderer.setClearColor('#ff3040',1)    // 设置背景颜色 支持十六进制颜色和字符串风格css颜色 (颜色, 透明度)
 ```
 
-### 设置像素比
+### **设置像素比**
 
 * 很多高清显示屏，尤其是移动设备上的显示屏，一个显示单元往往具有多个物理像素，这就是像素比。比如第一代iPhone4的Retina高清显示屏的像素比就是2，这为我们带来了更加细致入微的视觉体验，但无疑也会消耗更多的性能，当性能消耗过大时，我们的动画和渲染也就会变慢，俗称掉帧。
 
@@ -75,28 +75,25 @@ document.body.appendChild(labelRenderer.domElement);
 
 ### **场景渲染器自适应**
 
-* 有时候我们需要随着页面进行自适应操作 我们可以使用`.setSize` 方法重新设置渲染的输出尺寸
 * `window.onresize`监听窗口调整大小方法建议存在一个 如果你不通过指定监听`.addEventListener()`绑定 那么一个页面只能存在一个`window.onresize`方法 其他的会被覆盖
-* 不光场景渲染器需要自适应 相机也需要自适应 并且通过`.updateProjectionMatrix()`方法更新相机
+* 相机需要自适应 更新其宽高比[.aspect](https://threejs.org/docs/index.html#api/zh/cameras/PerspectiveCamera.aspect)后 再通过[.updateProjectionMatrix()](https://threejs.org/docs/index.html?q=PerspectiveCamera#api/zh/cameras/PerspectiveCamera.updateProjectionMatrix)方法更新相机 (每个相机都支持)
+* 渲染器通过[.setSize()](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer.setSize) 更新其宽高后 还需要更新[.setPixelRatio](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer.setPixelRatio)设备的像素比
 
 ```js
- // 创建一个CSS2渲染器CSS2DRenderer
-  const renderer = new THREE.WebGLRenderer()
- // 设置渲染器的尺寸(需要和其他渲染器宽高一致)
-  renderer.setSize(window.innerWidth, window.innerHeight)  
- // 监听页面尺寸是否修改
-  window.onresize = () => {
-    const width = window.innerWidth
-    const height = window.innerHeight
-    // 重置渲染器输出画布canvas尺寸
-    renderer.setSize(width, height)
-    // 全屏情况下：设置观察范围长宽比aspect为窗口宽高比
-    camera.aspect = width / height
-    // 渲染器执行render方法的时候会读取相机对象的投影矩阵属性projectionMatrix
-    // 但是不会每渲染一帧，就通过相机的属性计算投影矩阵(节约计算资源)
-    // 如果相机的一些属性发生了变化，需要执行updateProjectionMatrix ()方法更新相机的投影矩阵
+  // 实现画面变化 更新渲染的内容
+  window.addEventListener('resize', () => {
+    // 解构window对象
+    const { innerWidth, innerHeight, devicePixelRatio } = window
+    // 更新相机的宽高比
+    camera.aspect = innerWidth / innerHeight
+    // 更新摄像机的投影矩阵
     camera.updateProjectionMatrix()
-  }
+
+    // 更新渲染器
+    renderer.setSize(innerWidth, innerHeight)
+    // 更新渲染器的像素比
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
+  })
 ```
 
 ### **在Vue3中执行渲染**

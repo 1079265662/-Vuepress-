@@ -174,10 +174,14 @@ export default function getScene (nameCanvas) {
 
   // 6. 创建创建一个轨道控制器 实现交互渲染
   const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
+  // 设置控制器阻尼 让控制器更真实 如果该值被启用，你将必须在你的动画循环里调用.update()
+  controls.enableDamping = true
   console.log(controls)
 
   // 7. 创建更新动画的方法
   const render = () => {
+    // 设置阻尼感必须在动画中调用.update()
+    controls.update()
     // 使用渲染器,通过相机将场景渲染出来
     renderer.render(scene, camera) // render(场景, 相机)
     // 使用动画更新的回调API实现持续更新动画的效果
@@ -368,13 +372,16 @@ export default {
 
 * 作为控件`OrbitControls`需要单独导入 
 * 使用方法: `new OrbitControls(物体的相机设置, 渲染对象.domElement)`
+  * [.enableDamping](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enableDamping) 设置阻尼感如果该值被启用，你将必须在你的动画循环里调用[.update()](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.update)。
+
 
 ```js
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // 6. 创建创建一个轨道控制器 实现交互渲染
 const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
-console.log(controls)
+// 设置控制器阻尼 让控制器更真实 设置后需要在动画循环里调用.update()
+controls.enableDamping = true
 ```
 
 ### **开启坐标轴辅助器 AxesHelper**
