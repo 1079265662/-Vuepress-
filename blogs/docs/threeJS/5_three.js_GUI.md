@@ -63,9 +63,9 @@ const gui = new dat.GUI();
   - **Button** — 按钮
   - **Folder** — 抽屉，用于展开或折叠一组控件
 
-## 调试面板控件
+## 调试基础面板控件
 
-* 我们必须要使用`gui.add(...)`方法来向调试UI面板中添加控件。该方法的第1个参数是该控件将要影响的对象，第2个参数则是该控件绑定修改的对象属性。
+* 我们必须要使用[gui.add() ](https://github.com/dataarts/dat.gui/blob/master/API.md#guiaddobject-property-min-max-step--controller)方法来向调试UI面板中添加控件。该方法的第1个参数是该控件将要影响的对象，第2个参数则是该控件绑定修改的对象属性。
 * `gui`支持链式操作 也可以都使用一个方法 不过命名需要单独进行链式操作`.name()`
 
 ![image-20220627201938228](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220627201938228.png)
@@ -82,12 +82,27 @@ const gui = new dat.GUI();
 * 现在我们能在调试UI面板中看到一个能调整`y`数值的控件，当我们操作控件修改数值时，我们的立方体也会在`y`轴上移动到对应的数值坐标。
 
 * 我们还可以在添加控件时加入`最小值`，`最大值`，以及`步进值(滑块的速度)`等参数
+  * `min` 设置最小值
+  * `max` 设置最大值
+  * `step` 设置进步值(滑块速度)
+  * `name` 设置控件名称
+  * `onChange()` 修改时触发的方法 返回值是当前修改的值
+  * `onFinishChange()` 修改完成时触发的方法 返回值是当前修改后的值
+
 * 默认情况下，控件的名称是影响的变量名，比如`y`，我们也可以通过`.name()`参数来指定控件的名称，这样会更加容易分辨这个调试面板的控件到底产生什么影响。
 
 ```js
-gui.add(mesh.position, 'y', -100, 100, 0.01).name('Y轴切换') // 进行传参的方式
-gui.add(mesh.position, 'x').min(-3).max(3).step(0.01).name('X轴切换') // 进行链式操作
-gui.add(mesh.position, 'z').min(-3).max(3).step(0.01).name('Y轴切换') // 进行链式操作
+  // 设置gui面板
+  const gui = new dat.GUI()
+  gui.add(cube.position, 'x').min(0).max(5).step(0.01).name('修改X轴')
+    // 修改值的方法
+    .onChange(value => {
+      console.log('值被修改了', value)
+    })
+  	// 修改完毕的方法
+    .onFinishChange(value => {
+      console.log('修改完毕', value)
+    })
 ```
 
 ### **模型显示隐藏**
@@ -112,7 +127,7 @@ const skyBoxMaterial = new THREE.MeshBasicMaterial({
 gui.add(skyBoxMaterial, 'wireframe').name('显示线框')
 ```
 
-### **添加按钮控件**
+### **添加方法按钮控件**
 
 * 在使用`gui.add(...)`添加调试UI控件时，如果第2个参数传递的是一个函数对象，则会自动在调试UI面板中添加一个按钮，并且在按钮点击的时候调用这个函数。
   * 可以通过其他方法进行按钮的设置
@@ -123,6 +138,7 @@ const speedX = 0.01
   // 设置暂停动画
 const end = {
     color: 0xff0000,
+    // 方法名需要和gui设置的一致
     spin: () => {
       // 暂停动画
       speedX = 0
@@ -147,6 +163,38 @@ const start = {
 gui.add(start, 'spin').name('开始动画')
 ```
 
+## 添加调色板
+
+* [gui.addColor()](https://github.com/dataarts/dat.gui/blob/master/API.md#GUI+addColor) 设置调色板内容 需要设置一个默认的颜色对象
+  * 通过设置`onChange()` 修改时触发颜色变量 再修改物体的材质`material.color` 颜色属性 实现调色功能
+
+```js
+  // 默认物体的颜色
+  const params = {
+    color: '#b1e1e5'
+  }
+  // 修改物体颜色
+  gui.addColor(params, 'color').onChange(value => { // 获取修改的颜色变量
+      // 更新物体的材质颜色 实现变色
+    cube.material.color.set(value)
+  })
+```
+
+## 设置调试分组
+
+* [gui.addFolder()](https://github.com/dataarts/dat.gui/blob/master/API.md#guiaddfoldername--datguigui) 可以设置调试分组 可以更好的归纳一些内容
+
+```js
+  // 设置gui的展开缩放
+  const select = gui.addFolder('拓展属性')
+  // 设置线框调试
+  select.add(cube.material, 'wireframe').name('显示线框')
+```
+
+* 实现效果
+
+![image-20220828183245084](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202208281832141.png)
+
 ## 调试面板设置
 
 ### **默认关闭折叠**
@@ -164,6 +212,26 @@ const gui = new dat.GUI({ closed: true })
 ```js
 const gui = new dat.GUI({ width: 400 })
 ```
+
+## 销毁面板
+
+* `.hide()` 可以效果面板 通常可以在路由销毁后使用 比如Vue3的`onUnmounted()`
+
+```JS
+gui.hide()
+```
+
+* 在Vue框架中 这种方式的显示隐藏会出现重复 原因是`gui`重复添加了
+  * 给`gui`设置`name`属性 添加唯一标识 判断是否存在`name` 防止重复添加
+
+```js
+  // 如果存在gui名称 不进行添加
+  if (gui.name) return
+  // 设置gui配置的唯一标识 可以防止冲突添加
+  gui.name = 'gui'
+```
+
+
 
 ## 参考文献
 
