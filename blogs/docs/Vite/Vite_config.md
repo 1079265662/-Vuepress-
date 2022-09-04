@@ -17,7 +17,7 @@ categories: Vite
 
 * 在[Vite](https://vitejs.cn/)没出来之前 我们都是用[Vue-cli](https://cli.vuejs.org/zh/) 脚手架创建项目 现在官方推荐用[create-vue](https://github.com/vuejs/create-vue) 代替Vue-cli
 * Vite主打快速启动 低配置 这一点非常好 而且它支持`import`的导入方式 而`webpack`只支持 `CommonJS`的导入
-  * Vite和webpack不一样的点就是 webpack需要加载完所有资源才能启动，vite是先启动，然后需要什么资源再加载需要的部分，不需要的部分不加载
+  * Vite和webpack不一样的点就是 webpack需要加载完所有资源才能启动，Vite是先启动，然后需要什么资源再加载需要的部分，不需要的部分不加载
 
 
 ![image-20220830112921104](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202208301129234.png)
@@ -74,10 +74,9 @@ npm install -D sass
 
 ![image-20220831145046625](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202208311450671.png)
 
-### **配置prettier**
+### **配置Prettier **
 
-1. 手动创建`.prettierrc` 文件(不要`.js` 后缀) 前提是你在创建时候安装了prettierrc 否则没效果
-2. 使用以下prettier格式化规则
+手动创建`.prettierrc` 文件(不要`.js` 后缀) 前提是你在创建时候安装了Prettier 否则没效果
 
 ```js
 {
@@ -103,7 +102,7 @@ npm install -D sass
 
 ### **完善eslint**
 
-1. 如果我们我们在创建项目的时候 勾选`eslint`会自动创建一个`.eslintrc.cjs`规则文件
+如果我们我们在创建项目的时候 勾选`eslint`会自动创建一个`.eslintrc.cjs`规则文件
 
 * eslint 详解
 

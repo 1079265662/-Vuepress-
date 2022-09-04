@@ -170,9 +170,9 @@ Vscode快速设置文档 涉及到settings和eslint<br>
   "vetur.completion.autoImport": false,
   "vetur.validation.interpolation": false,
   "vetur.validation.script": false,
-  "vetur.validation.template": false
+  "vetur.validation.template": false,
+  "files.eol": "\n"
 }
-
 ```
 
 ## Vue2 eslint设置
