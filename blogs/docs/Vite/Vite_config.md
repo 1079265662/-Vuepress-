@@ -112,6 +112,8 @@ npm install -D sass
 
 ```js
   rules: {
+     // TS可以使用any (按需设置)
+    '@typescript-eslint/no-explicit-any': 'off',
     // 标签闭合
     'vue/html-self-closing': [
       'warn',
@@ -178,16 +180,24 @@ export default defineConfig({
 
 ## 配置tsconfig
 
-* 在`tsconfig.config.json` 修改`composite`属性 取消构建工具检测
+* 总共有两个`tsconfig`
+  * `tsconfig.config.json` 应该是参考TS
+  * `tsconfig.json` 本项目的TS配置文件 
+
+
+![image-20220907193353390](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209071933446.png)
+
+* 如果不需要参考TS 需要在`tsconfig.json`中取消`references`参考 并且以后设置TS规则也在这个文件中设置
 
 ```json
 {
-  "extends": "@vue/tsconfig/tsconfig.node.json",
-  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*"],
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
-    // 取消工具检测
-    "composite": false,
-    "types": ["node"]
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }
 
@@ -247,11 +257,15 @@ export default router
 
 ```tsx
 /**
- * settings.ts 全局配置文件
+ * 全局配置文件
  */
-export default {
+// 声明全局配置对象
+const viewSettings = {
   title: 'webgl学习'
 }
+
+// 导出
+export { viewSettings }
 
 ```
 
@@ -282,13 +296,12 @@ npm i vite-plugin-html -D
 // 代入Vite插件 用来设置title
 import { createHtmlPlugin } from 'vite-plugin-html'
 // 导入配置文件
-import $t from './src/settings.js'
+import { viewSettings } from './src/settings.js'
 
 export default defineConfig({
   // 导入插件
   plugins: [
     vue(),
-    // 使用vite-plugin-html 配置
     createHtmlPlugin({
       // 是否启动压缩html
       minify: true,
@@ -296,7 +309,7 @@ export default defineConfig({
       inject: {
         data: {
           // 注入title
-          title: $t.title
+          title: viewSettings.title
         }
       }
     })
@@ -313,14 +326,15 @@ export default defineConfig({
 
 ```tsx
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/dashboard/index.vue'
 // 导入通用配置
-import $t from '@/settings'
+import { viewSettings } from '@/settings'
 
 const routes = [
   {
     path: '/',
     name: 'HoMe',
+    // 首页无需按需加载
     component: HomeView,
     meta: {
       title: '首页'
@@ -329,8 +343,8 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // 设置懒加载
-    component: () => import('../views/AboutView.vue'),
+    // 设置按需加载
+    component: () => import('@/views/AboutView.vue'),
     meta: {
       title: '关于'
     }
@@ -345,7 +359,7 @@ const router = createRouter({
 // 设置路由title
 router.beforeEach((to, from, next) => {
   // 把路由title 和 默认title拼接起来
-  document.title = `${to.meta.title} - ${$t.title} `
+  document.title = `${to.meta.title} - ${viewSettings.title}`
   next()
 })
 

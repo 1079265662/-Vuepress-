@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TS和Vue3 使用记录 | LKaiLi</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="https://pan.zealsay.com/blog/favicon.ico">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/mouseClick.js"></script>
+    <script>var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?61498f37b83812e7b85952d5feaaab47";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <meta name="description" content="草 走 🤸 忽略">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.5146dfaf.css" as="style"><link rel="preload" href="/assets/js/app.53b033c0.js" as="script"><link rel="preload" href="/assets/js/5.cf81efa1.js" as="script"><link rel="preload" href="/assets/js/1.817ad2e8.js" as="script"><link rel="preload" href="/assets/js/32.ce58d15a.js" as="script"><link rel="prefetch" href="/assets/js/10.988ddcf1.js"><link rel="prefetch" href="/assets/js/100.a69065cb.js"><link rel="prefetch" href="/assets/js/101.9168b32e.js"><link rel="prefetch" href="/assets/js/102.d312e610.js"><link rel="prefetch" href="/assets/js/103.ea70288c.js"><link rel="prefetch" href="/assets/js/104.1dd0f1d7.js"><link rel="prefetch" href="/assets/js/105.bbcec1f4.js"><link rel="prefetch" href="/assets/js/106.1a36b7f1.js"><link rel="prefetch" href="/assets/js/107.7485d2fc.js"><link rel="prefetch" href="/assets/js/108.00858008.js"><link rel="prefetch" href="/assets/js/109.17125fba.js"><link rel="prefetch" href="/assets/js/11.0fb3e52b.js"><link rel="prefetch" href="/assets/js/110.2181c4ca.js"><link rel="prefetch" href="/assets/js/111.cde39236.js"><link rel="prefetch" href="/assets/js/112.e013d67c.js"><link rel="prefetch" href="/assets/js/113.c5ff6338.js"><link rel="prefetch" href="/assets/js/114.9ca2bea7.js"><link rel="prefetch" href="/assets/js/115.880f1719.js"><link rel="prefetch" href="/assets/js/116.22a5046b.js"><link rel="prefetch" href="/assets/js/117.cd948f43.js"><link rel="prefetch" href="/assets/js/118.91ebd07e.js"><link rel="prefetch" href="/assets/js/119.05fa34da.js"><link rel="prefetch" href="/assets/js/12.355b85c3.js"><link rel="prefetch" href="/assets/js/120.532a3ae0.js"><link rel="prefetch" href="/assets/js/121.6777b63e.js"><link rel="prefetch" href="/assets/js/122.beaae8f4.js"><link rel="prefetch" href="/assets/js/123.74c437a0.js"><link rel="prefetch" href="/assets/js/124.cd2e133d.js"><link rel="prefetch" href="/assets/js/125.3aafdb30.js"><link rel="prefetch" href="/assets/js/126.8f53aa9a.js"><link rel="prefetch" href="/assets/js/127.0f82464d.js"><link rel="prefetch" href="/assets/js/128.bf6f7b8a.js"><link rel="prefetch" href="/assets/js/129.c8a6b4a2.js"><link rel="prefetch" href="/assets/js/13.ffc63a13.js"><link rel="prefetch" href="/assets/js/130.52983713.js"><link rel="prefetch" href="/assets/js/131.9bef91aa.js"><link rel="prefetch" href="/assets/js/132.f2bf981a.js"><link rel="prefetch" href="/assets/js/133.a0ffe406.js"><link rel="prefetch" href="/assets/js/134.9ae3fba1.js"><link rel="prefetch" href="/assets/js/135.17ecee74.js"><link rel="prefetch" href="/assets/js/136.75f09f94.js"><link rel="prefetch" href="/assets/js/137.e6258787.js"><link rel="prefetch" href="/assets/js/138.9c74b160.js"><link rel="prefetch" href="/assets/js/139.233c26db.js"><link rel="prefetch" href="/assets/js/14.efa08ed1.js"><link rel="prefetch" href="/assets/js/140.9e8d5a4e.js"><link rel="prefetch" href="/assets/js/141.61c97631.js"><link rel="prefetch" href="/assets/js/15.dcc6fa3b.js"><link rel="prefetch" href="/assets/js/16.ee2270ce.js"><link rel="prefetch" href="/assets/js/17.fe0b6d04.js"><link rel="prefetch" href="/assets/js/18.dd2810dc.js"><link rel="prefetch" href="/assets/js/19.3d1ab2f6.js"><link rel="prefetch" href="/assets/js/20.749dbfb7.js"><link rel="prefetch" href="/assets/js/21.ed0e9f40.js"><link rel="prefetch" href="/assets/js/22.9bc6c12f.js"><link rel="prefetch" href="/assets/js/23.5396a900.js"><link rel="prefetch" href="/assets/js/24.92ac9721.js"><link rel="prefetch" href="/assets/js/25.517818ab.js"><link rel="prefetch" href="/assets/js/26.b74acc90.js"><link rel="prefetch" href="/assets/js/27.bff4ab48.js"><link rel="prefetch" href="/assets/js/28.4674db87.js"><link rel="prefetch" href="/assets/js/29.21e052b6.js"><link rel="prefetch" href="/assets/js/3.eaaba6c3.js"><link rel="prefetch" href="/assets/js/30.fc243451.js"><link rel="prefetch" href="/assets/js/31.e33f7c5b.js"><link rel="prefetch" href="/assets/js/33.267a1629.js"><link rel="prefetch" href="/assets/js/34.f9ab54eb.js"><link rel="prefetch" href="/assets/js/35.c5531564.js"><link rel="prefetch" href="/assets/js/36.4df92d53.js"><link rel="prefetch" href="/assets/js/37.3d7294ad.js"><link rel="prefetch" href="/assets/js/38.2de49e60.js"><link rel="prefetch" href="/assets/js/39.22dc10cf.js"><link rel="prefetch" href="/assets/js/4.f9a803a5.js"><link rel="prefetch" href="/assets/js/40.592ad954.js"><link rel="prefetch" href="/assets/js/41.31db24d1.js"><link rel="prefetch" href="/assets/js/42.3b9f5a62.js"><link rel="prefetch" href="/assets/js/43.f35b2c59.js"><link rel="prefetch" href="/assets/js/44.a03b7c09.js"><link rel="prefetch" href="/assets/js/45.b3fdb109.js"><link rel="prefetch" href="/assets/js/46.3bc782dd.js"><link rel="prefetch" href="/assets/js/47.9091d2ee.js"><link rel="prefetch" href="/assets/js/48.f8ee8b94.js"><link rel="prefetch" href="/assets/js/49.4f7642b4.js"><link rel="prefetch" href="/assets/js/50.4d1dc104.js"><link rel="prefetch" href="/assets/js/51.390a4f2c.js"><link rel="prefetch" href="/assets/js/52.138cd12c.js"><link rel="prefetch" href="/assets/js/53.9f622fb7.js"><link rel="prefetch" href="/assets/js/54.b412cf64.js"><link rel="prefetch" href="/assets/js/55.40536c22.js"><link rel="prefetch" href="/assets/js/56.3bcc9828.js"><link rel="prefetch" href="/assets/js/57.52844ac7.js"><link rel="prefetch" href="/assets/js/58.937a6e1a.js"><link rel="prefetch" href="/assets/js/59.e474daa0.js"><link rel="prefetch" href="/assets/js/6.c49aa0a0.js"><link rel="prefetch" href="/assets/js/60.6de76d7a.js"><link rel="prefetch" href="/assets/js/61.4a158ec0.js"><link rel="prefetch" href="/assets/js/62.c063346c.js"><link rel="prefetch" href="/assets/js/63.5e2dc97e.js"><link rel="prefetch" href="/assets/js/64.4300014b.js"><link rel="prefetch" href="/assets/js/65.15e97e16.js"><link rel="prefetch" href="/assets/js/66.ffb61425.js"><link rel="prefetch" href="/assets/js/67.57d4545a.js"><link rel="prefetch" href="/assets/js/68.a54a9bea.js"><link rel="prefetch" href="/assets/js/69.24d56e54.js"><link rel="prefetch" href="/assets/js/7.8bdacd25.js"><link rel="prefetch" href="/assets/js/70.505d0978.js"><link rel="prefetch" href="/assets/js/71.0474b2db.js"><link rel="prefetch" href="/assets/js/72.43990a48.js"><link rel="prefetch" href="/assets/js/73.fa1b3a42.js"><link rel="prefetch" href="/assets/js/74.745e573c.js"><link rel="prefetch" href="/assets/js/75.c2ef2504.js"><link rel="prefetch" href="/assets/js/76.29e709ee.js"><link rel="prefetch" href="/assets/js/77.e7315f17.js"><link rel="prefetch" href="/assets/js/78.116e75b8.js"><link rel="prefetch" href="/assets/js/79.f6ce435a.js"><link rel="prefetch" href="/assets/js/8.ad2ae975.js"><link rel="prefetch" href="/assets/js/80.4a426e0d.js"><link rel="prefetch" href="/assets/js/81.dff05fa2.js"><link rel="prefetch" href="/assets/js/82.fce175a3.js"><link rel="prefetch" href="/assets/js/83.6a25829f.js"><link rel="prefetch" href="/assets/js/84.20b07f4e.js"><link rel="prefetch" href="/assets/js/85.bce3e8fc.js"><link rel="prefetch" href="/assets/js/86.78dc7b04.js"><link rel="prefetch" href="/assets/js/87.ccaf27eb.js"><link rel="prefetch" href="/assets/js/88.ba023cb0.js"><link rel="prefetch" href="/assets/js/89.9972bf63.js"><link rel="prefetch" href="/assets/js/9.fb836414.js"><link rel="prefetch" href="/assets/js/90.0b156ee0.js"><link rel="prefetch" href="/assets/js/91.8c278334.js"><link rel="prefetch" href="/assets/js/92.5a7fc5aa.js"><link rel="prefetch" href="/assets/js/93.5a5c50f5.js"><link rel="prefetch" href="/assets/js/94.14a66174.js"><link rel="prefetch" href="/assets/js/95.7bc511ac.js"><link rel="prefetch" href="/assets/js/96.1e98d596.js"><link rel="prefetch" href="/assets/js/97.b2fa1c54.js"><link rel="prefetch" href="/assets/js/98.cf8f8968.js"><link rel="prefetch" href="/assets/js/99.59c217aa.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.5146dfaf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-57e19720><div data-v-57e19720><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-57e19720 data-v-57e19720><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-89477f7e data-v-57e19720 data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>LKaiLi</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div> <div class="hide" data-v-57e19720><div data-v-57e19720><div id="smart" class="wrapper-page" style="background-image:url(https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209072009800.jpg);background-position-x:center;background-position-y:center;background-size:cover;background-repeat-x:no-repeat;background-repeat-y:no-repeat;" data-v-57e19720><header class="navbar" data-v-57e19720><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="LKaiLi" class="logo"> <span class="site-name">LKaiLi</span></a> <div class="links"><div id="dayNightSwitch" class="generalWrapper" data-v-32f44868><a class="click" data-v-32f44868><div class="onOff daySwitch" data-v-32f44868><div class="star star1" data-v-32f44868></div> <div class="star star2" data-v-32f44868></div> <div class="star star3" data-v-32f44868></div> <div class="star star4" data-v-32f44868></div> <div class="star star5" data-v-32f44868></div> <div class="star sky" data-v-32f44868></div> <div class="sunMoon" data-v-32f44868><div class="crater crater1" data-v-32f44868></div> <div class="crater crater2" data-v-32f44868></div> <div class="crater crater3" data-v-32f44868></div> <div class="cloud part1" data-v-32f44868></div> <div class="cloud part2" data-v-32f44868></div></div></div></a></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GSAP/" class="nav-link"><i class="iconfont undefined"></i>
+  GSAP
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vite/" class="nav-link"><i class="iconfont undefined"></i>
+  Vite
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/three.js/" class="nav-link"><i class="iconfont undefined"></i>
+  three.js
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-57e19720></div> <aside class="sidebar" data-v-57e19720><div class="personal-info-wrapper" data-v-03833281 data-v-57e19720><img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/my_cat.png" alt="author-avatar" class="personal-img" data-v-03833281> <h3 class="name" data-v-03833281>
+    LKaiLi
+  </h3> <div class="num" data-v-03833281><div data-v-03833281><h3 data-v-03833281>126</h3> <h6 data-v-03833281>文章</h6></div> <div data-v-03833281><h3 data-v-03833281>36</h3> <h6 data-v-03833281>标签</h6></div></div> <hr data-v-03833281></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/TypeScript/" class="nav-link"><i class="iconfont undefined"></i>
+  TypeScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GSAP/" class="nav-link"><i class="iconfont undefined"></i>
+  GSAP
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JavaScript/" class="nav-link"><i class="iconfont undefined"></i>
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vscode/" class="nav-link"><i class="iconfont undefined"></i>
+  Vscode
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vite/" class="nav-link"><i class="iconfont undefined"></i>
+  Vite
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue3/" class="nav-link"><i class="iconfont undefined"></i>
+  Vue3
+</a></li><li class="dropdown-item"><!----> <a href="/categories/RABC/" class="nav-link"><i class="iconfont undefined"></i>
+  RABC
+</a></li><li class="dropdown-item"><!----> <a href="/categories/小程序/" class="nav-link"><i class="iconfont undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/categories/axios/" class="nav-link"><i class="iconfont undefined"></i>
+  axios
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Css/" class="nav-link"><i class="iconfont undefined"></i>
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/categories/three.js/" class="nav-link"><i class="iconfont undefined"></i>
+  three.js
+</a></li><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/uniapp/" class="nav-link"><i class="iconfont undefined"></i>
+  uniapp
+</a></li><li class="dropdown-item"><!----> <a href="/categories/vue-element-admin/" class="nav-link"><i class="iconfont undefined"></i>
+  vue-element-admin
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      关于播客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link"><i class="iconfont reco-mail"></i>
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link"><i class="iconfont reco-account"></i>
+  联系我
+</a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Type Script</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blogs/docs/TypeScript/0_1_TS_Vue.html" aria-current="page" class="active sidebar-link">TS和Vue3 使用记录</a></li><li><a href="/blogs/docs/TypeScript/1_1TypeScript.html" class="sidebar-link">TypeScript 学习记录</a></li><li><a href="/blogs/docs/TypeScript/1_2_generics.html" class="sidebar-link">TS泛型学习</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-89477f7e data-v-57e19720><h3 class="title" style="display:none;" data-v-89477f7e data-v-89477f7e>TS和Vue3 使用记录</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-89477f7e data-v-89477f7e><input type="password" value="" data-v-89477f7e> <span data-v-89477f7e>Konck! Knock!</span> <button data-v-89477f7e>OK</button></label> <div class="footer" style="display:none;" data-v-89477f7e data-v-89477f7e><span data-v-89477f7e><i class="iconfont reco-theme" data-v-89477f7e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-89477f7e>vuePress-theme-reco</a></span> <span data-v-89477f7e><i class="iconfont reco-copyright" data-v-89477f7e></i> <a data-v-89477f7e><span data-v-89477f7e>LKaiLi</span>
+            
+          <span data-v-89477f7e>2021  - </span>
+          2022
+        </a></span></div></div></div> <div data-v-57e19720><main class="page"><div class="page-title" style="display:none;"><h1 class="title">TS和Vue3 使用记录</h1> <div class="page-info" data-v-0efa1f05><i class="iconfont reco-account" data-v-0efa1f05><span data-v-0efa1f05>LKaiLi</span></i> <i class="iconfont reco-date" data-v-0efa1f05><span data-v-0efa1f05>2022-09-05</span></i> <i class="iconfont reco-eye" data-v-0efa1f05><span id="/blogs/docs/TypeScript/0_1_TS_Vue.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-0efa1f05><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-0efa1f05><span class="tag-item" data-v-0efa1f05>TypeScript</span><span class="tag-item" data-v-0efa1f05>Vue3</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><div class="custom-block tip"><p class="custom-block-title">介绍</p> <p>TS和Vue3 使用记录 记录一些踩坑内容<br></p></div> <h2 id="vue3-在原型链上创建属性"><a href="#vue3-在原型链上创建属性" class="header-anchor">#</a> Vue3 在原型链上创建属性</h2> <ul><li>通过<code>install</code>Vue3在原型链上注册一些全局内容 比如一些描述性的内容</li></ul> <blockquote><p>配置一个全局文件</p></blockquote> <ul><li>通过<code>export{}</code>进行命名导出</li></ul> <div class="language-tsx extra-class"><pre class="language-tsx"><code><span class="token comment">/**
+ * 全局配置文件
+ */</span>
+<span class="token comment">// 按钮名称</span>
+<span class="token keyword">const</span> button <span class="token operator">=</span> <span class="token punctuation">{</span>
+  reset<span class="token operator">:</span> <span class="token string">'重 置'</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span>  button <span class="token punctuation">}</span>
+
+</code></pre></div><blockquote><p>在入口文件 <code>main.ts</code></p></blockquote> <ul><li>在入口文件中导入并注册</li> <li><font color="#ff3040">注意: 全局属性一定要用<code>$</code>开头</font></li> <li><font color="#ff3040">注意: 如果你在Vue的原型链上 注册新的内容 那么必须定义后扩充 <code>@vue/runtime-core</code> 设置你注册的类型</font></li></ul> <div class="language-tsx extra-class"><pre class="language-tsx"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> createApp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createPinia <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'pinia'</span>
+
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
+
+<span class="token comment">// 导入按钮配置</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/settings'</span>
+<span class="token comment">// 创建Vue3要添加的原型链方法</span>
+<span class="token keyword">const</span> ret <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">install</span><span class="token punctuation">(</span><span class="token parameter">App<span class="token operator">:</span> any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 通过config.globalProperties给其添加原型链方法</span>
+    <span class="token comment">// app.config.globalProperties.$要创建的原型链方法名 = 创建的虚拟Dom方法</span>
+    App<span class="token punctuation">.</span>config<span class="token punctuation">.</span>globalProperties<span class="token punctuation">.</span>$b <span class="token operator">=</span> button <span class="token comment">// 全局属性一定要以$开头</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 定义了全局方法之后需要扩充类型</span>
+<span class="token keyword">declare</span> <span class="token keyword">module</span> <span class="token string">'@vue/runtime-core'</span> <span class="token punctuation">{</span>
+  <span class="token keyword">interface</span> <span class="token class-name">ComponentCustomProperties</span> <span class="token punctuation">{</span>
+    $b<span class="token operator">:</span> <span class="token punctuation">{</span>
+      reset<span class="token operator">:</span> <span class="token builtin">string</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">createApp</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">createPinia</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>ret<span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span>
+
+</code></pre></div><blockquote><p>在Vue中使用</p></blockquote> <ul><li>在模板<code>&lt;template&gt;</code>中 直接用即可</li> <li>在<code>&lt;script&gt;</code>中 需要导入<a href="">getCurrentInstance</a>获取当前组件实例并且需要断言<code>as any</code>其类型
+<ul><li><a href="">getCurrentInstance</a>  据说是内部接口 不稳定 只建议用来使用全局注册 并且打包后 会失去其实例 只会保留<code>$</code>符号的内容</li></ul></li></ul> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span> {{ $b.reset }} <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ts<span class="token punctuation">&quot;</span></span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token comment">// 导入getCurrentInstance 使用原型链对象方法</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> getCurrentInstance <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token comment">// 实例化 getCurrentInstance 使用原型链对象方法 并且结构proxy</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> proxy <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">getCurrentInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> any <span class="token comment">// 主要进行断言</span>
+<span class="token comment">// 使用原型链上的内容</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>proxy<span class="token punctuation">.</span>$b<span class="token punctuation">.</span>reset<span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----> <!----></main> <!----></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><div></div><APlayer audio="" fixed="true" mini="true" theme="#647ea0" loop="loop" order="list" preload="auto" volume="0.3" mutex="true" lrc-type="0" list-folded="true" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div id="goTop" class="hide-cat" data-v-bf92849a></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 LKaiLi
+    </div> <div class="operation" style="right:90px;bottom:40px;display:none;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:none;" data-v-5775ee02></i></div> <canvas id="banniang" width="120" height="322" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.53b033c0.js" defer></script><script src="/assets/js/5.cf81efa1.js" defer></script><script src="/assets/js/1.817ad2e8.js" defer></script><script src="/assets/js/32.ce58d15a.js" defer></script>
+  </body>
+</html>

@@ -35,7 +35,6 @@ Vscode快速设置文档 涉及到settings和eslint<br>
   "window.menuBarVisibility": "default",
   "workbench.activityBar.visible": true,
   "liveServer.settings.port": 5500,
-  "vsicons.dontShowNewVersionMessage": true,
   "workbench.settings.useSplitJSON": true,
   "less.compile": {
     // "compress":  true,  // 是否删除多余空白字符
@@ -164,15 +163,24 @@ Vscode快速设置文档 涉及到settings和eslint<br>
   "workbench.editor.untitled.hint": "hidden",
   "settingsSync.ignoredExtensions": [],
   "workbench.settings.enableNaturalLanguageSearch": false,
-  "tabnine.experimentalAutoImports": true,
   "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
   "vite.open": false,
   "vetur.completion.autoImport": false,
   "vetur.validation.interpolation": false,
   "vetur.validation.script": false,
   "vetur.validation.template": false,
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "prettier.semi": false,
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false
+  },
+  "prettier.singleQuote": true
 }
+
 ```
 
 ## Vue2 eslint设置
