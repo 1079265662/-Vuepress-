@@ -130,28 +130,6 @@ var plane = new THREE.Mesh(geometry, material);
     })
 ```
 
-## 导入纹理 TextureLoader()
-
-* 纹理一般是指我们常见的在一些第三方程序中创建的图像，如PNG和JPG类型的图。我们把这张图片放在立方体上。（我通常称为`贴图`）。我们需要做的就是创建一个TextureLoader。调用它的load方法，同时传入图像的URL，并将材质的 map 属性设置为该方法的返回值
-* [TextureLoader()](https://threejs.org/docs/?q=TextureLoade#api/zh/loaders/TextureLoader ) 通常用来加载一张图片可以返回一个纹理对象[Texture](https://threejs.org/docs/?q=TextureLoade#api/zh/textures/Texture) 作为一个表面，或者作为反射/折射贴图
-* [TextureLoader()](https://threejs.org/docs/?q=TextureLoade#api/zh/loaders/TextureLoader) 也可以**制作**`序列帧动画`
-
-### **网格模型使用加载的纹理贴图**
-
-* 配合[基础网格材质MeshBasicMaterial()](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/MeshBasicMaterial)的[.map](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/MeshBasicMaterial.map) 把加载好纹理变成网格模型的贴图
-
-```js
-  // 获取图片网格材质
-  const texture = new THREE.TextureLoader().load('https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E5%B0%8Fmao.jpg')
-  // 使用网格材质
-  const skyBoxMaterial = new THREE.MeshBasicMaterial({
-    map: texture,
-    side: THREE.DoubleSide
-  })
-  const mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-  scene.add(mesh);  //网格模型添加到场景中
-```
-
 ## Loader加载器在Vue cil中加载
 
 * 在Vue cil使用[.Loader](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader)加载器 需要注意 如果想使用本地资源 需要把资源文件放到[public](https://cli.vuejs.org/zh/guide/html-and-static-assets.html#public-%E6%96%87%E4%BB%B6%E5%A4%B9)非编译静态(必须绝对路径) 或者 `assets`编译静态中
@@ -176,9 +154,9 @@ loader.load(`${process.env.BASE_URL}model/model.gltf`, function (gltf) { // 进�
 * `assets `编译资源 他会被webpack进行编译处理 所以在非`vue`文件中 引入会出问题 需要通过es6`import` 或 CommonJs `require` 方式导入进来
 
 ```js
-// require方式导入
+// require方式导入 (适合webpack和vite)
 const img = require('@/assets/火焰/火焰.png')
-// import方式导入
+// import方式导入 (适合vite)
 import img from '@/assets/火焰/火焰.png'
 // 加载导入的纹理贴图
 const texture = textureLoader.load(img)

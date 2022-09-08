@@ -119,7 +119,8 @@ renderer.setClearColor('#00577')
   2. 创建相机 [Camera](https://threejs.org/docs/index.html?q=Camera#api/zh/cameras/Camerad)
   3. 创建网格模型 [Mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh)
      *  可包含材质 [Material](https://threejs.org/docs/index.html?q=Material#api/zh/constants/Materials)
-     *  颜色 [Color]()
+     *  颜色 [Color](./3_9_three.js_Color.md)
+     *  纹理 [Texture](./4_three.js_Texture.md)
   4. 光源的设置(非必须) [Light](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/Light)
   5. 创建渲染器 [WebGLRenderer](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer)
   6. 把渲染器绑定到指定页面元素上(可通过[element.appendChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)进行绑定) 通过[canvas](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API) 渲染[WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
@@ -529,56 +530,60 @@ controls.enableDamping = true
 *  [三维向量（Vector3）](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3) x y z轴
   * 该类表示的是一个三维向量（3D [vector](https://en.wikipedia.org/wiki/Vector_space)）。 一个三维向量表示的是一个有顺序的、三个为一组的数字组合（标记为x、y和z）， 可被用来表示很多事物
   * `CSS3DObject` CSS3对象模型、`CSS3DSprite` CSS3精灵模型
-* 如果你需要设置 x, y, z轴的值 就要使用三维向量（Vector3）[.set ](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.set)进行赋值修改
+
+### **添加拷贝修改相关语法**
+
+* 对向量( `Vector2` 和 `Vector3` )数据的处理方法
+
+> 假设以`.position`模型世界坐标位置为例
+
+* [.add(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.add) 将传入的向量v和这个向量相加 可以对x y z 轴进行相加处理
 
 ```js
-二维三维可用向量.scale.set(0.3, 0.3, 0.3) // 设置xyz的值 需要.set设置
+const coordinate = new THREE.Vector3(200, 50, 50)
+Object3D.position.add(coordinate)
 ```
 
-* 三维向量和二维向量 都需要用到以下修改值的方法 
+* [.copy(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.copy) 将所传入`Vector3`的x、y和z属性复制给这一`Vector3`。覆盖原有的 x y z
 
-  > 假设以`.position`模型世界坐标位置为例
+```js
+const coordinate = new THREE.Vector3(200, 50, 50)
+Object3D.position.copy(coordinate)
+```
 
-  * [.add(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.add) 将传入的向量v和这个向量相加 可以对x y z 轴进行相加处理
+* [.set(number)](https://threejs.org/docs/?q=Vector3#api/zh/math/Vector3.set) 设置该向量的x、y 和 z 分量。覆盖原有的 x y z 不用 `Vector3`用数字设置即可
 
-  ```js
-  const coordinate = new THREE.Vector3(200, 50, 50)
-  Object3D.position.add(coordinate)
-  ```
+```js
+Object3D.position.set(0, 0, 0)
+```
 
-  * [.copy(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.copy) 将所传入`Vector3`的x、y和z属性复制给这一`Vector3`。覆盖原有的 x y z
+* [.clone(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.clone) 返回一个新的`Vector3`，其具有和当前这个向量相同的x、y和z。复制一份 x y z 不修改原数据 类似于深拷贝向量一份数据
 
-  ```js
-  const coordinate = new THREE.Vector3(200, 50, 50)
-  Object3D.position.copy(coordinate)
-  ```
+```js
+const ret = Object3D.position.clone() 
+console.log(ret) // ret里面包含Vector3
+```
 
-  * [.set(number)](https://threejs.org/docs/?q=Vector3#api/zh/math/Vector3.set) 设置该向量的x、y 和 z 分量。覆盖原有的 x y z 不用 `Vector3`用数字设置即可
+* 也可以直接赋值或者进行运算符处理指定坐标
 
-  ```js
-  Object3D.position.set(0, 0, 0)
-  ```
+```js
+ // 赋值操作
+	Object3D.position.x = 20;
+    Object3D.position.y = 20;
+    Object3D.position.z = 2;
+// 相加相减操作
+	Object3D.position.x += 20;
+    Object3D.position.y -= 20;
+```
 
-  * [.clone(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.clone) 返回一个新的`Vector3`，其具有和当前这个向量相同的x、y和z。复制一份 x y z 不修改原数据
+* 创建一个新的`Vector2`, `Vector3`进行修改
 
-  ```js
-  const ret = Object3D.position.clone() 
-  console.log(ret) // ret里面包含Vector3
-  ```
+```js
+Object2D.position = new THREE.Vector2(0.5, 0.5)
+Object3D.position = new THREE.Vector3(0.5, 0.5, 0.5)
+```
 
-  * 也可以直接赋值或者进行运算符处理指定坐标
-
-  ```js
-   // 赋值操作
-  	Object3D.position.x = 20;
-      Object3D.position.y = 20;
-      Object3D.position.z = 2;
-  // 相加相减操作
-  	Object3D.position.x += 20;
-      Object3D.position.y -= 20;
-  ```
-
-### **获取模型的坐标**
+## **获取模型的坐标**
 
 *  [.getWorldPosition](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.getWorldPosition) 方法可以获取到模型的坐标 他可以用来获取世界坐标 可以通过`.getObjectByName()`获取模型的name 然后再使用该方法 获取其世界坐标
 *  `Vector3`是threejs的三维向量对象,可以通过`Vector3`对象表示一个顶点的xyz坐标，顶点的法线向量。

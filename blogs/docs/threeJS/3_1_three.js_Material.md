@@ -13,11 +13,10 @@ three.js 之 Material 材质 <br>
 
 <!-- more -->
 
-
-
 ## 材质种类
 
 * 在three.js中，材质决定了几何图形中的表面是如何画的。如果几何图形是骨架，定义了形状，那么材质就是皮肤。three.js 中有许多不同种类的材质，他们拥有不同的属性，像反光，纹理映射，调整透明度。
+* 任何类型的材质都是 [Material](https://threejs.org/docs/index.html?q=mater#api/zh/materials/Material)的基类
 
 ## 网格基础材质([Basic Material](https://link.segmentfault.com/?enc=BFh52AedUaRX7Bj6NkEpdg%3D%3D.ee7gn79A%2Bs8r4ZFlaCWhLNXExJIoR9kjLCRG8zGuHJdUBduyw4n1HxUyedvjvDx0K8XgfJ%2FUzeoJQWFBLyNIIH%2FuZvIpiSbx%2FxbvSzx%2BXos%3D))
 
