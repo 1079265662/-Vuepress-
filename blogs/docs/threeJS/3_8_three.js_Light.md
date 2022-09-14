@@ -13,17 +13,13 @@ three.js 之 Loader 几何体<br>
 
 <!-- more -->
 
-## **前言**
+## 灯光前言
 
-添加灯光其实和添加其它3D对象一样简单，首先实例化一个灯光，然后通过`scene.add`将其添加到场景中。在`Three.js`中有多种类型的灯光，我们已经简单用过了环境光`AmbientLight` 和点光源`PointLight`。
-
-接下来，我们将在这一小节中详细了解所有不同类型的灯光以及如何使用它们。
-
-## **准备工作**
+添加灯光其实和添加其它3D对象一样简单，首先实例化一个灯光，然后通过`scene.add`将其添加到场景中。
 
 首先我们来准备一个基础场景（一个`Sphere`球体、一个`Box`立方体、一个`Torus`圆环和一个`Plane`平面作为地板）。
 
-因为我们要使用灯光，所以我们必须使用对灯光有反应的材质。有很多材质对灯光有反应，在前面有关材质的课程中我们已经学习过了。本节中我们将使用`MeshStandardMaterial`，因为它是我们在上一课中看到的最真实的一种。我们将材质的粗糙度`roughness`设置为0.4，这样我们就能观察到光的反射。
+`MeshStandardMaterial`标准网格材质。我们将材质的粗糙度`roughness`设置为0.4，这样我们就能观察到光的反射。
 
 <img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207272010649.png" alt="图片" style="zoom:67%;" />
 
@@ -31,7 +27,7 @@ three.js 之 Loader 几何体<br>
 
 ## **环境光AmbientLight**
 
-环境光将在场景内的所有几何图形上应用全向照明（其实就是所有颜色的亮度提升）。它的第一个参数是颜色，第二个参数是光照强度。我们可以在实例化的时候直接设置属性，也可以在以后更改它们：
+环境光将在场景内的所有几何图形上应用全向照明（四面八方的光）。它的第一个参数是颜色，第二个参数是光照强度。我们可以在实例化的时候直接设置属性，也可以在以后更改它们：
 
 ```js
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
@@ -54,12 +50,14 @@ gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
 
 如果整个场景中，只有一个环境光，那么所有几何体的材质看上去都和`BasicMaterial`一样，因为所有几何体上的面都将被平均点亮。在现实生活中，当一个物体被照亮时，物体背面不会完全是黑色的，因为光线会在墙壁和其他物体上反射到物体背面。出于性能原因，`Three.js`不支持光反射，但是我们可以使用`AmbientLight`来模拟这种光反射。
 
-## **平行光DirectionalLight**
+## **平行光/直线光DirectionalLight**
 
-平行光`DirectionalLight`通常用来模拟太阳光，第一个参数是颜色，第二个参数是强度：
+平行光/直线光`DirectionalLight`通常用来模拟太阳光，第一个参数是颜色，第二个参数是强度：<font color =#ff3040>必须设置光源位置</font>
 
 ```js
 const directionalLight = new THREE.DirectionalLight(0x00fffc, 0.3)
+ // 设置光的位置
+directionalLight.position.set(10, 10, 10)
 scene.add(directionalLight)
 ```
 
@@ -90,10 +88,12 @@ scene.add(hemisphereLight)
 
 ## **点光源PointLight**
 
-点光源就像一个看不见的电灯泡，电灯泡对周围所有的物体雨露均沾，光线均匀传播。第一个参数是颜色，第二个参数是强度：
+点光源就像一个看不见的电灯泡，电灯泡对周围所有的物体雨露均沾，光线均匀传播。第一个参数是颜色，第二个参数是强度：<font color =#ff3040>必须设置光源位置</font>
 
 ```js
 const pointLight = new THREE.PointLight(0xff9000, 0.5)
+// 设置光的位置
+pointLight.position.set(10, 10, 10)
 scene.add(pointLight)
 ```
 
@@ -180,7 +180,7 @@ scene.add(spotLight.target)
 
 <img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/5.png" alt="5" style="zoom:80%;" />
 
-## **性能优化**
+## 性能相关
 
 3D世界有了灯光之后才更加真实。但是灯光也会带来更多的性能消耗。
 
@@ -266,3 +266,5 @@ scene.add(rectAreaLightHelper)
 ## 参考文献
 
 [一文搞懂3D世界里的灯光 |《Three.js零基础直通13》](https://mp.weixin.qq.com/s?__biz=Mzg3MTUyNzQzNg==&mid=2247489582&idx=1&sn=58352429e98ca46417625407b5bad600&chksm=cefc7d4df98bf45b61bccf43fd999fea7e8fedf425cc338be58b44756622b8cb168a45ca6194&scene=178&cur_album_id=2405559566127480834#rd)
+
+[06-PBR](https://www.yuque.com/books/share/aa187c93-6603-453e-9377-9a935b59aeb4/hvvntq)

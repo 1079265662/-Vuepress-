@@ -70,11 +70,11 @@ npm install -D sass
   * 搜索: vetur 和 Validation 
 
 
-![image-20220830194140846](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202208301941893.png)
+![image-20220908191342375](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209081913444.png)
 
 ![image-20220831145046625](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202208311450671.png)
 
-### **配置Prettier **
+### **配置Prettier**
 
 手动创建`.prettierrc` 文件(不要`.js` 后缀) 前提是你在创建时候安装了Prettier 否则没效果
 
@@ -368,6 +368,22 @@ export default router
 ```
 
 * 这样`title`就能依据你路由`meta`中设置的`title` 动态显示 所以路由的动态`title`是依赖`meta`中设置 别忘了新建路由的时候 进行设置
+
+## 批量导入图片
+
+* 在js或ts中导入图片 需要用`import`进行导入使用 Vite 中提供了 `import.meta.glob` 的语法糖来解决这种**批量导入**的问题，一次性加载出这些图片文件来。
+
+```tsx
+// 单独导入
+import item0 from "../assets/image/item_0.png"
+import item1 from "../assets/image/item_1.png"
+import item2 from "../assets/image/item_2.png"
+// ...more
+import item9 from "../assets/image/item_9.png"
+
+// 批量导入
+const imgs = import.meta.globEager("../assets/image/item_*.png");
+```
 
 ## 配置Vscode
 
