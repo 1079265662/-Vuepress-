@@ -345,8 +345,6 @@ $list: adam john wynn mason kuroir;// 声明一个scss数组
 
 ```
 
-
-
 ## scss的导入方式
 
 * scss导入分为 `@import`导入 和 `@use`导入
@@ -686,6 +684,40 @@ body {
 ```js
 // 到入全局样式
 import '@/styles/index.scss'
+```
+
+## 在JS中使用scss变量
+
+* scss不光可以在Vue的`<style>`中使用 也可以作为变量通过`:export`进行导出 在js中使用scss变量
+
+> scss文件中的变量导出
+
+* 通过`:export` 把scss变量导出
+* <font color = #ff3040> 注意: 导出变量的名称不可以携带`$`符号</font>
+
+```scss
+// 提示红
+$colorRed: #ff3040;
+// 成功颜色
+$successColor: #13ce66;
+// 提示灰
+$colorGrey: #999;
+// 导出颜色 可以在其他文件中使用
+:export {
+  // 导出的颜色变量 不可以携带$符号
+  colorRed: $colorRed;
+  successColor: $successColor;
+  colorGrey: $colorGrey;
+}
+```
+
+> js或者Vue中导入scss导出的变量
+
+* 通过`import`进行导入即可 支持解构 有点类似于`export{}`具名导出
+
+```js
+import { colorRed, successColor, colorGrey } from '@/styles/common.scss'
+console.log(colorRed, successColor, colorGrey) // '#ff3040' '#13ce66' '#999'
 ```
 
 ## 导入字体库

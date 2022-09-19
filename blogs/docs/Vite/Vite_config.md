@@ -385,6 +385,33 @@ import item9 from "../assets/image/item_9.png"
 const imgs = import.meta.globEager("../assets/image/item_*.png");
 ```
 
+## 生产环境去除打印
+
+[vite-plugin-remove-console](https://github.com/xiaoxian521/vite-plugin-remove-console) Vite第三方插件可以在生产环境中移除打印和断点
+
+* npm下载包
+
+```bash
+npm install vite-plugin-remove-console -D
+```
+
+* 在`vite.config.ts`中进行配置
+
+```tsx
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import removeConsole from 'vite-plugin-remove-console';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+      // 使用去除打印和断点
+    removeConsole()
+  ]
+});
+```
+
 ## 配置Vscode
 
 * [配置Vscode](./Vscode.md) 在这里查看
