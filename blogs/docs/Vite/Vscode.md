@@ -175,10 +175,11 @@ Vscode快速设置文档 涉及到settings和eslint<br>
   "github.copilot.enable": {
     "*": true,
     "yaml": false,
-    "plaintext": false,
+    "plaintext": true,
     "markdown": false
   },
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "typescript.locale": "zh-CN"
 }
 
 ```

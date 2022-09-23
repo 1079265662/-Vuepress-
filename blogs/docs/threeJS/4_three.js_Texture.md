@@ -21,6 +21,10 @@ three.js 之 Texture 纹理<br>
 
 * `TextureLoader()` 也可以制作序列帧动画
 
+* <font color=#ff3040>注意: three.js r84遗弃了TextureLoader进度事件。对于支持进度事件的TextureLoader </font>
+
+![image-20220920100808348](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209201008434.png)
+
 ### **网格模型使用加载的纹理贴图**
 
 * 配合[基础网格材质MeshBasicMaterial()](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/MeshBasicMaterial)的[.map](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/MeshBasicMaterial.map) 把加载好纹理变成网格模型的贴图
@@ -36,7 +40,9 @@ const cubeGeometry = new THREE.BoxGeometry(1, 1, 1) // 默认就是1,1,1 宽高�
 const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map使用纹理材质
 ```
 
-## 纹理的常用操作
+## 纹理贴图的常用操作
+
+* 以下纹理的属性 基于[PBR标准网格材质(MeshStandardMaterial)](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughnessMap)进行设置 其他材质需要看文档 是否支持
 
 ### **设置偏移量 X Y**
 
@@ -197,9 +203,9 @@ const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map�
   const texture = new THREE.TextureLoader().load(logo)
   // 创建灰度纹理
   const textureGray = new THREE.TextureLoader().load(logoGray)
-
   // 创建一个在网格模型中展示的几何体
   const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
+  
   // 设置该集合体的纹理材质
   const cubeMaterial = new THREE.MeshBasicMaterial({
     // 设置纹理贴图
@@ -240,7 +246,6 @@ import logoEnv from '@/assets/door/ambientOcclusion.jpg'
 const texture = new THREE.TextureLoader().load(logo)
 // 创建环境遮挡贴图
 const textureEnv = new THREE.TextureLoader().load(logoEnv)
-
 // 创建一个在网格模型中展示的几何体
 // 参数为长宽高 以及长宽高的分段数 横截面，利于变形使用，段数越多越柔和，则段数越少越生硬。
 const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
@@ -281,7 +286,6 @@ import displacementMap from '@/assets/door/height.jpg'
 const texture = new THREE.TextureLoader().load(logo)
 // 创建置换纹理
 const textureDisplacementMap = new THREE.TextureLoader().load(displacementMap)
-
 // 创建一个在网格模型中展示的几何体
 const cubeGeometry = new THREE.BoxGeometry(3, 3, 3, 200, 200, 200) // 参数为长宽高 以及长宽高的分段数 分段数需要单独设置 默认是1
 
@@ -297,5 +301,120 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 
 ```
 
+### **设置粗糙度**
 
+* [.roughness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughness) 设置纹理贴图的整体粗糙度 **默认为0.5 最小值为0 最大值为1**
+  * 粗糙度是物体表面反光的一种表现 越光滑的物体 反光越明显 相反越粗糙的物体反光就比较受限
+
+![image-20220923142137149](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231421307.png)
+
+* [.roughnessMap](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughness) 可以设置粗糙度贴图 也就是局部粗糙度 
+
+![image-20220923143956572](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231439650.png)
+
+![image-20220923144146173](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231441262.png)
+
+* 如果同时设置`.roughness` 和 `.roughnessMap` 那么两个值将会相乘 效果更明显
+
+```tsx
+// 导入纹理
+import logo from '@/assets/door/color.jpg'
+// 导入粗糙度贴图
+import roughness from '@/assets/door/roughness.jpg'
+
+// 创建纹理
+const texture = new THREE.TextureLoader().load(logo)
+// 创建粗糙度贴图
+const textureRoughness = new THREE.TextureLoader().load(roughness)
+// 创建一个在网格模型中展示的几何体
+const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
+
+// 设置该集合体的纹理材质
+const cubeMaterial = new THREE.MeshBasicMaterial({
+    // 设置纹理贴图
+    map: texture,
+   // 设置粗糙度贴图
+   roughnessMap: textureRoughness
+   // 设置粗糙度
+   roughness: 0.5 // 默认为0.5 最小值为0 最大值为1
+}) 
+```
+
+### **设置金属度**
+
+* [.metalness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.metalness) 设置纹理贴图的整体金属度 **默认为0.5 最小值为0 最大值为1**
+
+  * 金属度代表了有多少光子是直接被反射出去, 有多少光子在进入体内,后成了漫反射 
+  * 金属度等于0, 或者很低的情况下, **直接反射会变得非常弱, 只有漫反射**
+
+  ![image-20220923151659503](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231516595.png)
+
+  * 金属度如果等于1的情况下, **所有的光子都会被反射出去, 会完全没有漫反射**
+
+  ![image-20220923151739046](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231517114.png)
+
+* [.metalnessMap](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.metalnessMap) 可以设置金属度贴图 也就是局部金属度
+
+![image-20220923153256639](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231532677.png)
+
+![image-20220923153512473](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231535524.png)
+
+* 如果同时设置`.metalness` 和 `.metalnessMap` 那么两个值将会相乘 效果更明显
+
+```tsx
+// 导入纹理
+import logo from '@/assets/door/color.jpg'
+// 导入金属贴图
+import metalness from '@/assets/door/metalness.jpg'
+
+// 创建纹理
+const texture = new THREE.TextureLoader().load(logo)
+// 创建金属贴图
+const textureMetalness = new THREE.TextureLoader().load(metalness)
+// 创建一个在网格模型中展示的几何体
+const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
+
+// 设置该集合体的纹理材质
+const cubeMaterial = new THREE.MeshBasicMaterial({
+    // 设置纹理贴图
+    map: texture,
+    // 设置金属贴图
+    metalnessMap: textureMetalness,
+    // 设置金属度
+    metalness: 0.5 // 默认为0.5 最小值为0 最大值为1
+}) 
+```
+
+### **设置法线贴图**
+
+* [.normalMap](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.normalMap) 设置法线贴图
+
+![image-20220923161909543](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231619586.png)
+
+* 法线贴图的颜色代表着反射(方向)的向量 从而规定光源的反射效果 实现光照物体的层次感
+
+![image-20220923161820345](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231618455.png)
+
+* 记得设置灯光
+
+```tsx
+import logo from '@/assets/door/color.jpg'
+// 导入法线贴图
+import normal from '@/assets/door/normal.jpg'
+
+// 创建纹理
+const texture = new THREE.TextureLoader().load(logo)
+// 创建法线贴图
+const textureNormal = new THREE.TextureLoader().load(normal)
+// 创建一个在网格模型中展示的几何体
+const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
+
+// 设置该集合体的纹理材质
+const cubeMaterial = new THREE.MeshBasicMaterial({
+    // 设置纹理贴图
+    map: texture,
+    // 导入法线贴图
+    normalMap: textureNormal
+}) 
+```
 

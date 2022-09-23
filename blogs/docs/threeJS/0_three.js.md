@@ -33,7 +33,7 @@ npm install --save three
 
 * 如果使用TS 要安装TS版本
 
-```
+```bash
 npm install --save @types/three
 ```
 
