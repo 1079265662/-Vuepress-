@@ -166,6 +166,107 @@ const texture = textureLoader.load(img)
 
 ![image-20220619171155446](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220619171155446.png)
 
+## 资源统一加载
+
+* 任何类型的加载器 建议使用统一的加载方式(声明一个加载器的常量) 这样减少复用 并且在使用[LoadingManager](https://threejs.org/docs/index.html?q=loading#api/zh/loaders/managers/LoadingManager)加载管理器的时候更加的方便
+
+> 举一个TextureLoader纹理贴图加载器案例
+
+* [MeshStandardMaterial](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial)标准网格材质的纹理贴图具备很多内容 都需要使用[TextureLoader](https://threejs.org/docs/index.html?q=TextureLoader#api/zh/loaders/TextureLoader)纹理贴图加载器 进行加载
+
+```js
+  // 声明一个加载器的常量
+  const textureLoader = new THREE.TextureLoader()
+  // 创建纹理
+  const texture = textureLoader.load(logo)
+  // 创建灰度纹理
+  const textureGray = textureLoader.load(logoGray)
+  // 创建环境遮挡贴图
+  const textureEnv = textureLoader.load(logoEnv)
+  // 创建置换纹理
+  const textureDisplacementMap = textureLoader.load(displacementMap)
+  // 创建粗糙度纹理
+  const textureRoughness = textureLoader.load(roughness)
+  // 创建金属贴图
+  const textureMetalness = textureLoader.load(metalness)
+  // 创建法线贴图
+  const textureNormal = textureLoader.load(normal)
+  // 创建一个在网格模型中展示的几何体
+  const cubeGeometry = new THREE.BoxGeometry(3, 3, 3, 200, 200, 200) // 参数为长宽高 以及长宽高的分段数 横截面，利于变形使用，段数越多越柔和，则段数越少越生硬。
+  // 使用PBR材质
+  const cubeMaterial = new THREE.MeshStandardMaterial({
+    // 设置纹理贴图image.png
+    map: texture,
+    // 设置灰度纹理贴图
+    alphaMap: textureGray,
+    // 设置透明度 一定要把透明度设置为true
+    transparent: true,
+    // 设置环境遮挡贴图
+    aoMap: textureEnv,
+    // 设置环境遮挡贴图强度
+    aoMapIntensity: 1, // 默认为1 最小值为0 最大值为1
+    // 使用置换纹理
+    displacementMap: textureDisplacementMap,
+    // 设置置换纹理强度
+    displacementScale: 0.1, // 默认为1 最小值为0 最大值为1
+    // 设置粗糙度纹理
+    roughnessMap: textureRoughness,
+    // 设置粗糙度
+    // roughness: 0.5, // 默认为0.5 最小值为0 最大值为1
+    // 设置金属度
+    metalness: 0.5, // 默认为0.5 最小值为0 最大值为1
+    // 设置金属贴图
+    metalnessMap: textureMetalness,
+    // 导入法线贴图
+    normalMap: textureNormal
+  })
+
+  // 创建一个网格模型 放入创建的几何体和其自身材质
+  const cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // Mesh(几何体, 纹理材质)
+  // 设置环境遮挡贴图第二组uv坐标 (就是把第一组uv坐标的值赋值给第二组uv坐标)
+  cube.geometry.setAttribute('uv2', new THREE.Float32BufferAttribute(cube.geometry.attributes.uv.array, 2))
+
+  // 将几何体添加到场景中
+  scene.add(cube)
+```
+
+## 加载管理器
+
+* 每个加载器 都自带一个加载监听事件 如果想统一管理加载的内容 判断加载进度或者是否加载成功 需要使用[LoadingManager](https://threejs.org/docs/index.html?q=Texture#api/zh/loaders/managers/LoadingManager)加载管理器
+  * 声明加载管理器 把其变量塞到事件的加载器中即可使用
+  * [.onProgress](https://threejs.org/docs/index.html?q=Texture#api/zh/loaders/managers/LoadingManager.onProgress) 有三个参数
+    * `url` — 被加载的项的url (资源路径 绝对/相对路径 依据你导入的方式)
+    * `itemsLoaded` — 目前已加载项的个数。
+    * `itemsTotal` — 总共所需要加载项的个数。
+* <font color =#ff3040>注意: 加载管理器适合资源统一加载(上面介绍过) 使用一个统一的加载器的常量</font>
+
+```js
+// 导入three.js
+import * as THREE from 'three'
+// 导入Vue响应式
+import { ref } from 'vue'
+// 储存加载的百分比
+const loadingNumber = ref(0)
+/**
+ * @description: 声明加载管理器
+ * @returns {any}
+ */
+function loading() {
+  // 创建加载器
+  const manager = new THREE.LoadingManager()
+  // 加载中的参数
+  manager.onProgress = (url, itemsLoaded, itemsTotal) => { // url被加载的项的url itemsLoaded目前已加载项的个数 itemsTotal总共所需要加载项的个数。
+  // 获取加载百分比: 已加载个数 / 总数量 * 100 计算出加载百分比 并取两位小数
+    loadingNumber.value = Number(((itemsLoaded / itemsTotal) * 100).toFixed(2))
+  }
+  // 返回加载管理器的变量
+  return manager
+}
+// 设置一个统一的纹理加载器
+const textureLoader = new THREE.TextureLoader(loading()) // 在加载器中使用加载管理器
+//TODO 进行各种纹理的加载操作
+```
+
 ##  参考文献
 
 [Three.js零基础入门教程(郭隆邦)](http://www.yanhuangxueyuan.com/Three.js/)

@@ -32,9 +32,12 @@ three.js 之 Texture 纹理<br>
 ```js
 // 导入纹理图片 作为贴图
 import logo from '@/assets/logo.svg'
-  // 创建纹理
-const texture = new THREE.TextureLoader().load(logo)
-   // 创建一个在网格模型中展示的几何体
+
+// 设置一个统一的纹理加载器
+const textureLoader = new THREE.TextureLoader()
+// 创建纹理
+const texture = textureLoader.load(logo)
+// 创建一个在网格模型中展示的几何体
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1) // 默认就是1,1,1 宽高深度
 // 设置该集合体的纹理材质
 const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map使用纹理材质
@@ -199,10 +202,12 @@ const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map�
   // 导入灰度纹理
   import logoGray from '@/assets/door/alpha.jpg'
 
+  // 设置一个统一的纹理加载器
+  const textureLoader = new THREE.TextureLoader()
   // 创建纹理
-  const texture = new THREE.TextureLoader().load(logo)
+  const texture = textureLoader.load(logo)
   // 创建灰度纹理
-  const textureGray = new THREE.TextureLoader().load(logoGray)
+  const textureGray = textureLoader.load(logoGray)
   // 创建一个在网格模型中展示的几何体
   const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
   
@@ -242,10 +247,12 @@ import logo from '@/assets/door/color.jpg'
 // 导入环境遮挡贴图
 import logoEnv from '@/assets/door/ambientOcclusion.jpg'
 
+// 设置一个统一的纹理加载器
+const textureLoader = new THREE.TextureLoader()
 // 创建纹理
-const texture = new THREE.TextureLoader().load(logo)
+const texture = textureLoader.load(logo)
 // 创建环境遮挡贴图
-const textureEnv = new THREE.TextureLoader().load(logoEnv)
+const textureEnv = textureLoader.load(logoEnv)
 // 创建一个在网格模型中展示的几何体
 // 参数为长宽高 以及长宽高的分段数 横截面，利于变形使用，段数越多越柔和，则段数越少越生硬。
 const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
@@ -282,10 +289,12 @@ import logo from '@/assets/door/color.jpg'
 // 导入置换纹理
 import displacementMap from '@/assets/door/height.jpg'
 
+// 设置一个统一的纹理加载器
+const textureLoader = new THREE.TextureLoader()
 // 创建纹理
-const texture = new THREE.TextureLoader().load(logo)
+const texture = textureLoader.load(logo)
 // 创建置换纹理
-const textureDisplacementMap = new THREE.TextureLoader().load(displacementMap)
+const textureDisplacementMap = textureLoader.load(displacementMap)
 // 创建一个在网格模型中展示的几何体
 const cubeGeometry = new THREE.BoxGeometry(3, 3, 3, 200, 200, 200) // 参数为长宽高 以及长宽高的分段数 分段数需要单独设置 默认是1
 
@@ -322,10 +331,12 @@ import logo from '@/assets/door/color.jpg'
 // 导入粗糙度贴图
 import roughness from '@/assets/door/roughness.jpg'
 
+// 设置一个统一的纹理加载器
+const textureLoader = new THREE.TextureLoader()
 // 创建纹理
-const texture = new THREE.TextureLoader().load(logo)
+const texture = textureLoader.load(logo)
 // 创建粗糙度贴图
-const textureRoughness = new THREE.TextureLoader().load(roughness)
+const textureRoughness = textureLoader.load(roughness)
 // 创建一个在网格模型中展示的几何体
 const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
 
@@ -367,10 +378,12 @@ import logo from '@/assets/door/color.jpg'
 // 导入金属贴图
 import metalness from '@/assets/door/metalness.jpg'
 
+// 设置一个统一的纹理加载器
+const textureLoader = new THREE.TextureLoader()
 // 创建纹理
-const texture = new THREE.TextureLoader().load(logo)
+const texture = textureLoader.load(logo)
 // 创建金属贴图
-const textureMetalness = new THREE.TextureLoader().load(metalness)
+const textureMetalness = textureLoader.load(metalness)
 // 创建一个在网格模型中展示的几何体
 const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
 
@@ -402,10 +415,12 @@ import logo from '@/assets/door/color.jpg'
 // 导入法线贴图
 import normal from '@/assets/door/normal.jpg'
 
+// 设置一个统一的纹理加载器
+const textureLoader = new THREE.TextureLoader()
 // 创建纹理
-const texture = new THREE.TextureLoader().load(logo)
+const texture = textureLoader.load(logo)
 // 创建法线贴图
-const textureNormal = new THREE.TextureLoader().load(normal)
+const textureNormal = textureLoader.load(normal)
 // 创建一个在网格模型中展示的几何体
 const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
 

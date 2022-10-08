@@ -31,51 +31,11 @@ info : info
 info  // 属性名 和 导入的熟悉值名称一样 可以省略一个
 ```
 
-## 键值对 es6规则 (Vue `methods` es6函数方法声明)规则
-
-* es6提供了 函数方法声明的简写 更方便使用函数方法声明
-
->对象函数方法键值对 老写法
-
-```js
-方法名: function(){
-}
-```
-
-> es6键值对函数方法新写法
-
-```js
-//省去了function
-方法名(){ 
-}
-```
-
-### Vue `methods` es6函数方法声明
-
-> 老方法的 `methods:`函数方法声明 `async` 函数方法
-
-```js
-方法名 : async function(){
-
-}
-```
-
-> es6 的`methods:`函数方法声明 `async` 函数方法
-
-```js
-//省去了 : 和 function
-async 方法名(){ 
-
-}
-```
-
 ## es6的动态属性名(键)
 
 * es6支持动态绑定属性名(键) 可以通过三元表达式 来动态切换属性名(键)
 
 > 演示案例
-
-* xxxxxxxxxx     // 假设这是要格式化16位银行卡的内容    const card_number = 6214831061387673    // 进行格式化    const cardNumberChange = card_number.toString().replace(/(\d{4})(?=\d)/g, "$1 ");​    // 16位银行卡格式正则表达式    const rules = /^([1-9]{1})(\d{15}|\d{18})$/        // 只能输入数字规则    const rulseNumber = /(^-?[0-9][0-9]*(.[0-9]+)?)$/      // 只能存在数字正则表达式        // 去除银行卡空格 校验是否符合16位银行卡格式  (需要先去掉空格)    if (!rules.test(card_number.replace(/\s/g, ""))) {        console.error('错误银行卡格式');    }        //  去除银行卡空格 校验是否只存在数字  (需要先去掉空格)      if (!rulseNumber.test(cardNumberChange.replace(/\s/g, ""))) {        console.error('输入的银行卡号只能包含数字');      }js
 
 ```js
 // 创建一个 控制动态属性名的状态位
@@ -101,6 +61,28 @@ const obj = {
 // 创建三元表达式 动态切换属性名 (通过对象方式 绑定对象内容为属性名)
 [flag ? msg : info]: '动态属性名字符串直接绑定'
 }
+```
+
+## 动态方法
+
+* 通过三元表达式配合[匿名函数](https://zh.javascript.info/var#iife)进行方法的动态判断
+
+```js
+  let name = '小刘'
+  let age = 18
+  let saySome = true
+
+  // 方法A
+  function sayName (name, age) {
+    console.log(`我叫${name}`)
+  }
+  // 方法B
+  function sayOld (name, age) {
+    console.log(`今年${age}岁`)
+  }
+
+  // 根据三元表达式 进行方法的动态
+  const ret = (saySome ? sayName : sayOld)(name, age)
 ```
 
 ## 展开运算符 (扩展运算符)
