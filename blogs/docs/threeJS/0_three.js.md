@@ -558,6 +558,39 @@ function dispose() {
 export { getScene, scene, controls, dispose }
 ```
 
+* 在Vue3中使用
+
+```vue
+<template>
+  <div class="canvas" ref="stateDom" />
+</template>
+<script setup lang="ts">
+// 导入Vue3的API
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+//导入绘制和销毁
+import { getScene, dispose } from './components/texture_renderer'
+
+// 获取绘制元素的Dom
+const stateDom = ref()
+
+onMounted(() => {
+  // 传递页面Dom 绘制three.js
+  getScene(stateDom.value)
+})
+
+onBeforeUnmount(() => {
+  // 切换路由销毁three.js
+  dispose()
+})
+</script>
+<script lang="ts">
+export default {
+  name: 'ThreeJs'
+}
+</script>
+
+```
+
 
 
 ## three.js相关内容记录
