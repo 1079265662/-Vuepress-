@@ -312,7 +312,7 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 
 ### **设置粗糙度**
 
-* [.roughness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughness) 设置纹理贴图的整体粗糙度 **默认为0.5 最小值为0 最大值为1**
+* [.roughness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughness) 设置纹理贴图的整体粗糙度 **默认为1 最小值为0 最大值为1 例如: 镜子的粗糙度就是0.1**
   * 粗糙度是物体表面反光的一种表现 越光滑的物体 反光越明显 相反越粗糙的物体反光就比较受限
 
 ![image-20220923142137149](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231421307.png)
@@ -353,7 +353,7 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 
 ### **设置金属度**
 
-* [.metalness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.metalness) 设置纹理贴图的整体金属度 **默认为0.5 最小值为0 最大值为1**
+* [.metalness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.metalness) 设置纹理贴图的整体金属度 **默认为0 最小值为0 最大值为1 越大金属度越明显会很黑**
 
   * 金属度代表了有多少光子是直接被反射出去, 有多少光子在进入体内,后成了漫反射 
   * 金属度等于0, 或者很低的情况下, **直接反射会变得非常弱, 只有漫反射**
@@ -431,5 +431,68 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
     // 导入法线贴图
     normalMap: textureNormal
 }) 
+
 ```
 
+## 环境贴图 (cube几何贴图加载器)
+
+* [CubeTextureLoader](https://threejs.org/docs/index.html?q=cube#api/zh/loaders/CubeTextureLoader) cube几何贴图加载器 类似于几何体的加载 对应的是几个体的每个面
+  * 通过几何贴图加载器 加载环境贴图 贴在指定的几何体面上 再设置物体的粗糙度和金属度(让其反光有镜面的效果) 就可以实现环境贴图的效果
+
+### **环境贴图的示例**
+
+* 比如说[BoxGeometry](https://threejs.org/docs/index.html?q=BOX#api/zh/geometries/BoxGeometry)或者[SphereGeometry](https://threejs.org/docs/index.html?q=sph#api/zh/geometries/SphereGeometry) 立方体有六个面 或者 球体(也是六面个和立方体一样) 使用几何贴图加载器分别对应其每个面的贴图
+  * 物体的[.roughness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughness) 粗糙度设置低一些(**0.1左右**)光滑一些 默认粗糙度(默认为1) 是没有反光效果的
+  * 物体的[.metalness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.metalness) 金属度要搞一些(**0.7左右**)镜面效果强一些 默认金属度(默认为0)是没有镜面效果的
+  * <font color =#ff3040>注意: 一定要加上灯光 推荐[DirectionalLight 平行光](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/DirectionalLight) 和 [AmbientLight 环境光](https://threejs.org/docs/index.html?q=AmbientLight#api/zh/lights/AmbientLight) 一起用</font>
+
+![image-20221015163226829](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210151632885.png)
+
+* 代码展示案例
+
+```tsx
+// 创建场景
+const scene = new THREE.Scene()
+
+// 设置一个cube加载器
+const envMapLoader = new THREE.CubeTextureLoader()
+// 加载环境贴图
+const envMapT = envMapLoader.load([
+		'px.png',
+		'nx.png',
+		'py.png',
+		'ny.png',
+		'pz.png',
+		'nz.png'
+	])
+
+// 声明一个球体
+const sphere = new THREE.SphereGeometry(1, 20, 20)
+// 声明一个标准材质
+const mmaterial = new THREE.MeshStandardMaterial({
+    // 设置金属度
+    metalness: 0.7,
+    // 设置光滑度
+    roughness: 0.1,
+    // 设置环境贴图
+    envMap: envMapT
+  })
+
+// 创建网格模型
+const mesh = new THREE.Mesh(sphere, mmaterial)
+// 添加到场景
+scene.add(mesh)
+
+// 环境光
+const light = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
+scene.add(light)
+
+// 平行光
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+directionalLight.position.set(0, 0, 10)
+scene.add(directionalLight)
+```
+
+* 环境贴图的展示效果
+
+![image-20221015201426618](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210152014663.png)

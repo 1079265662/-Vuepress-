@@ -98,6 +98,7 @@ npm install -D sass
   "useTabs": false,
   "vueIndentScriptAndStyle": false
 }
+
 ```
 
 ### **完善eslint**
@@ -385,6 +386,85 @@ import item9 from "../assets/image/item_9.png"
 const imgs = import.meta.globEager("../assets/image/item_*.png");
 ```
 
+## 静态资源处理
+
+* 在Vue中分为两种静态资源
+
+![image-20221015202600114](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210152026144.png)
+
+* `public`资源不应该作为代码进行引用 他只适合一些本地下载的资源 或...
+  * 引入 `public` 中的资源永远应该使用根绝对路径 —— 举个例子，`public/icon.png` 应该在源码中被引用为 `/icon.png`。
+  * `public` 中的资源不应该被 JavaScript 文件引用。
+  * `public`不会被vite进行编译
+* `assets`资源作为代码中统一的静态资源管理 适合在代码中进行使用
+  * `assets`会被vite进行编译 所以需要单独设置
+
+### **template模板中引用资源**
+
+* `<template>`模板中引用资源很简单 直接按照相对路径引用即可
+
+```vue
+<template>
+  <img src="@/assets/logo.svg" />
+</template>
+```
+
+### **JS/TS中单一文件的引用方式**
+
+* 通过`import` 引入静态资源 这种适合单一文件的引用
+
+```vue
+<template>
+  <img :src="logo" />
+</template>
+
+<script setup lang="ts">
+import logo from '@/assets/logo.svg' 
+</script>
+```
+
+### **封装方法多文件引用方式**
+
+* 多个文件适合封装一个方法 进行引用减少代码的耦合性
+* [静态资源处理 | Vite 官方中文文档](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url) 通过官网介绍进行封装
+
+```js
+// 封装静态资源引用方法
+const getAssetsFile = (url: string) => {
+  return new URL(`../assets/${url}`, import.meta.url).href
+}
+export { getAssetsFile }
+
+```
+
+* 在JS/TS中使用引用方法
+
+```ts
+import { getAssetsFile } from '@/utils/getAssetsFile'
+
+// 这里是three.js的cube加载器 引用多张图片进行加载
+const envMapT = envMapLoader.load([
+    getAssetsFile('environmentMaps/0/px.jpg'),
+    getAssetsFile('environmentMaps/0/nx.jpg'),
+    getAssetsFile('environmentMaps/0/py.jpg'),
+    getAssetsFile('environmentMaps/0/ny.jpg'),
+    getAssetsFile('environmentMaps/0/pz.jpg'),
+    getAssetsFile('environmentMaps/0/nz.jpg')
+])
+```
+
+* 在`<template>`模板中也可以直接使用引用方法
+
+```vue
+<template>
+  <img :src="getAssetsFile('environmentMaps/0/px.jpg')" alt="" />
+</template>
+
+<script setup lang="ts">
+import { getAssetsFile } from '@/utils/getAssetsFile'
+</script>
+```
+
 ## 生产环境去除打印
 
 [vite-plugin-remove-console](https://github.com/xiaoxian521/vite-plugin-remove-console) Vite第三方插件可以在生产环境中移除打印和断点
@@ -421,3 +501,5 @@ export default defineConfig({
 [配置 Vite 2.0 项目启动后自动打开浏览器](https://zxuqian.cn/how-to-automatically-open-browser-in-vite-projects/)
 
 [收下这7款插件，让你在使用 Vite 的时候如虎添翼](https://www.cnblogs.com/hooray/p/15213132.html)
+
+[动态引入图片的几种方式](https://www.jianshu.com/p/ddfb5a8b458b)

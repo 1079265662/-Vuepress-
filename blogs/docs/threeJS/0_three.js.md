@@ -351,20 +351,28 @@ export default {
 </style>
 ```
 
-### **TS版本**
+### **TS拆分版本(常用)**
+
+* 写在函数外面 方便导出操作 并且有销毁方法
 
 ```tsx
 // 导入three.js
 import * as THREE from 'three'
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
 interface domElement {
   appendChild: Document['appendChild']
 }
+// 储存动画id
+let animationId: number
+// 创建一个渲染器
+const renderer = new THREE.WebGLRenderer({
+  antialias: true // 开启锯齿
+})
 /**
- *
- * @param {*} nameCanvas 接收页面传来的页面Dom元素
+ * Description 创建
+ * @param {T} nameCanvas
+ * @returns {any}
  */
 function getScene<T extends domElement>(nameCanvas: T) {
   // 1. 创建three.js场景
@@ -386,27 +394,34 @@ function getScene<T extends domElement>(nameCanvas: T) {
   // 把相机添加到场景中
   scene.add(camera)
 
-  // 创建一个在网格模型中展示的几何体
-  const cubeGeometry = new THREE.BoxGeometry() // 默认就是1,1,1 宽高深度
-  // 设置该集合体的纹理材质
-  const cubeMaterial = new THREE.MeshBasicMaterial({ color: '#abe2e5' }) // 支持CSS颜色设置方式 但是需要字符串格式
-
-  // 3. 创建一个网格模型 放入创建的几何体和其自身材质
-  const cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // Mesh(几何体, 纹理材质)
-  // 将几何体添加到场景中
-  scene.add(cube)
-
-  // 添加辅助线
-  const axesHelper = new THREE.AxesHelper(5)
-  scene.add(axesHelper)
-    
-  // 4. 创建一个渲染器
-  const renderer = new THREE.WebGLRenderer({
-    antialias: true // 开启锯齿
+  // 声明一个球体
+  const sphere = new THREE.SphereGeometry(1, 20, 20)
+  // 声明一个标准材质
+  const mmaterial = new THREE.MeshStandardMaterial({
+    // 设置金属度
+    metalness: 0.7,
+    // 设置光滑度
+    roughness: 0.1
   })
-  // 设置渲染器(画布)的大小 通过setSize()设置
-  renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)
+  // 创建网格模型
+  const mesh = new THREE.Mesh(sphere, mmaterial)
+  // 添加到场景
+  scene.add(mesh)
 
+  // 环境光
+  const light = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
+  scene.add(light)
+  // 平行光
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+  directionalLight.position.set(0, 0, 10)
+  scene.add(directionalLight)
+
+  // 创建一个辅助线
+  const axesHelper = new THREE.AxesHelper(20)
+  scene.add(axesHelper)
+
+  // 4. 设置渲染器(画布)的大小 通过setSize()设置
+  renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)
   // 5. 将webgl渲染到指定的页面元素中去 (比如body 也可以设置其他页面Dom元素)
   nameCanvas.appendChild(renderer.domElement)
 
@@ -414,7 +429,6 @@ function getScene<T extends domElement>(nameCanvas: T) {
   const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
   // 设置控制器阻尼 让控制器更真实 如果该值被启用，你将必须在你的动画循环里调用.update()
   controls.enableDamping = true
-  console.log(controls)
 
   // 7. 创建更新动画的方法
   const render = () => {
@@ -423,8 +437,10 @@ function getScene<T extends domElement>(nameCanvas: T) {
     // 使用渲染器,通过相机将场景渲染出来
     renderer.render(scene, camera) // render(场景, 相机)
     // 使用动画更新的回调API实现持续更新动画的效果
-    requestAnimationFrame(render)
+    animationId = requestAnimationFrame(render)
   }
+  // 执行创建更新动画的方法
+  render()
 
   // 实现画面变化 更新渲染的内容
   window.addEventListener('resize', () => {
@@ -439,113 +455,10 @@ function getScene<T extends domElement>(nameCanvas: T) {
     // 更新渲染器的像素比
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
   })
-    
-  // 执行创建更新动画的方法
-  render()
-}
-export { getScene }
-
-```
-
-### **TS拆分版本(常用)**
-
-* 写在函数外面 方便导出操作 并且有销毁方法
-
-```tsx
-// 导入three.js
-import * as THREE from 'three'
-// 导入轨道控制器
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
-interface domElement {
-  appendChild?: Document['appendChild'] | any
-  add: any
-  children: Array<any>
-  remove: any
-}
-// 储存动画id
-let animationId: number
-//  创建three.js场景
-const scene = new THREE.Scene()
-// 创建一个渲染器
-const renderer = new THREE.WebGLRenderer({
-  antialias: true // 开启锯齿
-})
-// 创建一个透视相机
-const camera = new THREE.PerspectiveCamera(
-  // 视觉角度
-  75,
-  // 相机纵横比 取整个屏幕 宽 / 高
-  window.innerWidth / window.innerHeight,
-  // 相机的进截面 (近距离不可见范围)
-  0.1,
-  // 远截面 (远距离不可见范围)
-  1000
-)
-// 创建创建一个轨道控制器 实现交互渲染
-const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
-
-/**
- * @function 渲染元素
- * @param nameCanvas Dom元素
- */
-function getScene<T extends domElement>(nameCanvas: T) {
-  // 设置相机的所在位置 通过三维向量Vector3的set()设置其坐标系 (基于世界坐标)
-  camera.position.set(0, 0, 10) // 默认没有参数 需要设置参数
-  // 把相机添加到场景中
-  scene.add(camera)
-
-  // 创建一个在网格模型中展示的几何体
-  const cubeGeometry = new THREE.BoxGeometry(1, 1, 1) // 默认就是1,1,1 宽高深度
-  // 设置该集合体的纹理材质
-  const cubeMaterial = new THREE.MeshBasicMaterial({ color: '#abe2e5' }) // 支持CSS颜色设置方式 但是需要字符串格式
-  //  创建一个网格模型 放入创建的几何体和其自身材质
-  const cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // Mesh(几何体, 纹理材质)
-  // 将几何体添加到场景中
-  scene.add(cube)
-
-  // 添加辅助线
-  const axesHelper = new THREE.AxesHelper(5)
-  scene.add(axesHelper)
-
-  // 设置渲染器(画布)的大小 通过setSize()设置
-  renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)
-
-  // 将webgl渲染到指定的页面元素中去 (比如body 也可以设置其他页面Dom元素)
-  nameCanvas.appendChild(renderer.domElement)
-  // 设置控制器阻尼 让控制器更真实 如果该值被启用，你将必须在你的动画循环里调用.update()
-  controls.enableDamping = true
-
-  // 创建更新动画的方法
-  const render = () => {
-    // 设置阻尼感必须在动画中调用.update()
-    controls.update()
-    // 使用渲染器,通过相机将场景渲染出来
-    renderer.render(scene, camera) // render(场景, 相机)
-    // 使用动画更新的回调API实现持续更新动画的效果
-   animationId = requestAnimationFrame(render)
-  }
-
-  // 实现画面变化 更新渲染的内容
-  window.addEventListener('resize', () => {
-    // 解构window对象
-    const { innerWidth, innerHeight, devicePixelRatio } = window
-    // 更新相机的宽高比
-    camera.aspect = innerWidth / innerHeight
-    // 更新摄像机的投影矩阵
-    camera.updateProjectionMatrix()
-    // 更新渲染器
-    renderer.setSize(innerWidth, innerHeight)
-    // 更新渲染器的像素比
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
-  })
-
-  // 执行创建更新动画的方法
-  render()
 }
 
 /**
- * @function 清除加载器和动画(销毁方法)
+ * @description: 清除加载器和动画(销毁方法)
  */
 function dispose() {
   // 清除渲染器
@@ -554,8 +467,8 @@ function dispose() {
   cancelAnimationFrame(animationId)
 }
 
-// 进行导出操作
-export { getScene, scene, controls, dispose }
+export { getScene, dispose }
+
 ```
 
 * 在Vue3中使用
@@ -591,7 +504,7 @@ export default {
 
 ```
 
-
+* <font color =#ff3040>注意: 不要把 加载器中的`scene`场景和`camera`相机 放在方法外单独声明 否则[WebGLRenderer](https://threejs.org/docs/index.html?q=renderer#api/zh/renderers/WebGLRenderer)的某些api方法无法使用(比如`.dispose`销毁渲染器)</font>
 
 ## three.js相关内容记录
 
