@@ -1,6 +1,6 @@
 ---
 title: three.js 之 Scene场景
-date: 2022-06-03
+date: 2022-10-21
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-28ve6mX.jpg
 tags:
  - three.js
@@ -37,7 +37,7 @@ three.js 之Scene 场景<br>
 | **fog**                             | 使用该属性可以为场景添加雾化效果，可以产生隐藏远处物体的浓雾效果。 |
 | **overrideMaterial**                | 使用该属性可以强制场景中的所有物体使用相同的材质。           |
 
-### **给场景添加雾化效果**
+## 给场景添加雾化效果
 
 使用 **fog** 属性可以为整个场景添加雾化效果，即场景中的物体离得越远就会变得越模糊。具体样式有如下两种：
 
@@ -70,6 +70,69 @@ scene.fog = new THREE.FogExp2( '#ff3040', 0.015 );
 scene.fog = new THREE.Fog(0x005577, -100, 1000);
 // 设置渲染器背景颜色 和雾化颜色相配    
 renderer.setClearColor('#ff3040', 1); //  (颜色, 透明度)
+```
+
+## 场景添加背景图
+
+* `Scene`不光可以设置纯色背景 也支持设置背景图(环境贴图 六个面) 和`HDR`(长图)
+
+  * 普通的环境贴图 是六个面的贴图无需单独设置 六个面是按照对立面进行设置的 包裹在一起形成`Scene`的背景效果
+
+  ![image-20221020204319776](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210202043826.png)
+
+  * 单独的一张长图 需要设置 [.mapping](https://threejs.org/docs/index.html?q=text#api/zh/textures/Texture.mapping)贴图的环绕方式 设置为[EquirectangularReflectionMapping](https://threejs.org/docs/index.html?q=text#api/zh/constants/Textures)等距圆柱投影的环境贴图也被叫做经纬线映射贴图 包裹在一起形成`Scene`的背景效果
+    *  这里用了一张`HDR` 相对比普通图片较耗资原但是更逼真 `HDR`也有六张的和一整张长图
+
+  ![image-20221020204415990](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210202044100.png)
+
+### **场景添加背景图**
+
+* 通过[.background](https://threejs.org/docs/index.html?q=scene#api/zh/scenes/Scene.background) 设置场景背景图
+
+```tsx
+// 创建场景
+const scene = new THREE.Scene()
+
+// 设置一个cube加载器
+const envMapLoader = new THREE.CubeTextureLoader()
+// 加载背景图(环境贴图 六个面)
+const envMapT = envMapLoader.load([
+		'px.png',
+		'nx.png',
+		'py.png',
+		'ny.png',
+		'pz.png',
+		'nz.png'
+	])
+  // 场景添加背景图
+scene.background = envMapT
+```
+
+### 场景内的物体添加默认环境贴图
+
+* [.environment](https://threejs.org/docs/index.html?q=scene#api/zh/scenes/Scene.environment) 可以给场景内 所有的物体添加一个默认的环境贴图 通常可以配合`.background`场景背景图使用 这样场景的背景就可以很好的映射在物体上 让物体有一种镜面效果
+  * 如果物体设置了单独的环境贴图 那么将会被替换 
+  * `.environment`的默认值是`null` 可以其值改成`null`还原或取消场景内物体的环境贴图
+
+```tsx
+// 创建场景
+const scene = new THREE.Scene()
+
+// 设置一个cube加载器
+const envMapLoader = new THREE.CubeTextureLoader()
+// 加载环境贴图 (六个面环境贴图)
+const envMapT = envMapLoader.load([
+		'px.png',
+		'nx.png',
+		'py.png',
+		'ny.png',
+		'pz.png',
+		'nz.png'
+	])
+// 场景添加背景图
+scene.background = envMapT
+// 场景内所有的物体添加默认的环境贴图 (如果物体不单独设置环境贴图 默认使用这个环境贴图)
+scene.environment = HDRtexture
 ```
 
 ##  参考文献

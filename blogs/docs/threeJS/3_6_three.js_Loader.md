@@ -230,7 +230,7 @@ const texture = textureLoader.load(img)
   scene.add(cube)
 ```
 
-## 加载管理器
+## LoadingManager加载管理器
 
 * 每个加载器 都自带一个加载监听事件 如果想统一管理加载的内容 判断加载进度或者是否加载成功 需要使用[LoadingManager](https://threejs.org/docs/index.html?q=Texture#api/zh/loaders/managers/LoadingManager)加载管理器
   * 声明加载管理器 把其变量塞到事件的加载器中即可使用
@@ -239,8 +239,9 @@ const texture = textureLoader.load(img)
     * `itemsLoaded` — 目前已加载项的个数。
     * `itemsTotal` — 总共所需要加载项的个数。
 * <font color =#ff3040>注意: 加载管理器适合资源统一加载(上面介绍过) 使用一个统一的加载器的常量</font>
+* <font color =#ff3040>注意: 加载管理器不适合监控单文件加载进度(比入一张图) 单文件就是0到1的关系 不适合使用加载管理器</font>
 
-```js
+```tsx
 // 导入three.js
 import * as THREE from 'three'
 // 导入Vue响应式
@@ -251,21 +252,81 @@ const loadingNumber = ref(0)
  * @description: 声明加载管理器
  * @returns {any}
  */
-function loading() {
+function loading(): any  {
   // 创建加载器
   const manager = new THREE.LoadingManager()
-  // 加载中的参数
-  manager.onProgress = (url, itemsLoaded, itemsTotal) => { // url被加载的项的url itemsLoaded目前已加载项的个数 itemsTotal总共所需要加载项的个数。
+  // 加载中的参数  url被加载的项的url itemsLoaded目前已加载项的个数 itemsTotal总共所需要加载项的个数。
+  manager.onProgress = (url, itemsLoaded, itemsTotal) => {
   // 获取加载百分比: 已加载个数 / 总数量 * 100 计算出加载百分比 并取两位小数
     loadingNumber.value = Number(((itemsLoaded / itemsTotal) * 100).toFixed(2))
   }
   // 返回加载管理器的变量
   return manager
 }
+
+/**
+ * @description: 清除加载器和动画(销毁方法)
+ */
+function dispose() {
+  // 清除渲染器
+  renderer.dispose()
+  // 清除动画
+  cancelAnimationFrame(animationId)
+  // 重置加载的百分比
+  loadingNumber.value = 0
+}
+
 // 设置一个统一的纹理加载器
 const textureLoader = new THREE.TextureLoader(loading()) // 在加载器中使用加载管理器
 //TODO 进行各种纹理的加载操作
 ```
+
+* **提示: 建议再销毁方法中 重置加载的百分比 这样下次加载的时候显示效果更好**
+
+### **单个和多个文件统一加载器**
+
+* 单个文件用文件的加载器进行传参计算 多个文件用`LoadingManager`加载管理器
+
+```tsx
+
+
+/**
+ * @description: 声明加载管理器
+ * @param {number | void} total
+ * @param {number | void} loaded
+ * @returns {any}
+ */
+function loading(total: number | void, loaded: number | void): any {
+  // 对于单独文件的加载进行计算
+  if (total && loaded) {
+    loadingNumber.value = Number(((loaded / total) * 100).toFixed(2))
+    return
+  }
+
+  // 对于多个文件的加载使用加载器进行计算
+  // 创建加载器
+  const manager = new THREE.LoadingManager()
+  // 加载中的参数
+  manager.onProgress = (url, itemsLoaded, itemsTotal) => {
+    console.log(url, itemsLoaded, itemsTotal)
+    loadingNumber.value = Number(((itemsLoaded / itemsTotal) * 100).toFixed(2))
+  }
+  return manager
+}
+
+// 使用HDR加载器
+const HDRloader = new RGBELoader()
+// 异步加载HDR
+HDRloader.loadAsync(getAssetsFile('hdr/002.hdr'), ({ total, loaded }) => {
+    // 单独文件计算进度用加载器的方法传参
+    loading(total, loaded)
+  }).then((HDRtexture) => {
+    // TODO 做一些加载完毕的事情
+  })
+
+```
+
+
 
 ##  参考文献
 

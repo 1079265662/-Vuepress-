@@ -496,3 +496,29 @@ scene.add(directionalLight)
 * 环境贴图的展示效果
 
 ![image-20221015201426618](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210152014663.png)
+
+## HDR贴图的应用
+
+* 得益于[HDR](./7_HDR.md)出色的色彩效果 虽HDR的资源消耗巨大 (vscode安装HDR插件后 预览一次就会崩溃) 但是也可以在webgl中使用
+  * `HDR`可以作为`Sence`背景 也可以作为物体的环境贴图
+  * `HDR`加载需要使用three.js的[RGBELoader](https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/RGBELoader.js)`HDR`文件加载器控件 (控件需要单独导入)
+  * `HDR`加载建议使用[.loadAsync](https://threejs.org/docs/index.html?q=load#api/zh/loaders/Loader.loadAsync) 异步加载 `HDR`一张图往往10m以上 适合异步加载
+  * 通过`RGBELoader`加载的 `HDR`需要设置 [.mapping](https://threejs.org/docs/index.html?q=text#api/zh/textures/Texture.mapping)贴图的环绕方式 设置为[EquirectangularReflectionMapping](https://threejs.org/docs/index.html?q=text#api/zh/constants/Textures)等距圆柱投影的环境贴图也被叫做经纬线映射贴图 包裹在一起形成`Scene`的背景效果
+
+```tsx
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
+// 1. 创建three.js场景
+const scene = new THREE.Scene()
+// 添加HDR贴图
+const HDRloader = new RGBELoader()
+// 异步加载HDR贴图
+HDRloader.loadAsync('hdr/002.hdr').then((HDRtexture) => {
+    // 设置HDR贴图的贴图环绕方式
+    HDRtexture.mapping = THREE.EquirectangularReflectionMapping
+    // 给场景设置HDR背景图
+    scene.background = HDRtexture
+    // 给场景内所有的物体添加默认的环境贴图 (如果物体不单独设置环境贴图 默认使用这个环境贴图)
+    scene.environment = HDRtexture
+  })
+```
+

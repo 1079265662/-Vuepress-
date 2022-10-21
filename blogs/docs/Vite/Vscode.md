@@ -92,7 +92,7 @@ Vscode快速设置文档 涉及到settings和eslint<br>
       "arrowParens": "avoid"
     },
     "js-beautify-html": {
-      // "wrap_line_length": 250, //换行长度
+      // "wrap_line_length": 120, //换行长度
       "wrap_attributes": "auto" //属性换行 force-aligned
       // "end_with_newline": false
     }
@@ -176,10 +176,12 @@ Vscode快速设置文档 涉及到settings和eslint<br>
     "*": true,
     "yaml": false,
     "plaintext": true,
-    "markdown": false
+    "markdown": false,
+    "typescript": true
   },
   "prettier.singleQuote": true,
-  "typescript.locale": "zh-CN"
+  "typescript.locale": "zh-CN",
+  "liveServer.settings.ChromeDebuggingAttachment": false
 }
 
 ```
