@@ -22,12 +22,18 @@ three.js 之 Loader 加载器 <br>
   * 普通加载方法 [.load ](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader.load)
   * es6 `promise`加载 [.loadAsync](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader.loadAsync)
 
-加载器的分类(不确定)
+> 加载器的分类
 
 * 模型加载器 用来加载大型模型 `gltf`和`glb`模型文件 <font color =#ff3040>模型加载器需要单独`import`引入</font>
   * [GLTFLoader()](https://threejs.org/docs/index.html?q=textur#examples/zh/loaders/GLTFLoader) 加载`gltf`和`glb`文件中的3D模型
 * 贴图加载器 通常用来加载`png` `jpg` `gif` 或者制作`序列帧动画`  <font color =#ff3040>贴图加载器不需要引入</font>
   * [TextureLoader()](https://threejs.org/docs/?q=TextureLoade#api/zh/loaders/TextureLoader ) 通常用来加载一张图片可以返回一个[texture  贴图对象](https://threejs.org/docs/index.html?q=Texture#api/zh/loaders/TextureLoader) 作为一个表面，或者作为反射/折射贴图
+
+> <font color =#ff3040>注意</font>
+
+* 项目部署后 有可能资源会在服务器端进行压缩(尤其是大的图片`HDR`资源) 导致资源图片的加载大小 大于 总文件大小 计算百分比会出问题 解决该问题 可以把资源挂载到OSS云上 或者在服务器端取消图片压缩 已知会压缩的平台: [netlify](https://www.netlify.com/)
+
+![123](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210211826476.jpg)
 
 ## 导入外部加载的模型 GLTFLoader()
 
@@ -299,7 +305,7 @@ const textureLoader = new THREE.TextureLoader(loading()) // 在加载器中使�
 function loading(total: number | void, loaded: number | void): any {
   // 对于单独文件的加载进行计算
   if (total && loaded) {
-    loadingNumber.value = Number(((loaded / total) * 100).toFixed(2))
+    loadingNumber.value = Number(((loaded / total) * 100).toFixed(0)) // 取消小数点
     return
   }
 
@@ -309,7 +315,7 @@ function loading(total: number | void, loaded: number | void): any {
   // 加载中的参数
   manager.onProgress = (url, itemsLoaded, itemsTotal) => {
     console.log(url, itemsLoaded, itemsTotal)
-    loadingNumber.value = Number(((itemsLoaded / itemsTotal) * 100).toFixed(2))
+    loadingNumber.value = Number(((itemsLoaded / itemsTotal) * 100).toFixed(0)) // 取消小数点
   }
   return manager
 }
