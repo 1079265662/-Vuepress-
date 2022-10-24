@@ -369,17 +369,22 @@ let animationId: number
 const renderer = new THREE.WebGLRenderer({
   antialias: true // 开启锯齿
 })
+// 创造轨道控制器
+let controls: any
+// 创建相机
+let camera: any
+
 /**
  * Description 创建
  * @param {T} nameCanvas
  * @returns {any}
  */
-function getScene<T extends domElement>(nameCanvas: T) {
+export function getScene<T extends domElement>(nameCanvas: T) {
   // 1. 创建three.js场景
   const scene = new THREE.Scene()
 
   // 2. 创建一个透视相机
-  const camera = new THREE.PerspectiveCamera(
+  camera = new THREE.PerspectiveCamera(
     // 视觉角度
     75,
     // 相机纵横比 取整个屏幕 宽 / 高
@@ -426,7 +431,7 @@ function getScene<T extends domElement>(nameCanvas: T) {
   nameCanvas.appendChild(renderer.domElement)
 
   // 6. 创建创建一个轨道控制器 实现交互渲染
-  const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
+  controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
   // 设置控制器阻尼 让控制器更真实 如果该值被启用，你将必须在你的动画循环里调用.update()
   controls.enableDamping = true
 
@@ -460,14 +465,14 @@ function getScene<T extends domElement>(nameCanvas: T) {
 /**
  * @description: 清除加载器和动画(销毁方法)
  */
-function dispose() {
+export function dispose() {
   // 清除渲染器
   renderer.dispose()
+  // 清除轨道控制器
+  controls.dispose()
   // 清除动画
   cancelAnimationFrame(animationId)
 }
-
-export { getScene, dispose }
 
 ```
 

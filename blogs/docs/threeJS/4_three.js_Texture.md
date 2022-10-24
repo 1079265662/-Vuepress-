@@ -503,7 +503,7 @@ scene.add(directionalLight)
   * `HDR`可以作为`Sence`背景 也可以作为物体的环境贴图
   * `HDR`加载需要使用three.js的[RGBELoader](https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/RGBELoader.js)`HDR`文件加载器控件 (控件需要单独导入)
   * `HDR`加载建议使用[.loadAsync](https://threejs.org/docs/index.html?q=load#api/zh/loaders/Loader.loadAsync) 异步加载 `HDR`一张图往往10m以上 适合异步加载
-  * 通过`RGBELoader`加载的 `HDR`需要设置 [.mapping](https://threejs.org/docs/index.html?q=text#api/zh/textures/Texture.mapping)贴图的环绕方式 设置为[EquirectangularReflectionMapping](https://threejs.org/docs/index.html?q=text#api/zh/constants/Textures)等距圆柱投影的环境贴图也被叫做经纬线映射贴图 包裹在一起形成`Scene`的背景效果
+  * 通过`RGBELoader`加载的 `HDR`需要设置 [.mapping](https://threejs.org/docs/index.html?q=text#api/zh/textures/Texture.mapping)贴图的环绕方式 设置为[EquirectangularReflectionMapping](https://threejs.org/docs/index.html?q=text#api/zh/constants/Textures)等距圆柱投影的环境贴图也被叫做`经纬线映射贴图` 包裹在一起形成`Scene`的背景效果
 
 ```tsx
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'

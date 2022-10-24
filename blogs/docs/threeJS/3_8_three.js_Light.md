@@ -29,6 +29,8 @@ three.js 之 Loader 几何体<br>
 
 环境光将在场景内的所有几何图形上应用全向照明（四面八方的光）。它的第一个参数是颜色，第二个参数是光照强度。我们可以在实例化的时候直接设置属性，也可以在以后更改它们：
 
+* 环境光没有阴影效果
+
 ```js
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
 scene.add(ambientLight)
@@ -115,9 +117,11 @@ const pointLight = new THREE.PointLight(0xff9000, 0.5, 10, 2)
 
 <img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207271747003.png" alt="图片" style="zoom:80%;" />
 
-## **矩形面光源RectAreaLight**
+## **矩形面光源(平面光源)RectAreaLight**
 
 矩形面光源就像是你家客厅里的方形吸顶灯。第一个参数是颜色，第二个参数是强度，第三和第四个参数是矩形的宽度和高度：
+
+* 平面光源没有阴影
 
 ```js
 const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 2, 1, 1)
@@ -188,18 +192,18 @@ scene.add(spotLight.target)
 
 少量性能消耗的灯光：
 
-- AmbientLight 环境光
-- HemisphereLight 半球光
+- `AmbientLight` 环境光
+- `HemisphereLight `半球光
 
 中等性能消耗的灯光：
 
-- DirectionalLight 平行光
-- PointLight 点光源
+- `DirectionalLight` 平行光
+- `PointLight` 点光源
 
 大量性能消耗的灯光：
 
-- SpotLight 聚光灯
-- RectAreaLight 矩形面光源
+- `SpotLight` 聚光灯
+- `RectAreaLight` 矩形面光源
 
 ## **灯光烘焙**
 
@@ -261,7 +265,70 @@ scene.add(rectAreaLightHelper)
 
 <img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/640.png" alt="640" style="zoom:80%;" />
 
+## 开启灯光阴影
 
+* 除了一些不支持阴影的光源(比如: `AmbientLight`环境光)以外 开启灯光阴影 当灯光打在物体上 可以实现阴影效果 阴影效果比较消耗性能 所以three.js默认是关闭阴影的 但是可以通过以下步骤打开阴影效果:
+
+  0. 材质和光源要满足对光照的反应 比如`AmbientLight`环境光 和 `MeshBasicMaterial`基础网格材质 就没有光照反应 所以设置阴影无效
+
+  1. 设置[WebGLRenderer.shadowMap](https://threejs.org/docs/index.html?q=webgl#api/zh/renderers/WebGLRenderer.shadowMap)渲染器开启对阴影的计算 ` renderer.shadowMap.enabled = true`
+  2. 设置灯光投射阴影 (比如 平型光[DirectionalLight.castShadow](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/DirectionalLight.castShadow))`.castShadow = true`
+  3. 设置`Object3D`物体投射阴影(需要阴影的物体)[.castShadow](https://threejs.org/docs/index.html?q=mesh#api/zh/core/Object3D.castShadow) `Object3D.castShadow = true`
+  4. 设置`Object3D`物体接收阴影(阴影投射的物体)[.receiveShadow](https://threejs.org/docs/index.html?q=mesh#api/zh/core/Object3D.receiveShadow) `Object3D.receiveShadow= true`
+
+```tsx
+  // 声明一个球体并具备阴影效果
+  const sphere = new THREE.SphereGeometry(1, 20, 20)
+  // 声明一个标准材质
+  const mmaterial = new THREE.MeshStandardMaterial()
+  // 创建网格模型
+  const sphereMesh = new THREE.Mesh(sphere, mmaterial)
+  // TODO 开启物体投射阴影
+  sphereMesh.castShadow = true
+  // 添加到场景
+  scene.add(sphereMesh)
+
+  // 声明一个平面用来接收物体阴影
+  const plane = new THREE.PlaneGeometry(10, 10)
+  // 声明一个标准材质
+  const pmaterial = new THREE.MeshStandardMaterial()
+  // 创建网格模型
+  const planeMesh = new THREE.Mesh(plane, pmaterial)
+  // 定位平面
+  planeMesh.position.set(0, -1, 0)
+  // 旋转平面到底部
+  planeMesh.rotation.x = -Math.PI / 2
+  // TODO 开启物体接收阴影
+  planeMesh.receiveShadow = true
+  // 添加到场景
+  scene.add(planeMesh)
+
+  // 环境光
+  const light = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
+  scene.add(light)
+  // 平行光
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+  directionalLight.position.set(10, 10, 10)
+  // TODO 设置灯光投射阴影
+  directionalLight.castShadow = true
+  scene.add(directionalLight)
+
+  // 创建一个辅助线
+  const axesHelper = new THREE.AxesHelper(20)
+  scene.add(axesHelper)
+
+  // 4. 设置渲染器(画布)的大小 通过setSize()设置
+  renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)
+  // TODO 设置WebGLRenderer渲染器开启对阴影的计算
+  renderer.shadowMap.enabled = true
+  // 5. 将webgl渲染到指定的页面元素中去 (比如body 也可以设置其他页面Dom元素)
+  nameCanvas.appendChild(renderer.domElement)
+
+```
+
+* 开启阴影的效果
+
+![image-20221023204057143](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210232040198.png)
 
 ## 参考文献
 
