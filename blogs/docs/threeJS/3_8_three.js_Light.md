@@ -56,6 +56,8 @@ gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
 
 平行光/直线光`DirectionalLight`通常用来模拟太阳光，第一个参数是颜色，第二个参数是强度：<font color =#ff3040>必须设置光源位置</font>
 
+* 平行光/直线光的[.shadow](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/shadows/DirectionalLightShadow) 阴影是通过[OrthographicCamera](https://threejs.org/docs/index.html?q=camera#api/zh/cameras/OrthographicCamera) 正交相机计算生成的
+
 ```js
 const directionalLight = new THREE.DirectionalLight(0x00fffc, 0.3)
  // 设置光的位置
@@ -149,14 +151,16 @@ rectAreaLight.lookAt(new THREE.Vector3())
 
 聚光灯就像手电筒，光线从一个点朝一个方向射出，形成光束。
 
-创建时的参数列表:
+* 聚光灯的[.shadow](https://threejs.org/docs/index.html?q=SpotLight#api/zh/lights/SpotLight.shadow) 阴影是通过[SpotLightShadow](https://threejs.org/docs/index.html?q=SpotLight#api/zh/lights/shadows/SpotLightShadow) 透视相机[PerspectiveCamera](https://threejs.org/docs/index.html?q=ca#api/zh/cameras/PerspectiveCamera) 计算生成的
 
-- `color`: 光的颜色
-- `intensity`: 光照强度
-- `distance`: 光照最大距离
-- `angle`: 光束的大小
-- `penumbra`: 光束边缘的清晰度
-- `decay`: 光照的衰减速度
+- 创建时的参数列表:
+
+  - `color`: 光的颜色
+  - `intensity`: 光照强度
+  - `distance`: 光照最大距离
+  - `angle`: 光束的大小
+  - `penumbra`: 光束边缘的清晰度
+  - `decay`: 光照的衰减速度
 
 ```js
 const spotLight = new THREE.SpotLight(0x78ff00, 0.5, 10, Math.PI * 0.1, 0.25, 1)
@@ -183,6 +187,86 @@ scene.add(spotLight.target)
 ```
 
 <img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/5.png" alt="5" style="zoom:80%;" />
+
+### **设置聚光灯聚焦大小**
+
+* [.angle](https://threejs.org/docs/index.html#api/zh/lights/SpotLight.angle) 可以设置聚光灯 聚焦大小 数值越小 范围也就越大 最大范围应该不超过 **`Math.PI/2`**。默认值为 **`Math.PI/3`**。
+
+```tsx
+    // 聚光灯
+    const SpotLight = new THREE.SpotLight(0xffffff, 0.5)
+    // 设置聚光灯的位置
+    SpotLight.position.set(5, 5, 5)
+    // 开启聚光灯阴影
+    SpotLight.castShadow = true
+    //TODO 设置聚光灯的角度
+    SpotLight.angle = Math.PI / 4
+    // 添加灯光到场景
+    this.scene.add(SpotLight)
+```
+
+![image-20221025192734516](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210251927570.png)
+
+### **设置聚光灯光线距离**
+
+* [.distance](https://threejs.org/docs/index.html?q=gui#api/zh/lights/SpotLight.distance) 可以设置光线的距离 默认是`0`空值 空值就是没有衰减
+  * 如果从非`0`开始 范围是:`1~100`之间 值越大光线距离越长
+  * 光线距离越短 衰弱的效果就越强
+
+```tsx
+  // 设置聚光灯光线距离
+  SpotLight.distance = 20
+```
+
+![image-20221025202931280](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210252029333.png)
+
+### **设置聚光灯半影的衰减**
+
+* [.penumbra](https://threejs.org/docs/index.html?q=gui#api/zh/lights/SpotLight.penumbra) 可以设置聚光灯的半影衰减 默认是`0` 范围是`0~1` 值越大半影衰减越明显 会显得聚焦感降低 更虚化看上去更真实
+
+```tsx
+  // 设置聚光灯半影的衰减
+  SpotLight.penumbra = 0.5
+```
+
+![image-20221025204235175](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210252042240.png)
+
+### **设置灯光的强度(亮度)**
+
+* 可以通过聚光灯的构造器生成强度 也可以通过`.intensity`二次设置灯光强度 它会覆盖构造器的灯光强度
+
+```tsx
+    // 聚光灯
+    const SpotLight = new THREE.SpotLight(0xffffff, 0.5) // 通过构造器设置聚光灯强度
+    // 设置灯光强度
+    SpotLight.intensity = 1 // 通过对.intensity 赋值修改灯光的强度 它会覆盖构造器的灯光强度
+```
+
+## 设置物理光照和衰减量
+
+这里用聚光灯[SpotLight](https://threejs.org/docs/index.html?q=SpotLight#api/zh/lights/SpotLight) 进行演示 物理衰减对性能的要求较大 灯光会根据距离的长短进行不同效果的展示 越远越暗 越近越亮
+
+* [.physicallyCorrectLights](https://threejs.org/docs/index.html?q=SpotLight#api/zh/renderers/WebGLRenderer.physicallyCorrectLights) 可以开启[WebGLRenderer](https://threejs.org/docs/index.html?q=SpotLight#api/zh/renderers/WebGLRenderer.physicallyCorrectLights) 渲染器的物理光照效果
+* [.decay](https://threejs.org/docs/index.html?q=SpotLight#api/zh/lights/SpotLight.decay) 可以设置物理光照的衰减量 如果不开启[.physicallyCorrectLights](https://threejs.org/docs/index.html?q=SpotLight#api/zh/renderers/WebGLRenderer.physicallyCorrectLights) 物理光照将不会有效果
+  * decay 设置为等于`2`将实现现实世界的光衰减。缺省(默认)值为`1`。
+
+```tsx
+    // 聚光灯
+    const SpotLight = new THREE.SpotLight(0xffffff, 0.6)
+    // 设置聚光灯的位置
+    SpotLight.position.set(5, 5, 5)
+    // 开启聚光灯阴影
+    SpotLight.castShadow = true
+    // TODO 设置物理光照的衰减量
+    SpotLight.decay = 0.2
+    // 添加灯光到场景
+    this.scene.add(SpotLight)
+
+    // 设置渲染器(画布)的大小 通过setSize()设置
+    this.renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)
+    // TODO 开启物理光照效果
+    this.renderer.physicallyCorrectLights = true
+```
 
 ## 性能相关
 
@@ -268,9 +352,9 @@ scene.add(rectAreaLightHelper)
 ## 开启灯光阴影
 
 * 除了一些不支持阴影的光源(比如: `AmbientLight`环境光)以外 开启灯光阴影 当灯光打在物体上 可以实现阴影效果 阴影效果比较消耗性能 所以three.js默认是关闭阴影的 但是可以通过以下步骤打开阴影效果:
-
+* 阴影的基类[LightShadow](https://threejs.org/docs/index.html?q=OrbitControls#api/zh/lights/shadows/LightShadow) 可以设置阴影的一些属性
   0. 材质和光源要满足对光照的反应 比如`AmbientLight`环境光 和 `MeshBasicMaterial`基础网格材质 就没有光照反应 所以设置阴影无效
-
+  
   1. 设置[WebGLRenderer.shadowMap](https://threejs.org/docs/index.html?q=webgl#api/zh/renderers/WebGLRenderer.shadowMap)渲染器开启对阴影的计算 ` renderer.shadowMap.enabled = true`
   2. 设置灯光投射阴影 (比如 平型光[DirectionalLight.castShadow](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/DirectionalLight.castShadow))`.castShadow = true`
   3. 设置`Object3D`物体投射阴影(需要阴影的物体)[.castShadow](https://threejs.org/docs/index.html?q=mesh#api/zh/core/Object3D.castShadow) `Object3D.castShadow = true`
@@ -298,8 +382,6 @@ scene.add(rectAreaLightHelper)
   planeMesh.position.set(0, -1, 0)
   // 旋转平面到底部
   planeMesh.rotation.x = -Math.PI / 2
-  // TODO 开启物体接收阴影
-  planeMesh.receiveShadow = true
   // 添加到场景
   scene.add(planeMesh)
 
@@ -329,6 +411,85 @@ scene.add(rectAreaLightHelper)
 * 开启阴影的效果
 
 ![image-20221023204057143](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210232040198.png)
+
+* 设置阴影的属性 可以通过`灯光变量.shadow.阴影属性` 进行设置 详细可以看阴影基类[LightShadow](https://threejs.org/docs/index.html?q=OrbitControls#api/zh/lights/shadows/LightShadow)
+
+![image-20221025150515814](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210251505864.png)
+
+### **设置阴影的模糊度**
+
+* [.radius](https://threejs.org/docs/index.html?q=OrbitControls#api/zh/lights/shadows/LightShadow.radius)设置阴影的模糊度 可以降低性能消耗(?) 但是越高的模糊度 会显得阴影不够细致有重影 可以通过[.mapSize ](https://threejs.org/docs/index.html?q=OrbitControls#api/zh/lights/shadows/LightShadow.mapSize)设置阴影的质量
+  * 阴影模糊度默认值是`1`
+
+```tsx
+  // 平行光
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+  // 设置光源位置
+  directionalLight.position.set(10, 10, 10)
+  // 开启光照投射阴影
+  directionalLight.castShadow = true
+  // TODO 设置阴影的模糊度
+  directionalLight.shadow.radius = 10 // 默认值是1
+  // 添加到场景
+  scene.add(directionalLight)
+```
+
+* 模糊度对比效果
+
+![image-20221025142611593](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210251426638.png)
+
+### **设置阴影的质量**
+
+* 打游戏的都知道 阴影可以设置其质量 阴影质量越高 吃的性能就越多
+* [.mapSize ](https://threejs.org/docs/index.html?q=OrbitControls#api/zh/lights/shadows/LightShadow.mapSize)设置阴影的质量 阴影的质量必须是2的幂 默认是: (512,512)
+  * (512,512) 是低质量阴影 也是默认阴影的默认质量
+  * (1024,1024) 中等质量阴影
+  * (2048,2048) 高质量阴影
+  * (4096,4096) 超高质量阴影
+
+```tsx
+  // 平行光
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+  // 设置光源位置
+  directionalLight.position.set(10, 10, 10)
+  // 开启光照投射阴影
+  directionalLight.castShadow = true
+  // TODO 设置阴影模糊度
+  directionalLight.shadow.mapSize.set(1024, 1024)
+  // 添加到场景
+  scene.add(directionalLight)
+```
+
+### 设置灯光物体跟踪
+
+* [.target](https://threejs.org/docs/index.html?q=light#api/zh/lights/SpotLight.target) 设置灯管对物体的跟踪 大部分的灯光都支持物体跟踪 
+  * 设置灯光对应的物体(网格模型`mesh`) 这样物体移动的时候灯光也会跟着物体移动
+
+```tsx
+    // 声明一个球体
+    const sphere = new THREE.SphereGeometry(1, 20, 20)
+    // 声明一个标准材质
+    const mmaterial = new THREE.MeshStandardMaterial()
+    // 创建网格模型
+    const sphereMesh = new THREE.Mesh(sphere, mmaterial)
+    // 开启阴影
+    sphereMesh.castShadow = true
+    // 添加到场景
+    this.scene.add(sphereMesh)
+    
+   // 设置聚光灯
+    const SpotLight = new THREE.SpotLight(0xffffff, 0.5)
+    // 设置聚光灯的位置
+    SpotLight.position.set(5, 5, 5)
+    // 开启聚光灯阴影
+    SpotLight.castShadow = true
+    // TODO 设置灯光对应的物体(网格模型mesh) 这样物体移动的时候灯光也会跟着物体移动
+    SpotLight.target = sphereMesh
+    // 添加灯光到场景
+    this.scene.add(SpotLight)
+```
+
+
 
 ## 参考文献
 

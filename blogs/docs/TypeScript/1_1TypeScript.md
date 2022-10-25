@@ -659,7 +659,7 @@ user.name = 'Tom'
 ```typescript
 // 设置class类的泛型
 class UserX<T>{
-  info: T; // class类设置泛型的时候 需要添加赋值断言 防止因为未赋值进行报错
+  info!: T; // class类设置泛型的时候 需要添加赋值断言 防止因为未赋值进行报错
 }
 // 
 let myUser = new UserX<IInfo>()
@@ -669,6 +669,30 @@ console.log(myUser); // UserX{}
 * 使用泛型未赋值类class的报错
 
 ![image-20220318145503126](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220318145503126.png)
+
+### `!:`和`?:`的区别
+
+* `!:` 和 `?:` 都可以实现在`class`类中 不设置默认值只设置类型
+
+  * `!:`是断言 断言这个值现在不存在 但是在将来一旦程序运行 将会进行赋值 本质上是必填值
+
+  ![image-20221025154104534](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210251541577.png)
+
+  * `?:`是可选参数 表示这个值可以存在也可以不存在 他会自动赋值一个`undefined`的类型
+
+  ![image-20221025154054528](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210251540577.png)
+
+```tsx
+class SceneCreated {
+  // 断言类型
+  animationId!: number
+  // 可选类型
+  animation?: number
+}
+
+```
+
+
 
 ##  ts的函数 `function`
 
