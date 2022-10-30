@@ -552,7 +552,7 @@ export class CreateWorld {
   // 创建场景
   createScene() {
     // 设置相机的所在位置 通过三维向量Vector3的set()设置其坐标系 (基于世界坐标)
-    this.camera.position.set(0, 0, 10) // 默认没有参数 需要设置参数
+    this.camera.position.set(0, 5, 10) // 默认没有参数 需要设置参数
     // 把相机添加到场景中
     this.scene.add(this.camera)
 
@@ -663,7 +663,7 @@ onBeforeUnmount(() => {
 </script>
 <script lang="ts">
 export default {
-  name: 'SpotLight'
+  name: ''
 }
 </script>
 <style lang="scss" scoped>
@@ -698,59 +698,6 @@ export default {
   ☑️`Dom` [模型节点](./2_1_three.js_Dom.md)
   
   🚫`Matrix` 欧拉角
-
-## 辅助控件插件
-
-* 记录非three.js核心的内容 这些基本上都是控件之类的 用来提供页面中的交互效果 
-
-### **轨道控制器 OrbitControls**
-
-* 听起来感觉很牛逼的感觉 实际上就是相机围绕目标进行轨道运动的效果 实现来拖拽和放大缩小模型 [官方介绍](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls)
-* <font color=#ff3040>注意: 使用轨道控制器之前 需要开启[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame)更新动画 否则轨道控制器会失效</font>
-* 声明后需要进行执行 否则会报错
-
-```js
-  // 7. 创建更新动画的方法
-  const render = () => {
-    // 使用渲染器,通过相机将场景渲染出来
-    renderer.render(scene, camera) // render(场景, 相机)
-    // 使用动画更新的回调API实现持续更新动画的效果
-    requestAnimationFrame(render)
-  }
-  // 执行创建更新动画的方法
-  render()
-```
-
-> 使用轨道控制器
-
-* 作为控件`OrbitControls`需要单独导入 
-* 使用方法: `new OrbitControls(物体的相机设置, 渲染对象.domElement)`
-  * [.enableDamping](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enableDamping) 设置阻尼感如果该值被启用，你将必须在你的动画循环里调用[.update()](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.update)。
-
-
-```js
-// 导入轨道控制器
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-// 6. 创建创建一个轨道控制器 实现交互渲染
-const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
-// 设置控制器阻尼 让控制器更真实 设置后需要在动画循环里调用.update()
-controls.enableDamping = true
-```
-
-### **开启坐标轴辅助器 AxesHelper**
-
-* 开启XYZ轴辅助线可以帮助我们调试物体的位置 [官方介绍](https://threejs.org/docs/index.html?q=AxesHelper#api/zh/helpers/AxesHelper)
-* `THREE.AxesHelper(轴线长度 默认是1)`
-* 不需要单独导入内置插件 需要通过`.add()`添加到`Scene`场景中使用
-
-![image-20220424174721556](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220424174721556.png)
-
-```js
-  // 添加坐标轴辅助器
-  const axesHelper = new THREE.AxesHelper(5)
-  // 添加到场景中去
-  scene.add(axesHelper)
-```
 
 ## 二维向量（Vector2）和 三维向量（Vector3）
 

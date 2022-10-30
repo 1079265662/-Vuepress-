@@ -382,6 +382,8 @@ scene.add(rectAreaLightHelper)
   planeMesh.position.set(0, -1, 0)
   // 旋转平面到底部
   planeMesh.rotation.x = -Math.PI / 2
+  // TODO 开启物体接收阴影
+  planeMesh.receiveShadow = true
   // 添加到场景
   scene.add(planeMesh)
 
@@ -440,7 +442,7 @@ scene.add(rectAreaLightHelper)
 
 ### **设置阴影的质量**
 
-* 打游戏的都知道 阴影可以设置其质量 阴影质量越高 吃的性能就越多
+* 阴影可以设置其质量 阴影质量越高 吃的性能就越多 通过光源对象进行设置
 * [.mapSize ](https://threejs.org/docs/index.html?q=OrbitControls#api/zh/lights/shadows/LightShadow.mapSize)设置阴影的质量 阴影的质量必须是2的幂 默认是: (512,512)
   * (512,512) 是低质量阴影 也是默认阴影的默认质量
   * (1024,1024) 中等质量阴影
@@ -489,7 +491,34 @@ scene.add(rectAreaLightHelper)
     this.scene.add(SpotLight)
 ```
 
+## 灯光添加物体中
 
+* 创建后的灯光 如果直接添加到`mesh`场景中 那么是场景灯光 也可以把灯光添加到物体中 那么就是物体灯光 (比如创建一个球体模拟太阳)
+
+```tsx
+   // 创建场景
+   const scene = new THREE.Scene()
+   // 创建一个灯光小球
+    const lightBall = new THREE.Mesh(
+      // 创建小球
+      new THREE.SphereGeometry(0.1, 20, 20),
+      // 创建标准材质
+      new THREE.MeshBasicMaterial({ color: '#ff3040' })
+    )
+    // 物体添加到场景中
+    scene.add(lightBall)
+    
+    // 创建点光源
+    const directionalLight = new THREE.PointLight('#ff3040', 1)
+    // 把点光源添加到小球中
+    lightBall.add(directionalLight)
+
+```
+
+* 效果图
+  * 那么随着灯光物体变化 物体的光照效果(影子)也会发生变化
+
+![image-20221030181556010](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210301815069.png)
 
 ## 参考文献
 
