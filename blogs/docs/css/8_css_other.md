@@ -1,5 +1,5 @@
 ---
-title: 一些常用或冷门的css样式
+title: 一些有趣的css样式
 date: 2022-01-25
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-9mk3ek.jpg
 tags:
@@ -172,6 +172,7 @@ box-shadow: 0 6px 4px -2px rgb(0 0 0 / 12%);
 * 缩放功能是一个十分好用的功能 当你懒得给组件的内容重新设置大小 或者你觉得不值当就用一次 那么我们就可以用到缩放功能
 * 在早期的数据可视化的大屏使用的是rem rem虽然也是为了自适应而生的 但是rem放大后 会造成虚化现象 后来大家都使用` transform: scale()` 来实现大屏效果
 * 有意思的是 谷歌和ie可以使用 `zoom` 来实现缩放 但是火狐不支持 所以只能使用`transform: scale()`来实现
+* [transform](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform) 不光有`scale`缩放 还有`rotate`旋转 `translate`平移 `skew`偏斜 `matrix`矩阵
 
 > 效果展示
 
@@ -239,3 +240,141 @@ box-shadow: 0 6px 4px -2px rgb(0 0 0 / 12%);
   box-shadow: inset 0 0 5px rgba(139, 136, 136, 0.6);
 ```
 
+## mix-blend-mode 内容和背景 混合模式
+
+*  [mix-blend-mode](https://developer.mozilla.org/zh-CN/docs/Web/CSS/mix-blend-mode) 混合模式最常见于 `photoshop` 中，利用混合模式将多个图层混合得到一个新的效果 比如一张顶层的图片 想个下层(子级)的文字混合在一起 实现一个 问题镶嵌在图片的效果 就是混合模式 这种实现方式 和背景属性[background-clip: text](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-clip) 有异曲同工之妙。一个是背景的混合 一个是图片`<img>`或者其他块级元素(一个纯色色块)
+
+* `mix-blend-mode CSS` 属性描述了元素的内容应该与元素的直系父元素的内容和元素的背景如何混合。它有以下属性值：
+
+  - `normal`：正常
+
+  - `multiply`：正片叠底
+
+  - `screen`：滤色
+
+  - `overlay`：叠加
+
+  - `darken`：变暗
+
+  - `lighten`：变亮
+
+  - `color-dodge`：颜色减淡
+
+  - `color-burn`：颜色加深
+
+  - `hard-light`：强光
+
+  - `soft-light`：柔光
+
+  - `difference`：差值
+
+  - `exclusion`：排除
+
+  - `hue`：色相
+
+  - `saturation`：饱和度
+
+  - `color`：颜色
+
+  - `luminosity`：亮度
+
+  - `initial`：初始
+
+  - `inherit`：继承
+
+  - `unset`：复原
+
+* 这些图层混合效果效果有前辈总结 可以看看[Photoshop中高级进阶系列之一——图层混合模式原理](http://www.zcool.com.cn/article/ZMzcyNzY=.html)：
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081139113.png)
+
+> 看看部分实际效果
+
+* 写一个绝对定位盒子 定位在`<img>`标签上 给定位盒子设置一些混合效果
+
+```html
+<body>
+  <div class="box">
+    <div class="box-text">mix-blend-mode属性</div>
+    <img src="https://www.dengzhanyong.com/PHP/images/1606961604.jpg" />
+  </div>
+</body>
+
+<style>
+  .box {
+    position: relative;
+  }
+
+  .box-text {
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    background: rgb(108, 124, 15);
+    font: bolder 100px 'Alfa Slab One';
+    color: #fff;
+    text-align: center;
+    padding-top: 10px;
+    height: 100%;
+    mix-blend-mode: darken; /* 设置一些混合效果 */
+  }
+
+</style>
+```
+
+* 正常情况下是这种效果
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081335394.webp)
+
+* 现在我们来添加mix-blend-mode属性，并为它赋上不同的值看看效果：
+
+```css
+mix-blend-mode: multiply; //正片叠底
+```
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081335770.webp)
+
+```css
+mix-blend-mode: screen; //滤色 
+```
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081335355.webp)
+
+```css
+mix-blend-mode: overlay; //叠加
+```
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081334942.webp)
+
+```css
+mix-blend-mode: darken; //变暗
+```
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081334608.webp)
+
+```css
+mix-blend-mode: lighten; //变亮
+```
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081334924.webp)
+
+* 如果项目中 有用到图片/色块 需要和文字混合的效果 不妨试试混合模式 
+  * 背景属性[background-clip: text](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-clip) 可以实现背景文字的混合 不过他没有滤镜效果
+  * [mix-blend-mode](https://developer.mozilla.org/zh-CN/docs/Web/CSS/mix-blend-mode) 可以实现混合效果 并且它支持各种滤镜效果
+
+## text-align-last 文本中最后一行对齐
+
+* [text-align-last](https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-align-last) 可以设置文本的最后一行对齐规则 默认值为`aoto`
+
+  * `aoto` 最后一行不做处理由 [`text-align`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-align) 的值来确定(默认值)
+
+  ![image-20221108133138856](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081331894.png)
+
+  * `left` 最后一行文字与内容盒子的左侧对齐
+  * `right` 最后一行文字与内容盒子的右侧对齐
+  * `center` 最后一行文字与内容盒子居中对齐
+
+  ![image-20221108133228081](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081332118.png)
+
+  * `justify` 最后一行文字的开头与内容盒子的左侧对齐，末尾与右侧对齐。
+
+![image-20221108133030946](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081330989.png)

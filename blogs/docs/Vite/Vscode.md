@@ -78,24 +78,26 @@ Vscode快速设置文档 涉及到settings和eslint<br>
   // "vetur.format.defaultFormatter.js": "none",
   // "vetur.format.options.tabSize": 2,
   // "vetur.format.options.useTabs": true,
-  "vetur.format.defaultFormatter.html": "js-beautify-html",
-  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "vetur.format.defaultFormatter.html": "prettier", // 用eslint格式化html
+  "vetur.format.defaultFormatter.js": "prettier-eslint",
   "vetur.format.defaultFormatter.scss": "prettier",
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
   "vetur.format.defaultFormatterOptions": {
     "prettier": {
+      "htmlWhitespaceSensitivity": "ignore",
       "semi": false, //不加分号
       "singleQuote": true, //用单引号
       "trailingComma": "none",
       "bracketSpacing": true,
       "tabWidth": 2,
-      "arrowParens": "avoid"
-    },
-    "js-beautify-html": {
-      // "wrap_line_length": 120, //换行长度
-      "wrap_attributes": "auto" //属性换行 force-aligned
-      // "end_with_newline": false
+      "arrowParens": "avoid",
+      "printWidth": 80
     }
+    // "js-beautify-html": {
+    //   "wrap_line_length": 150, //换行长度
+    //   "wrap_attributes": "auto" //属性换行 force-aligned
+    //   // "end_with_newline": false
+    // }
   },
   // 设置不同颜色括号
   "editor.bracketPairColorization.enabled": true,
@@ -180,8 +182,8 @@ Vscode快速设置文档 涉及到settings和eslint<br>
     "typescript": true
   },
   "prettier.singleQuote": true,
-  "typescript.locale": "zh-CN",
-  "liveServer.settings.ChromeDebuggingAttachment": false
+  "liveServer.settings.ChromeDebuggingAttachment": false,
+  "eslint.codeActionsOnSave.rules": null
 }
 
 ```

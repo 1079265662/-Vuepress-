@@ -70,7 +70,7 @@ npm install -D sass
   * 搜索: vetur 和 Validation 
 
 
-![image-20220908191342375](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209081913444.png)
+![image-20221101161612601](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211011616674.png)
 
 ![image-20220831145046625](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202208311450671.png)
 
@@ -84,10 +84,10 @@ npm install -D sass
   "bracketSameLine": false,
   "bracketSpacing": true,
   "embeddedLanguageFormatting": "auto",
-  "htmlWhitespaceSensitivity": "css",
+  "htmlWhitespaceSensitivity": "ignore",
   "insertPragma": false,
   "jsxSingleQuote": false,
-  "printWidth": 120,
+  "printWidth": 80,
   "proseWrap": "preserve",
   "quoteProps": "as-needed",
   "requirePragma": false,
@@ -411,7 +411,7 @@ const imgs = import.meta.globEager("../assets/image/item_*.png");
 
 ### **JS/TS中单一文件的引用方式**
 
-* 通过`import` 引入静态资源 这种适合单一文件的引用
+* 通过`import` 引入静态资源 这种适合单一文件的引用 可以分别作用于JS/TS和`<template>`模板中
 
 ```vue
 <template>
@@ -420,6 +420,7 @@ const imgs = import.meta.globEager("../assets/image/item_*.png");
 
 <script setup lang="ts">
 import logo from '@/assets/logo.svg' 
+console.log(logo) // 引入的图片资源路径
 </script>
 ```
 
