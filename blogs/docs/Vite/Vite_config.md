@@ -112,8 +112,22 @@ npm install -D sass
 * 添加`rules`规则
 
 ```js
+/* eslint-env node */
+require('@rushstack/eslint-patch/modern-module-resolution')
+
+module.exports = {
+  root: true,
+  extends: [
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    '@vue/eslint-config-typescript/recommended',
+    '@vue/eslint-config-prettier'
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest'
+  },
   rules: {
-     // TS可以使用any (按需设置)
+    // 可以使用any
     '@typescript-eslint/no-explicit-any': 'off',
     // 标签闭合
     'vue/html-self-closing': [
@@ -128,14 +142,16 @@ npm install -D sass
         math: 'always'
       }
     ],
-    'space-before-function-paren': 0,
+    'vue/html-indent': ['off'],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     // 设置name时候自动转大小写  ["error", "PascalCase" | "kebab-case"]
     'vue/component-definition-name-casing': ['error', 'PascalCase'],
     'array-bracket-spacing': [2, 'never'] // 不允许数组括号内的空格
-    // 'no-inferrable-types': true, // 是否取消对ts的检测
+    // 'no-inferrable-types': false, // 是否取消对ts的检测
   }
+}
+
 ```
 
 2. 添加规则忽略
@@ -244,6 +260,95 @@ const router = createRouter({
 })
 
 export default router
+```
+
+### 拆分路由
+
+* 子模块`children[]` 数据太多 可以单独封装在一个js/ts文件中 通过`...`解构进行导出
+
+> 拆分示例
+
+* 这是一个完整未拆分的路由 包含父级菜单和子级模块路由
+
+```tsx
+const routes = [
+  {
+    path: '/css',
+    component: Layout,
+    meta: <any>{
+      title: 'CSS操练场',
+    },
+    children: [
+      {
+        path: '/csstext',
+        name: 'CssText',
+        // 首页无需按需加载
+        component: () => import('@/views/css_menu/css_test/index.vue'),
+        meta: {
+          title: '滚动字体',
+        },
+      },
+      {
+        path: '/loveclick',
+        name: 'LoveClick',
+        // 首页无需按需加载
+        component: () => import('@/views/css_menu/love_click/index.vue'),
+        meta: {
+          title: '一颗爱心',
+        },
+      },
+    ],
+  },
+]
+
+```
+
+* 进行拆分操作 把子模块`children[]`的数据 进行拆分操作
+
+```tsx
+export const css_menu = [
+  {
+    path: '/csstext',
+    name: 'CssText',
+    // 首页无需按需加载
+    component: () => import('@/views/css_menu/css_test/index.vue'),
+    meta: {
+      title: '滚动字体'
+    }
+  },
+  {
+    path: '/loveclick',
+    name: 'LoveClick',
+    // 首页无需按需加载
+    component: () => import('@/views/css_menu/love_click/index.vue'),
+    meta: {
+      title: '一颗爱心'
+    }
+  }
+]
+
+```
+
+* 在路由文件中进行 导入并通过`...`解构子级里面的数组数据
+  * 建议不要导出父级菜单 因为父级菜单依赖于`Layout`菜单 导出的时候 还需要在js/ts中引入`Layout`组件 而且父级菜单并不占位置并且能直观的展示有哪些父级菜单
+
+```tsx
+// 使用动态导入/懒加载
+const Layout = () => import('@/layout/index.vue')
+// 导入拆分的路由
+import { css_menu } from './modules/css_menu'
+const routes = [
+  {
+    path: '/css',
+    component: Layout,
+    meta: <any>{
+      title: 'CSS操练场',
+    },
+    // 解构子级数组里面的数据
+    children: [...css_menu],
+  },
+]
+
 ```
 
 ## 配置页面title

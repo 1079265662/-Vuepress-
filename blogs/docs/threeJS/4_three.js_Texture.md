@@ -41,6 +41,7 @@ const texture = textureLoader.load(logo)
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1) // 默认就是1,1,1 宽高深度
 // 设置该集合体的纹理材质
 const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map使用纹理材质
+
 ```
 
 ## 纹理贴图的常用操作
@@ -56,12 +57,13 @@ const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map�
 
 ```tsx
 // 1.直接修改
-  texture.offset.x = 0.5
-  texture.offset.y = 0.5
+texture.offset.x = 0.5
+texture.offset.y = 0.5
 // 2.用set(x,y)进行批量修改
-  texture.offset.set(0.5, 0.5)
+texture.offset.set(0.5, 0.5)
 // 3.创建一个新的Vector2 进行修改
-   texture.offset = new THREE.Vector2(0.5, 0.5)
+texture.offset = new THREE.Vector2(0.5, 0.5)
+
 ```
 
 ### **设置旋转弧度**
@@ -74,9 +76,10 @@ const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map�
 
 ```tsx
 // 计算出弧度
- const radians = Math.PI/180
+const radians = Math.PI / 180
 // 设置纹理的旋转
-  texture.rotation = 45 * radians
+texture.rotation = 45 * radians
+
 ```
 
 ### **修改旋转中心点**
@@ -85,17 +88,18 @@ const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map�
 
 ```tsx
 // 1.直接修改
-  texture.center.x = 0.5
-  texture.center.y = 0.5
+texture.center.x = 0.5
+texture.center.y = 0.5
 // 2.用set(x,y)进行批量修改
-  texture.center.set(0.5, 0.5)
+texture.center.set(0.5, 0.5)
 
 // 配合rotation旋转弧度使用
-  // 计算出弧度
-  const radians = Math.PI / 180
-  texture.rotation = 45 * radians
-  // 修改旋转中心点
-  texture.center.set(0.5, 0.5)
+// 计算出弧度
+const radians = Math.PI / 180
+texture.rotation = 45 * radians
+// 修改旋转中心点
+texture.center.set(0.5, 0.5)
+
 ```
 
 ### **设置贴图重复**
@@ -106,18 +110,19 @@ const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map�
     * [.wrapT](https://threejs.org/docs/index.html?q=V#api/zh/textures/Texture.wrapT) 定义了纹理贴图在垂直方向上将如何包裹
 
 ```tsx
-  // 设置重复包裹
-  // 设置水平方向上
-  texture.wrapS = THREE.RepeatWrapping
-  // 设置垂直方向
-  texture.wrapT = THREE.RepeatWrapping
+// 设置重复包裹
+// 设置水平方向上
+texture.wrapS = THREE.RepeatWrapping
+// 设置垂直方向
+texture.wrapT = THREE.RepeatWrapping
 
-  // 1.设置重复次数
-  texture.repeat.set(3, 2) // 设置 x y轴的重复次数
+// 1.设置重复次数
+texture.repeat.set(3, 2) // 设置 x y轴的重复次数
 
-  // 2.直接设置
-  texture.repeat.x = 2
-  texture.repeat.y = 3
+// 2.直接设置
+texture.repeat.x = 2
+texture.repeat.y = 3
+
 ```
 
 * 设置重复后的纹理常量
@@ -175,10 +180,10 @@ const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map�
 
 ![image-20220909134420622](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209091344653.png)
 
-### **设置灰度纹理**
+### **设置灰度/透明纹理**
 
-* [.alphaMap](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/MeshBasicMaterial.alphaMap) 灰度纹理，用于控制整个表面的不透明度。（黑色：完全透明；白色：完全不透明）
-  * 使用`.alphaMap`灰度纹理的时候 需要把纹理的[.transparent](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/Material.transparent) 设置为`true` 透明
+* [.alphaMap](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/MeshBasicMaterial.alphaMap) 灰度/透明度纹理，用于控制整个表面的不透明度。（偏黑色：越透明；偏白色：越不透明）
+  * 使用`.alphaMap`灰度纹理的时候 需要把开启纹理的[.transparent](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/Material.transparent) 是否透明设置为`true` 透明
 
 > 灰度纹理的作用
 
@@ -197,29 +202,30 @@ const cubeMaterial = new THREE.MeshBasicMaterial({ map: texture }) // 通过map�
 ![image-20220909154840606](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209091548631.png)
 
 ```tsx
-  // 导入纹理
-  import logo from '@/assets/door/color.jpg'
-  // 导入灰度纹理
-  import logoGray from '@/assets/door/alpha.jpg'
+// 导入纹理
+import logo from '@/assets/door/color.jpg'
+// 导入灰度纹理
+import logoGray from '@/assets/door/alpha.jpg'
 
-  // 设置一个统一的纹理加载器
-  const textureLoader = new THREE.TextureLoader()
-  // 创建纹理
-  const texture = textureLoader.load(logo)
-  // 创建灰度纹理
-  const textureGray = textureLoader.load(logoGray)
-  // 创建一个在网格模型中展示的几何体
-  const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
-  
-  // 设置该集合体的纹理材质
-  const cubeMaterial = new THREE.MeshBasicMaterial({
-    // 设置纹理贴图
-    map: texture,
-    // 设置灰度纹理贴图
-    alphaMap: textureGray,
-    // 设置透明度 一定要把透明度设置为true
-    transparent: true
-  }) 
+// 设置一个统一的纹理加载器
+const textureLoader = new THREE.TextureLoader()
+// 创建纹理
+const texture = textureLoader.load(logo)
+// 创建灰度纹理
+const textureGray = textureLoader.load(logoGray)
+// 创建一个在网格模型中展示的几何体
+const cubeGeometry = new THREE.BoxGeometry(3, 3, 3)
+
+// 设置该集合体的纹理材质
+const cubeMaterial = new THREE.MeshBasicMaterial({
+  // 设置纹理贴图
+  map: texture,
+  // 设置灰度纹理贴图
+  alphaMap: textureGray,
+  // 设置透明度 一定要把透明度设置为true
+  transparent: true,
+})
+
 ```
 
 ### **设置环境遮挡贴图**
@@ -255,22 +261,25 @@ const texture = textureLoader.load(logo)
 const textureEnv = textureLoader.load(logoEnv)
 // 创建一个在网格模型中展示的几何体
 // 参数为长宽高 以及长宽高的分段数 横截面，利于变形使用，段数越多越柔和，则段数越少越生硬。
-const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
+const cubeGeometry = new THREE.BoxGeometry(3, 3, 3)
 
 // 设置该集合体的纹理材质
 const cubeMaterial = new THREE.MeshBasicMaterial({
-    // 设置纹理贴图
-    map: texture,
-    // 设置环境遮挡贴图
-    aoMap: textureEnv,
-    // 设置环境遮挡贴图强度
-    aoMapIntensity: 1 // 默认为1 最小值为0 最大值为1
+  // 设置纹理贴图
+  map: texture,
+  // 设置环境遮挡贴图
+  aoMap: textureEnv,
+  // 设置环境遮挡贴图强度
+  aoMapIntensity: 1, // 默认为1 最小值为0 最大值为1
 })
 
 //  创建一个网格模型 放入创建的几何体和其自身材质
 const cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // Mesh(几何体, 纹理材质)
 // 设置环境遮挡贴图第二组uv坐标 (就是把第一组uv坐标的值赋值给第二组uv坐标)
-cube.geometry.setAttribute('uv2', new THREE.Float32BufferAttribute(cube.geometry.attributes.uv.array, 2))
+cube.geometry.setAttribute(
+  'uv2',
+  new THREE.Float32BufferAttribute(cube.geometry.attributes.uv.array, 2)
+)
 // 将几何体添加到场景中
 scene.add(cube)
 
@@ -300,12 +309,12 @@ const cubeGeometry = new THREE.BoxGeometry(3, 3, 3, 200, 200, 200) // 参数为�
 
 // 设置该集合体的纹理材质
 const cubeMaterial = new THREE.MeshBasicMaterial({
-    // 设置纹理贴图
-    map: texture,
-    // 使用置换纹理
-    displacementMap: textureDisplacementMap,
-    // 设置置换纹理强度
-    displacementScale: 0.1 // 默认为1 最小值为0 最大值为1
+  // 设置纹理贴图
+  map: texture,
+  // 使用置换纹理
+  displacementMap: textureDisplacementMap,
+  // 设置置换纹理强度
+  displacementScale: 0.1, // 默认为1 最小值为0 最大值为1
 })
 
 ```
@@ -349,6 +358,7 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
    // 设置粗糙度
    roughness: 0.5 // 默认为0.5 最小值为0 最大值为1
 }) 
+
 ```
 
 ### **设置金属度**
@@ -385,17 +395,18 @@ const texture = textureLoader.load(logo)
 // 创建金属贴图
 const textureMetalness = textureLoader.load(metalness)
 // 创建一个在网格模型中展示的几何体
-const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
+const cubeGeometry = new THREE.BoxGeometry(3, 3, 3)
 
 // 设置该集合体的纹理材质
 const cubeMaterial = new THREE.MeshBasicMaterial({
-    // 设置纹理贴图
-    map: texture,
-    // 设置金属贴图
-    metalnessMap: textureMetalness,
-    // 设置金属度
-    metalness: 0.5 // 默认为0.5 最小值为0 最大值为1
-}) 
+  // 设置纹理贴图
+  map: texture,
+  // 设置金属贴图
+  metalnessMap: textureMetalness,
+  // 设置金属度
+  metalness: 0.5, // 默认为0.5 最小值为0 最大值为1
+})
+
 ```
 
 ### **设置法线贴图**
@@ -422,15 +433,84 @@ const texture = textureLoader.load(logo)
 // 创建法线贴图
 const textureNormal = textureLoader.load(normal)
 // 创建一个在网格模型中展示的几何体
-const cubeGeometry = new THREE.BoxGeometry(3, 3, 3) 
+const cubeGeometry = new THREE.BoxGeometry(3, 3, 3)
 
 // 设置该集合体的纹理材质
 const cubeMaterial = new THREE.MeshBasicMaterial({
-    // 设置纹理贴图
-    map: texture,
-    // 导入法线贴图
-    normalMap: textureNormal
-}) 
+  // 设置纹理贴图
+  map: texture,
+  // 导入法线贴图
+  normalMap: textureNormal,
+})
+
+```
+
+### 设置深度写入
+
+* [.depthWrite](https://threejs.org/docs/index.html?q=PointsMaterial#api/zh/materials/Material.depthWrite)设贴图的深度行为 默认为`true`覆盖的 也就是两张贴图重叠在一起 默认最上层(离相机)的贴图 会被默认覆盖
+  * 通常贴图的深度写入 需要先设置 [.alphaMap](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/MeshBasicMaterial.alphaMap) 灰度/透明度纹理并且 开启纹理的[.transparent](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/Material.transparent) 是否透明设置为`true` 透明
+
+![image-20221108194438882](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081944955.png)
+
+```tsx
+// 创建深度写入点材质
+const pmaterial = new THREE.PointsMaterial({
+  color: '#ff3040',
+  size: 0.2,
+  transparent: true, // 开启透明度
+  map: texture, // 设置贴图
+  alphaMap: texture, // 设置透明贴图
+  depthWrite: false, // 关闭深度写入(防止点被遮挡)
+})
+
+```
+
+### 设置叠加混合模式
+
+* [.blending](https://threejs.org/docs/index.html?q=PointsMaterial#api/zh/materials/Material.blending) 可以设置贴图的叠加混合模式 当两张贴图叠加在一起 可以设置其混合模式
+  * `THREE.NoBlending` 不混合
+  * `THREE.NormalBlending` 正常混合(默认值)
+    * z-buffer值较大的像素将会遮挡z-buffer值较小的像素，没有纹理融合效果，设置纹理透明度无效。
+  * `THREE.AdditiveBlending` 相加混合
+    * 此混合模式只是将一个图层的像素值添加到另一个图层。如果值大于1（在RGB的情况下），则显示白色。线性减淡颜色值。由于它总是产生与输入相同或更浅的颜色，因此它也被称为“加亮”。
+  * `THREE.SubtractiveBlending` 相减混合
+    * 此混合模式将一个图层的像素值减去另一个图层像素值。如果为负值，则显示黑色。
+  * `THREE.MultiplyBlending` 相乘混合
+    * 颜色混合，源图像RGB分量与目标图像RGB分量的相乘。
+  * `THREE.CustomBlending` 自定义混合
+* 通常需要设置[.depthWrite](https://threejs.org/docs/index.html?q=PointsMaterial#api/zh/materials/Material.depthWrite)设贴图的深度行为为`false`
+
+![image-20221108200403281](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211082004340.png)
+
+```tsx
+// 创建点材质
+const pmaterial = new THREE.PointsMaterial({
+  color: '#ff3040',
+  size: 0.2,
+  transparent: true, // 开启透明度
+  map: texture, // 设置贴图
+  alphaMap: texture, // 设置透明贴图
+  depthWrite: false, // 关闭深度写入(防止点被遮挡)
+  blending: THREE.NormalBlending, // 设置混合模式 (AdditiveBlending为叠加)
+})
+
+```
+
+### 设置顶点着色(默认颜色)
+
+* [.vertexColors](https://threejs.org/docs/index.html?q=vertexColors#api/zh/materials/Material.vertexColors) 可以设置材质/材质的顶点颜色 (默认为`false`) 顶点颜色是指每个顶点都有一个颜色值(默认色值) 默认顶点颜色的优先级高于材质颜色(通过.color设置的颜色)
+  * 顶点颜色的值是一个0-1的值 0表示黑色 1表示白色
+  * 部分材质(例如 [点材质(PointsMaterial)](https://threejs.org/docs/index.html?q=PointsMaterial#api/zh/materials/PointsMaterial) 修改材质的`.color`时候 就需要设置其顶点着色为`true`
+
+```tsx
+const starMaterial = new THREE.PointsMaterial({
+  size: 0.3,
+  map: material,
+  alphaMap: material,
+  transparent: true, // 开启透明度
+  depthWrite: false, // 关闭深度写入(防止点被遮挡),
+  vertexColors: true, // 开启顶点颜色 (默认为false) 顶点颜色是指每个顶点都有一个颜色值(默认色值) 顶点颜色的优先级高于材质颜色(通过.color设置的颜色) 顶点颜色的值是一个0-1的值 0表示黑色 1表示白色
+})
 
 ```
 
@@ -458,25 +538,25 @@ const scene = new THREE.Scene()
 const envMapLoader = new THREE.CubeTextureLoader()
 // 加载环境贴图
 const envMapT = envMapLoader.load([
-		'px.png',
-		'nx.png',
-		'py.png',
-		'ny.png',
-		'pz.png',
-		'nz.png'
-	])
+  'px.png',
+  'nx.png',
+  'py.png',
+  'ny.png',
+  'pz.png',
+  'nz.png',
+])
 
 // 声明一个球体
 const sphere = new THREE.SphereGeometry(1, 20, 20)
 // 声明一个标准材质
 const mmaterial = new THREE.MeshStandardMaterial({
-    // 设置金属度
-    metalness: 0.7,
-    // 设置光滑度
-    roughness: 0.1,
-    // 设置环境贴图
-    envMap: envMapT
-  })
+  // 设置金属度
+  metalness: 0.7,
+  // 设置光滑度
+  roughness: 0.1,
+  // 设置环境贴图
+  envMap: envMapT,
+})
 
 // 创建网格模型
 const mesh = new THREE.Mesh(sphere, mmaterial)
@@ -491,6 +571,7 @@ scene.add(light)
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
 directionalLight.position.set(0, 0, 10)
 scene.add(directionalLight)
+
 ```
 
 * 环境贴图的展示效果
@@ -513,12 +594,13 @@ const scene = new THREE.Scene()
 const HDRloader = new RGBELoader()
 // 异步加载HDR贴图
 HDRloader.loadAsync('hdr/002.hdr').then((HDRtexture) => {
-    // 设置HDR贴图的贴图环绕方式
-    HDRtexture.mapping = THREE.EquirectangularReflectionMapping
-    // 给场景设置HDR背景图
-    scene.background = HDRtexture
-    // 给场景内所有的物体添加默认的环境贴图 (如果物体不单独设置环境贴图 默认使用这个环境贴图)
-    scene.environment = HDRtexture
-  })
+  // 设置HDR贴图的贴图环绕方式
+  HDRtexture.mapping = THREE.EquirectangularReflectionMapping
+  // 给场景设置HDR背景图
+  scene.background = HDRtexture
+  // 给场景内所有的物体添加默认的环境贴图 (如果物体不单独设置环境贴图 默认使用这个环境贴图)
+  scene.environment = HDRtexture
+})
+
 ```
 

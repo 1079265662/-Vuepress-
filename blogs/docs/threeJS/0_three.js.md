@@ -636,13 +636,15 @@ export class CreateWorld {
 
 ```vue
 <template>
-  <div class="canvas" ref="stateDom" />
+  <div>
+    <div ref="stateDom" />
+  </div>
 </template>
 <script setup lang="ts">
 // 导入Vue3的API
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 //导入绘制和销毁
-import { CreateWorld } from './components/renderer_soptlight'
+import { CreateWorld } from './components/ksy_renderer'
 
 // 获取Dom
 const stateDom = ref()
@@ -650,6 +652,8 @@ const stateDom = ref()
 let Three: any = null
 
 onMounted(() => {
+  console.log(123)
+
   // 创建three.js实例
   Three = new CreateWorld(stateDom.value)
   // 传递页面Dom 绘制three.js
@@ -663,17 +667,10 @@ onBeforeUnmount(() => {
 </script>
 <script lang="ts">
 export default {
-  name: ''
+  name: 'StartSky'
 }
 </script>
-<style lang="scss" scoped>
-.canvas {
-  background: #000;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-</style>
+<style lang="scss" scoped></style>
 
 ```
 
