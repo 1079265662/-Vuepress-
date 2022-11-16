@@ -522,16 +522,19 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class CreateWorld {
+  // 绘制canvas的Dom
+  canvas!: any
+  // 轨道控制器
+  controls!: OrbitControls
+  // 设置动画id
+  animationId!: number
+
   constructor(canvas: any) {
     // 接收传入的画布Dom元素
     this.canvas = canvas
   }
-  canvas!: any
-  // 设置动画id
-  animationId!: number
-  // 创造轨道控制器
-  controls!: any
-  // 设置渲染器
+
+  // 创建渲染器
   renderer = new THREE.WebGLRenderer({
     antialias: true // 开启锯齿
   })
@@ -550,33 +553,15 @@ export class CreateWorld {
   )
 
   // 创建场景
-  createScene() {
+  createScene = () => {
     // 设置相机的所在位置 通过三维向量Vector3的set()设置其坐标系 (基于世界坐标)
     this.camera.position.set(0, 5, 10) // 默认没有参数 需要设置参数
     // 把相机添加到场景中
     this.scene.add(this.camera)
 
-    // 声明一个球体
-    const sphere = new THREE.SphereGeometry(1, 20, 20)
-    // 声明一个标准材质
-    const mmaterial = new THREE.MeshStandardMaterial({
-      // 设置金属度
-      metalness: 0.7,
-      // 设置光滑度
-      roughness: 0.1
-    })
-    // 创建网格模型
-    const mesh = new THREE.Mesh(sphere, mmaterial)
-    // 添加到场景
-    this.scene.add(mesh)
-
     // 环境光
     const light = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
     this.scene.add(light)
-    // 平行光
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
-    directionalLight.position.set(0, 0, 10)
-    this.scene.add(directionalLight)
 
     // 创建一个辅助线
     const axesHelper = new THREE.AxesHelper(20)
@@ -592,17 +577,7 @@ export class CreateWorld {
     // 设置控制器阻尼 让控制器更真实 如果该值被启用，你将必须在你的动画循环里调用.update()
     this.controls.enableDamping = true
 
-    // 创建更新动画的方法
-    const render = () => {
-      // 设置阻尼感必须在动画中调用.update()
-      this.controls.update()
-      // 使用渲染器,通过相机将场景渲染出来
-      this.renderer.render(this.scene, this.camera) // render(场景, 相机)
-      // 使用动画更新的回调API实现持续更新动画的效果
-      this.animationId = requestAnimationFrame(render)
-    }
-    // 执行创建更新动画的方法
-    render()
+    this.render()
 
     // 实现画面变化 更新渲染的内容
     window.addEventListener('resize', () => {
@@ -619,8 +594,18 @@ export class CreateWorld {
     })
   }
 
+  render = () => {
+    // console.log(this.animationId)
+    // 设置阻尼感必须在动画中调用.update()
+    this.controls.update()
+    // 使用渲染器,通过相机将场景渲染出来
+    this.renderer.render(this.scene, this.camera) // render(场景, 相机)
+    // 使用动画更新的回调API实现持续更新动画的效果
+    this.animationId = requestAnimationFrame(this.render)
+  }
   // 销毁渲染内容
-  dispose() {
+  dispose = () => {
+    // console.log(this.animationId)
     // 清除渲染器
     this.renderer.dispose()
     // 清除轨道控制器
@@ -652,8 +637,6 @@ const stateDom = ref()
 let Three: any = null
 
 onMounted(() => {
-  console.log(123)
-
   // 创建three.js实例
   Three = new CreateWorld(stateDom.value)
   // 传递页面Dom 绘制three.js
@@ -667,7 +650,7 @@ onBeforeUnmount(() => {
 </script>
 <script lang="ts">
 export default {
-  name: 'StartSky'
+  name: ''
 }
 </script>
 <style lang="scss" scoped></style>
@@ -789,6 +772,29 @@ mesh.getWorldPosition(worldPosition);
   })
   // 声明网格模型 导入创建的立方体和网格材质
   content.mesh = new THREE.Mesh(geometry, skyBoxMaterial)
+```
+
+## three.js在ts中
+
+* three.js 有ts版本
+
+```bash
+npm i @types/three
+```
+
+* 安装后 可以直接设置`three.js `中的ts类型 支持提示 也支持插件的类型设置
+  * 声明一个`OrbitControls`轨道控制器的类型 和 `THREE.Mesh`网格类型
+
+```tsx
+// 导入three.js
+import * as THREE from 'three'
+// 导入轨道控制器
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
+// 轨道控制器
+controls!: OrbitControls
+// 声明mesh 类型为THREE.Mesh或为空
+mesh: THREE.Mesh | undefined
 ```
 
 ##  参考文献

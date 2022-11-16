@@ -551,16 +551,22 @@ class Child {
 ### **类的继承** `extends`
 
 * 关键字 `extends` 继承其他的class类
+* <font color =#ff3040>注意: 类继承只会继承其构造函数 不会继承声明的类型</font>
 
 ```typescript
 // 类1
 class Father {
-
+  // 类型声明不会继承
+  scene: string
+    
+  // 构造函数内容会被继承
+  constructor(canvas: any) {
+    this.scene = '123'   
+  }
 }
 
 // 类2继承类1
 class Child extends Father {
-
 
 }
 ```
@@ -568,6 +574,9 @@ class Child extends Father {
 ### **类与接口 **`interface`
 
 * Class类可以和接口`interface`一起使用 来定义Class类的内容 接口声明的变量 Class类也需要声明 否则会报错
+* 接口在定义的时候，不能初始化属性以及方法，属性不能进行初始化，方法不能实现方法体。 类实现接口之后，必须声明接口中定义的属性以及方法。
+  * <font color =#ff3040>注意: 类继承接口定义后 需要再次声明接口中的定义</font>
+
 
 ```typescript
 // 接口
@@ -692,8 +701,6 @@ class SceneCreated {
 
 ```
 
-
-
 ##  ts的函数 `function`
 
 * ts的函数就是js中的方法 分为两种函数: 具名函数和命名函数
@@ -810,7 +817,7 @@ console.log(str33)
 
 * [单独记录](./1_2_generics.md)
 
-## 断言
+## 断言`as`
 
 * 类型断言用于手动指定一个值的类型。
 
@@ -916,5 +923,19 @@ console.log(typeof m) // function
 // 调用数组中的方法
 m(1, 2) // 3
 
+```
+
+### 选择属性时断言
+
+* 对一个没有声明类型的属性进行选择的时候 会出现以下报错 需要对`material`属性进断言设置 规定该属性的属性
+
+![image-20221116193429070](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211161934126.png)
+
+* 把属性`()`起来 通过`as`断言设置其属性 并且在最前面添加`;`分好 (书写规范不写也可以`prettier`会自动格式化添加`;`
+
+![image-20221116193655953](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211161936004.png)
+
+```tsx
+;(item.object as THREE.Mesh).material = this.redMaterial 
 ```
 

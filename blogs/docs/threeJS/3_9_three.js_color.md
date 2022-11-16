@@ -26,6 +26,13 @@ const color2 = new THREE.Color( 0xff0000 );
 const color1 = new THREE.Color('#ff3040');
 ```
 
+* 颜色有 四个属性
+  * `.isColor`判断是否是颜色属性
+  * `.r` 红色通道的值在0到1之间。默认值为1。
+  * `.g` 绿色通道的值在0到1之间。默认值为1。
+  * `.b` 蓝色通道的值在0到1之间。默认值为1。
+* `rgb`在修改单独颜色的时候 可能需要一起修改
+
 ## 颜色随机
 
 * [Mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh) 网格中有两个参数 `Mesh( geometry : BufferGeometry, material : Material )`
@@ -70,5 +77,33 @@ const color = new THREE.Color(Math.random() * 0xffffff)
   const sphereMesh = new THREE.Mesh(sphere, mats)
   // 把网格添加到场景中
   scene.add(sphereMesh)
+```
+
+## 颜色混入
+
+* [.lerp(color, alpha)](https://threejs.org/docs/index.html?q=color#api/zh/math/Color.lerp) 设置颜色的混入效果 
+  * `color ` 用于收敛的颜色。表示即将混入到那个颜色去
+    `alpha ` 介于0到1的数字。表示混入的强度(越大混入颜色越深) 通常可以通过距离(或其他)方式进行计算 
+
+```js
+// 设置数量
+const paramsConst = 10000
+// 设置顶点颜色
+const colors = new Float32Array(paramsConst * 3)
+
+for (let index = 0; index < paramsConst; index++) {
+  // 设置三个为一组
+  const current = index * 3
+
+  // 克隆颜色
+  const mixColor = this.createdColor.clone()
+  // 设置颜色混入
+  mixColor.lerp(this.endColor, index / paramsConst)
+  // 设置顶点颜色 rgb都要设置
+  colors[current] = mixColor.r
+  colors[current + 1] = mixColor.g
+  colors[current + 2] = mixColor.b
+}
+
 ```
 
