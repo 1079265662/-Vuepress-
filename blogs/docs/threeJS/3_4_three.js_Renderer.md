@@ -59,18 +59,17 @@ renderer.setClearColor('#ff3040',1)    // 设置背景颜色 支持十六进制�
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 ```
 
-### **执行持续场景渲染**
+### 设置渲染器透明
 
-* 通过`requestAnimationFrame`方法 可以自适应的根据刷新率 渲染页面内容
+* `WebGLRenderer` 背景默认是纯黑色 并且不透明 如果`canvas`通过`fixed`或者`absolute` 定位后默认是无法显示被遮挡的内容 
+  *  通过[alpha](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer) 属性设置渲染器透明性 默认是`false`
 
-```js
-const render = () => {
-    renderer.render(场景Scene, 相机Camera) // 执行渲染操作
-    requestAnimationFrame(render) // 请求再次执行渲染函数render，渲染下一帧 需要回调自己
-  }
-render()
-// 在元素上绘制canvas
-document.body.appendChild(labelRenderer.domElement);
+```tsx
+// 创建场景渲染器
+const renderer = new THREE.WebGLRenderer({
+  antialias: true, // 开启抗锯齿
+  alpha: true // 开启透明
+})
 ```
 
 ### **场景渲染器自适应**
@@ -80,19 +79,20 @@ document.body.appendChild(labelRenderer.domElement);
 * 渲染器通过[.setSize()](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer.setSize) 更新其宽高后 还需要更新[.setPixelRatio](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer.setPixelRatio)设备的像素比
 
 ```js
-  // 实现画面变化 更新渲染的内容
-  window.addEventListener('resize', () => {
-    // 解构window对象
-    const { innerWidth, innerHeight, devicePixelRatio } = window
-    // 更新相机的宽高比
-    camera.aspect = innerWidth / innerHeight
-    // 更新摄像机的投影矩阵
-    camera.updateProjectionMatrix()
-    // 更新渲染器
-    renderer.setSize(innerWidth, innerHeight)
-    // 更新渲染器的像素比
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
-  })
+// 实现画面变化 更新渲染的内容
+window.addEventListener('resize', () => {
+  // 解构window对象
+  const { innerWidth, innerHeight, devicePixelRatio } = window
+  // 更新相机的宽高比
+  this.camera.aspect = innerWidth / innerHeight
+  // 更新摄像机的投影矩阵
+  this.camera.updateProjectionMatrix()
+  // 更新渲染器
+  this.renderer.setSize(innerWidth, innerHeight)
+  // 更新渲染器的像素比
+  this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
+})
+
 ```
 
 ### **在Vue3中执行渲染**
@@ -129,6 +129,8 @@ export default {
 </script>
 
 ```
+
+
 
 ### **销毁渲染器和动画**
 

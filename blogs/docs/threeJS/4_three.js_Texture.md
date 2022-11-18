@@ -409,6 +409,52 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 
 ```
 
+### **开启两面可见(共有属性)**
+
+* [.side](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/Material.side) 设置渲染面行为 默认是`THREE.FrontSide`只渲染正面 这是一个**共有属性**(所有材质都存在)
+  * `THREE.FrontSide`正面。
+  * `THREE.BackSide`背面
+  * `THREE.DoubleSide`双面/两面。
+
+```js
+// 设置该集合体的纹理材质
+const cubeMaterial = new THREE.MeshBasicMaterial({
+  // 设置两面可见
+  side: THREE.DoubleSide
+})
+
+```
+
+### **开启透明度(共有属性)**
+
+* 通过材质的透明度属性[.opacity](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/Material.side)可以设置材质的透明程度，`.opacity`属性值的范围是0.0~1.0，0.0值表示完全透明, 1.0表示完全不透明，`.opacity`默认值1.0。这是一个**共有属性**
+* 当设置`.opacity`属性值的时候，需要设置材质属性`transparent`值为`true`，如果材质的transparent属性没设置为true, 材质会保持完全不透明状态。
+* 在构造函数参数中设置`transparent`和`.opacity`的属性值
+
+```tsx
+const material = new THREE.MeshPhongMaterial({
+  color: 0x220000,
+  // transparent设置为true，开启透明，否则opacity不起作用
+  transparent: true,
+  // 设置材质透明度
+  opacity: 0.4,
+})
+
+```
+
+* 通过访问材质对象属性形式设置`transparent`和`.opacity`的属性值
+
+```tsx
+  // transparent设置为true，开启透明，否则opacity不起作用
+material.transparent = true;
+  // 设置材质透明度
+material.opacity = 0.4;
+```
+
+
+
+
+
 ### **设置法线贴图**
 
 * [.normalMap](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.normalMap) 设置法线贴图

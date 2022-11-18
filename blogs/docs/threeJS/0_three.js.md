@@ -523,7 +523,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class CreateWorld {
   // 绘制canvas的Dom
-  canvas!: any
+  canvas!: HTMLElement | Document
   // 轨道控制器
   controls!: OrbitControls
   // 设置动画id
@@ -578,7 +578,21 @@ export class CreateWorld {
     this.controls.enableDamping = true
 
     this.render()
+    this.onWindowResize()
+  }
 
+  render = () => {
+    // console.log(this.animationId)
+    // 设置阻尼感必须在动画中调用.update()
+    this.controls.update()
+    // 使用渲染器,通过相机将场景渲染出来
+    this.renderer.render(this.scene, this.camera) // render(场景, 相机)
+    // 使用动画更新的回调API实现持续更新动画的效果
+    this.animationId = requestAnimationFrame(this.render)
+  }
+
+  // 尺寸变化时调整渲染器大小
+  onWindowResize = () => {
     // 实现画面变化 更新渲染的内容
     window.addEventListener('resize', () => {
       // 解构window对象
@@ -594,15 +608,6 @@ export class CreateWorld {
     })
   }
 
-  render = () => {
-    // console.log(this.animationId)
-    // 设置阻尼感必须在动画中调用.update()
-    this.controls.update()
-    // 使用渲染器,通过相机将场景渲染出来
-    this.renderer.render(this.scene, this.camera) // render(场景, 相机)
-    // 使用动画更新的回调API实现持续更新动画的效果
-    this.animationId = requestAnimationFrame(this.render)
-  }
   // 销毁渲染内容
   dispose = () => {
     // console.log(this.animationId)

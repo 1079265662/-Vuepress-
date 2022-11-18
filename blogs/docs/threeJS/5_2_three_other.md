@@ -87,15 +87,17 @@ controls.enableDamping = true
       const render = () => {
         const time = clock.getElapsedTime()
         // 通过时钟设置物体的x轴运动
-        // // 通过sin()函数设置物体的x轴运动 通过time设置物体的运动速度 通过3设置物体的运动范围
-        lightBall.position.x = Math.sin(time) * 3 
-        // 通过时钟设置物体的y轴运动
-        // // 通过cos()函数设置物体的y轴运动 通过time设置物体的运动速度 通过3设置物体的运动范围
+        // 通过时间来改变位置 产生动画效果 通过Math.sin()来实现正弦函数 产生周期性的变化 数值为-1~1之间
+        lightBall.position.x = Math.sin(time)
+        // 通过时钟设置物体的y轴运动 数值为-3~3之间
         lightBall.position.z = Math.cos(time) * 3 
         // 上下运动y轴
         // // abs()取绝对值 使得y轴的值永远为正数 从而实现上下运动
         lightBall.position.y = Math.abs(Math.sin(time * 3)) * 2 
-  
+        
+        // 旋转x轴
+        lightBall.rotation.x = this.clock.getElapsedTime()
+          
         // 设置阻尼感必须在动画中调用.update()
         this.controls.update()
         // 使用渲染器,通过相机将场景渲染出来
@@ -108,5 +110,5 @@ controls.enableDamping = true
       render()
       
   ```
-
+  
   

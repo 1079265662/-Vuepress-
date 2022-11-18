@@ -336,59 +336,14 @@ window.onresize = () = >{
 
 * [TrackballControls](https://threejs.org/docs/index.html?q=TrackballControls#examples/zh/controls/TrackballControls) 轨迹球控制器，和环轨控制器的效果极为相似，区别是取消了垂直镜头的区间限制，允许世界颠倒。
 
-## **使用环轨控制器 OrbitControls**
+## 滚动页面
 
-现在让我们修改一下代码，来用一下这个环轨控制器。
+* 页面多个内容滚动的时候(高度为`100vh`) 可以通过相机的`y`轴移动 来显示这些内容
 
-### **导入轨道控制器(轨道控制器)**
-
-虽然Three.js为我们提供了这些开箱即用的控制器，但毕竟不是所有时候都需要它们，所以为了减少Three.js库的代码量，它们并不在three.min.js中，我们需要单独引入这些控制器类。
-
-* 工程化下 我们npm three.js后 直接导入指定控件即可 比如[OrbitControls](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls) 他在 `three/examples/jsm/controls/OrbitControls.js`中
-
-```js
-// 工程化下 直接导入OrbitControls
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-```
-
-* 注意，我们在创建OrbitControls类时无需`THREE.`前缀。实例化时需要传递两个参数，相机对象和画布对象。
-
-```js
-const controls = new OrbitControls(camera, canvas)
-```
-
-* 现在我们可以使用鼠标左键拖拽来旋转相机，还可以使用鼠标滚轮来放大或缩小。这比我们自己手写可简单多了对吧。
-
-### **改变初始视角 target**
-
-* 环轨控制器默认情况下会看向场景的中心点，我们可以通过改变 `target` 属性来改变初始视角的位置。
-
-```js
-const controls = new OrbitControls(camera, canvas)
-controls.target.y = 2
-```
-
-### **添加移动过度效果 enableDamping**
-
-* 当我们设置`enableDamping`参数为true时，鼠标拖拽移动时会带有缓动效果，让用户交互体验更加丝滑。除了将`enableDamping`设置为true，我们还应该在tick函数中添加`controls.update()`，刷新控制器的数值表现。
-
-```js
-// Controls
-const controls = new OrbitControls(camera, canvas)
-// 使用过度效果
-controls.enableDamping = true
-
-// ...
-
-const tick = () =>
-{
-    // ...
-
-    // Update controls
-    controls.update()
-
-    // ...
-}
+```tsx
+    // 移动相机 下滚动所以是-y 让相机沿着-y轴移动 
+    this.camera.position.y =
+      -(window.scrollY / window.innerHeight) * 30 // 当前滚动的距离 / 屏幕高度 * 物体间距 下滚动所以是-y
 ```
 
 ## 参考文献
