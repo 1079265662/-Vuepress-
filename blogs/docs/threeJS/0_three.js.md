@@ -92,24 +92,26 @@ three.js支持十六进制的颜色设置 和 字符串类型的css风格颜色
 * 十六进制的颜色设置
 
 ```js
-// 创建渲染器对象 
+// 创建渲染器对象
 const renderer = new THREE.WebGLRenderer({
-  antialias: true // 开启锯齿
-	})
-    // 设置渲染器背景颜色
+  antialias: true, // 开启锯齿
+})
+// 设置渲染器背景颜色
 renderer.setClearColor(0x00577)
+
 ```
 
 * css风格颜色
   * <font color =#ff3040>注意: css风格的颜色 需要是字符串格式的才可以</font>
 
 ```js
-// 创建渲染器对象 
+// 创建渲染器对象
 const renderer = new THREE.WebGLRenderer({
-  antialias: true // 开启锯齿
-	})
-    // 设置渲染器背景颜色 类型要为字符串格式
+  antialias: true, // 开启锯齿
+})
+// 设置渲染器背景颜色 类型要为字符串格式
 renderer.setClearColor('#00577')
+
 ```
 
 ## three.js的渲染步骤
@@ -514,6 +516,12 @@ export default {
 ### 使用构造函数渲染(常用)
 
 * 更先进 更细致的构造函数 class类进行渲染
+  * [addEventListener](https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener) 监听属性如果监听的是`window`对象 那么在Vue框架中 切换路由后其监听依旧会生效 为了性能优化 需要通过[removeEventListener](https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/removeEventListener) 进行销毁监听
+  * `removeEventListener`销毁监听需要传入参数 而且必须和 `addEventListener`监听属性的方法一致 否则无法进行销毁操作 建议单独把监听的方法写成一个构造函数 监听和销毁使用同一个构造函数  [详细看这里](https://zh.javascript.info/introduction-browser-events#addeventlistener)
+    * [MouseEvent](https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent/MouseEvent)鼠标相关 ts类型: `MouseEvent`
+    * [resize](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/resize_event)屏幕视图调整大小时(浏览器尺寸/拉伸改变时) ts类型: `UIEvent | Event`
+    * [DOM](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/Introduction)节点(页面元素) ts类型: `HTMLElement | Document | Element`
+
 
 ```tsx
 // 导入three.js
@@ -523,16 +531,11 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class CreateWorld {
   // 绘制canvas的Dom
-  canvas!: HTMLElement | Document
+  canvas!: HTMLElement | Document | Element
   // 轨道控制器
   controls!: OrbitControls
   // 设置动画id
   animationId!: number
-
-  constructor(canvas: any) {
-    // 接收传入的画布Dom元素
-    this.canvas = canvas
-  }
 
   // 创建渲染器
   renderer = new THREE.WebGLRenderer({
@@ -552,12 +555,33 @@ export class CreateWorld {
     1000
   )
 
+  constructor(canvas: any) {
+    // 接收传入的画布Dom元素
+    this.canvas = canvas
+  }
+
   // 创建场景
   createScene = () => {
     // 设置相机的所在位置 通过三维向量Vector3的set()设置其坐标系 (基于世界坐标)
     this.camera.position.set(0, 5, 10) // 默认没有参数 需要设置参数
     // 把相机添加到场景中
     this.scene.add(this.camera)
+
+    // 声明一个球体
+    const sphere = new THREE.SphereGeometry(1, 20, 20)
+
+    // 声明一个标准材质
+    const mmaterial = new THREE.MeshStandardMaterial()
+
+    // 创建网格模型
+    const mesh = new THREE.Mesh(sphere, mmaterial)
+    // 添加到场景
+    this.scene.add(mesh)
+
+    // 平行光
+    // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+    // directionalLight.position.set(8, 3, 4)
+    // this.scene.add(directionalLight)
 
     // 环境光
     const light = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
@@ -578,7 +602,7 @@ export class CreateWorld {
     this.controls.enableDamping = true
 
     this.render()
-    this.onWindowResize()
+    this.onAddEventListener()
   }
 
   render = () => {
@@ -592,29 +616,33 @@ export class CreateWorld {
   }
 
   // 尺寸变化时调整渲染器大小
-  onWindowResize = () => {
+  onWindowResize = (item: Event | UIEvent) => {
+    // 解构window对象
+    const { innerWidth, innerHeight, devicePixelRatio } = window
+    // 更新相机的宽高比
+    this.camera.aspect = innerWidth / innerHeight
+    // 更新摄像机的投影矩阵
+    this.camera.updateProjectionMatrix()
+    // 更新渲染器
+    this.renderer.setSize(innerWidth, innerHeight)
+    // 更新渲染器的像素比
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
+  }
+
+  // 监听窗口变化
+  onAddEventListener = () => {
     // 实现画面变化 更新渲染的内容
-    window.addEventListener('resize', () => {
-      // 解构window对象
-      const { innerWidth, innerHeight, devicePixelRatio } = window
-      // 更新相机的宽高比
-      this.camera.aspect = innerWidth / innerHeight
-      // 更新摄像机的投影矩阵
-      this.camera.updateProjectionMatrix()
-      // 更新渲染器
-      this.renderer.setSize(innerWidth, innerHeight)
-      // 更新渲染器的像素比
-      this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
-    })
+    window.addEventListener('resize', this.onWindowResize)
   }
 
   // 销毁渲染内容
   dispose = () => {
-    // console.log(this.animationId)
     // 清除渲染器
     this.renderer.dispose()
     // 清除轨道控制器
     this.controls.dispose()
+    // 销毁监听
+    window.removeEventListener('resize', this.onWindowResize)
     // 清除动画
     cancelAnimationFrame(this.animationId)
   }
@@ -764,19 +792,22 @@ mesh.getWorldPosition(worldPosition);
   * 如果要修改渲染面 请看[这里]( https://threejs.org/docs/index.html?q=MeshLambertMaterial#api/zh/materials/Material.side) 通过`side`设置
 
 ```js
-  // 创建一个立方体
-  const geometry = new THREE.BoxGeometry(100, 100, 100) 
-  // 创建图片网格材质
-  const texture = new THREE.TextureLoader().load('https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E5%B0%8Fmao.jpg')
-  // 创建网格材质
-  const skyBoxMaterial = new THREE.MeshLambertMaterial({
-      // 设置纹理贴图
-    map: texture,
-      // 设置渲染面: 
-    side: THREE.DoubleSide
-  })
-  // 声明网格模型 导入创建的立方体和网格材质
-  content.mesh = new THREE.Mesh(geometry, skyBoxMaterial)
+// 创建一个立方体
+const geometry = new THREE.BoxGeometry(100, 100, 100)
+// 创建图片网格材质
+const texture = new THREE.TextureLoader().load(
+  'https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/%E5%B0%8Fmao.jpg'
+)
+// 创建网格材质
+const skyBoxMaterial = new THREE.MeshLambertMaterial({
+  // 设置纹理贴图
+  map: texture,
+  // 设置渲染面:
+  side: THREE.DoubleSide,
+})
+// 声明网格模型 导入创建的立方体和网格材质
+content.mesh = new THREE.Mesh(geometry, skyBoxMaterial)
+
 ```
 
 ## three.js在ts中
@@ -800,6 +831,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 controls!: OrbitControls
 // 声明mesh 类型为THREE.Mesh或为空
 mesh: THREE.Mesh | undefined
+
 ```
 
 ##  参考文献

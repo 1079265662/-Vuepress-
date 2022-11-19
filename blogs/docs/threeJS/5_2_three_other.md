@@ -76,8 +76,12 @@ controls.enableDamping = true
 
 * [Clock](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock) 可以用于跟踪对象 记录对象时间
 
-  * [.getElapsedTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.getElapsedTime) 可以用来获取动画执行的时间 可以用它进行一些数学运算处理
-
+  * [.getElapsedTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.getElapsedTime) 可以用来获取渲染器执行的时长(当前渲染器执行了多少秒)单位是`s`秒 可以用来做旋转效果
+  * [.oldTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.oldTime) 存储时钟最后一次调用 `.autoStart `, `.getElapsedTime` 或 `.getDelta` 方法的时间。默认值是 **0**。
+  * [.getDelta](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.getDelta) 获取动画执行的每帧时间(每帧的渲染时间 通常为小数) 可以用来做一些`+=/-=`自增的效果
+    * 获取自[.oldTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.oldTime) 设置后到当前的秒数。 同时将[.oldTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.oldTime) 设置为当前时间。
+  
+  
   ```js
       // 设置闹钟
       const clock = new THREE.Clock()
@@ -85,7 +89,11 @@ controls.enableDamping = true
       // 在动画执行时调用
       // 创建更新动画的方法
       const render = () => {
+  	  // 获取动画执行的时长
         const time = clock.getElapsedTime()
+        // 获取动画执行的帧数
+        const clockDelta = this.clock.getDelta()
+        
         // 通过时钟设置物体的x轴运动
         // 通过时间来改变位置 产生动画效果 通过Math.sin()来实现正弦函数 产生周期性的变化 数值为-1~1之间
         lightBall.position.x = Math.sin(time)
@@ -97,6 +105,10 @@ controls.enableDamping = true
         
         // 旋转x轴
         lightBall.rotation.x = this.clock.getElapsedTime()
+        
+        // 根据鼠标的位置来改变相机的位置
+        this.camera.position.x +=
+        (this.mouse.x * 10 - this.camera.position.x) * clockDelta
           
         // 设置阻尼感必须在动画中调用.update()
         this.controls.update()

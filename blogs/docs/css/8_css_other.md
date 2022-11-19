@@ -13,6 +13,20 @@ categories: Css
 
 <!-- more -->
 
+## 优化页面全局属性
+
+* 设置`body`文档主体元素
+
+```css
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+```
+
 ## 修改webkit浏览器自带的滚动条 `webkit`
 
 * 浏览器自带的滚动条十分的难看 修改一下样式怎样
