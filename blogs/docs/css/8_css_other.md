@@ -392,3 +392,129 @@ mix-blend-mode: lighten; //变亮
   * `justify` 最后一行文字的开头与内容盒子的左侧对齐，末尾与右侧对齐。
 
 ![image-20221108133030946](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211081330989.png)
+
+## dvh 和 dvw 自适应视口
+
+* `vh`和`vw` 这两个单位可以占满整个视口 
+
+![image-20221212172936782](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212121729822.png)
+
+* 但是他们在移动端会受到顶部地址栏或底部操作栏的溢出问题 并且在PC端vw也会收到滚动条的影响
+
+![image-20221212172948176](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212121729218.png)
+
+* 可以用新单为`dvh`和`svw` 这个 d 是 `dynamic` 的缩写，它是动态的：这样浏览器会根据自身自适应的拉伸 不用担心溢出问题
+
+![image-20221212173123528](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212121731565.png)
+
+* 只不过兼容性一般
+
+![image-20221212173226030](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212121732062.png)
+
+## linear-gradient 渐变属性
+
+* [linear-gradient](https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient/linear-gradient) 用于创建一个表示两种或多种颜色线性渐变的图片。其结果属于[`<gradient>`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient)数据类型，是一种特别的[`<image>`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/image)数据类型。
+* [CSS的渐变规则](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Images/Using_CSS_gradients) 在这里了解CSS的渐变规则
+
+```css
+/* 渐变轴为45度，从蓝色渐变到红色 如果不设置过度中心点 默认为50%开始转变 */
+linear-gradient(45deg, blue, red);
+
+/* 从右下到左上、从蓝色渐变到红色 */
+linear-gradient(to left top, blue, red);
+
+/* 从下到上，从蓝色开始渐变、到高度 40% 位置是绿色渐变开始、最后以红色结束 */
+linear-gradient(0deg, blue, green 40%, red);
+
+/* 渐变轴为45%, 从透明到红色 从透明起点5%开始渐变, 设置过度中心点也在5% 这样可以实现一个剪切的效果 */
+linear-gradient(45deg, transparent 5%, 5%, red);
+linear-gradient(45deg, transparent 5%, red 5%); /* 也可以这样写 不设置过度中心点, 但是设置红色渐变的起点在5% */
+
+```
+
+* 渐变轴示意图
+  * 渐变颜色可以多个 渐变开始到结束对应从左往右设置
+  * 渐变点默认是50% 从中间开始从上到下的渐变
+  * 渐变默认从上到下, 可以通过旋转改变其渐变的位置
+
+![image-20221213140404899](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212131404939.png)
+
+> 使用案例
+
+* 做一个左下角缺少的按钮样式 可以通过背景渐变旋转 并设置衔接的渐变中心点实现
+
+![image-20221213181631564](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212131816597.png)
+
+```css
+ // 设置一个渐变的背景并且进行旋转
+background: linear-gradient(45deg, transparent 5%, #ff013c 5%);
+ // 设置右侧阴影
+box-shadow: 6px 0px 0px 0px #00e6f6;
+```
+
+* 进行多色的按钮拼接
+
+![image-20221214110820359](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212141108411.png)
+
+```css
+background: linear-gradient(
+  45deg, // 旋转45°
+  transparent 3%, // 透明3%
+  red 3%, // 从3%开始变红
+  5%, // 从5%设备过渡点
+  blue 5% // 从5%开始变蓝
+  );
+
+// 也可以这样写
+background: linear-gradient(
+  45deg, // 旋转45°
+  transparent 3%, // 透明3%
+  red 3%, // 从3%开始变红
+  red 5%, // 从5%设备过渡点
+  blue 5% // 从5%开始变蓝
+  );
+```
+
+
+
+### repeating-linear-gradient 线性渐变
+
+* [repeating-radial-gradient()](https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient/repeating-linear-gradient)是渐变的一种 数据类型都是`<gradient>`和`<image>` 创建一个由重复线性渐变组成的重复渐变
+
+```css
+/* 一个倾斜 45 度的重复线性渐变，
+   从蓝色开始渐变到红色 */
+repeating-linear-gradient(45deg, blue, red);
+
+/* 一个从右下角到左上角的重复线性渐变，
+   从蓝色开始渐变到红色 */
+repeating-linear-gradient(to left top, blue, red);
+
+/* 一个由下至上的重复线性渐变，
+   从蓝色开始，40% 后变绿，
+   最后渐变到红色 */
+repeating-linear-gradient(0deg, blue, green 40%, red);
+```
+
+* 还有[repeating-radial-gradient()](https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient/repeating-radial-gradient)创建一个从原点辐射的重复渐变
+
+##  clip-path 剪切功能
+
+* [clip-path](https://developer.mozilla.org/zh-CN/docs/Web/CSS/clip-path) 属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏。
+
+### inset() 矩形插图
+
+* [inset()](https://developer.mozilla.org/en-US/docs/Web/CSS/basic-shape/inset)进行一个矩形的剪裁 上下左右 
+  * 剪切方式是 设置上下剪切位置后 两个剪切点相连的位置剪切下来 以外的部分隐藏
+  * 如果想完全隐藏不剪辑 可以设置为`inset(50% 50% 50% 50%)`
+  * 负数就是往里剪切
+
+![image-20221214181528396](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212141815452.png)
+
+```css
+// 从上到下50%处 左边王莉6px 从下倒上20%处 开始剪切 相当于在中考下剪切了30%部分
+clip-path: inset(50% -6px 20% 0);
+// 平移-20px更凸显剪切
+transform: translateX(-20px);
+```
+

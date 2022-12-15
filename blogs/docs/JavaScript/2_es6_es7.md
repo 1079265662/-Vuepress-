@@ -158,10 +158,25 @@ console.log({name : 'keke',age: 12})
 
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/f1483584-8bb5-4644-84c5-c5a329e06ee4.png)
 
-* 对象结构常用于Vue中的赋值 某些数据直接赋值可能会导致数据出现双向绑定问题(比如父子传值) 所以可以使用这种方式进行对象的结构 (当然前提是对象格式)
-* 展开运算符对于 对象来说通常是用作混入的方法
+* 对象结构常用于Vue中的赋值 某些数据直接赋值可能会导致数据出现双向绑定问题(比如父子传值) **因为是浅拷贝**
 
-### **展开运算符的混入(拼接)**
+### 展开对象并且只用值
+
+* 对象的展开 好像并没有什么用 但是可以通过[Object.values()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/values) 先把对象的值转成数组集合 让后通过`...`展开运算符 把值展开
+
+```js
+let user = {
+  myName: 'John',
+  age: 30,
+}
+
+const { myName, age } = user // 通过赋值的方式解构对象
+
+console.log(...Object.values(user)) // 通过...运算符解构对象
+
+```
+
+### **展开对象的混入(拼接)**
 
 * 通过`...`展开运算符 可以混入多个对象 
 * 如果存在相同`key`键名(属性名) 取新添加的`key`键名(属性名)
