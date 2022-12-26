@@ -518,3 +518,97 @@ clip-path: inset(50% -6px 20% 0);
 transform: translateX(-20px);
 ```
 
+## Css过度效果的简单记录
+
+* Css过度应用在两个属性上 
+  * [transition](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition) 过度属性, 或者通过过度动画方法[transition-timing-function](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-timing-function) 进行设置, 多个设置可通过`,`分割
+  * [animation](https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation) 动画属性, 或者通过动画方法[animation-timing-function](https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-timing-function) 进行设置, 多个设置可通过`,`分割
+* 通过`cubic-bezier()`可以手动设置Css赛贝尔参数, 也可以通过在线调试获取赛贝尔参数
+  * [赛贝尔曲线效果速查表, 包含动画和背景渐变两种展示效果](https://easings.net/zh-cn)
+  * [详细的赛贝尔展示, 没有渐变展示效果](https://xuanfengge.com/easeing/ceaser/)
+  * [简单的赛贝尔对比](https://cubic-bezier.com/#.17,.67,.83,.67)
+
+
+```css
+/**  transition 和 animation 属性定义赛贝尔曲线 **/
+.block {
+    /** 简写 **/
+	transition: all 0.6s cubic-bezier(0.37, 0, 0.63, 1);
+    animation: glitched 0.6s cubic-bezier(0.37, 0, 0.63, 1);
+    /** 指定过度/动画执行的方式 多个属性通过, 分割steps()是步长用来设置动画帧数 **/
+    transition-timing-function: steps(2, end), cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    animation-timing-function: steps(2, end), cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+```
+
+* Css也内置了几个现成的赛贝尔效果, 可以直接设置实现预设的赛贝尔曲线动画效果
+
+```css
+animation-timing-function: ease;
+```
+
+`ease` 对应自定义cubic-bezier(.25,.01,.25,1),效果为先慢后快再慢；
+
+![aHR0cDovL3d3dy55ZGh0bWwuY29tL2ltZy8yMDE4LTA5LTExLzEuanBn](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212261155744.png)
+
+2. `linear` 对应自定义cubic-bezier(0,0,1,1)，效果为匀速直线；
+
+![aHR0cDovL3d3dy55ZGh0bWwuY29tL2ltZy8yMDE4LTA5LTExLzIuanBn](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212261155006.png)
+
+3. `ease-in` 对应自定义cubic-bezier(.42,0,1,1),效果为先慢后快；
+
+![aHR0cDovL3d3dy55ZGh0bWwuY29tL2ltZy8yMDE4LTA5LTExLzMuanBn](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212261155157.png)
+
+4. `ease-out` 对应自定义cubic-bezier(0,0,.58,1),效果为先快后慢；
+
+![aHR0cDovL3d3dy55ZGh0bWwuY29tL2ltZy8yMDE4LTA5LTExLzQuanBn](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212261155342.png)
+
+5. `ease-in-out` 对应自定义cubic-bezier(.42,0,.58,1),效果为先慢后快再慢。
+
+![aHR0cDovL3d3dy55ZGh0bWwuY29tL2ltZy8yMDE4LTA5LTExLzUuanBn](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212261156629.png)
+
+## animation动画取消过渡效果
+
+`animation` 默认是从0%到100%的执行, 其默认的过度效果(动画)是`ease`效果(先慢后快再慢过度效果)
+
+* `@keyframes` 的属性是0%到100%，假如我们写的是0%-100%，那绝对会有渐变效果
+
+```css
+@keyframes twinkling{ 
+  0%{ 
+    opacity: 0; 
+  } 
+  100%{ 
+    opacity: 1; /** 会存在渐变效果 **/
+  } 
+}
+
+```
+
+* 那所以我们换一个写法，0%-50%的时间显示，51%-100%的时间隐藏，就可以直接跳过过度效果实现无渐变。
+
+```css
+// 一闪一闪动画
+.twinkle{ 
+  animation: twinkling 0.5s infinite linear; 
+} 
+.animated{ 
+  animation-duration: 0.5s; 
+} 
+
+@keyframes twinkling{ 
+  0%, 50%{ 
+    opacity: 0; 
+  } 
+  51%, 100%{ 
+    opacity: 1; /** 不会存在渐变效果 **/
+  } 
+}
+
+```
+
+## 点状背景效果
+
+* 通过[radial-gradient()](https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient/radial-gradient)线性渐变和[background-size](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-size)背景图大小设置点状背景
+
+![image-20221226174206281](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212261742343.png)
