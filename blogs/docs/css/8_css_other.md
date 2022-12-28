@@ -628,6 +628,7 @@ animation-timing-function: ease;
     width: 100svw;
     background-image: radial-gradient(#00000021 1px, transparent 1px);
     background-size: 5px 5px;
+    background-position: -13px -3px;
   }
 
 ```
