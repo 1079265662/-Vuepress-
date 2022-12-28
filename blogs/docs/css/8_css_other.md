@@ -610,5 +610,25 @@ animation-timing-function: ease;
 ## 点状背景效果
 
 * 通过[radial-gradient()](https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient/radial-gradient)线性渐变和[background-size](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-size)背景图大小设置点状背景
+  * 通过`radial-gradient()`设置一个灰色点点, 再通过`background-size`背景尺寸把灰色点点设置的小一些, 因为`background-repeat`背景默认重复行为是`repeat`重复排列, 所以灰色小点点会依次排列, 形成点状背景效果
 
-![image-20221226174206281](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212261742343.png)
+
+![image-20221228103418680](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202212281034717.png)
+
+```html
+  <div class="one-box">
+    <!-- 点状背景 -->
+  </div>
+
+```
+
+```css
+  .one-box {
+    height: 100svh;
+    width: 100svw;
+    background-image: radial-gradient(#00000021 1px, transparent 1px);
+    background-size: 5px 5px;
+  }
+
+```
+
