@@ -78,7 +78,7 @@ controls.enableDamping = true
 
   * [.getElapsedTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.getElapsedTime) 可以用来获取渲染器执行的时长(当前渲染器执行了多少秒)单位是`s`秒 可以用来做旋转效果
   * [.oldTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.oldTime) 存储时钟最后一次调用 `.autoStart `, `.getElapsedTime` 或 `.getDelta` 方法的时间。默认值是 **0**。
-  * [.getDelta](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.getDelta) 获取动画执行的每帧时间(每帧的渲染时间 通常为小数) 可以用来做一些`+=/-=`自增的效果
+  * [.getDelta](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.getDelta) 获取动画的时间间隔(每帧的间隔时间差, 通常为小数)可以用来做一些`+=/-=`自增的效果
     * 获取自[.oldTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.oldTime) 设置后到当前的秒数。 同时将[.oldTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.oldTime) 设置为当前时间。
   
   
@@ -91,7 +91,7 @@ controls.enableDamping = true
       const render = () => {
   	  // 获取动画执行的时长
         const time = clock.getElapsedTime()
-        // 获取动画执行的帧数
+        // 获取动画的时间间隔
         const clockDelta = this.clock.getDelta()
         
         // 通过时钟设置物体的x轴运动

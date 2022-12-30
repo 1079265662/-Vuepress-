@@ -530,6 +530,11 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class CreateWorld {
+  constructor(canvas: HTMLElement) {
+    // 接收传入的画布Dom元素
+    this.canvas = canvas
+  }
+    
   // 绘制canvas的Dom
   canvas!: HTMLElement | Document | Element
   // 轨道控制器
@@ -554,11 +559,6 @@ export class CreateWorld {
     // 远截面 (远距离不可见范围)
     1000
   )
-
-  constructor(canvas: any) {
-    // 接收传入的画布Dom元素
-    this.canvas = canvas
-  }
 
   // 创建场景
   createScene = () => {

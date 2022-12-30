@@ -49,17 +49,19 @@ three.js 之 Loader 加载器 <br>
 ```js
 // 引入gltf模型加载库GLTFLoader.js
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-const model = new THREE.Group();//声明一个组对象，用来添加加载成功的三维场景
-const loader = new GLTFLoader(); //创建一个GLTF加载器
-loader.load(`${process.env.BASE_URL}model/model.gltf`, function (gltf) {//gltf加载成功后返回一个对象
-    console.log('控制台查看gltf对象结构', gltf);
-    //gltf.scene可以包含网格模型Mesh、光源Light等信息，至于gltf.scene是否包含光源，要看.gltf文件中是否有光源信息
-    console.log('gltf对象场景属性', gltf.scene);
-    //把gltf.scene中的所有模型添加到model组对象中
-    model.add(gltf.scene);
+const model = new THREE.Group() //声明一个组对象，用来添加加载成功的三维场景
+const loader = new GLTFLoader() //创建一个GLTF加载器
+loader.load(`${process.env.BASE_URL}model/model.gltf`, (gltf) => {
+  //gltf加载成功后返回一个对象
+  console.log('控制台查看gltf对象结构', gltf)
+  //gltf.scene可以包含网格模型Mesh、光源Light等信息，至于gltf.scene是否包含光源，要看.gltf文件中是否有光源信息
+  console.log('gltf对象场景属性', gltf.scene)
+  //把gltf.scene中的所有模型添加到model组对象中
+  model.add(gltf.scene)
 })
-const scene = new THREE.Scene();
-scene.add(model);// 把三维模型添加到场景中
+const scene = new THREE.Scene()
+scene.add(model) // 把三维模型添加到场景中
+
 ```
 
 ### **异步加载**
@@ -80,7 +82,7 @@ loader.loadAsync(`${process.env.BASE_URL}model/model.gltf`, (gltf) => { // gltf�
 
 ### **颜色偏差问题**
 
-* 通过`GLTFLoader`导入的gltf文件 大概率会出现颜色偏差问题 是因为three.js的默认颜色空间是 线性颜色空间`THREE.LinearEncoding` gltf的颜色空间是sRGB
+* 通过`GLTFLoader`导入的gltf文件 可能会出现颜色偏差问题 是因为three.js的默认颜色空间是 线性颜色空间`THREE.LinearEncoding` gltf的颜色空间是`sRGB`
 * 通过three.js的[纹理常量Textures](https://threejs.org/docs/index.html?q=PlaneGeometry#api/zh/constants/Textures) 了解到需要在 创建渲染器`WebGLRenderer`的时候进行颜色空间的处理
 
 ```js
