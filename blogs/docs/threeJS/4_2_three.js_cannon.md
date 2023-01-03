@@ -49,14 +49,14 @@ npm i cannon-es
 ```tsx
 // 导入conoon.js
 import * as CANNON from 'cannon-es'
-
-// 创建物理世界
+// 导入音频
+import ballAudio from '@/assets/ball/ball_music.mp3'
 export class CreateConnon {
   // 创建物理世界 并且设置重力属性
   world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.8, 0) }) // 重力加速度 g=9.8m/s^2 向下跌落y轴取反
   // 创建物理引擎模型
   sphereBody!: CANNON.Body
-    
+
   // 创建物理世界
   createPhysics = () => {
     // 设置重力方向 (x, y, z)
@@ -259,3 +259,30 @@ const planeBody = new CANNON.Body({
 })
 
 ```
+
+## 监听刚体物理碰撞
+
+* `Body`物体刚体的碰撞可以通过[addEventListener](https://pmndrs.github.io/cannon-es/docs/classes/Body.html#addEventListener)中`collide`碰撞事件进行监听, 获取到碰撞参数: 
+  * `.body`是碰撞的物体
+  * `.target`是被碰撞的物体
+  * `.contact`是碰撞的相关参数, 比如碰撞后物体冲击强度
+    * [getImpactVelocityAlongNormal()](https://pmndrs.github.io/cannon-es/docs/classes/ContactEquation.html#getImpactVelocityAlongNormal) 获取碰撞强度, 数值越大强度越大
+
+```tsx
+// 创建球体跌落的音频
+audio = new Audio('/src/assets/ball/ball_music.mp3')
+
+// 监听球体刚体落地
+onSphereBody = () => {
+  // 给球体刚体绑定碰撞事件
+  this.sphereBody.addEventListener('collide', (e: CANNON.Body | any) => {
+    console.log(e.contact.getImpactVelocityAlongNormal())
+    // 获取物体冲击强度 大于5强度时播放音频
+    if (e.contact.getImpactVelocityAlongNormal() > 5) {
+      this.audio.play()
+    }
+  })
+}
+
+```
+

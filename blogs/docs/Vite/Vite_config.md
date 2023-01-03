@@ -514,7 +514,7 @@ const imgs = import.meta.globEager("../assets/image/item_*.png");
 </template>
 ```
 
-### **JS/TS中单一文件的引用方式**
+### **JS/TS import引用方式**
 
 * 通过`import` 引入静态资源 这种适合单一文件的引用 可以分别作用于JS/TS和`<template>`模板中
 
@@ -527,6 +527,18 @@ const imgs = import.meta.globEager("../assets/image/item_*.png");
 import logo from '@/assets/logo.svg' 
 console.log(logo) // 引入的图片资源路径
 </script>
+```
+
+### **JS/TS使用绝对路径引用**
+
+* 放在`assets`或者`public`的资源 也可以通过绝对路径进行引用(相对路径和`@/`在脚手架中的JS/TS不可用)
+
+```tsx
+// 获取绝对路径assets下的音频
+const ret = new Audio('/src/assets/ball/ball_music.mp3')
+// 音频播放
+ret.play()
+
 ```
 
 ### **封装方法多文件引用方式**
