@@ -246,7 +246,7 @@ scene.add(spotLight.target)
 
 这里用聚光灯[SpotLight](https://threejs.org/docs/index.html?q=SpotLight#api/zh/lights/SpotLight) 进行演示 物理衰减对性能的要求较大 灯光会根据距离的长短进行不同效果的展示 越远越暗 越近越亮
 
-* [.physicallyCorrectLights](https://threejs.org/docs/index.html?q=SpotLight#api/zh/renderers/WebGLRenderer.physicallyCorrectLights) 可以开启[WebGLRenderer](https://threejs.org/docs/index.html?q=SpotLight#api/zh/renderers/WebGLRenderer.physicallyCorrectLights) 渲染器的物理光照效果
+* [.physicallyCorrectLights](https://threejs.org/docs/index.html?q=SpotLight#api/zh/renderers/WebGLRenderer.physicallyCorrectLights) 可以开启[WebGLRenderer](https://threejs.org/docs/index.html?q=SpotLight#api/zh/renderers/WebGLRenderer.physicallyCorrectLights) 渲染器的物理光照效果, 需要在`renderer`中开启
 * [.decay](https://threejs.org/docs/index.html?q=SpotLight#api/zh/lights/SpotLight.decay) 可以设置物理光照的衰减量 如果不开启[.physicallyCorrectLights](https://threejs.org/docs/index.html?q=SpotLight#api/zh/renderers/WebGLRenderer.physicallyCorrectLights) 物理光照将不会有效果
   * decay 设置为等于`2`将实现现实世界的光衰减。缺省(默认)值为`1`。
 
@@ -440,7 +440,7 @@ scene.add(rectAreaLightHelper)
 
 ![image-20221025142611593](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210251426638.png)
 
-### **设置阴影的质量**
+### 设置阴影的质量
 
 * 阴影可以设置其质量 阴影质量越高 吃的性能就越多 通过光源对象进行设置
 * [.mapSize ](https://threejs.org/docs/index.html?q=OrbitControls#api/zh/lights/shadows/LightShadow.mapSize)设置阴影的质量 阴影的质量必须是2的幂 默认是: (512,512)
@@ -462,7 +462,7 @@ scene.add(rectAreaLightHelper)
   scene.add(directionalLight)
 ```
 
-### 设置灯光物体跟踪
+### **设置灯光物体跟踪**
 
 * [.target](https://threejs.org/docs/index.html?q=light#api/zh/lights/SpotLight.target) 设置灯管对物体的跟踪 大部分的灯光都支持物体跟踪 
   * 设置灯光对应的物体(网格模型`mesh`) 这样物体移动的时候灯光也会跟着物体移动

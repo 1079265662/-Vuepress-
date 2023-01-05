@@ -343,6 +343,15 @@ let abc: Object = {
 console.log(abbc) // { a: 1, b: 2, c: '你好', d: null, f: undefined }
 ```
 
+### **声明一个数组对象**
+
+* 声明一个数组中包含的对象, 并且默认为空
+
+```tsx
+// 默认数组为空, 当数组有对象时候, 规定其对象中的类型
+const BoxPhysics: { mesh: number; body: string }[] = [] 
+```
+
 ### **方法 `function`**
 
 * 规定一个方法类型

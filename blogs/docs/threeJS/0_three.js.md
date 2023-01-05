@@ -714,16 +714,19 @@ export default {
 
 ## 二维向量（Vector2）和 三维向量（Vector3）
 
-* **[二维向量（Vector2）](https://threejs.org/docs/index.html?q=Vector2#api/zh/math/Vector2)** x y 轴
-  * 表示2D [vector](https://en.wikipedia.org/wiki/Vector_space)（二维向量）的类。 一个二维向量是一对有顺序的数字（标记为x和y），可用来表示很多事物
-  * `CSS2DObject` CSS2对象模型
-*  [三维向量（Vector3）](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3) x y z轴
-  * 该类表示的是一个三维向量（3D [vector](https://en.wikipedia.org/wiki/Vector_space)）。 一个三维向量表示的是一个有顺序的、三个为一组的数字组合（标记为x、y和z）， 可被用来表示很多事物
-  * `CSS3DObject` CSS3对象模型、`CSS3DSprite` CSS3精灵模型
+[二维向量（Vector2）](https://threejs.org/docs/index.html?q=Vector2#api/zh/math/Vector2) x y 轴
+
+* 表示2D [vector](https://en.wikipedia.org/wiki/Vector_space)（二维向量）的类。 一个二维向量是一对有顺序的数字（标记为x和y），可用来表示很多事物
+* `CSS2DObject` CSS2对象模型
+
+[三维向量（Vector3）](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3) x y z轴
+
+* 该类表示的是一个三维向量（3D [vector](https://en.wikipedia.org/wiki/Vector_space)）。 一个三维向量表示的是一个有顺序的、三个为一组的数字组合（标记为x、y和z）， 可被用来表示很多事物
+* `CSS3DObject` CSS3对象模型、`CSS3DSprite` CSS3精灵模型
 
 ### **添加拷贝修改相关语法**
 
-* 对向量( `Vector2` 和 `Vector3` )数据的处理方法
+对向量( `Vector2` 和 `Vector3` )数据的处理方法
 
 > 假设以`.position`模型世界坐标位置为例
 
