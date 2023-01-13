@@ -81,7 +81,7 @@ const vertexShaderSource = `
 
 > 空间坐标图
 
-![img](https://cdn.nlark.com/yuque/0/2022/webp/22620727/1651318484959-e2511004-cdd3-4a83-97a2-0693402024f2.webp?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_37%2Ctext_6ICB6ZmI5omT56CB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+![xyz](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202301111134456.jpg)
 
 如果运行一次顶点着色器， 那么gl_Position 就是 **（-0.5，-0.5，0，1）** 记住他永远是个 **Vec4**, 简单理解就是对应**x、y、z、w**。即使你没用其他的，也要设置默认值， 这就是所谓的 3维模型转换到我们屏幕中。
 
