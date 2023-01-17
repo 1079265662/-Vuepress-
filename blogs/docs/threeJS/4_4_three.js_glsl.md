@@ -27,9 +27,16 @@ Shader着色器在three.js中使用<br>
 
 shader中有三种类型的变量: `uniforms`, `attributes`, 和 `varyings`
 
-- `uniforms`是所有顶点都具有相同的值的变量。 比如灯光，雾，和阴影贴图就是被储存在`uniforms`中的数据。 `uniforms`可以通过顶点着色器和片元着色器来访问。
-- `attributes` 与每个顶点关联的变量。例如，顶点位置，法线和顶点颜色都是存储在`attributes`中的数据。`attributes`只 可以在顶点着色器中访问。
-- `varyings` 是从顶点着色器传递到片元着色器的变量。对于每一个片元，每一个`varying`的值将是相邻顶点值的平滑插值。
+- `uniforms`是所有顶点都具有相同的值的变量。可以通过顶点着色器`vertexShader`和片元着色器`fragmentShader`来访问。
+  - `uniform`变量就像是C语言里面的常量（const ），它不能被shader程序修改。**（shader只能用，不能改）**
+  - `uniform`变量一般用来表示**：变换矩阵，材质，光照参数和颜色等信息**。
+
+- `attributes` 与每个顶点关联的变量。只可以在顶点着色器`vertexShader`中访问。
+  - attribute变量来表示一些顶点的数据，**如：顶点坐标，法线，纹理坐标，顶点颜色等。**
+
+- `varyings` 是从顶点着色器`vertexShader`传递到片元着色器`fragmentShader`的变量。对于每一个片元，每一个`varying`的值将是相邻顶点值的平滑插值。
+  - `varyings`变量在顶点着色器`vertexShader`传递到片元着色器`fragmentShader`二者之间的声明(类名)必须是一致的
+
 
 注意：在shader 内部，`uniforms`和`attributes`就像常量；你只能使用JavaScript代码通过缓冲区来修改它们的值。
 
