@@ -32,13 +32,31 @@ shader中有三种类型的变量: `uniforms`, `attributes`, 和 `varyings`
   - `uniform`变量一般用来表示**：变换矩阵，材质，光照参数和颜色等信息**。
 
 - `attributes` 与每个顶点关联的变量。只可以在顶点着色器`vertexShader`中访问。
-  - attribute变量来表示一些顶点的数据，**如：顶点坐标，法线，纹理坐标，顶点颜色等。**
+  - `attribute`变量来表示一些顶点的数据，**如：顶点坐标，法线，纹理坐标，顶点颜色,uv值等。**
 
 - `varyings` 是从顶点着色器`vertexShader`传递到片元着色器`fragmentShader`的变量。对于每一个片元，每一个`varying`的值将是相邻顶点值的平滑插值。
   - `varyings`变量在顶点着色器`vertexShader`传递到片元着色器`fragmentShader`二者之间的声明(类名)必须是一致的
+  - `varyings`声明后是没有值的, 需要在函数中赋值
+  - `varyings`的变量通常会在变量名前添加`v`, 来标记该变量的特殊性
 
 
 注意：在shader 内部，`uniforms`和`attributes`就像常量；你只能使用JavaScript代码通过缓冲区来修改它们的值。
+
+### **着色器浮点精确度**
+
+规定着色器显示的`float`浮点精确度, 越精确质量越高, 理解为材质的画质, 在three.js的[RawShaderMaterial](https://threejs.org/docs/index.html?q=shader#api/zh/materials/RawShaderMaterial) 原始着色器中必须设置, 通过`precision`设置`float`, 分为三个质量等级
+
+* 在原始着色器`RawShaderMaterial`必须在顶点着色器`vertexShader`和片元着色器`fragmentShader`中设置, 两者的浮点精度可以不一致, 但必须都声明
+
+```glsl
+// highp高浮点精确度 -2^16 - 2^16
+precision highp float
+// mediump中浮点精确度 -2^16 - 2^10
+precision mediump float
+// lowp低浮点精确度 -2^8 - 2^8
+precision lowp float
+
+```
 
 ### **Shader代码规范**
 
