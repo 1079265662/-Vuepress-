@@ -21,6 +21,7 @@ three.js 之 Loader 加载器 <br>
 * 加载器都依赖基类[.Loader](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader) 用来实现加载
   * 普通加载方法 [.load ](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader.load)
   * es6 `promise`加载 [.loadAsync](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader.loadAsync)
+* [TextureLoader](https://threejs.org/docs/index.html#api/zh/loaders/TextureLoader) 纹理贴图加载器现在不支持进度监听, 直接通过`onLoad`方法监听是否加载完成即可
 
 > 加载器的分类
 

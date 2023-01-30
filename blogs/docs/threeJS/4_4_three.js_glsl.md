@@ -123,6 +123,69 @@ const shader = new THREE.ShaderMaterial({
 
 ```
 
+### **着色器GLSL代码**
+
+适用于three.js中[RawShaderMaterial](https://threejs.org/docs/index.html#api/zh/materials/RawShaderMaterial) 原始着色器材质中的顶点着色器`vertexShader`和片元着色器`fragmentShader`
+
+* 在three.js中使用`RawShaderMaterial` 原始着色器, 如果是vite需要安装配置[vite-plugin-string](https://github.com/aweikalee/vite-plugin-string), 让其GLSL代码转换成字符串
+
+```js
+// 引入glsl
+import planeVertexShader from '../glsl/vertexShader.glsl'
+import planeFragmentShader from '../glsl/fragmentShader.glsl'
+// 声明一个着色器材质
+const shader = new THREE.ShaderMaterial({
+  // 设置双面显示
+  side: THREE.DoubleSide,
+  // 顶点着色器 需要设置坐标转换
+  vertexShader: planeVertexShader,
+  // 片元着色器
+  fragmentShader: planeFragmentShader,
+})
+
+```
+
+* 设置`vertexShader`顶点着色器
+
+```glsl
+// 设置精度
+precision mediump float;
+
+// 传入three.js中的一些变量
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
+
+// 传入three.js顶点关联的变量
+attribute vec3 position;
+
+void main() {
+  // 顶点坐标
+  vec4 modelPostion = modelMatrix * vec4(position, 1.0);
+
+  // 计算顶点位置
+  gl_Position = projectionMatrix * viewMatrix * modelPostion;
+}
+
+```
+
+* 设置`fragmentShader`片元着色器
+
+```js
+// 设置精度
+precision mediump float;
+
+void main() {
+  // 设置片元颜色
+  gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); // 纯白色
+}
+
+```
+
+* 实现效果
+
+![image-20230129150213034](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202301291502132.png)
+
 ## uniforms使用
 
 `uniforms`是 GLSL 着色器中的全局变量。可以通过three.js设置后传入GLSL中
