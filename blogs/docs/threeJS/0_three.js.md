@@ -681,14 +681,18 @@ export class CreateWorld {
 
   // 销毁渲染内容
   dispose = () => {
-    // 清除渲染器
-    this.renderer.dispose()
+    // 清除场景
+    this.scene.clear()
     // 清除轨道控制器
     this.controls.dispose()
-    // 销毁监听
-    window.removeEventListener('resize', this.onWindowResize)
+    // 清除渲染器
+    this.renderer.dispose()
+    // 强制环境的丢失销毁webgl上下文 (存在白屏问题, 上下文不销毁也能自动销毁, 但会在控制台警告)
+    // this.renderer.forceContextLoss()
     // 清除动画
     cancelAnimationFrame(this.animationId)
+    // 销毁监听
+    window.removeEventListener('resize', this.onWindowResize)
   }
 }
 
