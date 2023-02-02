@@ -588,7 +588,7 @@ export class CreateWorld {
 
   // 创建渲染器
   renderer = new THREE.WebGLRenderer({
-    antialias: true // 开启锯齿
+   // antialias: true // 开启锯齿
   })
   // 设置场景
   scene = new THREE.Scene()

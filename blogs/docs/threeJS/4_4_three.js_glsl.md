@@ -186,6 +186,40 @@ void main() {
 
 ![image-20230129150213034](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202301291502132.png)
 
+### **偏移问题**
+
+通过glsl着色器渲染的时候, 会出现一些类似于小边框的效果, 这个其实是着色器多出的渲染部分
+
+![](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302011346563.png)
+
+可以通过给xy轴偏移0.01, 让其隐藏不渲染的内容
+
+```glsl
+// 设置变量
+float color;
+void main() {
+  color = step(0.8, mod(vUv.x * 10.0 + 0.01, 1.0));
+  // 如果color < 0.5, 返回0.0, 否则返回1.0
+  color += step(0.8, mod(vUv.y * 10.0 + 0.01, 1.0));
+  gl_FragColor = vec4(color, color, color, 1.0);
+}
+
+```
+
+### **抗锯齿问题**
+
+three.js[WebGLRenderer](https://threejs.org/docs/index.html?q=renderer#api/zh/renderers/WebGLRenderer)的`antialias`抗锯齿对于glsl不太友好, 甚至开了还不如不开, 所以建议别开, 等以后有后期处理的抗锯齿库再补充
+
+![image-20230201144946264](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302011449315.png)
+
+```js
+  // 创建渲染器
+  new THREE.WebGLRenderer({
+    // antialias: true // 不要开抗锯齿
+  })
+  
+```
+
 ## uniforms使用
 
 `uniforms`是 GLSL 着色器中的全局变量。可以通过three.js设置后传入GLSL中
@@ -265,6 +299,74 @@ void main() {
  sin(time)
 }
 ```
+
+## glsl内置函数
+
+开始学习three.js着色器材质时，我们经常会无从下手，辛苦写下的着色器，也会因莫名的报错而手足无措。原因是着色器材质它涉及到另一种语言–GLSL，只有懂了这个语言，我们才能更好的写出着色器材质，利用好的我们的GPU。这篇说一说glsl内置函数。
+
+### **和角度相关的函数** 
+
+下面是一个和角度相关的函数，他们的用法我们度熟悉。
+
+| 函数       | 参数 | 描述           |
+| ---------- | ---- | -------------- |
+| sin(x)     | 弧度 | 正弦函数       |
+| cos(x)     | 弧度 | 余弦函数       |
+| tan(x)     | 弧度 | 正切函数       |
+| asin(x)    | 弧度 | 反正弦函数     |
+| acos(x)    | 弧度 | 反余弦函数     |
+| atan(x)    | 弧度 | 反正切函数     |
+| radians(x) | 角度 | 角度转换为弧度 |
+| degrees(x) | 弧度 | 弧度转换为角度 |
+
+### **数学函数** 
+
+这类主要是对指数对数幂函数的操作
+
+| 函数           | 描述                                                         |
+| -------------- | ------------------------------------------------------------ |
+| pow(x,y)       | x的y次方。如果x小于0，结果是未定义的。同样，如果x=0并且y<=0,结果也是未定义的。 |
+| exp(x)         | e的x次方                                                     |
+| log(x)         | 计算满足x等于e的y次方的y的值。如果x的值小于0，结果是未定义的。 |
+| exp2(x)        | 计算2的x次方                                                 |
+| log2(x)        | 计算满足x等于2的y次方的y的值。如果x的值小于0，结果是未定义的。 |
+| sqrt(x)        | 计算x的开方。如果x小于0，结果是未定义的。                    |
+| inversesqrt(x) | 计算x的开方之一的值，如果x小于等于0，结果是未定义的。        |
+
+### **常用函数** 
+
+这里是常用函数，和js中的内置函数很像，需要牢记。
+
+| 函数                        | 描述                                                         |
+| --------------------------- | ------------------------------------------------------------ |
+| abs(x)                      | 返回x的绝对值                                                |
+| sign(x)                     | 如果x>0，返回1.0；如果x=0，返回0，如果x<0，返回-1.0          |
+| floor(x)                    | 返回小于等于x的最大整数值                                    |
+| ceil(x)                     | 返回大于等于x的最小整数值                                    |
+| fract(x)                    | 返回x-floor(x)，即返回x的小数部分                            |
+| mod(x, y)                   | 返回x和y的模                                                 |
+| min(x, y)                   | 返回x和y的值较小的那个值。                                   |
+| max(x, y)                   | 返回x和y的值较大的那个值。                                   |
+| clamp(x, minVal, maxVal)    | 将x值钳于minVal和maxVal之间，意思就是当x<minVal时返回minVal，当x>maxVal时返回maxVal，当x在minVal和maxVal之间时，返回x |
+| mix(x, y, a)                | 返回线性混合的x和y，如：x*(1−a)+y*a                          |
+| step(edge, x)               | 如果x < edge，返回0.0，否则返回1.0                           |
+| smoothstep(edge0, edge1, x) | 如果x <= edge0，返回0.0 ；如果x >= edge1 返回1.0；如果edge0 < x < edge1，则执行0~1之间的平滑埃尔米特差值。如果edge0 >= edge1，结果是未定义的。 |
+
+###  **几何函数**
+
+这是与长度、距离、向量等相关的函数
+
+| length(x)               | 返回向量x的长度                                |
+| ----------------------- | ---------------------------------------------- |
+| distance(p0,p1)         | 计算向量p0，p1之间的距离                       |
+| dot                     | 向量x，y之间的点积                             |
+| cross(x, y)             | 向量x，y之间的叉积                             |
+| normalize(x)            | 标准化向量，返回一个方向和x相同但长度为1的向量 |
+| faceforward(N, I, Nref) | 如果Nref和I的点积小于0，返回N；否则，返回-N；  |
+| reflect(I, N)           | 返回反射向量                                   |
+| refract(I, N, eta)      | 返回折射向量                                   |
+
+经常用的函数差不多就是这些。还需要我们在实践中反复练习，才能使用的得心应手。
 
 ## Vite引入glsl
 

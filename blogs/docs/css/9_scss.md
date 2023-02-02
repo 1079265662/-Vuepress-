@@ -734,6 +734,8 @@ console.log(colorRed, successColor, colorGrey) // '#ff3040' '#13ce66' '#999'
 }
 ```
 
+* 扩展: 可以用过[fontmin](http://ecomfe.github.io/fontmin/) 筛选你需要的字体, 英文中文字实在是太多了, 一般的中文字体包体积非常大
+
 ## 清除默认样式
 
 * npm下载清除默认样式包

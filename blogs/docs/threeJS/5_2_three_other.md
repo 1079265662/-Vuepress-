@@ -33,6 +33,7 @@ categories: three.js
   }
   // 执行创建更新动画的方法
   render()
+
 ```
 
 > 使用轨道控制器
@@ -40,6 +41,7 @@ categories: three.js
 * 作为控件`OrbitControls`需要单独导入 
 * 使用方法: `new OrbitControls(物体的相机设置, 渲染对象.domElement)`
   * [.enableDamping](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enableDamping) 设置阻尼感如果该值被启用，你将必须在你的动画循环里调用[.update()](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.update)。
+  * [.enabled](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enabled) 禁用轨道控制器, 设置为`false`禁用, 默认为`true`
 
 
 ```js
@@ -49,6 +51,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
 // 设置控制器阻尼 让控制器更真实 设置后需要在动画循环里调用.update()
 controls.enableDamping = true
+
 ```
 
 ## 无需单独导入的控件
@@ -75,9 +78,12 @@ controls.enableDamping = true
 * [Clock](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock) 可以用于跟踪对象 记录对象时间
 
   * [.getElapsedTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.getElapsedTime) 可以用来获取渲染器执行的时长(当前渲染器执行了多少秒)单位是`s`秒 可以用来做旋转效果
+    * 获取自时钟启动后的秒数，同时将 [.oldTime](https://threejs.org/docs/index.html#api/zh/core/Clock.oldTime) 设置为当前时间。
+  
   * [.oldTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.oldTime) 存储时钟最后一次调用 `.autoStart `, `.getElapsedTime` 或 `.getDelta` 方法的时间。默认值是 **0**。
   * [.getDelta](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.getDelta) 获取动画的时间间隔(每帧的间隔时间差, 通常为小数)可以用来做一些`+=/-=`自增的效果
     * 获取自[.oldTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.oldTime) 设置后到当前的秒数。 同时将[.oldTime](https://threejs.org/docs/index.html?q=clock#api/zh/core/Clock.oldTime) 设置为当前时间。
+    * <font color=#ff3040>`.getDelta`需要放在`.getElapsedTime`前面, 因为`getElapsedTime`会重置`oldTime`</font>
   
   
   ```js
@@ -87,11 +93,11 @@ controls.enableDamping = true
       // 在动画执行时调用
       // 创建更新动画的方法
       const render = () => {
+        // 获取动画的时间间隔, 必须放在.getElapsedTime前面
+        const clockDelta = clock.getDelta()
   	  // 获取动画执行的时长
         const time = clock.getElapsedTime()
-        // 获取动画的时间间隔
-        const clockDelta = this.clock.getDelta()
-        
+  
         // 通过时钟设置物体的x轴运动
         // 通过时间来改变位置 产生动画效果 通过Math.sin()来实现正弦函数 产生周期性的变化 数值为-1~1之间
         lightBall.position.x = Math.sin(time)
