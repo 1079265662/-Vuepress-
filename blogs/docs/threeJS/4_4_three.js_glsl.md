@@ -44,7 +44,7 @@ shader中有三种类型的变量: `uniforms`, `attributes`, 和 `varyings`, 如
 
 规定着色器显示的`float`浮点精确度, 越精确质量越高, 理解为材质的画质, 在three.js的[RawShaderMaterial](https://threejs.org/docs/index.html?q=shader#api/zh/materials/RawShaderMaterial) 原始着色器中必须设置, 通过`precision`设置`float`, 分为三个质量等级
 
-* 在原始着色器`RawShaderMaterial`必须在顶点着色器`vertexShader`和片元着色器`fragmentShader`中设置, 两者的浮点精度可以不一致, 但必须都声明
+* 着色器中, 必须在顶点着色器`vertexShader`和片元着色器`fragmentShader`中设置, 两者的浮点精度可以不一致, 但必须都声明
 
 ```glsl
 // highp高浮点精确度 -2^16 - 2^16
@@ -71,6 +71,8 @@ precision lowp float
 
 * [ShaderMaterial](https://threejs.org/docs/index.html?q=sha#api/zh/materials/ShaderMaterial) 着色器材质, 内置的`uniforms`和`attributes`
 * [RawShaderMaterial](https://threejs.org/docs/index.html?q=shader#api/zh/materials/RawShaderMaterial) 原始着色器, 不使用内置的`uniforms`和`attributes`, 需要声明后才能使用
+
+<font color =#ff3040>注意: 以上两种材质默认渲染格式为 `RGB`没有透明属性, 需要给其.[transparent](https://threejs.org/docs/index.html#api/zh/materials/Material.transparent) 透明度设置`true`, 否则将无法渲染`RGBA`透明内容</font>
 
 ### **通过ShaderMaterial实现**
 
@@ -218,6 +220,25 @@ three.js[WebGLRenderer](https://threejs.org/docs/index.html?q=renderer#api/zh/re
     // antialias: true // 不要开抗锯齿
   })
   
+```
+
+### **透明设置**
+
+three.js中, [Material](https://threejs.org/docs/index.html?q=RawShaderMaterial#api/zh/materials/Material) 材质默认渲染格式为`RGB`, 不支持着色器`gl_FragColor`中的透明度设置, 需要给其设置.[transparent](https://threejs.org/docs/index.html#api/zh/materials/Material.transparent) 透明支持设置为`true`让其支持`RGBA`渲染格式
+
+* `.transparent` 透明支持设置为`true`后支持图像的透明效果, 让其从`RGB`转换为`RGBA`渲染效果
+
+```js
+const material = new THREE.RawShaderMaterial({
+  // 设置透明设置, 默认Material使用带有 RGB 的渲染目标格式。需要设置RGBA带有透明的渲染目标格式
+  transparent: true,
+})
+
+```
+
+```glsl
+gl_FragColor = vec4(1.0, 1,0, 1.0, 0.5) // 支持RGBA透明效果
+
 ```
 
 ## uniforms使用

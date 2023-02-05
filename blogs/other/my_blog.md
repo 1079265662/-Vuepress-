@@ -60,16 +60,28 @@ tags:
 
 ::: warning 今年的目标 !
 
-☑️	~~戒烟~~
+🔲 学习[矩阵](https://www.bilibili.com/video/BV1P3411B7pp/?spm_id_from=333.337.search-card.all.click&vd_source=3a0029ff8ede56423c7ee662853dfd29)相关内容(相乘相加矩阵)
 
-⬜	完成公司的矿山系统(Vue2)
+🔲 学习[计算机图形学](https://www.bilibili.com/video/BV1X7411F744/?spm_id_from=333.337.search-card.all.click)
 
-☑️	用Vue3制作一个简历静态页面
-
-⬜	还没想好
-
-⬜	还没想好
+🔲 想准备一场旅游
 
 :::
 
-![cheers.gif](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/b5MrE38mWiH1pP9.gif)
+::: tip 继续保持!
+
+🚀 学习webgl和glsl内容
+
+🚀 寻找对象
+
+🥺 减肥, 锻炼
+
+🥺 降低欲望
+
+:::
+
+::: details 这里是空的
+什么都没有捏
+:::
+
+![dabian](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/undefined202302051709312.gif)
