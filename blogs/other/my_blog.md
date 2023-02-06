@@ -22,31 +22,15 @@ tags:
 
 > 自我介绍 
 
-​	hello大家好 🙋‍♂ 我叫刘凯利 是一名狂热的前端Vue爱好者 艾宾浩斯遗忘曲线的坚定信徒 喜欢记录新知识 并快速遗忘旧知识 正在努力学习[Vue3](https://v3.cn.vuejs.org/)和[gsap TweenMax.js](https://www.tweenmax.com.cn/index.html)
-
-​	希望能遇上愿意分享交流的朋友，提升自己。
-
-​	如果您有什么意见或者想交流前端知识 欢迎联系我
-
-​	当然您也可有留言联系我
-
-
+​	hello大家好 🙋‍♂ 我叫刘凯利是一名前端, 常用技术栈: Vue3, Vue2, TS(基础), three.js, GLSL
 
 > 写封邮件 
 
 :e-mail: 1079265662@qq.com
 
-[网易邮箱](https://mail.163.com/)
-
-[腾讯邮箱](https://mail.qq.com/)
-
-
-
 > 微信联系
 
 ![个人微信小图.jpg](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/yaYsbMeFv41KUOh.jpg)
-
-
 
 >鸣谢
 
@@ -55,8 +39,6 @@ tags:
 技术指导 : [Yida](https://zhangyujie.top/) [暴富指南](https://alphaloveomega.gitee.io/blog/)
 
 静态托管 : [vercel](https://vercel.com/) [netlify](https://app.netlify.com/)
-
-
 
 ::: warning 今年的目标 !
 
@@ -82,6 +64,8 @@ tags:
 
 ::: details 这里是空的
 什么都没有捏
-:::
 
 ![dabian](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/undefined202302051709312.gif)
+
+:::
+

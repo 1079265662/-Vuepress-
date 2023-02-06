@@ -371,8 +371,8 @@ interface domElement {
 
 ## ts的接口 `interface`
 
-* 关键字 `interface`
-* 说到接口：在面向对象的编程中，接口是一种规范的定义，它定义了行为和动作的规范，在程序设计里面，接口起到一种限制和规范的作用。接口定义了某一批类所需要遵守的规范，接口不关心这些类的内部状态数据，也不关心这些类里方法的实现细节，它只规定这批类里必须提供某些方法，提供这些方法的类就可以满足实际需要。 typescrip中的接口类似于java，同时还增加了更灵活的接口类型，包括属性、函数、可索引和类等！
+说到接口：在面向对象的编程中，接口是一种规范的定义，它定义了行为和动作的规范，在程序设计里面，接口起到一种限制和规范的作用。接口定义了某一批类所需要遵守的规范，接口不关心这些类的内部状态数据，也不关心这些类里方法的实现细节，它只规定这批类里必须提供某些方法，提供这些方法的类就可以满足实际需要。 typescrip中的接口类似于java，同时还增加了更灵活的接口类型，包括属性、函数、可索引和类等！
+
 * `interface` 不光可以声明 还可以继承`extends` 提升代码的延展性 
 * `interface` 可以设置可选参数(可有可无) `?: 类型`
 * `interface` 的值可以多次赋值声明符合条件的值 除非设置只读属性 `readonly`
@@ -383,13 +383,35 @@ interface domElement {
 ```typescript
 interface IUser {
   name: string
-  age: number
+  age: number   
 }
 // 通过接口 声明数据
 let user: IUser = { name: 'hanyun', age: 32 }
 
 console.log(user)
 // { name: 'hanyun', age: 32 }
+```
+
+### **规定key的类型**
+
+也可以规定key的类型, 常用于遍历(for...in)使用key值的情况
+
+```tsx
+// 给对象声明一个接口, 规定遍历的时候key为string类型, value为any类型
+interface EachKey {
+  [key: string]: any
+}
+
+// 声明对象, 绑定接口规定的类型
+const directives: EachKey = {
+  waterClick: '大水逼'
+}
+
+// 遍历的时候使用key的值
+for (const key in directives) {
+  app.directive(key, directives[key])
+}
+
 ```
 
 ### **接口的继承** `extends`
@@ -537,15 +559,15 @@ const myPrint: Iprint = print
 
 ## ts的类 `class`
 
-* 类(Class)：定义了一件事物的抽象特点，包含它的属性和方法 
-  * Class类可以 继承`extends` 继承其他的class类
-  * Class类可以和接口`interface`一起使用 来定义Class类的内容 接口声明的变量 Class类也需要声明 否则会报错
-  * Class类可以设置 抽象类`abstract` 抽象类就是可以声明方法 不单单是变量
-  * Class类的修饰符 可以规定四种修饰符 来限制数据 如果你不写修饰符 默认是`public` 公开
-    * `public` 公开 公开的值可以在本类、子类和实例(外部)中进行赋值修改
-    * `protected` 受保护 受保护的值可以在本类进行修改和赋值 也可以在子类中赋值修改 但是实例(外部)不可以修改
-    * `private` 私有 私有的值只能在类内部赋值修改 限制属性只能在本类中访问 子类和实例(外部)不能访问( 不能用 不能继承 )
-    * `readonly` 只读 只读的值只能在本类赋值修改 也可以被子类继承 但不可以在子类和实例(外部)赋值修改
+类(Class)：定义了一件事物的抽象特点，包含它的属性和方法 
+* Class类可以 继承`extends` 继承其他的class类
+* Class类可以和接口`interface`一起使用 来定义Class类的内容 接口声明的变量 Class类也需要声明 否则会报错
+* Class类可以设置 抽象类`abstract` 抽象类就是可以声明方法 不单单是变量
+* Class类的修饰符 可以规定四种修饰符 来限制数据 如果你不写修饰符 默认是`public` 公开
+  * `public` 公开 公开的值可以在本类、子类和实例(外部)中进行赋值修改
+  * `protected` 受保护 受保护的值可以在本类进行修改和赋值 也可以在子类中赋值修改 但是实例(外部)不可以修改
+  * `private` 私有 私有的值只能在类内部赋值修改 限制属性只能在本类中访问 子类和实例(外部)不能访问( 不能用 不能继承 )
+  * `readonly` 只读 只读的值只能在本类赋值修改 也可以被子类继承 但不可以在子类和实例(外部)赋值修改
 
 ### **声明class**
 
@@ -914,7 +936,7 @@ const { a: ax } = obj
 console.log(ax) // 你好
 ```
 
-### 通过断言 return方法中的数组
+### **通过断言 return方法中的数组**
 
 * 通过`as`把数组转换成元组 `return`数组中的方法
 
@@ -934,17 +956,50 @@ m(1, 2) // 3
 
 ```
 
-### 选择属性时断言
+### **选择属性时断言**
 
-* 对一个没有声明类型的属性进行选择的时候 会出现以下报错 需要对`material`属性进断言设置 规定该属性的属性
+* 对一个没有声明类型的属性进行选择的时候, 会出现以下报错, 需要对`material`属性进断言设置, 规定该属性的属性
 
 ![image-20221116193429070](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211161934126.png)
 
-* 把属性`()`起来 通过`as`断言设置其属性 并且在最前面添加`;`分好 (书写规范不写也可以`prettier`会自动格式化添加`;`
+* 把属性`()`起来 通过`as`断言设置其属性 并且在最前面添加`;` (书写规范不写也可以`prettier`会自动格式化添加`;`
 
 ![image-20221116193655953](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211161936004.png)
 
 ```tsx
 ;(item.object as THREE.Mesh).material = this.redMaterial 
+```
+
+* 如果外部已经有`()`, 那么将不会在最前面添加`;`
+
+```tsx
+Number((lastRipple as HTMLElement).dataset.createdAt)
+```
+
+## ts遍历问题
+
+在TypeScript里面，当遍历对象(for...in)的时候，如果我们直接使用对象的key(属性名), 会报错
+
+* 在js中, 如果我们用遍历(for...in)中的key, 那么js会帮我们进行隐式转换, 自动把key转换为字符串
+* 在ts中, 不存在隐式转换, key被识别为隐式具有 “any“ 类型, 会报错
+
+需要单独的通过`interface`接口定义需要遍历的对象, 并规定其key的属性为`string`
+
+```tsx
+// 给对象声明一个接口, 规定遍历的时候key为string类型, value为any类型
+interface EachKey {
+  [key: string]: any
+}
+
+// 声明对象, 绑定接口规定的类型
+const directives: EachKey = {
+  waterClick: '大水逼'
+}
+
+// 遍历的时候使用key的值
+for (const key in directives) {
+  app.directive(key, directives[key])
+}
+
 ```
 
