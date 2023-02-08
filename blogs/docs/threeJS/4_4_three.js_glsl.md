@@ -18,6 +18,8 @@ Shader着色器在three.js中使用<br>
 
 着色器材质（ShaderMaterial）是一个用GLSL编写的小程序 ，在GPU上运行。它能够提供 materials 之外的效果，也可以将许多对象组合成单个Geometry或BufferGeometry以提高性能。
 
+* 着色器学习网站 [大量示例](https://thebookofshaders.com/?lan=ch)
+
 ### **着色器材质的变量**
 
 每个着色器材质都可以指定两种不同类型的shaders，他们是顶点着色器和片元着色器(Vertex shaders and fragment shaders)。
@@ -197,8 +199,12 @@ void main() {
 可以通过给xy轴偏移0.01, 让其隐藏不渲染的内容
 
 ```glsl
+// 接收公共值
+varying vec2 vUv;
+
 // 设置变量
 float color;
+
 void main() {
   color = step(0.8, mod(vUv.x * 10.0 + 0.01, 1.0));
   // 如果color < 0.5, 返回0.0, 否则返回1.0
@@ -308,6 +314,7 @@ const rawShader = new THREE.RawShaderMaterial({
 
 // 修改uniforms属性中的值
 rawShader.uniforms.time.value = 3
+
 ```
 
 * 在GLSL中接收three.js传来的`uniforms`中的属性, 必须通过上面的类型表, 转换three.js的类型设置其在GLSL中的基本类型
@@ -319,11 +326,14 @@ uniform float time;
 void main() {
  sin(time)
 }
+
 ```
 
 ## glsl内置函数
 
 开始学习three.js着色器材质时，我们经常会无从下手，辛苦写下的着色器，也会因莫名的报错而手足无措。原因是着色器材质它涉及到另一种语言–GLSL，只有懂了这个语言，我们才能更好的写出着色器材质，利用好的我们的GPU。这篇说一说glsl内置函数。
+
+* glsl取反为`1-`, 取正为`1+`(以three.js传来的UV作为参数0~1)
 
 ### **和角度相关的函数** 
 
@@ -388,6 +398,34 @@ void main() {
 | refract(I, N, eta)      | 返回折射向量                                   |
 
 经常用的函数差不多就是这些。还需要我们在实践中反复练习，才能使用的得心应手。
+
+### **二维向量随机数**
+
+glsl没有提供相应的随机数方法, 可以通过已有的数学方法计算出一个伪随机, 详细看[随机](https://thebookofshaders.com/10/?lan=ch), 这篇文章
+
+```glsl
+// 设置精度
+precision mediump float;
+
+// 接收公共值
+varying vec2 vUv;
+
+// 接收three.js传递的值(时间)
+uniform float time;
+
+// 伪随机方法
+float random(vec2 st) {
+  return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+void main() {
+  // 随机数
+  float color = random(vUv + time);
+    
+  gl_FragColor = vec4(color, color, color, 1);
+}
+
+```
 
 ## Vite引入glsl
 
