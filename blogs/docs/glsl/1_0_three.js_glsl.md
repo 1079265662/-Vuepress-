@@ -252,6 +252,7 @@ gl_FragColor = vec4(1.0, 1,0, 1.0, 0.5) // 支持RGBA透明效果
 `uniforms`是 GLSL 着色器中的全局变量。可以通过three.js设置后传入GLSL中
 
 *  <font color=#ff3040>每个 `uniforms`对象中的内容平必须包括一个 **value** 属性</font>。value的类型必须和下表中 GLSL的基本类型相对应。
+*  类型如果两个值一样, 可以简写为一个比如: `vec2(0.5) 等于 vec2(0.5, 0.5)`
 
 | GLSL 类型      | JavaScript 类型                                              |
 | :------------- | :----------------------------------------------------------- |
@@ -407,7 +408,7 @@ void main() {
 | reflect(I, N)           | 返回反射向量                                                 |
 | refract(I, N, eta)      | 返回折射向量                                                 |
 
-### **二维向量随机数**
+### **随机数方法(二维向量)**
 
 glsl没有提供相应的随机数方法, 可以通过已有的数学方法计算出一个伪随机, 详细看[随机](https://thebookofshaders.com/10/?lan=ch), 这篇文章
 
@@ -422,6 +423,9 @@ varying vec2 vUv;
 uniform float time;
 
 // 伪随机方法
+/*
+* st: vec2二维向量的参数
+*/
 float random(vec2 st) {
   return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453);
 }
@@ -431,6 +435,21 @@ void main() {
   float color = random(vUv + time);
     
   gl_FragColor = vec4(color, color, color, 1);
+}
+
+```
+
+### **旋转方法(二维向量)**
+
+```glsl
+//旋转函数
+/**
+* uv: 顶点坐标
+* rotation: 旋转角度
+* mid: 旋转中心
+*/
+vec2 rotate(vec2 uv, float rotation, vec2 mid) {
+  return vec2(cos(rotation) * (uv.x - mid.x) + sin(rotation) * (uv.y - mid.y) + mid.x, cos(rotation) * (uv.y - mid.y) - sin(rotation) * (uv.x - mid.x) + mid.y);
 }
 
 ```
