@@ -56,7 +56,7 @@ Vscode快速设置文档 涉及到settings和eslint<br>
   // 每次保存的时候自动格式化
   "editor.formatOnSave": true,
   // #每次保存的时候将代码按eslint格式进行修复
-  // "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
@@ -78,7 +78,7 @@ Vscode快速设置文档 涉及到settings和eslint<br>
   // "vetur.format.defaultFormatter.js": "none",
   // "vetur.format.options.tabSize": 2,
   // "vetur.format.options.useTabs": true,
-  "vetur.format.defaultFormatter.html": "prettier", // 用eslint格式化html
+  "vetur.format.defaultFormatter.html": "prettier",
   "vetur.format.defaultFormatter.js": "prettier-eslint",
   "vetur.format.defaultFormatter.scss": "prettier",
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
@@ -91,13 +91,10 @@ Vscode快速设置文档 涉及到settings和eslint<br>
       "bracketSpacing": true,
       "tabWidth": 2,
       "arrowParens": "avoid",
-      "printWidth": 80
+      "printWidth": 80,
+      "useTabs": false,
+      "vueIndentScriptAndStyle": false
     }
-    // "js-beautify-html": {
-    //   "wrap_line_length": 150, //换行长度
-    //   "wrap_attributes": "auto" //属性换行 force-aligned
-    //   // "end_with_newline": false
-    // }
   },
   // 设置不同颜色括号
   "editor.bracketPairColorization.enabled": true,
@@ -183,7 +180,17 @@ Vscode快速设置文档 涉及到settings和eslint<br>
   },
   "prettier.singleQuote": true,
   "liveServer.settings.ChromeDebuggingAttachment": false,
-  "eslint.codeActionsOnSave.rules": null
+  "eslint.codeActionsOnSave.rules": null,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "Default Dark+",
+  "git.confirmSync": false,
+  "[glsl]": {
+    "editor.defaultFormatter": "raczzalan.webgl-glsl-editor"
+  },
+  "git.autofetch": true,
+  "editor.stickyScroll.enabled": true,
+  "update.mode": "manual"
+  // "eslint.codeActionsOnSave.rules":
 }
 
 ```

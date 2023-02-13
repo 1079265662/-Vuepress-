@@ -1,11 +1,11 @@
 ---
-title: three.js 之 着色器材质
+title: three.js 之 glsl
 date: 2023-01-09
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202301091642302.jpg
 tags:
  - three.js
- - Shader
-categories: three.js
+ - glsl
+categories: glsl
 ---
 
 ::: tip 介绍
@@ -333,7 +333,16 @@ void main() {
 
 开始学习three.js着色器材质时，我们经常会无从下手，辛苦写下的着色器，也会因莫名的报错而手足无措。原因是着色器材质它涉及到另一种语言–GLSL，只有懂了这个语言，我们才能更好的写出着色器材质，利用好的我们的GPU。这篇说一说glsl内置函数。
 
-* glsl取反为`1-`, 取正为`1+`(以three.js传来的UV作为参数0~1)
+* glsl取反为`1.0 - 参数`, 取正为`1.0 + 参数`(以three.js传来的UV作为参数0~1)
+
+### **常用方法函数**
+
+类似于three.js中的一些方法
+
+| 函数                        | 参数                            | 描述                             |
+| --------------------------- | ------------------------------- | -------------------------------- |
+| texture2D(sampler2D, vec2 ) | sampler2D采样纹理, 物体的UV坐标 | 用来在片元着色器中设置2D纹理贴图 |
+|                             |                                 |                                  |
 
 ### **和角度相关的函数** 
 
@@ -397,8 +406,6 @@ void main() {
 | faceforward(N, I, Nref) | 如果Nref和I的点积小于0，返回N；否则，返回-N；                |
 | reflect(I, N)           | 返回反射向量                                                 |
 | refract(I, N, eta)      | 返回折射向量                                                 |
-
-经常用的函数差不多就是这些。还需要我们在实践中反复练习，才能使用的得心应手。
 
 ### **二维向量随机数**
 
