@@ -38,6 +38,7 @@ shader中有三种类型的变量: `uniforms`, `attributes`, 和 `varyings`, 如
   - `varyings`变量在顶点着色器`vertexShader`传递到片元着色器`fragmentShader`二者之间的声明(类名)必须是一致的
   - `varyings`声明后是没有值的, 需要在函数中赋值
   - `varyings`的值不允许改变, 如果需要改变值, 需要创建一个新的变量
+- `#define 变量名 值`  定义一个私有变量, 不用规定其类型, 值不可以改变
 
 
 注意：在shader 内部，`uniforms`和`attributes`就像常量；你只能使用JavaScript代码通过缓冲区来修改它们的值。
@@ -385,7 +386,7 @@ void main() {
 | floor(x)                    | 返回小于等于x的最大整数值                                    |
 | ceil(x)                     | 返回大于等于x的最小整数值                                    |
 | fract(x)                    | 返回x-floor(x)，即返回x的小数部分                            |
-| mod(x, y)                   | 返回x和y的模                                                 |
+| mod(x, y)                   | 返回x和y的模 (取余)                                          |
 | min(x, y)                   | 返回x和y的值较小的那个值。                                   |
 | max(x, y)                   | 返回x和y的值较大的那个值。                                   |
 | clamp(x, minVal, maxVal)    | 将x值钳于minVal和maxVal之间，意思就是当x<minVal时返回minVal，当x>maxVal时返回maxVal，当x在minVal和maxVal之间时，返回x |
@@ -400,7 +401,7 @@ void main() {
 | 函数                    | 描述                                                         |
 | ----------------------- | ------------------------------------------------------------ |
 | length(x)               | 返回向量x的长度<br />支持二维向量vec2, 那么其长度为两个值相加后的长度<br />用来实现半径渐变效果(扩散效果)<br />不支持vec3, vec4等 |
-| distance(p0,p1)         | 计算向量p0，p1之间的距离<br />支持二维向量vec2两个值的距离, p0和p1都必须为vec2, vec2的两个值对应计算 |
+| distance(p0,p1)         | 计算向量p0，p1之间的距离<br />支持二维向量vec2两个值的距离, p0和p1都必须为vec2, vec2的两个值对应计算<br />distance(uv坐标, vec2(0.5)), 可以让片元着色器居中生成(默认是按照uv坐标生成) |
 | dot                     | 向量x，y之间的点积                                           |
 | cross(x, y)             | 向量x，y之间的叉积                                           |
 | normalize(x)            | 标准化向量，返回一个方向和x相同但长度为1的向量               |
