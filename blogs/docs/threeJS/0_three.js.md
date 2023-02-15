@@ -508,7 +508,7 @@ export default {
 
 * <font color =#ff3040>注意: 不要把 加载器中的`scene`场景 放在方法外单独声明 否则[WebGLRenderer](https://threejs.org/docs/index.html?q=renderer#api/zh/renderers/WebGLRenderer)的某些api方法无法使用(比如`.dispose`销毁渲染器)</font>
 
-### 使用构造函数渲染(常用)
+### 使用构造函数渲染
 
 * 更先进 更细致的构造函数 class类进行渲染
   * [addEventListener](https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener) 监听属性如果监听的是`window`对象 那么在Vue框架中 切换路由后其监听依旧会生效 为了性能优化 需要通过[removeEventListener](https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/removeEventListener) 进行销毁监听
@@ -688,6 +688,236 @@ export default {
 <style lang="scss" scoped></style>
 
 ```
+
+### **使用拆分class的模块渲染(常用)**
+
+通过class的继承特性, 可以拆分three.js的渲染内容, 可以把渲染的**公共类,公共方法类**作为基础, 这样我们就省去创建一些重复性的内容, 我们只需要专注于不同的渲染方法方式即可, 实现一个模块化效果
+
+1. 第一层是three.js渲染的公共类, 一些依赖于three.js渲染的类型, 比如`renderer`, `scene`, `camera`等, 通过ts进行类型设置, 通过`import type`可以进行ts的类型引入, 这一类**是公共类**
+
+```tsx
+/**
+ * three.js渲染的公共类
+ */
+
+// 导入three.js
+import * as THREE from 'three'
+// 导入轨道控制器类型
+import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
+export class Type {
+  // 轨道控制器
+  controls!: OrbitControls
+  // 设置动画id
+  animationId!: number
+  // 创建材质
+  mmaterial!: THREE.RawShaderMaterial
+
+  // 创建渲染器
+  renderer = new THREE.WebGLRenderer({
+    antialias: true, // 关掉锯齿
+    alpha: true // 设置背景透明
+  })
+  // 设置场景
+  scene = new THREE.Scene()
+  // 设置相机
+  camera = new THREE.PerspectiveCamera(
+    // 视觉角度
+    75,
+    // 相机纵横比 取整个屏幕 宽 / 高
+    window.innerWidth / window.innerHeight,
+    // 相机的进截面 (近距离不可见范围)
+    0.1,
+    // 远截面 (远距离不可见范围)
+    1000
+  )
+
+  // 创建时钟
+  clock = new THREE.Clock()
+}
+
+```
+
+2. 第二层, three.js的渲染方法, 继承于第一层的**公共类**, 例如, 监听页面尺寸更新画布大小, 销毁画布的常规/基础方法等, 这一类是**公共方法类**
+
+```tsx
+/**
+ * three.js渲染的公共方法类
+ */
+// 导入公共类
+import { Type } from './type'
+
+export class CreatedRender extends Type {
+  // 尺寸变化时调整渲染器大小
+  onWindowResize = () => {
+    // 解构window对象
+    const { innerWidth, innerHeight, devicePixelRatio } = window
+    // 更新相机的宽高比
+    this.camera.aspect = innerWidth / innerHeight
+    // 更新摄像机的投影矩阵
+    this.camera.updateProjectionMatrix()
+    // 更新渲染器
+    this.renderer.setSize(innerWidth, innerHeight)
+    // 更新渲染器的像素比
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
+  }
+
+  // 监听窗口变化
+  onAddEventListener = () => {
+    // 实现画面变化 更新渲染的内容
+    window.addEventListener('resize', this.onWindowResize)
+  }
+
+  // 销毁渲染内容
+  dispose = () => {
+    // 清除场景
+    this.scene.clear()
+    // 清除轨道控制器
+    this.controls.dispose()
+    // 清除渲染器
+    this.renderer.dispose()
+    // 释放内存
+    // this.renderer.forceContextLoss()
+    // 清除动画
+    cancelAnimationFrame(this.animationId)
+    // 销毁监听
+    window.removeEventListener('resize', this.onWindowResize)
+  }
+}
+
+```
+
+3. 第二层以后, 这些类就可以进行自定义渲染方法, 满足自身需求的一些方法类, 比如渲染一个正方体还是一个球体, 这取决你这一层的自定义渲染方法, **最后一层的类名作为构造函数进行使用**
+   * 通常这一层需要通过`constructor`实例化传入的`canvas`画布Dom(类型`HTMLElement`)
+   * `render`渲染方法也可以写在这里, 有些值是依赖于three.js中的[Clock](https://threejs.org/docs/index.html?q=Clock#api/zh/core/Clock) 跟踪时间
+   * 这里举个例子, 我们要渲染一个面, 那么就可以继承第二步**共方法类**, 创建自己想要的效果
+
+```tsx
+// 导入公共方法类
+import { CreatedRender } from '@/glsltype/createdrender'
+// 导入three.js
+import * as THREE from 'three'
+// 导入轨道控制器
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
+export class CreatedCanvas extends CreatedRender {
+  constructor(canvas: HTMLElement) {
+    super()
+    // 接收传入的画布Dom元素
+    this.canvas = canvas
+  }
+
+  // 绘制canvas的Dom
+  canvas!: HTMLElement | Document | Element
+
+  // 球体长宽
+  sphereNumber = {
+    radius: 2
+  }
+
+  // 创建场景
+  createScene = () => {
+    const { radius } = this.sphereNumber
+
+    // 设置相机的所在位置 通过三维向量Vector3的set()设置其坐标系 (基于世界坐标)
+    this.camera.position.set(0, 5, 20) // 默认没有参数 需要设置参数
+    // 把相机添加到场景中
+    this.scene.add(this.camera)
+
+    // 声明一个球体
+    const sphere = new THREE.SphereGeometry(radius, 32, 32)
+
+    // 创建网格模型
+    const mesh = new THREE.Mesh(sphere, this.mmaterial)
+    // 添加到场景
+    this.scene.add(mesh)
+
+    // 环境光
+    const light = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
+    this.scene.add(light)
+
+    // 创建一个辅助线
+    const axesHelper = new THREE.AxesHelper(20)
+    this.scene.add(axesHelper)
+
+    // 设置渲染器(画布)的大小 通过setSize()设置
+    this.renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)
+    // 将webgl渲染到指定的页面元素中去 (比如body 也可以设置其他页面Dom元素)
+    this.canvas.appendChild(this.renderer.domElement)
+
+    // 创建创建一个轨道控制器 实现交互渲染
+    // new OrbitControls(相机, 渲染器Dom元素)
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+    // 设置控制器阻尼 让控制器更真实 如果该值被启用，你将必须在你的动画循环里调用.update()
+    this.controls.enableDamping = true
+    // 禁用轨道控制器
+    // this.controls.enabled = false
+
+    // 渲染方法
+    this.render()
+    // 添加监听画布大小变化
+    this.onAddEventListener()
+  }
+
+  // 渲染动画
+  render = () => {
+    // 获得动画执行时间
+    // const clockTime = this.clock.getElapsedTime()
+
+    // 设置阻尼感必须在动画中调用.update()
+    this.controls.update()
+
+    // 使用渲染器,通过相机将场景渲染出来
+    this.renderer.render(this.scene, this.camera) // render(场景, 相机)
+    // 使用动画更新的回调API实现持续更新动画的效果
+    this.animationId = requestAnimationFrame(this.render)
+  }
+}
+
+```
+
+4. 最后, 我们在Vue中导入最后一层的class构造函数, 实现three.js的展示
+
+```vue
+<template>
+  <div>
+    <div ref="stateDom" />
+  </div>
+</template>
+<script setup lang="ts">
+// 导入Vue3的API
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+// 导入three.js的构造函数
+import { CreatedCanvas } from './components/iphone_render'
+
+// 获取Dom
+const stateDom = ref()
+// 储存three.js的实例
+let Three: any = null
+
+onMounted(() => {
+  // 创建three.js实例
+  Three = new CreatedCanvas(stateDom.value)
+  // 传递页面Dom 绘制three.js
+  Three.createScene()
+})
+
+onBeforeUnmount(() => {
+  // 销毁three.js实例
+  Three.dispose()
+})
+</script>
+
+<script lang="ts">
+export default {
+  name: 'IPhone'
+}
+</script>
+<style lang="scss" scoped></style>
+
+```
+
+
 
 ### **着色器GLSL代码**
 
