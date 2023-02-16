@@ -501,7 +501,7 @@ const shader = new THREE.ShaderMaterial({
 
 ## 在ts环境下使用glsl
 
-glsl文件在ts环境下是没有类型标识的, 直接导入会报错 所以我们需要在脚手架([create-vue](https://github.com/vuejs/create-vue) Vue3+vite脚手架环境下)根目录下创建一个`env.d.ts`(格式为`*.d.ts`, 进行glsl类型设置, 作为字符串导入
+glsl文件在ts环境下是没有类型标识的, 直接导入会报错, 所以我们需要在脚手架([create-vue](https://github.com/vuejs/create-vue))根目录下创建一个`env.d.ts`(格式为`*.d.ts`), 作为字符串导入
 
 ```tsx
 declare module '*.glsl' {
@@ -510,6 +510,10 @@ declare module '*.glsl' {
 }
 
 ```
+
+::: details 查看文件目录
+![image-20230216172529775](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161726829.png)
+:::
 
 ## 参考文献
 
