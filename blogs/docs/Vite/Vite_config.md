@@ -195,6 +195,10 @@ export default defineConfig({
 })
 ```
 
+::: details 查看文件目录
+![image-20230216173250748](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161732791.png)
+:::
+
 ## 配置tsconfig
 
 * 总共有两个`tsconfig`
@@ -609,6 +613,48 @@ export default defineConfig({
     removeConsole()
   ]
 });
+```
+
+## 补充ts导入资源类型
+
+在ts文件中导入资源是需要类型的, 默认提供了一些图片(png, jpg)的资源类型, 在进行一些其他资源类型的补充
+
+```ts
+/// <reference types="vite/client" />
+declare module '*.vue' {
+  // import type { DefineComponent } from 'vue'
+  // const component: ComponentOptions | ComponentOptions['setup']
+  export default component
+}
+declare module '*.glsl' {
+  const value: string
+  export default value
+}
+declare module '*.glb' {
+  const value: string
+  export default value
+}
+declare module '*.gltf' {
+  const value: string
+  export default value
+}
+
+```
+
+::: details 查看文件目录
+![image-20230216172529775](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161726829.png)
+:::
+
+## Vite中导入静态资源
+
+[静态资源](https://cn.vitejs.dev/config/shared-options.html#assetsinclude)是一些不参与编译的资源, 图片等常见静态资源类型vite内置, 但是部分静态资源, 需要手动添加比如: glb和gltf的weblg模型资源
+
+```tsx
+export default defineConfig({
+  // 静态资源
+  assetsInclude: ['**/*.gltf', '**/*.glb'],
+})
+
 ```
 
 ## 配置Vscode

@@ -65,11 +65,12 @@ scene.add(model) // 把三维模型添加到场景中
 
 ```
 
-### **异步加载**
+### **promise异步加载**
 
-* `.loadAsync` 可以支持异步加载[详细](https://threejs.org/docs/index.html?q=TextureLoader#api/zh/loaders/Loader.loadAsync) 异步加载使用的`promise`方法 需要通过`then`和`catch`获取其异步加载状态
+`.loadAsync` 可以支持异步加载[详细](https://threejs.org/docs/index.html?q=TextureLoader#api/zh/loaders/Loader.loadAsync) 异步加载使用的`promise`方法 需要通过`then`和`catch`获取其异步加载状态
 
 ```js
+const loader = new THREE.GLTFLoader();
 loader.loadAsync(`${process.env.BASE_URL}model/model.gltf`, (gltf) => { // gltf加载成功后返回一个对象 该对象是模型信息
       console.log('控制台查看gltf对象结构', gltf)
       // gltf.scene可以包含网格模型Mesh、光源Light等信息，至于gltf.scene是否包含光源，要看.gltf文件中是否有光源信息
@@ -79,6 +80,43 @@ loader.loadAsync(`${process.env.BASE_URL}model/model.gltf`, (gltf) => { // gltf�
     }).catch(()=>{
     ... 调用失败的方法
 })
+
+```
+
+### **async/await异步加载**
+
+[async/await](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function) 可以优化`promise`的链式操作, 而且`GLTFLoader`返回的数据就是`promise`对象, 可以通过`async/await`进行代码优化
+
+```js
+// 创建加载器
+const gltfLoader = new THREE.GLTFLoader(); 
+// 用async/await来获取模型的异步数据
+const result = await gltfLoader.loadAsync("car/scene.gltf"); // promise解析后的模型数据
+
+```
+
+> 在class类中使用
+
+`async/await`在class中使用, 需要写在箭头函数`()`前面
+
+```js
+class Person {
+  // 创建加载器
+  gltfLoader = new THREE.GLTFLoader()
+
+  // 在箭头函数的()前添加async 关键字
+  loadIphone = async () => {
+    // 用async/await来获取模型的异步数据
+    const result = await gltfLoader.loadAsync('car/scene.gltf') 
+    console.log(result) // promise解析后的模型数据
+  }
+
+  createScene = () => {
+    // 在需要模型的方法里调用异步数据
+    this.loadIphone()
+  }
+}
+
 ```
 
 ### **颜色偏差问题**
@@ -335,8 +373,41 @@ HDRloader.loadAsync(getAssetsFile('hdr/002.hdr'), ({ total, loaded }) => {
 
 ```
 
+## Vite中导入glb和gltf
 
+glb和gltf资源是[静态资源](https://cn.vitejs.dev/config/shared-options.html#assetsinclude), 如果文件在脚手架([create-vue](https://github.com/vuejs/create-vue))中导入使用, 需要在`vite.config.ts`配置中设置为静态资源, 不进行编译处理
+
+```js
+// 静态资源设置
+assetsInclude: ['**/*.gltf', '**/*.glb'],
+```
+
+::: details 查看文件目录
+![image-20230216173250748](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161732791.png)
+:::
+
+## 在ts环境下使用glb和gltf
+
+glb,gltf 文件在ts环境下是没有类型标识的, 直接导入会报错, 所以我们需要在脚手架([create-vue](https://github.com/vuejs/create-vue))根目录下创建一个`env.d.ts`(格式为`*.d.ts`)作为字符串导入
+
+```tsx
+declare module '*.glb' {
+  const value: string
+  export default value
+}
+declare module '*.gltf' {
+  const value: string
+  export default value
+}
+
+```
+
+::: details 查看文件目录
+![image-20230216172529775](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161726829.png)
+:::
 
 ##  参考文献
 
 [Three.js零基础入门教程(郭隆邦)](http://www.yanhuangxueyuan.com/Three.js/)
+
+[加载异步功能不起作用或使用错误](https://discourse.threejs.org/t/loadasync-function-not-working-or-using-wrong/28355)

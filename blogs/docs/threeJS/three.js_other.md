@@ -84,7 +84,14 @@ categories: three.js
 
 gltf文件一般会配合一些相关的贴图, 导入three.js时候会读取贴图, 但在Blender中, 需要手动导入贴图, glb模型则不需要手动添加贴图(自带贴图)
 
-![image-20230216094525847](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302160945925.png)
+![image-20230216154928086](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161549116.png)
+
+::: tip gltf模型和贴图关联
+gltf模型可以和相关贴图进行关联, 如果不关联, 在three.js加载后只显示模型的效果
+
+包含金属度, 粗糙度等贴图都是PBR材质[MeshStandardMaterial](https://threejs.org/docs/index.html?q=Mesh#api/zh/materials/MeshStandardMaterial)
+
+:::
 
 > 添加gltf模型, 并进入shading着色模式
 

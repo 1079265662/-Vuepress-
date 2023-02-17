@@ -113,11 +113,11 @@ renderer.setClearColor('#00577')
 
 * three.js的三大组件之一 必要元素
   1. 创建场景对象 [Scene](https://threejs.org/docs/index.html?q=Scene#api/zh/scenes/Scene)
-  2. 创建相机 [Camera](https://threejs.org/docs/index.html?q=Camera#api/zh/cameras/Camerad)
-  3. 创建网格模型 [Mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh)
+  2. 创建网格模型 [Mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh)
      *  可包含材质 [Material](https://threejs.org/docs/index.html?q=Material#api/zh/constants/Materials)
      *  颜色 [Color](./3_9_three.js_Color.md)
      *  纹理 [Texture](./4_three.js_Texture.md)
+  3. 创建相机 [Camera](https://threejs.org/docs/index.html?q=Camera#api/zh/cameras/Camerad)
   4. 光源的设置(非必须) [Light](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/Light)
   5. 创建渲染器 [WebGLRenderer](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer)
   6. 把渲染器绑定到指定页面元素上(可通过[element.appendChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)进行绑定) 通过[canvas](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API) 渲染[WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
