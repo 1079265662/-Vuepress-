@@ -23,7 +23,7 @@
     "@vuepress-reco/vuepress-plugin-pagation": "^1.6.0",
     "aos": "^2.3.4",
     "vue-class-component": "^7.2.3",
-    "vuepress-plugin-auto-sidebar": "^2.2.2",
+    "vuepress-plugin-auto-sidebar": "^2.3.2",
     "vuepress-plugin-cursor-effects": "^1.0.2",
     "vuepress-plugin-dynamic-title": "^1.0.0",
     "vuepress-plugin-meting": "^0.2.3",
