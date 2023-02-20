@@ -330,6 +330,8 @@ console.log(a) // 这个时候会报错 我们需要把never改成我们已经�
 
 ### **对象** `Object`
 
+<font color =#ff3040>记住！`Object` 不是 `object`，不要把他们两混淆</font>
+
 * 万物皆对象 什么都可以塞进对象中
 
 ```typescript
@@ -341,7 +343,34 @@ let abc: Object = {
   f: undefined
 }
 console.log(abbc) // { a: 1, b: 2, c: '你好', d: null, f: undefined }
+
 ```
+
+* 在 TypeScript 中，我们使用接口来定义对象的类型
+
+```tsx
+// Object接口定义                                 
+interface Person {                              
+    name: string;                                     
+    age: number;
+}
+
+let tom: Person = {
+    name: 'Tom',
+    age: 25
+};  // success
+
+let tom: Person = {
+    name: 11,
+    age: 25
+};  // Error
+```
+
+### **`object `非原始对象** 
+
+`object `不是`Object`, 他不是真正的`Object`,也不存在`Object`的实例, 他表示非原始对象, 一般不在项目中使用, 该类型一般应用到有些`Object`对象方法中
+
+* 使用`object`类型，就可以更好的表示像[Object.create](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create)这样的API，在TypeScript2.2的发布，标准库的类型声明已经更新，以使用新的对象类型。例如，[Object.create ](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create)和[Object.setPrototypeOf()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf)方法，现在需要为它们的原型参数指定 `object | null` 类型
 
 ### **声明一个数组对象**
 

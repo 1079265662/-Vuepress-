@@ -127,4 +127,34 @@ controls.enableDamping = true
       
   ```
   
-  
+
+## 三维空间包围盒Box3
+
+[Box3](https://threejs.org/docs/index.html?q=box2#api/zh/math/Box3.getSize)三维空间包围盒, 可以包围导入的三维物体, 传入物体的`Object3D`, 在物体外生成包围盒, 可以用来查看物体的大小
+
+* [min](https://threejs.org/docs/index.html#api/zh/math/Vector3) - (参数可选) [Vector3](https://threejs.org/docs/index.html#api/zh/math/Vector3) 表示包围盒的下边界。 默认值是（ + Infinity, + Infinity, + Infinity ）。
+* [max](https://threejs.org/docs/index.html#api/zh/math/Vector3) - (参数可选) [Vector3](https://threejs.org/docs/index.html#api/zh/math/Vector3) 表示包围盒的上边界。 默认值是（ - Infinity, - Infinity, - Infinity ）。
+* [.getSize](https://threejs.org/docs/index.html#api/zh/math/Box3.getSize), 可以获得包围盒的大小(.[sub](https://threejs.org/docs/index.html#api/zh/math/Vector3.sub) 后的数据)
+
+```js
+// 通过三维空间包围盒计算物体的大小
+const getBoxSize = (object: THREE.Object3D) => {
+  // 创建一个包围盒
+  const box = new THREE.Box3()
+  // 设置包围盒的大小
+  box.setFromObject(object)
+  // 获取包围盒的大小
+  const boxSize = box.getSize(new THREE.Vector3())
+
+  console.log(`当前物体的大小(包围盒)`, boxSize)
+}
+
+```
+
+::: details 查看测量效果
+![image-20230220181802720](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302201820902.png)
+
+:::
+
+
+

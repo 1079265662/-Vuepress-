@@ -458,6 +458,8 @@ material.opacity = 0.4;
 ### **设置法线贴图**
 
 * [.normalMap](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.normalMap) 设置法线贴图
+  * 法线贴图可以让模型从精模到简模, 可以通过发现贴图来完善模型的细节, 从而减少模型的大小, 并且不影响过多的模型显示效果
+
 
 ![image-20220923161909543](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231619586.png)
 
