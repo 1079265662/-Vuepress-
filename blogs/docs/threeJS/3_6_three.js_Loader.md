@@ -279,97 +279,122 @@ const texture = textureLoader.load(img)
 
 ## LoadingManager加载管理器
 
-* 每个加载器 都自带一个加载监听事件 如果想统一管理加载的内容 判断加载进度或者是否加载成功 需要使用[LoadingManager](https://threejs.org/docs/index.html?q=Texture#api/zh/loaders/managers/LoadingManager)加载管理器
-  * 声明加载管理器 把其变量塞到事件的加载器中即可使用
-  * [.onProgress](https://threejs.org/docs/index.html?q=Texture#api/zh/loaders/managers/LoadingManager.onProgress) 有三个参数
-    * `url` — 被加载的项的url (资源路径 绝对/相对路径 依据你导入的方式)
-    * `itemsLoaded` — 目前已加载项的个数。
-    * `itemsTotal` — 总共所需要加载项的个数。
+每个加载器 都自带一个加载监听事件 如果想统一管理加载的内容 判断加载进度或者是否加载成功 需要使用[LoadingManager](https://threejs.org/docs/index.html?q=Texture#api/zh/loaders/managers/LoadingManager)加载管理器
+* 声明加载管理器 把其变量塞到事件的加载器中即可使用
+* [.onProgress](https://threejs.org/docs/index.html?q=Texture#api/zh/loaders/managers/LoadingManager.onProgress) 有三个参数
+  * `url` — 被加载的项的url (资源路径 绝对/相对路径 依据你导入的方式)
+  * `itemsLoaded` — 目前已加载项的个数。
+  * `itemsTotal` — 总共所需要加载项的个数。
+
 * <font color =#ff3040>注意: 加载管理器适合资源统一加载(上面介绍过) 使用一个统一的加载器的常量</font>
 * <font color =#ff3040>注意: 加载管理器不适合监控单文件加载进度(比入一张图) 单文件就是0到1的关系 不适合使用加载管理器</font>
 
 ```tsx
+// loading.ts
 // 导入three.js
 import * as THREE from 'three'
+// 导入加载类型
+import type { LoadingManager } from 'three'
 // 导入Vue响应式
 import { ref } from 'vue'
-// 储存加载的百分比
-const loadingNumber = ref(0)
-/**
- * @description: 声明加载管理器
- * @returns {any}
- */
-function loading(): any  {
-  // 创建加载器
-  const manager = new THREE.LoadingManager()
-  // 加载中的参数  url被加载的项的url itemsLoaded目前已加载项的个数 itemsTotal总共所需要加载项的个数。
-  manager.onProgress = (url, itemsLoaded, itemsTotal) => {
-  // 获取加载百分比: 已加载个数 / 总数量 * 100 计算出加载百分比 并取两位小数
-    loadingNumber.value = Number(((itemsLoaded / itemsTotal) * 100).toFixed(2))
-  }
-  // 返回加载管理器的变量
-  return manager
-}
+export const loadingNumber = ref(0)
 
 /**
- * @description: 清除加载器和动画(销毁方法)
+ * @description: 声明加载管理器
+ * @param {number | void} total 总大小
+ * @param {number | void} loaded 已加载大小
+ * @returns {loadingNumber | any}
  */
-function dispose() {
-  // 清除渲染器
-  renderer.dispose()
-  // 清除动画
-  cancelAnimationFrame(animationId)
-  // 重置加载的百分比
+// 模型/hdr加载的方法
+export function loadTexture(
+  total: number | void,
+  loaded: number | void
+): LoadingManager | any {
   loadingNumber.value = 0
-}
 
-// 设置一个统一的纹理加载器
-const textureLoader = new THREE.TextureLoader(loading()) // 在加载器中使用加载管理器
-//TODO 进行各种纹理的加载操作
-```
-
-* **提示: 建议再销毁方法中 重置加载的百分比 这样下次加载的时候显示效果更好**
-
-### **单个和多个文件统一加载器**
-
-* 单个文件用文件的加载器进行传参计算 多个文件用`LoadingManager`加载管理器
-
-```tsx
-
-
-/**
- * @description: 声明加载管理器
- * @param {number | void} total
- * @param {number | void} loaded
- * @returns {any}
- */
-function loading(total: number | void, loaded: number | void): any {
-  // 对于单独文件的加载进行计算
+  // 对于单独文件的加载进行计算(比如hdr)
   if (total && loaded) {
-    loadingNumber.value = Number(((loaded / total) * 100).toFixed(0)) // 取消小数点
+    loadingNumber.value = Number(((loaded / total) * 100).toFixed(2))
     return
   }
 
-  // 对于多个文件的加载使用加载器进行计算
   // 创建加载器
   const manager = new THREE.LoadingManager()
-  // 加载中的参数
+
+  // 加载中的参数  url被加载的项的url itemsLoaded目前已加载项的个数 itemsTotal总共所需要加载项的个数。
   manager.onProgress = (url, itemsLoaded, itemsTotal) => {
-    console.log(url, itemsLoaded, itemsTotal)
-    loadingNumber.value = Number(((itemsLoaded / itemsTotal) * 100).toFixed(0)) // 取消小数点
+    // 获取加载百分比: 已加载个数 / 总数量 * 100 计算出加载百分比 并取两位小数
+    loadingNumber.value = Number(((itemsLoaded / itemsTotal) * 100).toFixed(2))
   }
+
+  // 返回加载管理器的变量(一般用不到, 特殊请倪哥看需要)
   return manager
 }
 
-// 使用HDR加载器
-const HDRloader = new RGBELoader()
-// 异步加载HDR
-HDRloader.loadAsync(getAssetsFile('hdr/002.hdr'), ({ total, loaded }) => {
-    // 单独文件计算进度用加载器的方法传参
-    loading(total, loaded)
-  }).then((HDRtexture) => {
-    // TODO 做一些加载完毕的事情
-  })
+/**
+ * @description: 声明加载管理器
+ * @returns {any}
+ */
+// export function loading(): THREE.LoadingManager | any {
+//   loadingNumber.value = 0
+
+//   // 创建加载器
+//   const manager = new THREE.LoadingManager()
+//   // 加载中的参数
+//   manager.onProgress = (url, itemsLoaded, itemsTotal) => {
+//     loadingNumber.value = Number(((itemsLoaded / itemsTotal) * 100).toFixed(2))
+//   }
+
+//   return loadingNumber.value
+// }
+
+```
+
+* 在three.js中使用, 使用加载器的时候, 调用
+
+```js
+// 导入加载方法
+import { loadTexture } from '@/utils/loading'
+// 创建glTF加载器时候使用加载方法
+const loader = new GLTFLoader(loadTexture())
+
+```
+
+### **单个和多个文件统一加载器**
+
+单个文件用文件的加载器进行传参计算 多个文件用`LoadingManager`加载管理器, 比如纹理贴图和glb/gltf文件加载
+
+* 可以通过Vue3的组合式api的`ref()`响应式数据来记录加载的百分比数据
+
+```tsx
+// 导入加载类型
+import type { LoadingManager } from 'three'
+// 导入Vue响应式
+import { ref } from 'vue'
+
+export class CreatedRender {
+  // 设置响应式变量
+  loadingNumber = ref(0)
+
+  /**
+   * @description: 声明加载管理器
+   * @returns {LoadingManager}
+   */
+  loading = (): LoadingManager => {
+    // 创建加载器
+    const manager = new THREE.LoadingManager()
+    // 加载中的参数  url被加载的项的url itemsLoaded目前已加载项的个数 itemsTotal总共所需要加载项的个数。
+    manager.onProgress = (url, itemsLoaded, itemsTotal) => {
+      // 获取加载百分比: 已加载个数 / 总数量 * 100 计算出加载百分比 并取两位小数
+      this.loadingNumber.value = Number(
+        ((itemsLoaded / itemsTotal) * 100).toFixed(2)
+      )
+    }
+
+    // 返回加载管理器的变量(一般用不到, 特殊情况需要)
+    return manager
+  }
+}
 
 ```
 

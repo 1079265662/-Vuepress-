@@ -13,7 +13,7 @@ three.js 之 Texture 纹理<br>
 
 <!-- more -->
 
-## 纹理导入 TextureLoader()
+## 纹理贴图导入 TextureLoader()
 
 * 纹理一般是指我们常见的在一些第三方程序中创建的图像，如PNG和JPG类型的图。我们把这张图片放在立方体上。（我通常称为`贴图`）。我们需要做的就是创建一个[TextureLoader()](https://threejs.org/docs/?q=TextureLoade#api/zh/loaders/TextureLoader )。调用它的load方法，同时传入图像的URL，并将材质的 map 属性设置为该方法的返回值
 * `TextureLoader()` 通常用来加载一张图片可以返回一个纹理对象[Texture](https://threejs.org/docs/?q=TextureLoade#api/zh/textures/Texture) 作为一个表面，或者作为反射/折射贴图
@@ -647,6 +647,23 @@ HDRloader.loadAsync('hdr/002.hdr').then((HDRtexture) => {
   // 给场景内所有的物体添加默认的环境贴图 (如果物体不单独设置环境贴图 默认使用这个环境贴图)
   scene.environment = HDRtexture
 })
+
+```
+
+## 纹理贴图反转
+
+[.flipY](https://threejs.org/docs/index.html#api/zh/textures/Texture.flipY) GPU中纹理贴图Y轴反转, 默认为`true`, 纹理贴图会在Y轴上翻转, 设置为`false`纹理贴图在Y轴不会翻转
+
+* 通常纹理贴图导入后, 该属性默认是`true`, 也就是翻转效果
+* 是否要取消Y轴翻转, 取决于模型文件导出时候的设置
+
+![image-20230220105009311](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302201050458.png)
+
+```js
+// 导入色彩贴图
+const map = this.textureLoader.load(getAssetsFile('iphone/basecolor.png'))
+// 取消贴图的反转
+map.flipY = false
 
 ```
 
