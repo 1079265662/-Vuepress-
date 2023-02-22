@@ -161,6 +161,34 @@ const start = {
     }
   }
 gui.add(start, 'spin').name('开始动画')
+
+```
+
+### **通过对象创建gui的内容**
+
+通过一个对象(对象支持中文), 对象的key作为`gui`的名称, **参数1设置对象, 参数2按需设置对象的key**, 实现创建
+
+```js
+/**
+ * 创建三维场景的控制界面
+ */
+//创建控件对象变量
+const controls = {
+  缩放系数: 1,
+  转速: 0.01,
+  颜色: material.color.getStyle(), // 获取three.js当前材质的颜色数据
+}
+//关联空间数据创建交互界面
+const gui = new dat.GUI() //创建GUI对象
+const folder = gui.addFolder('菜单') //添加文件夹
+
+folder.addColor(controls, '颜色') //添加颜色菜单选项
+//添加缩放系数拖动条菜单选项
+folder.add(controls, '缩放系数', 0.1, 2.5)
+//添加转速下拉菜单选项
+folder.add(controls, '转速', { 低速: 0.005, 中速: 0.01, 高速: 0.1 })
+folder.open() // 展开gui菜单
+
 ```
 
 ## 添加调色板
