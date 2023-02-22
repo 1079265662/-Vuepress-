@@ -267,10 +267,15 @@ camera.lookAt(0, 0, 0); //相机指向Three.js坐标系原点
 
 ## 相机自适应页面的尺寸
 
-* 通过`window.onresize`监听页面尺寸是否改变 重新给画布赋值 并更新摄像机投影矩阵
-* <font color =#ff3040>注意: 修改了相机参数 需要用到`updateProjectionMatrix`方法 进行参数更新</font>
+通过`window.onresize`监听页面尺寸是否改变 重新给画布赋值 并更新摄像机投影矩阵
 
-### **正投影相机[OrthographicCamera](http://www.yanhuangxueyuan.com/threejs/docs/index.html#api/zh/cameras/OrthographicCamera)自适应渲染**
+* <font color =#ff3040>注意: 修改了相机参数 需要用到[.updateProjectionMatrix](https://threejs.org/docs/index.html?q=PerspectiveCamera#api/zh/cameras/PerspectiveCamera.updateProjectionMatrix)方法 进行参数更新</font>
+
+  ![image-20230221142449014](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302211424049.png)
+
+* [position](https://threejs.org/docs/index.html#api/zh/core/Object3D.position) 位置属性不需要
+
+### **正投影相机[OrthographicCamera](https://threejs.org/docs/index.html?q=OrthographicCamera#api/zh/cameras/OrthographicCamera)自适应渲染**
 
 * 渲染区域变化了，要通过Three.js渲染器`.setSize()`方法重置渲染器渲染尺寸。
 
@@ -292,7 +297,7 @@ window.onresize = () = >{
 };
 ```
 
-### **透视投影相机[PerspectiveCamera](http://www.yanhuangxueyuan.com/threejs/docs/index.html#api/zh/cameras/PerspectiveCamera)自适应渲染**
+### **透视投影相机[PerspectiveCamera](https://threejs.org/docs/index.html?q=PerspectiveCamera#api/zh/cameras/PerspectiveCamera)自适应渲染**
 
 * 渲染区域变化了，要通过Three.js渲染器`.setSize()`方法重置渲染器渲染尺寸。
 

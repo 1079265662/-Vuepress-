@@ -458,7 +458,7 @@ material.opacity = 0.4;
 ### **设置法线贴图**
 
 * [.normalMap](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.normalMap) 设置法线贴图
-  * 法线贴图可以让模型从精模到简模, 可以通过发现贴图来完善模型的细节, 从而减少模型的大小, 并且不影响过多的模型显示效果
+  * 法线贴图可以让模型从精模到简模, 把一些顶点几何数据转化为贴图法线数据, 这样通过法线贴图来完善模型的细节, 从而减少模型的大小, 并且不影响过多的模型显示效果
 
 
 ![image-20220923161909543](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231619586.png)
@@ -493,7 +493,7 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 
 ```
 
-### 设置深度写入
+### **设置深度写入**
 
 * [.depthWrite](https://threejs.org/docs/index.html?q=PointsMaterial#api/zh/materials/Material.depthWrite)设贴图的深度行为 默认为`true`覆盖的 也就是两张贴图重叠在一起 默认最上层(离相机)的贴图 会被默认覆盖
   * 通常贴图的深度写入 需要先设置 [.alphaMap](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/MeshBasicMaterial.alphaMap) 灰度/透明度纹理并且 开启纹理的[.transparent](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/Material.transparent) 是否透明设置为`true` 透明
@@ -513,7 +513,7 @@ const pmaterial = new THREE.PointsMaterial({
 
 ```
 
-### 设置叠加混合模式
+### **设置叠加混合模式**
 
 * [.blending](https://threejs.org/docs/index.html?q=PointsMaterial#api/zh/materials/Material.blending) 可以设置贴图的叠加混合模式 当两张贴图叠加在一起 可以设置其混合模式
   * `THREE.NoBlending` 不混合
@@ -544,7 +544,7 @@ const pmaterial = new THREE.PointsMaterial({
 
 ```
 
-### 设置顶点着色(默认颜色)
+### **设置顶点着色(默认颜色)**
 
 * [.vertexColors](https://threejs.org/docs/index.html?q=vertexColors#api/zh/materials/Material.vertexColors) 可以设置材质/材质的顶点颜色 (默认为`false`) 顶点颜色是指每个顶点都有一个颜色值(默认色值) 默认顶点颜色的优先级高于材质颜色(通过.color设置的颜色)
   * 顶点颜色的值是一个0-1的值 0表示黑色 1表示白色
@@ -626,13 +626,84 @@ scene.add(directionalLight)
 
 ![image-20221015201426618](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210152014663.png)
 
+### **环境贴图使用场景**
+
+通常环境贴图使用的场景分为两种
+
+* 第一种是作用在材质上的比如[MeshStandardMaterial](https://threejs.org/docs/index.html?q=sce#api/zh/scenes/Scene) PBR材质中的[.envMap](https://threejs.org/docs/index.html?q=stan#api/zh/materials/MeshStandardMaterial.envMap)设置环境贴图, 比如物体通过粗糙度金属度在表面反射的效果, 如果金属度粗糙度允许, 环境贴图会存在一些光照效果(类似于反光的效果), 通常环境光可以配合环境贴图, 实现一个反射的光照效果
+  * [.envMapIntensity](https://threejs.org/docs/index.html?q=stan#api/zh/materials/MeshStandardMaterial.envMapIntensity)环境贴图效果的强度, 默认是`1`, 用来表现出环境贴图对物体的影响(类似以光照的强度)
+
+```js
+import { getAssetsFile } from '@/utils/getAssetsFile'
+
+// 设置一个环境贴图加载器
+const envMapLoader = new THREE.CubeTextureLoader()
+// 这里是three.js的环境贴图加载器 引用多张图片进行加载
+const envMap = envMapLoader.loadAsync([
+  'px.png',
+  'nx.png',
+  'py.png',
+  'ny.png',
+  'pz.png',
+  'nz.png',
+] as any)
+
+// 声明一个标准材质
+const mmaterial = new THREE.MeshStandardMaterial({
+  // 设置金属度
+  metalness: 0.7,
+  // 设置光滑度
+  roughness: 0.1,
+  // 设置环境贴图
+  envMap,
+})
+
+```
+
+![](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302211148389.png)
+
+* 第二种是作为[Scene](https://threejs.org/docs/index.html?q=sce#api/zh/scenes/Scene)场景的[.background](https://threejs.org/docs/index.html#api/zh/scenes/Scene.background)背景图, 可以配合物体的环境贴图, 在场景中模拟外界效果
+
+```js
+import { getAssetsFile } from '@/utils/getAssetsFile'
+
+// 设置一个环境贴图加载器
+const envMapLoader = new THREE.CubeTextureLoader()
+// 这里是three.js的环境贴图加载器 引用多张图片进行加载
+const envMap = envMapLoader.loadAsync([
+  'px.png',
+  'nx.png',
+  'py.png',
+  'ny.png',
+  'pz.png',
+  'nz.png',
+] as any)
+
+// 声明一个标准材质
+const mmaterial = new THREE.MeshStandardMaterial({
+  // 设置金属度
+  metalness: 0.7,
+  // 设置光滑度
+  roughness: 0.1,
+  // 给材质添加环境贴图
+  envMap,
+})
+
+
+// 给场景添加背景
+scene.background = envMap
+
+```
+
+![image-20230221135227613](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302211352791.png)
+
 ## HDR贴图的应用
 
-* 得益于[HDR](./7_HDR.md)出色的色彩效果 虽HDR的资源消耗巨大 (vscode安装HDR插件后 预览一次就会崩溃) 但是也可以在webgl中使用
-  * `HDR`可以作为`Sence`背景 也可以作为物体的环境贴图
-  * `HDR`加载需要使用three.js的[RGBELoader](https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/RGBELoader.js)`HDR`文件加载器控件 (控件需要单独导入)
-  * `HDR`加载建议使用[.loadAsync](https://threejs.org/docs/index.html?q=load#api/zh/loaders/Loader.loadAsync) 异步加载 `HDR`一张图往往10m以上 适合异步加载
-  * 通过`RGBELoader`加载的 `HDR`需要设置 [.mapping](https://threejs.org/docs/index.html?q=text#api/zh/textures/Texture.mapping)贴图的环绕方式 设置为[EquirectangularReflectionMapping](https://threejs.org/docs/index.html?q=text#api/zh/constants/Textures)等距圆柱投影的环境贴图也被叫做`经纬线映射贴图` 包裹在一起形成`Scene`的背景效果
+得益于[HDR](./7_HDR.md)出色的色彩效果 虽HDR的资源消耗巨大 (vscode安装HDR插件后 预览一次就会崩溃) 但是也可以在webgl中使用
+* `HDR`可以作为`Sence`背景 也可以作为物体的环境贴图
+* `HDR`加载需要使用three.js的[RGBELoader](https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/RGBELoader.js)`HDR`文件加载器控件 (控件需要单独导入)
+* `HDR`加载建议使用[.loadAsync](https://threejs.org/docs/index.html?q=load#api/zh/loaders/Loader.loadAsync) 异步加载 `HDR`一张图往往10m以上 适合异步加载
+* 通过`RGBELoader`加载的 `HDR`需要设置 [.mapping](https://threejs.org/docs/index.html?q=text#api/zh/textures/Texture.mapping)贴图的环绕方式 设置为[EquirectangularReflectionMapping](https://threejs.org/docs/index.html?q=text#api/zh/constants/Textures)等距圆柱投影的环境贴图也被叫做`经纬线映射贴图` 包裹在一起形成`Scene`的背景效果
 
 ```tsx
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'

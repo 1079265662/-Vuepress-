@@ -398,6 +398,41 @@ export class CreatedRender {
 
 ```
 
+## Vite脚手架下导入静态资源
+
+[create-vue](https://github.com/vuejs/create-vue)脚手架环境下静态资源, ts/js文件中静态资源不可以直接通过路径来导入, 需要通过`import`或通过[官方封装的方法导入](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url)(Vue文件可以直接使用路径导入)
+
+* [静态资源处理 | Vite 官方中文文档](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url) 通过官网介绍进行封装
+
+```js
+// getAssetsFile.ts
+// 封装静态资源引用方法
+const getAssetsFile = (url: string) => {
+  return new URL(`../assets/${url}`, import.meta.url).href
+}
+export { getAssetsFile }
+
+```
+
+* 在ts中使用导入方法
+
+```ts
+import { getAssetsFile } from '@/utils/getAssetsFile'
+
+// 设置一个环境贴图加载器
+const envMapLoader = new THREE.CubeTextureLoader()
+// 这里是three.js的环境贴图加载器 引用多张图片进行加载
+const envMap = await envMapLoader.loadAsync([
+  getAssetsFile('environmentMaps/0/px.jpg'),
+  getAssetsFile('environmentMaps/0/nx.jpg'),
+  getAssetsFile('environmentMaps/0/py.jpg'),
+  getAssetsFile('environmentMaps/0/ny.jpg'),
+  getAssetsFile('environmentMaps/0/pz.jpg'),
+  getAssetsFile('environmentMaps/0/nz.jpg'),
+] as any)
+
+```
+
 ## Vite中导入glb和gltf
 
 glb和gltf资源是[静态资源](https://cn.vitejs.dev/config/shared-options.html#assetsinclude), 如果文件在脚手架([create-vue](https://github.com/vuejs/create-vue))中导入使用, 需要在`vite.config.ts`配置中设置为静态资源, 不进行编译处理
@@ -405,6 +440,19 @@ glb和gltf资源是[静态资源](https://cn.vitejs.dev/config/shared-options.ht
 ```js
 // 静态资源设置
 assetsInclude: ['**/*.gltf', '**/*.glb'],
+```
+
+* 在ts代码中进行导入
+  * [create-vue](https://github.com/vuejs/create-vue)脚手架环境下, ts/js文件中静态资源不可以直接通过路径来导入, 需要通过`import`或通过[官方封装的方法导入](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url)(Vue文件可以直接使用路径导入)
+
+```js
+// 导入手机模型gltf
+import huawei from '@/assets/iphone/huaweiB.glb'
+// 创建glTF加载器
+const loader = new GLTFLoader()
+// 异步获得加载的模型
+const gltf = await this.loader.loadAsync(huawei)
+
 ```
 
 ::: details 查看文件目录

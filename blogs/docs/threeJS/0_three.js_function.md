@@ -105,8 +105,11 @@ Mesh.rotation.z += 0.1
 
 ### **设置一个组 Group**
 
+[Group](https://threejs.org/docs/index.html?q=Group#api/zh/objects/Group) 是three.js的一个组, 创建时会自带[Object3D](https://threejs.org/docs/index.html#api/zh/core/Object3D) 中提供的属性和方法, 也就是说`Object3D`是他的基类, 并且自身也携带一些属性
+
+* 加载的gltf/glb的内容, 就可以放在`Group`中, 这样计算模型还未加载出来, 也可以使用`Object3D`中的一些属性和方法(比如`rotateY()`旋转Y轴方法) 防止报错
 * 我们可以把声明的网格模型对象放到一个集合中 也就组[Group](https://threejs.org/docs/index.html?q=group#api/zh/objects/Group) 这样我们可以给组内的网格模型进行批量的操作
-* Group也继承自`Object3D`类，因此可以使用`Object3D`类的属性和方法，例如位置，比例，旋转，四元数和`lookAt`都可以作用在Group上。
+* Group也继承自`Object3D`类，因此可以使用`Object3D`类的属性和方法，例如位置，比例，旋转，四元数和`lookAt`都可以作用在`Group`上。
 
 ```js
 //创建一个立方体几何对象Geometry
@@ -124,9 +127,10 @@ const group = new THREE.Group();
 group.add(mesh);
 
 // 创建场景对象Scene
-var scene = new THREE.Scene();
+const scene = new THREE.Scene();
 //把group中的模型添加到场景中
 scene.add(group);
+
 ```
 
 ### **遍历Object3D对象 .traverse**

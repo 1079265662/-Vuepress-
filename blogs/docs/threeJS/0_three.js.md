@@ -696,6 +696,7 @@ export default {
 1. 第一层是three.js渲染的公共类, 一些依赖于three.js渲染的类型, 比如`renderer`, `scene`, `camera`等, 通过ts进行类型设置, 通过`import type`可以进行ts的类型引入, 这一类**是公共类**
 
 ```tsx
+// type.ts
 /**
  * three.js渲染的公共类
  */
@@ -741,6 +742,7 @@ export class Type {
 2. 第二层, three.js的渲染方法, 继承于第一层的**公共类**, 例如, 监听页面尺寸更新画布大小, 销毁画布的常规/基础方法等, 这一类是**公共方法类**
 
 ```tsx
+// createdrender.ts
 /**
  * three.js渲染的公共方法类
  */
@@ -787,20 +789,74 @@ export class CreatedRender extends Type {
 
 ```
 
-3. 第二层以后, 这些类就可以进行自定义渲染方法, 满足自身需求的一些方法类, 比如渲染一个正方体还是一个球体, 这取决你这一层的自定义渲染方法, **最后一层的类名作为构造函数进行使用**
-   * 通常这一层需要通过`constructor`实例化传入的`canvas`画布Dom(类型`HTMLElement`)
-   * `render`渲染方法也可以写在这里, 有些值是依赖于three.js中的[Clock](https://threejs.org/docs/index.html?q=Clock#api/zh/core/Clock) 跟踪时间
-   * 这里举个例子, 我们要渲染一个面, 那么就可以继承第二步**共方法类**, 创建自己想要的效果
+* 第三层, 可以再来一个three.js的工具方法类, 包围盒, 辅助线, 可视化灯光的工具方法类
 
 ```tsx
-// 导入公共方法类
-import { CreatedRender } from '@/glsltype/createdrender'
+// utils_renderer.ts
+/**
+ * three.js渲染的工具类
+ */
+// 导入three.js
+import * as THREE from 'three'
+// 导入公共类
+import { CreatedRender } from './createdrender'
+
+export class CreatedUtils extends CreatedRender {
+  /**
+   * @description 设置包围盒
+   * @param THREE.Object3D 传入的物体
+   */
+  getBoxSize = (object: THREE.Object3D) => {
+    // 创建一个包围盒
+    const box = new THREE.Box3()
+
+    // 设置包围盒的大小
+    box.setFromObject(object)
+    // 获取包围盒的大小
+    const boxSize = box.getSize(new THREE.Vector3())
+
+    console.log(`当前物体的大小(包围盒)`, boxSize)
+  }
+
+  /**
+   * @description 设置平行光可视化
+   * @param THREE.DirectionalLight 传入平行光光源
+   */
+  setLightHelper = (light: THREE.DirectionalLight) => {
+    // 创建一个可视化灯光
+    const helper = new THREE.DirectionalLightHelper(light, 5)
+    // 添加到场景中
+    this.scene.add(helper)
+  }
+
+  /**
+   * @description 创建辅助线
+   * @param length 传入辅助线的长度
+   */
+  addaxesHelper = (length = 10) => {
+    // 创建一个辅助线
+    const axesHelper = new THREE.AxesHelper(length)
+    // 添加到场景中
+    this.scene.add(axesHelper)
+  }
+}
+
+```
+
+3. 第三层以后, 这些类就可以进行自定义渲染方法, 满足自身需求的一些方法类, 比如渲染一个正方体还是一个球体, 这取决你这一层的自定义渲染方法, **最后一层的类名作为构造函数进行使用**
+   * 通常这一层需要通过`constructor`实例化传入的`canvas`画布Dom(类型`HTMLElement`)
+   * `render`渲染方法也可以写在这里, 有些值是依赖于three.js中的[Clock](https://threejs.org/docs/index.html?q=Clock#api/zh/core/Clock) 跟踪时间
+   * 这里举个例子, 我们要渲染一个面, 那么就可以继承第三步**工具方法类**, 创建自己想要的场景效果
+
+```tsx
+// 导入工具方法类
+import { CreatedUtils } from '@/glsltype/utils_renderer'
 // 导入three.js
 import * as THREE from 'three'
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-export class CreatedCanvas extends CreatedRender {
+export class CreatedCanvas extends CreatedUtils {
   constructor(canvas: HTMLElement) {
     super()
     // 接收传入的画布Dom元素
@@ -836,9 +892,8 @@ export class CreatedCanvas extends CreatedRender {
     const light = new THREE.AmbientLight(0xffffff, 0.5) // soft white light
     this.scene.add(light)
 
-    // 创建一个辅助线
-    const axesHelper = new THREE.AxesHelper(20)
-    this.scene.add(axesHelper)
+    // 创建辅助线
+    this.addaxesHelper(100)
 
     // 设置渲染器(画布)的大小 通过setSize()设置
     this.renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)

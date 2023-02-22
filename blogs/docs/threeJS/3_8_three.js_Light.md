@@ -25,9 +25,14 @@ three.js 之 Loader 几何体<br>
 
 由于我们使用了对光有反应的材质，所以在没有任何灯光的情况下，我们的3D世界将只有一片黑暗！
 
+> 关于旋转
+
+* 如果是`mesh`物体旋转, 那么只是物体的自转, 灯光是不进行旋转的, 会根据物体的自身的旋转显示对应的光照效果
+* 如果是`scene`场景旋转, 那么场景中所有的物体和灯光都会进行同步的旋转效果, 不会根据物体自身的旋转显示对应的光照效果(因为光源也在同步转)
+
 ## **环境光AmbientLight**
 
-环境光将在场景内的所有几何图形上应用全向照明（四面八方的光）。它的第一个参数是颜色，第二个参数是光照强度。我们可以在实例化的时候直接设置属性，也可以在以后更改它们：
+环境光将在场景内的所有几何图形上应用全向照明（四面八方的光）。它的第一个参数是颜色，第二个参数是光照强度。我们可以在实例化的时候直接设置属性，也可以在以后更改它们, 作为整个场景的明暗强弱, 通常环境光可以配合环境贴图, 实现一个反射的明暗效果
 
 * 环境光没有阴影效果
 
@@ -303,23 +308,29 @@ scene.add(spotLight.target)
 
 ## **灯光辅助**
 
-灯光会对3D场景中产生影响，但其本身是不可见的，所以移动或是旋转时就很麻烦，但我们可以使用灯光辅助类来使得灯光对象变得可见：
+灯光会对3D场景中产生影响，但其本身是不可见的，所以移动或是旋转时就很麻烦，但我们可以使用灯光辅助类来使得灯光对象变得可见
 
-- HemisphereLightHelper
-- DirectionalLightHelper
-- PointLightHelper
-- RectAreaLightHelper
-- SpotLightHelper
+- [HemisphereLightHelper](https://threejs.org/docs/index.html?q=HemisphereLightHelper#api/zh/helpers/HemisphereLightHelper) 半球形光辅助
+- [DirectionalLightHelper](https://threejs.org/docs/index.html?q=DirectionalLightHelper#api/zh/helpers/DirectionalLightHelper) 平行光辅助
+- [PointLightHelper]() 点光源辅助
+- [RectAreaLightHelper](https://threejs.org/docs/index.html?q=RectAreaLightHelper#examples/zh/helpers/RectAreaLightHelper) 自定义光源辅助
+- [SpotLightHelper](https://threejs.org/docs/index.html?q=SpotLightHelper#api/zh/helpers/SpotLightHelper) 聚光灯辅助
 
-实例化这些类，使用相应的光作为参数，并将它们添加到场景中。第二个参数用于改变灯光辅助对象的大小：
+实例化这些类，使用相应的光源的实例作为参数，并将它们添加到场景中。第二个参数用于改变灯光辅助对象的大小：
 
 ```js
+// 导入three.js
+import * as THREE from 'three'
+
+// 半球形辅助
 const hemisphereLightHelper = new THREE.HemisphereLightHelper(hemisphereLight, 0.2)
 scene.add(hemisphereLightHelper)
 
+// 平行光辅助
 const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 0.2)
-scene.add(directionalLightHelper)
+scene.add(directionalLightHelper)'=
 
+// 点光源辅助
 const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2)
 scene.add(pointLightHelper)
 ```
@@ -339,12 +350,15 @@ window.requestAnimationFrame(() =>
 
 <img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/641.png" alt="641" style="zoom:80%;" />
 
-`RectAreaLightHelper`没有内置在`Three.js`中，我们要在`Three.js`仓库的路径中找到它`three/examples/js/helpers/RectAreaLightHelper.js`，并像导入`OrbitControls`一样导入后才可以使用它：
+`RectAreaLightHelper`没有内置在`Three.js`中，像导入[OrbitControls](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls)一样导入后才可以使用它
+
+* `jsm`文件是three.js的ts扩展, 如果你使用的ts就必须通过`jsm`文件导入
 
 ```js
-import { RectAreaLightHelper } from 'three/examples/js/helpers/RectAreaLightHelper.js'
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper'
 const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight)
 scene.add(rectAreaLightHelper)
+
 ```
 
 <img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/640.png" alt="640" style="zoom:80%;" />

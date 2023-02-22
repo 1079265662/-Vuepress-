@@ -128,7 +128,7 @@ controls.enableDamping = true
   ```
   
 
-## 三维空间包围盒Box3
+### **三维空间包围盒Box3**
 
 [Box3](https://threejs.org/docs/index.html?q=box2#api/zh/math/Box3.getSize)三维空间包围盒, 可以包围导入的三维物体, 传入物体的`Object3D`, 在物体外生成包围盒, 可以用来查看物体的大小
 
@@ -137,16 +137,22 @@ controls.enableDamping = true
 * [.getSize](https://threejs.org/docs/index.html#api/zh/math/Box3.getSize), 可以获得包围盒的大小(.[sub](https://threejs.org/docs/index.html#api/zh/math/Vector3.sub) 后的数据)
 
 ```js
-// 通过三维空间包围盒计算物体的大小
-const getBoxSize = (object: THREE.Object3D) => {
-  // 创建一个包围盒
-  const box = new THREE.Box3()
-  // 设置包围盒的大小
-  box.setFromObject(object)
-  // 获取包围盒的大小
-  const boxSize = box.getSize(new THREE.Vector3())
+// 导入three.js
+import * as THREE from 'three'
 
-  console.log(`当前物体的大小(包围盒)`, boxSize)
+export class CreatedUtils  {
+  // 通过三维空间包围盒计算物体的大小
+  getBoxSize = (object: THREE.Object3D) => {
+    // 创建一个包围盒
+    const box = new THREE.Box3()
+    
+    // 设置包围盒的大小
+    box.setFromObject(object)
+    // 获取包围盒的大小
+    const boxSize = box.getSize(new THREE.Vector3())
+
+    console.log(`当前物体的大小(包围盒)`, boxSize)
+  }
 }
 
 ```
@@ -156,5 +162,47 @@ const getBoxSize = (object: THREE.Object3D) => {
 
 :::
 
+### **光源辅助**
 
+灯光会对3D场景中产生影响，但其本身是不可见的，所以移动或是旋转时就很麻烦，但我们可以使用灯光辅助类来使得灯光对象变得可见
 
+- [HemisphereLightHelper](https://threejs.org/docs/index.html?q=HemisphereLightHelper#api/zh/helpers/HemisphereLightHelper) 半球形光辅助
+- [DirectionalLightHelper](https://threejs.org/docs/index.html?q=DirectionalLightHelper#api/zh/helpers/DirectionalLightHelper) 平行光辅助
+- [PointLightHelper]() 点光源辅助
+- [RectAreaLightHelper](https://threejs.org/docs/index.html?q=RectAreaLightHelper#examples/zh/helpers/RectAreaLightHelper) 自定义光源辅助 <font color =#ff3040>注意: 这个需要单独导入</font>
+- [SpotLightHelper](https://threejs.org/docs/index.html?q=SpotLightHelper#api/zh/helpers/SpotLightHelper) 聚光灯辅助
+
+实例化这些类，使用相应的光源的实例作为参数，并将它们添加到场景中。第二个参数用于改变灯光辅助对象的大小：
+
+```js
+// 导入three.js
+import * as THREE from 'three'
+
+// 半球形辅助
+const hemisphereLightHelper = new THREE.HemisphereLightHelper(hemisphereLight, 0.2)
+scene.add(hemisphereLightHelper)
+
+// 平行光辅助
+const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 0.2)
+scene.add(directionalLightHelper)'=
+
+// 点光源辅助
+const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2)
+scene.add(pointLightHelper)
+
+```
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/642.png)
+
+`RectAreaLightHelper`没有内置在`Three.js`中，像导入[OrbitControls](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls)一样导入后才可以使用它
+
+* `jsm`文件是three.js的ts扩展, 如果你使用的ts就必须通过`jsm`文件导入
+
+```js
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper'
+const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight)
+scene.add(rectAreaLightHelper)
+
+```
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/640.png)

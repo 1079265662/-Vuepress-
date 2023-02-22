@@ -548,10 +548,12 @@ ret.play()
 
 ### **封装方法多文件引用方式**
 
-* 多个文件适合封装一个方法 进行引用减少代码的耦合性
+多个文件适合封装一个方法 进行引用减少代码的耦合性
+
 * [静态资源处理 | Vite 官方中文文档](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url) 通过官网介绍进行封装
 
 ```js
+// getAssetsFile.ts
 // 封装静态资源引用方法
 const getAssetsFile = (url: string) => {
   return new URL(`../assets/${url}`, import.meta.url).href
@@ -560,7 +562,7 @@ export { getAssetsFile }
 
 ```
 
-* 在JS/TS中使用引用方法
+* 在JS/TS中使用导入方法
 
 ```ts
 import { getAssetsFile } from '@/utils/getAssetsFile'
