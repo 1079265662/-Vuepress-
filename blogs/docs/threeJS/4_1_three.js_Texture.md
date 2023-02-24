@@ -740,3 +740,37 @@ map.flipY = false
 
 ```
 
+## 贴图二次修改问题
+
+会有这样的一个场景, 颜色贴图`envMap`可以进行二次修改, 这里会出现一个问题, 在`mesh`模型中是存在`material`这个属性, 但是我们不可以直接通过属性去修改`material`中的贴图
+
+```tsx
+// 先设置一次设置PBR材质
+iphoneMap.material = new THREE.MeshStandardMaterial({
+  // 设置颜色贴图
+  map,
+})
+
+// 这里想直接修改材质的环境贴图, ts会报错, 不允许直接修改
+iphoneMap.material.map = map2
+
+```
+
+因为直接修改材质的贴图属性在three.js中是不允许的, 我们需要新建一个和之前相同的材质, 进行二次修改
+
+```js
+// 先设置一次设置材质
+iphoneMap.material = new THREE.MeshStandardMaterial({
+  // 设置环境贴图
+  envMap,
+})
+
+// 二次修改材质
+iphoneMap.material = new THREE.MeshStandardMaterial({
+  map,
+})
+
+```
+
+
+

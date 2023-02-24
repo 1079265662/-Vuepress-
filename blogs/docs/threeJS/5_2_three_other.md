@@ -1,5 +1,5 @@
 ---
-title: three.js一些相关控件
+title: three.js一些其他内容
 date: 2022-05-07
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-dpzjzg.jpg
 tags:
@@ -38,21 +38,92 @@ categories: three.js
 
 > 使用轨道控制器
 
-* 作为控件`OrbitControls`需要单独导入 
-* 使用方法: `new OrbitControls(物体的相机设置, 渲染对象.domElement)`
-  * [.enableDamping](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enableDamping) 设置阻尼感如果该值被启用，你将必须在你的动画循环里调用[.update()](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.update)。
-  * [.enabled](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enabled) 禁用轨道控制器, 设置为`false`禁用, 默认为`true`
-
+作为控件`OrbitControls`需要单独导入, 使用方法: `new OrbitControls(物体的相机设置, 渲染对象.domElement)`
 
 ```js
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // 6. 创建创建一个轨道控制器 实现交互渲染
 const controls = new OrbitControls(camera, renderer.domElement) // new OrbitControls(相机, 渲染器Dom元素)
-// 设置控制器阻尼 让控制器更真实 设置后需要在动画循环里调用.update()
-controls.enableDamping = true
 
 ```
+
+* [.enableDamping](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enableDamping) 设置阻尼感如果该值被启用，你将必须在你的动画循环里调用[.update()](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.update)。
+
+```js
+// 设置控制器阻尼 让控制器更真实 设置后需要在动画循环里调用.update()
+controls.enableDamping = true
+render = () => {
+  // 设置阻尼感必须在动画中调用.update()
+  controls.update()  
+}
+
+```
+
+* [.enabled](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enabled) 禁用轨道控制器, 设置为`false`禁用, 默认为`true`
+
+```js
+// 禁用轨道控制器
+controls.enabled = false
+
+```
+
+* 设置缩放范围, 控制一个产品的缩放范围
+  * [.maxDistance](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.maxDistance) 控制器能拉开的最大距离, 默认是无限大`Infinity`
+  * [.minDistance](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.minDistance) 控制器能拉开的最小距离, 默认为0
+  * [.enableZoom](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enableZoom) 禁止用户进行缩放
+
+```js
+//透视投影相机：相机距离目标观察点距离越远显示越小，距离越近显示越大
+
+// 设置控制器的最大距离
+controls.maxDistance = 500
+// 设置控制器的最小距离
+controls.minDistance = 10
+//禁止缩放
+controls.enableZoom = false;
+
+```
+
+* 设置水平(左右)旋转范围, 你想控制用户能够看到的角度范围, 其有效值范围为[-2 *` Math.PI`，2 * `Math.PI`]弧度值, -360°到360°
+*  <font color =ff3040>注意:水平(左右)旋转范围最小值和最大值必须都设置才会生效, 单独设置一个无效</font>
+  * [.minAzimuthAngle](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.minAzimuthAngle) 最小的旋转弧度值, 默认值: -2 *` Math.PI`, 通常为负数
+  * [.maxAzimuthAngle](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.maxAzimuthAngle) 最大旋旋转弧度值, 默认值: 2 *` Math.PI`, 通常是最小值的绝对值
+
+```js
+// 设置最大水平旋转, 弧度值
+controls.minAzimuthAngle = -Math.PI / 2 // 最小 -90°
+controls.maxAzimuthAngle = Math.PI / 2 // 最大 90
+
+```
+
+* 设置垂直(上下)旋转范围, 有效值范围[0 , Math.PI]弧度值, 0°~180°
+*  <font color =ff3040>注意: 垂直(上下)旋转范围最小值和最大值必须都设置才会生效, 单独设置一个无效</font>
+  * [.minPolarAngle](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.minPolarAngle) 你能够垂直旋转的角度的下限，其默认值为0
+  * [.maxPolarAngle](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.maxPolarAngle) 你能够垂直旋转的角度的上限，其默认值为`Math.PI`。
+
+```js
+// 上下旋转范围0~120度
+controls.minPolarAngle = 0
+controls.maxPolarAngle = Math.PI * (120 / 180)
+
+```
+
+* [.enablePan](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enablePan)禁止右键拖拽平移, 默认为`true`
+
+```js
+controls.enablePan = false; //禁止右键拖拽
+
+```
+
+* [.enableRotate](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enableRotate) 禁用摄像机水平或垂直旋转, 默认值为`true`
+
+```js
+controls.enableRotate = false; //禁止旋转
+
+```
+
+
 
 ## 无需单独导入的控件
 
@@ -206,3 +277,45 @@ scene.add(rectAreaLightHelper)
 ```
 
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/640.png)
+
+## BufferGeometry几何体对象
+
+在three.js中， [BufferGeometry](https://threejs.org/docs/index.html?q=EllipseCurve#api/zh/core/BufferGeometry)是用来代表所有几何体的一种方式。 `BufferGeometry` 本质上是一系列 `BufferAttributes` 的 名称 。每一个 `BufferAttribute` 代表一种类型数据的数组：位置，法线，颜色，uv，等等…… 这些合起来， `BufferAttributes `代表每个顶点所有数据的 并行数组 。**可以理解为通过各类属性创建一个自定义的几何体, 可以创建一个通过[EllipseCurve](https://threejs.org/docs/#api/zh/extras/curves/EllipseCurve)椭圆曲线创建的圆等其他效果**
+
+![image.png](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302241806892.png)
+
+* [.setAttribute()](https://threejs.org/docs/index.html?q=EllipseCurve#api/zh/core/BufferGeometry.setAttribute) 设置为当前几何体设置一个 `attribute`, 需要先规定要添加的类型, 再进行参数的[BufferAttribute](https://threejs.org/docs/index.html?q=BufferAttribute#api/zh/core/BufferAttribute)的设置
+
+```js
+const geometry = new THREE.BufferGeometry()
+// 创建一个简单的矩形. 在这里我们左上和右下顶点被复制了两次。
+// 因为在两个三角面片里，这两个顶点都需要被用到。
+const vertices = new Float32Array([
+  -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0,
+
+  1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0,
+])
+
+// itemSize = 3 因为每个顶点都是一个三元组。
+geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3))
+
+```
+
+* .[setFromPoints()](https://threejs.org/docs/index.html#api/zh/core/BufferGeometry.setFromPoints) 通过该方法可以把数组`pointsArr`(通过[.getPoints](https://threejs.org/docs/#api/zh/extras/core/Curve.getPoints)取出分段数的数组)坐标数据提取出来赋值给几何体。具体说就是把`pointsArr`里面坐标数据提取出来，赋值给`geometry.attributes.position`坐标属性
+
+```js
+const pointsArr = [
+  // 三维向量Vector3表示的坐标值
+  new THREE.Vector3(0, 0, 0),
+  new THREE.Vector3(0, 100, 0),
+  new THREE.Vector3(0, 100, 100),
+  new THREE.Vector3(0, 0, 100),
+]
+// 把数组pointsArr里面的坐标数据提取出来，赋值给`geometry.attributes.position`属性
+geometry.setFromPoints(pointsArr)
+console.log('几何体变化', geometry.attributes.position)
+
+```
+
+
+
