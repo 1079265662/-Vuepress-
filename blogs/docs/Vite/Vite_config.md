@@ -590,6 +590,41 @@ import { getAssetsFile } from '@/utils/getAssetsFile'
 </script>
 ```
 
+### **Vite全局静态文件处理**
+
+[静态资源](https://cn.vitejs.dev/config/shared-options.html#assetsinclude)是一些不参与编译的文件, 图片等常见静态资源类型vite内置, 但是部分静态资源, 需要手动添加比如: glb和gltf的weblg模型资源
+
+```tsx
+export default defineConfig({
+  // 静态资源
+  assetsInclude: ['**/*.gltf', '**/*.glb'],
+})
+
+```
+
+### **Vite自定义静态文件处理**
+
+上面介绍了通过[assetsInclude](https://cn.vitejs.dev/config/shared-options.html#assetsinclude), 配置全局的静态处理, 如果我们只想在`import`引入的时候, 进行处理, 可以使用[显式 URL 引入](https://cn.vitejs.dev/guide/assets.html#explicit-url-imports) `?url`后缀
+
+```js
+// 导入three.js自带的json字体库
+import helvetiker from 'three/examples/fonts/optimer_bold.typeface.json?url'
+
+```
+
+这样就能通过传统的URL引入了
+
+![image-20230225221759051](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/undefined202302252218086.png)
+
+### **Vite静态文件字符串处理**
+
+Vite自带的[?raw](https://cn.vitejs.dev/guide/assets.html#importing-asset-as-string) 后缀可以将声明作为字符串引入。
+
+```js
+import shaderString from './shader.glsl?raw'
+
+```
+
 ## 生产环境去除打印
 
 [vite-plugin-remove-console](https://github.com/xiaoxian521/vite-plugin-remove-console) Vite第三方插件可以在生产环境中移除打印和断点
@@ -646,18 +681,6 @@ declare module '*.gltf' {
 ::: details 查看文件目录
 ![image-20230216172529775](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161726829.png)
 :::
-
-## Vite中导入静态资源
-
-[静态资源](https://cn.vitejs.dev/config/shared-options.html#assetsinclude)是一些不参与编译的资源, 图片等常见静态资源类型vite内置, 但是部分静态资源, 需要手动添加比如: glb和gltf的weblg模型资源
-
-```tsx
-export default defineConfig({
-  // 静态资源
-  assetsInclude: ['**/*.gltf', '**/*.glb'],
-})
-
-```
 
 ## 配置Vscode
 

@@ -455,7 +455,7 @@ vec2 rotate(vec2 uv, float rotation, vec2 mid) {
 
 ```
 
-## Vite引入glsl
+## Vite引入glsl (vite插件)
 
 当单独创建glsl文件进行引入时Vite打包工具默认不识别glsl文件, 并不会把glsl转化成一段字符串, 所以不能直接引入使用, 需要通过[vite-plugin-string](https://github.com/aweikalee/vite-plugin-string) 进行转换
 
@@ -496,6 +496,15 @@ const shader = new THREE.ShaderMaterial({
   // 片元着色器
   fragmentShader: planeFragmentShader,
 })
+
+```
+
+## Vite引入glsl (?raw)
+
+Vite自带的[?raw](https://cn.vitejs.dev/guide/assets.html#importing-asset-as-string) 后缀可以将声明作为字符串引入。不使用插件也能处理成glsl字符串
+
+```js
+import shaderString from './shader.glsl?raw'
 
 ```
 

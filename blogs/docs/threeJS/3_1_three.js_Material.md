@@ -57,9 +57,10 @@ material.roughness = 0.65
 
 ## 网格朗伯材质([MeshLambertMaterial](https://threejs.org/docs/index.html?q=MeshLambertMaterial#api/zh/materials/MeshLambertMaterial))
 
-`MeshLambertMaterial`能够反光，可以让几何物体产生暗淡的表面。在大部分 3D 应用中，朗伯都是一种常用的材质。就像之前，我们可以调整颜色。我们可以通过 `emissive` 属性来给材质添加亮色。适合粗糙的物体
+`MeshLambertMaterial`能够反光(但达不到镜面效果)，可以让几何物体产生简单的暗淡的表面。在大部分 3D 应用中，朗伯都是一种常用的材质。就像之前，我们可以调整颜色。我们可以通过 `emissive` 属性来给材质添加亮色。适合粗糙的物体
 
-* 他的其他名字叫 `漫反射材质` 他具备光照反射效果 具备立体感 同时消耗性能较低 适合粗糙的物体 比如墙体或者木头
+* 他的其他名字叫 `漫反射材质` 他具备光照反射效果 具备立体感 同时消耗性能较低 适合粗糙的物体 比如墙体或者木头, **也可以设置文字展示**的效果
+* 如果需要更高的显示效果, 需要使用开较大的`MeshStandardMaterial`PBR材质
 * <font color =#ff3040>注意: 该材质需要灯光才能看到</font>
 
 ```js

@@ -278,7 +278,16 @@ scene.add(rectAreaLightHelper)
 
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/640.png)
 
-## BufferGeometry几何体对象
+## three.js物体的生成
+
+three.js中想生成一个物体(只是物体), 用到两个内容
+
+* [BufferGeometry](https://threejs.org/docs/index.html?q=EllipseCurve#api/zh/core/BufferGeometry) 几何体对象, **必要**
+* [Material](https://threejs.org/docs/index.html?q=mesh#api/zh/materials/Material) 材质, 贴图可以理解为贴在几何体上, **非必要**
+
+有了这两个要素, 就可以生成一个几何体, 并且可以给几何体添加自己的材质贴图
+
+### **BufferGeometry几何体对象**
 
 在three.js中， [BufferGeometry](https://threejs.org/docs/index.html?q=EllipseCurve#api/zh/core/BufferGeometry)是用来代表所有几何体的一种方式。 `BufferGeometry` 本质上是一系列 `BufferAttributes` 的 名称 。每一个 `BufferAttribute` 代表一种类型数据的数组：位置，法线，颜色，uv，等等…… 这些合起来， `BufferAttributes `代表每个顶点所有数据的 并行数组 。**可以理解为通过各类属性创建一个自定义的几何体, 可以创建一个通过[EllipseCurve](https://threejs.org/docs/#api/zh/extras/curves/EllipseCurve)椭圆曲线创建的圆等其他效果**
 
