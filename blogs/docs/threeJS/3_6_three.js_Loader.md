@@ -17,11 +17,11 @@ three.js 之 Loader 加载器 <br>
 
 * 如果想做复杂的webgl场景 离不开加载器 加载器通过把`gltf`和`glb`的3D模型加载进来 转换成three.js的[Object3D](https://threejs.org/docs/index.html?q=Object#api/zh/core/Object3D) 他是其实就可以理解为`Mesh` 然后把他`.add`到`Scene`中 渲染到场景中
   * 一个glTF组件可传输一个或多个场景， 包括网格、材质、贴图、蒙皮、骨架、变形目标、动画、灯光以及摄像机。
-* 也可以加载一张
 * 加载器都依赖基类[.Loader](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader) 用来实现加载
   * 普通加载方法 [.load ](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader.load)
   * es6 `promise`加载 [.loadAsync](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader.loadAsync)
 * [TextureLoader](https://threejs.org/docs/index.html#api/zh/loaders/TextureLoader) 纹理贴图加载器现在不支持进度监听, 直接通过`onLoad`方法监听是否加载完成即可
+* **几乎所有的加载器, 都需要导入**
 
 > 加载器的分类
 

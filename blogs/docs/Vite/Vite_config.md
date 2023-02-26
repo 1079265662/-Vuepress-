@@ -602,7 +602,7 @@ export default defineConfig({
 
 ```
 
-### **Vite自定义静态文件处理**
+### **Vite处理URL资源**
 
 上面介绍了通过[assetsInclude](https://cn.vitejs.dev/config/shared-options.html#assetsinclude), 配置全局的静态处理, 如果我们只想在`import`引入的时候, 进行处理, 可以使用[显式 URL 引入](https://cn.vitejs.dev/guide/assets.html#explicit-url-imports) `?url`后缀
 

@@ -13,9 +13,9 @@ categories: three.js
 
 <!-- more -->
 
-## 需要单独导入的控件
+## 附加组件
 
-* 有些控件不内置在three.js的核心中 需要单独导入使用
+* 有些控件不内置在three.js的核心中, 需要单独导入使用
 
 ### 轨道控制器 OrbitControls
 
@@ -123,11 +123,9 @@ controls.enableRotate = false; //禁止旋转
 
 ```
 
+## 内置组件
 
-
-## 无需单独导入的控件
-
-* 这些控件属于three.js内置内容 不需要单独导入
+* 这些控件属于three.js内置组件, 不需要单独导入
 
 ### **开启坐标轴辅助器 AxesHelper**
 
@@ -280,10 +278,10 @@ scene.add(rectAreaLightHelper)
 
 ## three.js物体的生成
 
-three.js中想生成一个物体(只是物体), 用到两个内容
+three.js中想生成一个物体(只是物体), 用到两个内容, 如果[mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh)中不添加材质, 那么默认会采用[MeshBasicMaterial](https://threejs.org/docs/index.html#api/zh/materials/MeshBasicMaterial)基础材质
 
 * [BufferGeometry](https://threejs.org/docs/index.html?q=EllipseCurve#api/zh/core/BufferGeometry) 几何体对象, **必要**
-* [Material](https://threejs.org/docs/index.html?q=mesh#api/zh/materials/Material) 材质, 贴图可以理解为贴在几何体上, **非必要**
+* [Material](https://threejs.org/docs/index.html?q=mesh#api/zh/materials/Material) 材质, 贴图可以理解为贴在几何体上, **非必要**, 默认[Mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh)会采用[MeshBasicMaterial](https://threejs.org/docs/index.html#api/zh/materials/MeshBasicMaterial)基础材质
 
 有了这两个要素, 就可以生成一个几何体, 并且可以给几何体添加自己的材质贴图
 
