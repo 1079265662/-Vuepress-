@@ -742,7 +742,7 @@ map.flipY = false
 
 ## 贴图二次修改问题
 
-会有这样的一个场景, 颜色贴图`envMap`可以进行二次修改, 这里会出现一个问题, 在`mesh`模型中是存在`material`这个属性, 但是我们不可以直接通过属性去修改`material`中的贴图
+会有这样的一个场景, 颜色贴图`envMap`可以进行二次修改, 这里会出现一个问题, 在`mesh`模型中是存在`material`这个属性, 但是在ts中可能因为某些原因不存在`material`类型, 所以我们需要通过断言进行二次修改
 
 ```tsx
 // 先设置一次设置PBR材质
@@ -751,26 +751,59 @@ iphoneMap.material = new THREE.MeshStandardMaterial({
   map,
 })
 
-// 这里想直接修改材质的环境贴图, ts会报错, 不允许直接修改
-iphoneMap.material.map = map2
+// 通过断言设置material类型为我们之前使用的材质
+const iphoneMapMaterial = this.iphoneMap.material as THREE.MeshPhysicalMaterial
+// 标记为需要更新
+iphoneMapMaterial.needsUpdate = true
+// 更新贴图
+iphoneMapMaterial.map = map2
 
 ```
 
-因为直接修改材质的贴图属性在three.js中是不允许的, 我们需要新建一个和之前相同的材质, 进行二次修改
+不建议通过二次声明的方式进行修改, 因为这样会造成物体材质的二次声明, 消耗性能并且页面会进行卡顿, 如下所示
 
 ```js
 // 先设置一次设置材质
 iphoneMap.material = new THREE.MeshStandardMaterial({
   // 设置环境贴图
-  envMap,
+  map,
 })
 
 // 二次修改材质
 iphoneMap.material = new THREE.MeshStandardMaterial({
-  map,
+  map2,
 })
 
 ```
 
+### **贴图缓存更新**
 
+three.js里的很多对象都有一个`.needsUpdate`属性, 纹理贴图也有该[属性](https://threejs.org/docs/index.html?q=material#api/zh/materials/Material.needsUpdate), 告诉`renderer`这一帧我该更新缓存了, 这个属性经常会作用到切换不同的贴图时的缓存操作
 
+* 每次`map`, 或者`envMap`等各种贴图改变**真值`true`**的时候都需要更新材质, 首次对材质进行贴图赋值的时候不需要
+
+```tsx
+// 先设置一次设置PBR材质
+iphoneMap.material = new THREE.MeshStandardMaterial({
+  // 设置颜色贴图
+  map,
+})
+
+// 通过断言设置material类型为我们之前使用的材质
+const iphoneMapMaterial = this.iphoneMap.material as THREE.MeshPhysicalMaterial
+// 标记为需要更新
+iphoneMapMaterial.needsUpdate = true
+// 更新贴图
+iphoneMapMaterial.map = map2
+
+```
+
+::: tip 关于纹理贴图的缓存机制
+
+材质在three.js中是通过`THREE.Material`来描述的，其实材质并没有什么数据要传输，但是为什么还要搞一个needsUpdate呢，这里还要说一下shader这个东西，shader直译过来是着色器，提供了在gpu中编程处理顶点和像素的可能性，在绘画中有个shading的术语来表示绘画的明暗法，GPU中的shading也类似，通过程序计算光照的明暗来表现物体的材质，ok, 既然shader是一段跑在GPU上的程序，那么像所有程序一样都需要进行一次编译链接的操作， WebGL中是在运行时对shader程序进行编译的，这当然需要消耗时间，因此也是最好能够一次编译就运行到程序结束。所以three.js中就在material初始化的时候就编译链接了shader程序并且缓存了编译链接后得到的program对象。一般一个material是不需要再去重新编译整个shader了，材质的调整只需要修改shader的uniform参数就行了。但是如果是替换了整个材质，比如将原来phong的shader替换成了一个lambert的shader，就需要将`material.needsUpdate`设置成true去重新做一次编译。
+
+:::
+
+## 参考文献
+
+[浅谈three.js中的needsUpdate](https://www.cnblogs.com/pissang/archive/2012/11/05/2755458.html)
