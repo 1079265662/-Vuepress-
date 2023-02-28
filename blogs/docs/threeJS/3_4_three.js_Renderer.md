@@ -130,57 +130,6 @@ export default {
 
 ```
 
-
-
-### **销毁渲染器和动画**
-
-* 在现代框架中 频繁的切换路由是常见的 当我们用页面的生命周期 创建一个渲染器后 来回切换页面 会导致渲染器重复 从而会报错 
-
-  ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209131529121.png)
-
-* 我们在路由切换前 需要清除 `WebGLRenderer`渲染器 和 [requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame) 动画
-  * `WebGLRenderer`通过[.dispose](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer.dispose) 清除当前的渲染器
-  * `requestAnimationFrame` 会返回一个唯一`id`(类似于定时器) 然后通过[cancelAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/cancelAnimationFrame) 传入id 进行清理操作
-
-```js
-// 储存动画id
-let animationId: number
-// 创建一个渲染器
-const renderer = new THREE.WebGLRenderer({
-  antialias: true // 开启锯齿
-})
-// 创建更新动画的方法
-const render = () => {
-  // 使用渲染器,通过相机将场景渲染出来
-  renderer.render(scene, camera) // render(场景, 相机)
-  // 记录动画的id
-  animationId = requestAnimationFrame(render)
-}
-/**
- * @function 清除加载器和动画(销毁方法)
- */
-function dispose() {
-  renderer.dispose()
-  cancelAnimationFrame(animationId)
-}
-export { dispose }
-
-```
-
-* 在Vue中使用
-
-```vue
-<script lang="ts" setup>
-import { onBeforeUnmount } from 'vue'
-import { dispose } from './components/texture_renderer'
-// 页面销毁前生命周期执行
-onBeforeUnmount(() => {
-  dispose()
-})
-</script>
-
-```
-
 ## CSS2DRenderer 2D(CSS2)渲染器
 
 * 通过three.js扩展库 `CSS2DObject`可以实现把**HTML元素**和三维元素相结合 可以使用[二维向量（Vector2）](https://threejs.org/docs/index.html?q=Vector2#api/zh/math/Vector2) [.position](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.position)局部位置属性 

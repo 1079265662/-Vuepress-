@@ -666,7 +666,7 @@ import { CreateWorld } from './components/ksy_renderer'
 // 获取Dom
 const stateDom = ref()
 // 储存three.js的实例
-let Three: any = null
+let Three: CreateWorld
 
 onMounted(() => {
   // 创建three.js实例
@@ -948,7 +948,7 @@ import { CreatedCanvas } from './components/iphone_render'
 // 获取Dom
 const stateDom = ref()
 // 储存three.js的实例
-let Three: any = null
+let Three: CreatedCanvas 
 
 onMounted(() => {
   // 创建three.js实例

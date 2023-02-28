@@ -140,14 +140,39 @@ let value7: any[] = []
 
 ### **元组** `tuple`
 
-* 没有关键字 只有定义方式 定义指定的数据类型 ` [number, string, boolean] `
-* 指定几个 就只能输入几个 而且类型必须和规定的一致
+定义一对值分别为 `string` 和 `number` 的元组：
 
-```typescript
-let tuple: [string, number, boolean] = ['a', 1, false]
-console.log(tuple)
+```ts
+let tom: [string, number] = ['Tom', 25];
+```
 
-// ['a', 1, false]
+当赋值或访问一个已知索引的元素时，会得到正确的类型：
+
+```ts
+let tom: [string, number];
+tom[0] = 'Tom';
+tom[1] = 25;
+
+tom[0].slice(1);
+tom[1].toFixed(2);
+```
+
+也可以只赋值其中一项：
+
+```ts
+let tom: [string, number];
+tom[0] = 'Tom';
+```
+
+但是当直接对元组类型的变量进行初始化或者赋值的时候，需要提供所有元组类型中指定的项。
+
+```ts
+let tom: [string, number];
+tom = ['Tom', 25];
+let tom: [string, number];
+tom = ['Tom'];
+
+// Property '1' is missing in type '[string]' but required in type '[string, number]'.
 ```
 
 ### **枚举** `enum`
@@ -1032,3 +1057,44 @@ for (const key in directives) {
 
 ```
 
+## 重载
+
+重载允许一个函数接受不同数量或类型的参数时，作出不同的处理。
+
+比如，我们需要实现一个函数 `reverse`，输入数字 `123` 的时候，输出反转的数字 `321`，输入字符串 `'hello'` 的时候，输出反转的字符串 `'olleh'`。
+
+利用联合类型，我们可以这么实现：
+
+```ts
+function reverse(x: number | string): number | string | void {
+    if (typeof x === 'number') {
+        return Number(x.toString().split('').reverse().join(''));
+    } else if (typeof x === 'string') {
+        return x.split('').reverse().join('');
+    }
+}
+```
+
+**然而这样有一个缺点，就是不能够精确的表达，输入为数字的时候，输出也应该为数字，输入为字符串的时候，输出也应该为字符串。**
+
+这时，我们可以使用重载定义多个 `reverse` 的函数类型：
+
+```ts
+function reverse(x: number): number;
+function reverse(x: string): string;
+function reverse(x: number | string): number | string | void {
+    if (typeof x === 'number') {
+        return Number(x.toString().split('').reverse().join(''));
+    } else if (typeof x === 'string') {
+        return x.split('').reverse().join('');
+    }
+}
+```
+
+上例中，我们重复定义了多次函数 `reverse`，前几次都是函数定义，最后一次是函数实现。在编辑器的代码提示中，可以正确的看到前两个提示。
+
+注意，TypeScript 会优先从最前面的函数定义开始匹配，所以多个函数定义如果有包含关系，需要优先把精确的定义写在前面。
+
+## 参考文献
+
+[TypeScript 入门教程](https://ts.xcatliu.com/)

@@ -26,6 +26,17 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 ```
 
 * three.js中自带一些简单的json字体库, 可以直接进行引入使用, <font color =#ff3040>注意: 在Vite环境中, 需要对[显式 URL 引入](https://cn.vitejs.dev/guide/assets.html#explicit-url-imports) 的资源添加`?url`后缀, 取消编译时的操作</font>
+
+```js
+// 导入three.js的json字体, url资源需要在后缀加上?url 其他的按路径导入即可, bold是加粗字体, regular是正常字体
+// 导入three.js自带的json字体库
+import helvetiker from 'three/examples/fonts/optimer_bold.typeface.json?url'
+// 本地assets资源的引用
+import helvetikerAssets from '@/assets/iphone/font/text.json?url'
+
+// 如果再出现路径中含有/@fr/, 建议重启项目
+```
+
 * 字体的材质可以设置[MeshLambertMaterial](https://threejs.org/docs/index.html?q=MeshLambertMaterial#api/zh/materials/MeshLambertMaterial) 朗博材质(轻微的反光处理) 或 [MeshBasicMaterial](https://threejs.org/docs/index.html?q=mesh#api/zh/materials/MeshBasicMaterial)基础材质(性能最好)
 
 ::: details 查看three.js自带json格式字体
@@ -34,13 +45,7 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 
 :::
 
-```js
-// 导入three.js的json字体, url资源需要在后缀加上?url 其他的按路径导入即可, bold是加粗字体, regular是正常字体
-import helvetiker from 'three/examples/fonts/optimer_bold.typeface.json?url'
-
-```
-
-字体效果有两种
+字体效果有两种: 
 
 * 2D字体, 通过[ShapeGeometry](https://threejs.org/docs/index.html#api/zh/geometries/ShapeGeometry) 形状缓冲几何体, 原理是通过各种顶点绘制成一个个三角形, 最后形成一个字体的效果, 字体只是这个几何体的实现能力的一种
 * 3D立体文字(几何字体), 通过[TextGeometry](https://threejs.org/docs/index.html?q=TextGeometry#examples/zh/geometries/TextGeometry) 文本缓冲几何体生成, 这是一个附加组件, 需要单独引入使用
@@ -152,3 +157,41 @@ const text = new THREE.Mesh(geometry, material)
 生成了一个3D效果(几何字体)的文字(未开启斜角) ,一般大号的字体才需要斜角的展示效果
 
 ![image-20230226184841685](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/undefined202302261848706.png)
+
+## 加载中文字体
+
+可以通过[fontmin](http://ecomfe.github.io/fontmin/#app) 提取出我们需要的中文(不提取也可以, 就是json文件会很大), 然后通过[Facetype.js](http://gero3.github.io/facetype.js/) 把ttf文件转化成`json`格式, `json`格式中就包含中文字体的顶点坐标
+
+* `Vite`环境中引入url资源需要添加`?url`后缀
+
+```js
+// 导入three.js的json字体, url资源需要在后缀加上?url
+import helvetiker from '@/assets/iphone/font/text.json?url'
+// 声明字体加载器
+const fontLoader = new FontLoader()
+// 加载常规字体
+const font = await fontLoader.loadAsync(helvetiker)
+
+// 声明文字几何体
+const geometry = new TextGeometry('你好', {
+  font, //THREE.Font的实例。
+  size: 8, // 字体大小，默认值为100。
+  height: 1, // 挤出文本的厚度。默认值为50
+  curveSegments: 20, 
+})
+
+// 设置字体的材质朗伯材质
+const material = new THREE.MeshLambertMaterial({
+  color: '#ffffff',
+  side: THREE.DoubleSide,
+})
+
+// 设置文字模型
+const text = new THREE.Mesh(geometry, material)
+
+
+```
+
+生成了一个中文的3D字体效果
+
+![image-20230228180437326](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302281804355.png)

@@ -613,15 +613,21 @@ export default defineConfig({
 
 上面介绍了通过[assetsInclude](https://cn.vitejs.dev/config/shared-options.html#assetsinclude), 配置全局的静态处理, 如果我们只想在`import`引入的时候, 进行处理, 可以使用[显式 URL 引入](https://cn.vitejs.dev/guide/assets.html#explicit-url-imports) `?url`后缀
 
+* 如果再出现路径中含有`/@fr/`, 建议重启项目
+
 ```js
 // 导入three.js自带的json字体库
 import helvetiker from 'three/examples/fonts/optimer_bold.typeface.json?url'
+// 本地assets资源的引用
+import helvetikerAssets from '@/assets/iphone/font/text.json?url'
 
 ```
 
 这样就能通过传统的URL引入了
 
-![image-20230225221759051](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/undefined202302252218086.png)
+![image-20230228175416946](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302281754908.png)
+
+![image-20230228175457744](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302281754783.png)
 
 ### **Vite静态文件字符串处理**
 
