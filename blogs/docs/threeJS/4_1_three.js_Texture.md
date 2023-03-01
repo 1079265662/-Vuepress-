@@ -781,16 +781,20 @@ iphoneMap.material = new THREE.MeshStandardMaterial({
 three.js里的很多对象都有一个`.needsUpdate`属性, 纹理贴图也有该[属性](https://threejs.org/docs/index.html?q=material#api/zh/materials/Material.needsUpdate), 告诉`renderer`这一帧我该更新缓存了, 这个属性经常会作用到切换不同的贴图时的缓存操作
 
 * 每次`map`, 或者`envMap`等各种贴图改变**真值`true`**的时候都需要更新材质, 首次对材质进行贴图赋值的时候不需要
+* 在ts中(@types/three版本0.149.0)`.getObjectByName()` 获取到的模型是一个`Object3D`格式的数据, 但本身其实是`Mesh`类型, 可以通过断言给其设置为`Mesh<THREE.BufferGeometry, 使用材质的类型>`
 
 ```tsx
+// 查找模型, 给其设置Mesh类型泛型为BufferGeometry和MeshStandardMaterial(依据使用材质的类型)
+const iphoneMap = this.iphone.getObjectByName('手机') as  THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>
+
 // 先设置一次设置PBR材质
 iphoneMap.material = new THREE.MeshStandardMaterial({
   // 设置颜色贴图
   map,
 })
 
-// 通过断言设置material类型为我们之前使用的材质
-const iphoneMapMaterial = this.iphoneMap.material as THREE.MeshPhysicalMaterial
+// 二次修改材质
+const iphoneMapMaterial = this.iphoneMap.material
 // 标记为需要更新
 iphoneMapMaterial.needsUpdate = true
 // 更新贴图

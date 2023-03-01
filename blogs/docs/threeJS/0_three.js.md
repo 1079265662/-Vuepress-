@@ -1079,62 +1079,98 @@ void main() {
 
 > 假设以`.position`模型世界坐标位置为例
 
-* [.add(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.add) 将传入的向量v和这个向量相加 可以对x y z 轴进行相加处理
+[.add(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.add) 将传入的向量v和这个向量相加 可以对x y z 轴进行相加处理
 
 ```js
 const coordinate = new THREE.Vector3(200, 50, 50)
 Object3D.position.add(coordinate)
 ```
 
-* [.copy(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.copy) 将所传入`Vector3`的x、y和z属性复制给这一`Vector3`。覆盖原有的 x y z
+[.copy(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.copy) 将所传入`Vector3`的x、y和z属性复制给这一`Vector3`。覆盖原有的 x y z
 
 ```js
 const coordinate = new THREE.Vector3(200, 50, 50)
 Object3D.position.copy(coordinate)
+
 ```
 
-* [.set(number)](https://threejs.org/docs/?q=Vector3#api/zh/math/Vector3.set) 设置该向量的x、y 和 z 分量。覆盖原有的 x y z 不用 `Vector3`用数字设置即可
+[.set(number)](https://threejs.org/docs/?q=Vector3#api/zh/math/Vector3.set) 设置该向量的x、y 和 z 分量。覆盖原有的 x y z 不用 `Vector3`用数字设置即可
 
 ```js
 Object3D.position.set(0, 0, 0)
+
+// 有时候可以直接通过数组展开语法也可以, 规范还是用.copy进行赋值
+const coordinateSpread  = [200, 50, 50]
+Object3D.position.set(...coordinate)
+
 ```
 
-* [.clone(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.clone) 返回一个新的`Vector3`，其具有和当前这个向量相同的x、y和z。复制一份 x y z 不修改原数据 类似于深拷贝向量一份数据
+[.clone(Vector3)](https://threejs.org/docs/index.html?q=Vector3#api/zh/math/Vector3.clone) 返回一个新的`Vector3`，其具有和当前这个向量相同的x、y和z。复制一份 x y z 不修改原数据 类似于深拷贝向量一份数据
 
 ```js
 const ret = Object3D.position.clone() 
 console.log(ret) // ret里面包含Vector3
 ```
 
-* 也可以直接赋值或者进行运算符处理指定坐标
+可以直接赋值或者进行运算符处理指定坐标
 
 ```js
- // 赋值操作
-	Object3D.position.x = 20;
-    Object3D.position.y = 20;
-    Object3D.position.z = 2;
+// 赋值操作
+Object3D.position.x = 20
+Object3D.position.y = 20
+Object3D.position.z = 2
 // 相加相减操作
-	Object3D.position.x += 20;
-    Object3D.position.y -= 20;
+Object3D.position.x += 20
+Object3D.position.y -= 20
+
 ```
 
-* 创建一个新的`Vector2`, `Vector3`进行修改
+或者直接创建一个新的`Vector2`, `Vector3`进行修改
 
 ```js
 Object2D.position = new THREE.Vector2(0.5, 0.5)
 Object3D.position = new THREE.Vector3(0.5, 0.5, 0.5)
+
 ```
+
+## 获取模型Mesh
+
+[.getObjectByName(模型name值)](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.getObjectByName) 方法可以直接获取到和name匹配的`Mesh`模型
+
+* 在ts中(@types/three版本0.149.0)`.getObjectByName()` 获取到的模型是一个`Object3D`格式的数据, 但本身其实是`Mesh`类型, 可以通过断言给其设置为`Mesh<THREE.BufferGeometry, 使用材质的类型>`
+* 当我们修改模型材质的时候, 也需要给其添加上之前我们设置的材质属性断言
+
+```tsx
+// 查找模型, 给其设置Mesh类型泛型为BufferGeometry和MeshStandardMaterial(依据使用材质的类型)
+const iphoneMap = this.iphone.getObjectByName('手机') as  THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>
+
+// 设置贴图材质的断言
+const iphoneMapMaterial = iphoneMap.material 
+
+// 标记为需要更新
+iphoneMapMaterial.needsUpdate = true
+// 更新贴图
+iphoneMapMaterial.map = map2
+
+```
+
+::: details 查看实际使用效果(截图)
+
+![VIY9UG7%{E[7}JC{4}]JXFX](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303012019259.png)
+
+:::
 
 ## **获取模型的坐标**
 
-*  [.getWorldPosition](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.getWorldPosition) 方法可以获取到模型的坐标 他可以用来获取世界坐标 可以通过`.getObjectByName()`获取模型的name 然后再使用该方法 获取其世界坐标
+*  [.getWorldPosition](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.getWorldPosition) 方法可以获取到模型的坐标 他可以用来获取世界坐标 可以通过`.getObjectByName(模)`获取模型的name 然后再使用该方法 获取其世界坐标
 *  `Vector3`是threejs的三维向量对象,可以通过`Vector3`对象表示一个顶点的xyz坐标，顶点的法线向量。
 
 ```js
 // 声明一个三维向量用来保存世界坐标
-const worldPosition = new THREE.Vector3();
+const worldPosition = new THREE.Vector3()
 // 执行getWorldPosition方法把模型的世界坐标保存到参数worldPosition中
-mesh.getWorldPosition(worldPosition);
+mesh.getWorldPosition(worldPosition)
+
 ```
 
 ## 使用网格基础材质 MeshBasicMaterial

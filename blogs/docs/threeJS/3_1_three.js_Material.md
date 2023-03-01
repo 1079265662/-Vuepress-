@@ -256,11 +256,17 @@ const points = new THREE.Points(geometry, material);
 
 ## 雪碧材质([SpriteMaterial](https://threejs.org/docs/index.html?q=SpriteMaterial#api/zh/materials/SpriteMaterial))
 
-另一种特殊的材质是`SpriteMaterial`，它能够使用纹理贴图，并且应用于雪碧材质上。Sprite是一种总是面向镜头的特殊平面.
+雪碧材质/精灵材质材质是`SpriteMaterial`，它能够使用纹理贴图，并且应用于雪碧材质上。
+
+* `SpriteMaterial`精灵材质需要配合[Sprite](https://threejs.org/docs/index.html?q=Sprite#api/zh/objects/Sprite) 精灵物体来使用, 他永远都会面向于相机, 无论怎么修改相机位置, 适合做一些小的信息点, 镜头改变时, 自身也跟着镜头走
 
 ```js
-const material = new THREE.SpriteMaterial({map: "mytexture.png"});
-const sprite = new THREE.Sprite(material);
+const map = new THREE.TextureLoader().load('sprite.png')
+const material = new THREE.SpriteMaterial({
+    map
+})
+const sprite = new THREE.Sprite(material)
+
 ```
 
 ![sprite material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639077)

@@ -633,3 +633,20 @@ animation-timing-function: ease;
 
 ```
 
+## user-select 取消用户选择
+
+浏览器默认行为中双击可以选中中文字或者emoji, 可以进行选中效果
+
+![image-20230301155506455](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303011555574.png)
+
+通过设置[user-select](https://developer.mozilla.org/zh-CN/docs/Web/CSS/user-select)可以取消这种选中效果
+
+```css
+.select-none {
+  user-select: none;
+}
+
+```
+
+
+
