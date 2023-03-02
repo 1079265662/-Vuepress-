@@ -259,6 +259,7 @@ const points = new THREE.Points(geometry, material);
 雪碧材质/精灵材质材质是`SpriteMaterial`，它能够使用纹理贴图，并且应用于雪碧材质上。
 
 * `SpriteMaterial`精灵材质需要配合[Sprite](https://threejs.org/docs/index.html?q=Sprite#api/zh/objects/Sprite) 精灵物体来使用, 他永远都会面向于相机, 无论怎么修改相机位置, 适合做一些小的信息点, 镜头改变时, 自身也跟着镜头走
+* `Sprite`是一个平面, 没有z轴的值
 
 ```js
 const map = new THREE.TextureLoader().load('sprite.png')
@@ -271,8 +272,143 @@ const sprite = new THREE.Sprite(material)
 
 ![sprite material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639077)
 
+## 关于Threejs材质中深度测试
+
+3维场景中要绘制物体的遮挡关系，就离不开**深度测试**
+
+* 深度测试的简单解释（抛开透明等情况）： 如果**开启了`depthTest`深度测试**，每个片元就要拿自己的深度值，跟深度缓冲区中**对应位置的深度值**比较，如果自己离屏幕**更近**（默认的比较方式），且**开启了`depthWrite`深度写入**，就会把深度缓冲区中这块位置的深度值**替换**成自己的深度值，让自己成为**标杆**，并有机会展示到屏幕上，后面只有这块位置比自己离屏幕更近的，才有机会替换掉自己展示到屏幕上
+* 如果**没开启深度测试`depthTest`**，则会按绘制顺序，后面绘制的覆盖前面的, 通过.[renderOrder](https://threejs.org/docs/index.html#api/zh/core/Object3D.renderOrder) 可以查看物体的渲染顺序
+* `depthTest`深度测试和`depthWrite`深度写入, 默认是`true`开启状态
+*  除了深度方面, three.js渲染物体的时候, 默认会开启[WebGLRenderer的sortObjects](https://threejs.org/docs/index.html#api/zh/renderers/WebGLRenderer.sortObjects) 绘制顺序, 通过.[renderOrder](https://threejs.org/docs/index.html#api/zh/core/Object3D.renderOrder) 设置物体的渲染顺序, 也可以控制物体的深度方面内容
+
+three材质相关的参数可以**影响深度测试**，这些参数，作用于**使用这个材质的物体**，原理就是控制前面提到的深度相关的的**开启[depthTest](https://threejs.org/docs/index.html#api/zh/materials/Material.depthTest)** 与 **写入[depthWrite](https://threejs.org/docs/index.html#api/zh/materials/Material.depthWrite)**
+
+### **示例代码介绍**
+
+后面的示例都会基于此，绘制存在遮挡关系的正方体跟圆柱体，**绘制顺序很重要**，先绘制的正方体，后绘制的圆柱体
+
+```js
+// 正方体
+const cubeGeometry = new THREE.BoxGeometry(200, 200, 200)
+// 正方体材质
+const cubeMaterial = new THREE.MeshLambertMaterial({
+  color: 0x00ff00
+})
+const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
+scene.add(cube)
+
+// 圆柱体
+const cyGeometry = new THREE.CylinderGeometry(50, 50, 300, 32)
+const cyMaterial = new THREE.MeshLambertMaterial({
+  color: 0xffff00
+})
+// 圆柱体材质
+const cylinder = new THREE.Mesh(cyGeometry, cyMaterial)
+cylinder.rotateX(Math.PI / 2)
+scene.add(cylinder)
+
+```
+
+默认行为两个物体的深度测试和深度写入是开启的, 显示效果如下
+
+![](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303021113705.webp)
+
+> [depthTest](https://threejs.org/docs/index.html#api/zh/materials/Material.depthTest) 开启物体的深度测试
+
+```js
+// 给后渲染的圆柱体关闭深度测试
+const cyMaterial = new THREE.MeshLambertMaterial({
+  ...
+  depthTest: false
+})
+
+```
+
+使用此参数使圆柱不被遮挡，可以关闭圆柱的深度测试，这样圆柱的绘制，就变成了不按照前后位置关系绘制，而是按照渲染的前后顺序绘制，这样后绘制的圆柱就可以覆盖正方体了
+
+![image.png](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303021121412.webp)
+
+> [depthWrite](https://threejs.org/docs/index.html#api/zh/materials/Material.depthWrite) 开启物体是否可以深度写入
+
+```js
+// 给先渲染的立方体关闭深度写入
+const cubeMaterial = new THREE.MeshLambertMaterial({
+  ...
+  depthWrite: false
+})
+
+```
+
+上一节为了让圆柱不被遮挡，是处理了圆柱，我们也可以处理正方体使其挡不住圆柱，阻止正方体的深度值写入，这样深度缓冲区中对应位置存的是圆柱的深度信息，圆柱变成了离屏幕最近的，就不会被遮挡了
+
+![image.png](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303021136505.webp)
+
+>  [depthFunc](https://threejs.org/docs/index.html#api/zh/materials/Material.depthFunc) **深度测试函数**
+
+作用：默认为`THREE.LessEqualDepth`， 材质使用这些深度函数来比较输入像素和缓冲器中深度的值。 如果比较的结果为`true`，则将绘制像素。**不要关闭`depthTest`深度测试**
+也就是说深度测试是有规则的，只是默认绘制最近的，可以修改规则, [three.js提供了很多深度模式规则](https://threejs.org/docs/index.html#api/zh/constants/Materials)
+
+![image.png](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303021147132.webp)
+
+```js
+// 修改深度测试函数, 
+const cubeMaterial = new THREE.MeshLambertMaterial({
+  depthFunc: THREE.NeverDepth
+})
+
+```
+
+### **关于多个透明物体渲染**
+
+关于透明物体的渲染，我们经常会碰到各种问题。最常见的问题就是**多个透明物体**在渲染的时候，会跳过后面一个透明物体直接显示了之后的物体，从而形成非常诡异的现象。
+
+![image-20230302154718781](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303021551902.png)
+
+> 解决方式
+
+**第一种解决: **干预物体的渲染顺序, 修改`Mesn`中的`.renderOrder`渲染顺序
+
+three.js渲染物体的时候, 默认会开启[WebGLRenderer的sortObjects](https://threejs.org/docs/index.html#api/zh/renderers/WebGLRenderer.sortObjects) 绘制顺序, 通过.[renderOrder](https://threejs.org/docs/index.html#api/zh/core/Object3D.renderOrder) 设置物体的渲染顺序(默认是0), 控制物体的深度方面内容
+
+* 适合某些透明材质是固定的场景
+  * 比如`gltf/glb`模型自带的透明材质和二次创建的透明材质重叠的时候, 直接拉高二次创建的透明材质`.renderOrder`渲染顺序
+
+* 如果`.sortObjects = false`不开启自动排序，`.renderOrder`渲染顺序将会失效, 绘制顺序就是物体的添加顺序（**注意，此时透明物体和非透明物体仍然是分开渲染的**）
+
+```js
+const material = new THREE.SpriteMaterial({
+  map: spriteMap,
+  transparent: true
+})
+
+const sprite = new THREE.Sprite(material)
+
+// 给模型设置渲染顺序, 这样就不会, 有点类似于css中的z-index层级设置
+sprite.renderOrder = 1
+
+```
+
+这样当多个透明物体叠加在一起的时候, 显示效果就正常了
+
+![image-20230302183647403](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303021836462.png)
+
+**第二种解决:** 也可以基于 alpha blending 的简单方式渲染,一般步骤：
+
+1. **先绘制不透明物体（threejs从近向远排序绘制）**
+2. 关闭透明材质的深度写入（`depthwrite: false`）
+3. 打开透明材质的深度测试（`depthTest: true`）, 这个是默认开启的, 可以不设置
+4. 透明物体根据相机距离进行排序（从远向近的顺序绘制）
+
+* 如果向让透明物体一直显示，无论从什么角度都显示, 可以把第三步设置`depthTest: false`取消深度测试
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303021842488.jpeg)
+
 ## 文章来源
 
 [three.js 之 Material](https://segmentfault.com/a/1190000014639067)
 
 [一文搞懂 Three.js 里的材质 |《Three.js零基础直通11》](https://mp.weixin.qq.com/s?__biz=Mzg3MTUyNzQzNg==&mid=2247489272&idx=1&sn=e450ccc5ac8330fabbe2358573061523&chksm=cefc739bf98bfa8d2409f78b6597025a4bc9b721b7679b00dbf23de96c77f33c7cf4beab665b&scene=178&cur_album_id=2405559566127480834#rd)
+
+[看懂Threejs材质中深度测试相关参数](https://juejin.cn/post/7043330105241763847)
+
+[threejs中深度与透明](https://zhuanlan.zhihu.com/p/151649142)
