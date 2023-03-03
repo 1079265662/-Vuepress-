@@ -928,6 +928,28 @@ let ret = hd(true) as number
 console.log(res)
 ```
 
+### `!:`的断言使用
+
+`!:`是断言 断言这个值现在不存在, 但是在将来一旦程序运行, 将会进行赋值, 本质上是必填值
+
+> 在class中的使用
+
+![image-20221025154104534](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210251541577.png)
+
+```tsx
+class SceneCreated {
+  // 断言类型
+  animationId!: number
+  // 可选类型
+  animation?: number
+}
+
+```
+
+> 在引用的时候使用
+
+![image-20230303132414265](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/undefined202303031324315.png)
+
 
 
 ### **宽泛数据类型转换为值类型**
