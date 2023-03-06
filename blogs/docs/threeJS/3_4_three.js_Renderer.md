@@ -218,9 +218,7 @@ scene.add(ambient) // CSS2DObject内容插入scene场景对象中
 
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/e06645802f2742eda25815e6d7a91628.gif)
 
-* 2D渲染器生成的html元素 [transform](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform)元素不是[matrix3d()](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/matrix3d)
 
-![image-20220610122035918](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220610122035918.png)
 
 ## CSS3DRenderer 3D(CSS3)渲染器 
 

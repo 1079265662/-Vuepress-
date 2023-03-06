@@ -1,6 +1,6 @@
 ---
 title: three.js 之 Raycaster 光线投射
-date: 2022-11-16
+date: 2023-03-06
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202211161902823.png
 tags:
  - three.js
@@ -15,11 +15,15 @@ categories: three.js
 
 ## 什么是光线投射
 
-* [Raycaster](https://threejs.org/docs/index.html?q=ray#api/zh/core/Raycaster) 光线投射 以相机或其他能提供射线的物体为基准(比如一个静态物体) 通过鼠标的`X Y`轴(鼠标的`X Y`轴需要转换成[three.js需求的设备坐标](./5_4_mouse_XY.md)) 打出一个射线 这个射线可以帮助我们选中物体 支持多个物体集合的数组 和 单个物体的选中`Object3D`
-  * [.intersectObjects](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObjects) 检测和射线相交的一组物体。需要传入多个物体集合的数组 多个物体的交互
-  * [.intersectObject](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObject) 检查与射线相交的单个物体。需要单个物体的`Object3D` 单个物体的交互
+* [Raycaster](https://threejs.org/docs/index.html?q=ray#api/zh/core/Raycaster) 光线投射 以相机或其他能提供射线的物体为基准(比如一个静态物体), 通过鼠标的`X Y`轴(鼠标的`X Y`轴需要转换成[three.js需求的设备坐标](./5_4_mouse_XY.md)) 打出一个射线, 这个射线可以帮助我们选中物体, **支持多个/单个物体的`Object3D`数组集合 和 场景子对象`scene.children`的集合**
+  * [.intersectObjects](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObjects) 检测和射线相交的一组物体。**支持多个/单个物体的`Object3D`数组集合 和 场景子对象`scene.children`的集合**
+  * [.intersectObject](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObject) 检查与射线相交的单个物体。**需要单个物体的`Object3D`数组集合**
 
 * <font color =#ff3040>注意: 需要把JS的`X Y`轴需要转换成[three.js需求的设备坐标](./5_4_mouse_XY.md) </font>
+
+### **场景子对象`scene.children`的光线投射**
+
+光线投射器可以投射`scene.children`中的场景所包含的所有物体(子对象)
 
 ```tsx
 // 创建二维向量 用于记录鼠标的位置
@@ -34,8 +38,9 @@ window.addEventListener('mousemove', ({ clientX, clientY }) => { // mousemove �
   // 设置光线投射器的射线 通过setFromCamera()设置 传入鼠标的位置和相机
   raycaster.setFromCamera(mouse, this.camera)
 
-  // 获取所有的立方体 intersectObjects()传入需要检测的物体
+  // 投射scene场景中含的所有物体(子对象)
   const cube = raycaster.intersectObjects(this.scene.children) // 会返回所有与射线相交的多个对象的数组
+  
   // 遍历选中的立方体 批量修改
   cube.forEach((item) => {
     console.log(item.object)
@@ -46,6 +51,22 @@ window.addEventListener('mousemove', ({ clientX, clientY }) => { // mousemove �
 
 ```
 
+### **多个/ 单个物体的`Object3D`数组集合**
 
+[.intersectObjects](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObjects) 默认的参数是不支持`Object3D`类型的, 但是它支持投射数组的方式`Object3D`类型集合, 比如: [`Object3D1`, `Object3D2`], 这样他就能通过投射检测这两个`Object3D`类型的物体只要其中之一投射到就返回投射信息
 
- 
+[.intersectObject](https://threejs.org/docs/index.html?q=Raycaster#api/zh/core/Raycaster.intersectObject) 检查与射线相交的单个物体。**需要单个物体的`Object3D`数组集合**
+
+```js
+// 创建一个光线投射器
+const raycaster = new THREE.Raycaster()
+// 投射多个Object3D对象, 数组的形式
+const spriteMeshRay = raycaster.intersectObjects([
+  this.spriteMesh,
+  this.iphone,
+]) // 规定只要投射到这两个物体(其中之一), 就返回投射的信息
+
+// 单个Object3D对象, 使用.intersectObject方法
+const cube = raycaster.intersectObject(this.iphone) 
+
+```
