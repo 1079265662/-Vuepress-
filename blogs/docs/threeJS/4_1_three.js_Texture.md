@@ -319,9 +319,9 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 
 ```
 
-### **设置粗糙度**
+### **设置粗糙/光滑度**
 
-* [.roughness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughness) 设置纹理贴图的整体粗糙度 **默认为1 最小值为0 最大值为1 例如: 镜子的粗糙度就是0.1**
+* [.roughness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughness) 设置纹理贴图的整体粗糙度 **默认为1 最小值为0 最大值为1 例如: 镜子反光明显他的的粗糙度就是0.1**
   * 粗糙度是物体表面反光的一种表现 越光滑的物体 反光越明显 相反越粗糙的物体反光就比较受限
 
 ![image-20220923142137149](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231421307.png)
@@ -740,7 +740,29 @@ map.flipY = false
 
 ```
 
-## 贴图二次修改问题
+### **为什么需要纹理贴图反转**
+
+* 如果glft/glb模型文件**不包含纹理**, 通过three.js提供的`TextureLoader`纹理加载器从外部手动添加纹理的时候, 就需要取消纹理反转
+
+```js
+// 导入色彩贴图
+const map = this.textureLoader.load(getAssetsFile('iphone/basecolor.png'))
+// 取消贴图的反转
+map.flipY = false
+
+```
+
+* 如果glft/glb的模型文件**自带纹理**, 通过`GLTFLoader`加载后, 就可以正确地自动配置从glft/glb文件中引用的纹理, 不需要取消纹理反转
+
+```js
+// 导入gltf加载器
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+// 异步获得加载的模型
+const gltf = await loader.loadAsync(car)
+
+```
+
+## 纹理贴图二次修改问题
 
 会有这样的一个场景, 颜色贴图`envMap`可以进行二次修改, 这里会出现一个问题, 在`mesh`模型中是存在`material`这个属性, 但是在ts中可能因为某些原因不存在`material`类型, 所以我们需要通过断言进行二次修改
 
@@ -808,7 +830,35 @@ iphoneMapMaterial.map = map2
 
 :::
 
+## 纹理贴图的编码
 
+three.js中默认的编码格式是`LinearEncoding`线性编码, 编码在以下内容使用
+
+* 纹理贴图: `Texture`通过 [.encoding](https://threejs.org/docs/index.html#api/zh/textures/Texture.encoding) 属性可以查看编码, 通过three.js**创建的纹理贴图是线性编码**
+* 场景渲染器: `WebGLRenderer`通过 [.outputEncoding](https://threejs.org/docs/index.html#api/zh/renderers/WebGLRenderer.outputEncoding) 修改渲染编码, `WebGLRenderer`场景渲染器**默认是线性渲染**
+
+常用的两种编码格式`sRGBEncoding`和`LinearEncoding`, 两者在`.encoding`对应的编码值
+
+* `LinearEncoding`的编码值为 3000 , three.js默认的编码
+* `sRGBEncoding`的编码值为 3001, gltf/glb模型文件的编码
+
+* 其他编码格式在[这里查看](https://threejs.org/docs/index.html?q=ren#api/zh/constants/Textures)
+
+**通过gltf/glb创建的模型自带的纹理贴图是sRGB编码**
+
+### **gltf/glb的编码设置问题**
+
+gltf/glb模型的编码是`sRGBEncoding`, 通过[GLTFLoader](https://threejs.org/docs/index.html?q=gltf#examples/zh/loaders/GLTFLoader)加载器加载到three.js中, 会出现一些色差
+![image-20230307190545297](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303071905396.png)
+
+这时候`WebGLRenderer`场景渲染器默认的渲染是线性渲染(默认), 那么如果模型中包含一些自带的纹理贴图就会出现色差问题(自带贴图是sRGB编码), 需要 [WebGLRenderer](https://threejs.org/docs/index.html#api/zh/renderers/WebGLRenderer) 通过 [.outputEncoding](https://threejs.org/docs/index.html#api/zh/renderers/WebGLRenderer.outputEncoding) 修改渲染编码为sRGB编码
+
+```js
+renderer.outputEncoding = THREE.sRGBEncoding // 解决gltf/glb模型加载后出现色差问题
+
+```
+
+总的来说`WebGLRenderer`场景渲染的`.outputEncoding`编码渲染方式, 必须和纹理贴图的`.encoding`编码方式一致, 否则会出现一些色差问题
 
 ## 参考文献
 

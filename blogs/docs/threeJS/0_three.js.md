@@ -707,6 +707,9 @@ import * as THREE from 'three'
 import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class Type {
+  // 绘制canvas的Dom
+  canvas!: HTMLElement | Document | Element
+
   // 轨道控制器
   controls!: OrbitControls
   // 设置动画id
@@ -719,8 +722,10 @@ export class Type {
     antialias: true, // 关掉锯齿
     alpha: true // 设置背景透明
   })
+
   // 设置场景
   scene = new THREE.Scene()
+
   // 设置相机
   camera = new THREE.PerspectiveCamera(
     // 视觉角度
@@ -733,6 +738,8 @@ export class Type {
     1000
   )
 
+  // 创建纹理加载器
+  textureLoader = new THREE.TextureLoader()
   // 创建时钟
   clock = new THREE.Clock()
 }
@@ -746,10 +753,18 @@ export class Type {
 /**
  * three.js渲染的公共方法类
  */
+
 // 导入公共类
 import { Type } from './type'
+import type { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js'
 
 export class CreatedRender extends Type {
+  // 是否开启CSS2DRenderer或者CSS3DRenderer的渲染
+  // 开启了2D
+  isCSS2DRenderer = false
+  // 2D渲染器
+  label2DRenderer!: CSS2DRenderer
+
   // 尺寸变化时调整渲染器大小
   onWindowResize = () => {
     // 解构window对象
@@ -760,6 +775,11 @@ export class CreatedRender extends Type {
     this.camera.updateProjectionMatrix()
     // 更新渲染器
     this.renderer.setSize(innerWidth, innerHeight)
+    // 如果开启了CSS2DRenderer
+    if (this.isCSS2DRenderer) {
+      // 更新CSS2DObject的渲染器
+      this.label2DRenderer.setSize(innerWidth, innerHeight)
+    }
     // 更新渲染器的像素比
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
   }
@@ -794,8 +814,9 @@ export class CreatedRender extends Type {
 ```tsx
 // utils_renderer.ts
 /**
- * three.js渲染的工具类
+ * three.js渲染的工具方法类
  */
+
 // 导入three.js
 import * as THREE from 'three'
 // 导入公共类
@@ -814,8 +835,9 @@ export class CreatedUtils extends CreatedRender {
     box.setFromObject(object)
     // 获取包围盒的大小
     const boxSize = box.getSize(new THREE.Vector3())
-
     console.log(`当前物体的大小(包围盒)`, boxSize)
+
+    return boxSize
   }
 
   /**
@@ -838,6 +860,25 @@ export class CreatedUtils extends CreatedRender {
     const axesHelper = new THREE.AxesHelper(length)
     // 添加到场景中
     this.scene.add(axesHelper)
+
+    return axesHelper
+  }
+
+  /**
+   * @description 计算全屏下的webgl设备坐标
+   * @param item 传入的鼠标事件
+   */
+  calculateFullXY = (item: MouseEvent) => {
+    const { clientX, clientY } = item
+    // 创建二维向量 用于记录鼠标的位置
+    const mouse = new THREE.Vector2()
+
+    // mousemove 鼠标移动事件 还可以替换其他时间click等
+    // 将鼠标点击位置的屏幕坐标转换成three.js中的标准设备坐标
+    mouse.x = (clientX / window.innerWidth) * 2 - 1 // X轴坐标 2个单位 -1到1
+    mouse.y = -((clientY / window.innerHeight) * 2 - 1) // Y轴坐标 2个单位 -1到1 这里需要反转一下 因为在JS/CSS坐标中Y轴是反的
+
+    return mouse
   }
 }
 
@@ -857,28 +898,17 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class CreatedCanvas extends CreatedUtils {
-  constructor(canvas: HTMLElement) {
+ constructor(canvas: HTMLElement) {
     super()
     // 接收传入的画布Dom元素
     this.canvas = canvas
   }
 
-  // 绘制canvas的Dom
-  canvas!: HTMLElement | Document | Element
-
-  // 球体长宽
-  sphereNumber = {
-    radius: 2
-  }
-
   // 创建场景
   createScene = () => {
-    const { radius } = this.sphereNumber
-
-    // 设置相机的所在位置 通过三维向量Vector3的set()设置其坐标系 (基于世界坐标)
-    this.camera.position.set(0, 5, 20) // 默认没有参数 需要设置参数
-    // 把相机添加到场景中
-    this.scene.add(this.camera)
+    const { radius } = {
+      radius: 2
+    }
 
     // 声明一个球体
     const sphere = new THREE.SphereGeometry(radius, 32, 32)
@@ -894,6 +924,11 @@ export class CreatedCanvas extends CreatedUtils {
 
     // 创建辅助线
     this.addaxesHelper(100)
+
+    // 设置相机的所在位置 通过三维向量Vector3的set()设置其坐标系 (基于世界坐标)
+    this.camera.position.set(0, 5, 20) // 默认没有参数 需要设置参数
+    // 把相机添加到场景中
+    this.scene.add(this.camera)
 
     // 设置渲染器(画布)的大小 通过setSize()设置
     this.renderer.setSize(window.innerWidth, window.innerHeight) // setSize(画布宽度, 画布高度)

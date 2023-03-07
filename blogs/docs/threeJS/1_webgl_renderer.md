@@ -49,7 +49,7 @@ WebGL 的发展最早要追溯到 2006 年，WebGL 起源于 Mozilla 员工弗�
 - **图片装配**
 - **光栅化**
 - **片元着色器**
-- **裁剪测试**
+- xxxxxxxxxx13 1// 创建一个组2const glassPanel = new THREE.Group()3// 创建一个网格模型4const demoMesh = new THREE.Mesh(geometry, material)5​6// 销毁组中的全部子类7// glassPanel.clear()8// 销毁组中的网格模型9glassPanel.remove(this.demoMesh)10// 销毁该网格模型的几何对象11demoMesh.geometry.dispose()12// (可选)利用js内存回收机制, 清除创建的网格模型对象13demoMesh = null as nulljs
 - **多重采样操作**
 - **背面剔除**
 - **模板测试**

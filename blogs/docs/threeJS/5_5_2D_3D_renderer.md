@@ -21,7 +21,7 @@ three.js提供了两种内置的页面元素渲染器, 用来渲染Vue或者其�
 
 ### 2D渲染器介绍
 
-[CSS2DRenderer](https://threejs.org/docs/index.html?q=CSS2DRenderer#examples/zh/renderers/CSS2DRenderer) 2D渲染器, 对应的是`CSS2DObject`2D对象, 是一个`Object3D`
+[CSS2DRenderer](https://threejs.org/docs/index.html?q=CSS2DRenderer#examples/zh/renderers/CSS2DRenderer) 2D渲染器, 对应的是`CSS2DObject`2D对象, 是一个`Object3D`(残缺版, 部分属性无效), 2D渲染器更适合做一些需要持续显示的标签
 
 ```JS
 // 导入2D渲染器和2D对象
@@ -32,7 +32,7 @@ import {
 
 ```
 
-* CSS2D(类似于`Sprite`雪碧图)，场景缩放时，缩小放大都一样大, **不会根据透视相机的效果, 永远保持一个大小**，**不被模型遮挡**，通过DOM事件点击。可以使用`Object3D`的 [.position](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.position)位置等属性
+* CSS2D(类似于`Sprite`雪碧图)，场景缩放时，缩小放大都一样大, **不根据透视相机的显示效果, 永远保持一个大小**，**不被模型遮挡**，通过DOM事件点击。可以使用`Object3D`的 [.position](https://threejs.org/docs/index.html?q=obj#api/zh/core/Object3D.position)位置等属性
 
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/e06645802f2742eda25815e6d7a91628.gif)
 
@@ -44,7 +44,7 @@ import {
 
 ### 3D渲染器介绍
 
-[CSS3DRenderer](https://threejs.org/docs/index.html?q=CSS2DRenderer#examples/zh/renderers/CSS2DRenderer) 3D渲染器, 对应的是`CSS3DObject`, 是一个[Object3D](https://threejs.org/docs/index.html?q=Object#api/zh/core/Object3D)
+[CSS3DRenderer](https://threejs.org/docs/index.html?q=CSS2DRenderer#examples/zh/renderers/CSS2DRenderer) 3D渲染器, 对应的是`CSS3DObject`, 是一个[Object3D](https://threejs.org/docs/index.html?q=Object#api/zh/core/Object3D), 3D渲染器更适合做一些和模型保持一致的标签, 比如模型旋转标签也跟着旋转的需求
 
 ```js
 // 导入3D渲染器和3D对象
@@ -55,7 +55,7 @@ import {
 
 ```
 
-* CSS3D不面向摄像机，场景缩放时，**会随着透视相机由远变小, 由进变大**，**不被模型遮挡**，通过DOM事件点击, 可以使用`Object3D`的[.scale](https://threejs.org/docs/index.html?q=Object#api/zh/core/Object3D.scale)缩放等属性
+* CSS3D不面向摄像机，场景缩放时，**会随着透视相机显示效果, 由远变小, 由近变大**，**不被模型遮挡**，通过DOM事件点击, 可以使用`Object3D`的[.scale](https://threejs.org/docs/index.html?q=Object#api/zh/core/Object3D.scale)缩放等属性
   * **3D元素的尺存(px)和渲染器尺寸差距较大 通常需要设置`.scale`缩放比的值`<1`**
 
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/bd0cf6acd7414a0aafe75fb838a371e4.gif)
@@ -64,7 +64,7 @@ import {
 
 ![image-20230306200150028](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303062002574.png)
 
-* 3D渲染器生成的html元素 [transform](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform)元素是[matrix3d()](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/matrix3d)3D 转换效果
+* 3D渲染器生成的html元素 [transform](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform)元素是[matrix3d()](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/matrix3d)3D转换效果
 
 ![image-20220610122217013](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220610122217013.png)
 
@@ -114,7 +114,7 @@ label2DRenderer.domElement.style.pointerEvents = 'none' // 鼠标事件不可用
 canvas.appendChild(label2DRenderer.domElement)
 // document.body.appendChild(label2DRenderer.domElement)
 
-// 把Dom元素转化为Object2D
+// 把Dom元素转化为Object3D
 const tags2D = new CSS2DObject(tags) // tags就是Vue的Dom元素
 
 // 添加到场景中
@@ -166,12 +166,20 @@ const onWindowResize = () => {
    * 如果在body里面通过` document.body.removeChild()`删除body节点方式销毁
 
 ```js
+// Vue3
+onUnmounted(() => {
 // 销毁CSS2DRenderer
 // 添加在canvas里面 canvas.appendChild()
 canvas.removeChild(label2DRenderer.domElement)
 // 添加在body里面 document.body.appendChild()
 // document.body.removeChild(label2DRenderer.domElement)
+})
 
+// Vue2
+beforeDestroy() {
+canvas.removeChild(label2DRenderer.domElement)
+// document.body.removeChild(label2DRenderer.domElement)
+}
 ```
 
 `CSS3DRenderer`创建方式和`CSS2DRenderer`差不多, 需要主要的是CSS3DRenderer的大小问题, 可能会过大, 通过`.scale`缩放进行设置, 通过css属性[backface-visibility: hidden](https://developer.mozilla.org/zh-CN/docs/Web/CSS/backface-visibility), 取消背面显示

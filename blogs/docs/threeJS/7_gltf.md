@@ -118,11 +118,11 @@ blender：最新版本可以直接导出gltf，旧的版本可以通过gltf插�
 
 ### **GLTF颜色空间**
 
-* GLTF颜色空间是 sRGB在three.js中使用
-* 在three.js中 需要单独设置
+GLTF颜色空间是 `sRGBEncoding`编码, three.js中默认的编码格式是`LinearEncoding`编码, 加载的gltf/glb模型如果自带一些纹理贴图, 需要[WebGLRenderer](https://threejs.org/docs/index.html#api/zh/renderers/WebGLRenderer) 通过 [.outputEncoding](https://threejs.org/docs/index.html#api/zh/renderers/WebGLRenderer.outputEncoding) 修改渲染编码为sRGB编码
 
 ```js
-renderer.outputEncoding = THREE.sRGBEncoding; //解决加载gltf格式模型纹理贴图和原图不一样问题
+renderer.outputEncoding = THREE.sRGBEncoding // 解决gltf/glb模型加载后出现色差问题
+
 ```
 
 ### **GLTF光源支持**
@@ -162,4 +162,6 @@ babylon命令开发如下图所示，可以直接选择导出的格式。
 
 
 如果想导出Lambert或Phong材质应该如何操作，如果不行的话，也可以自己写程序批量替换相关的材质，毕竟PBR材质可以包含除了Phong材质高光
+
+
 
