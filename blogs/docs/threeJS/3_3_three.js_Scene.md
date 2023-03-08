@@ -32,7 +32,7 @@ three.js 之Scene 场景<br>
 | **add(object)**                     | 用于向场景中添加对象。使用该方法还可以创建对象组。           |
 | **children**                        | 用于返回一个场景中所有对象的列表，包括摄像机和光源。         |
 | **getObjectByName(name,recursive)** | 在创建对象时可以指定唯一的标识 **name**，使用该方法可以查找特定名字的对象。 当参数 **recursive** 设置为 **false** 时，在调用者子元素上查找当参数 **recursive** 设置为 **true** 时，在调用者的所有后代对象上查找 |
-| **remove(object)**                  | **object** 为场景中对象的引用，使用该方法可以将对象从场景中移除。 |
+| **remove(object)**                  | 13 1// 创建一个组2const glassPanel = new THREE.Group()3// 创建一个网格模型4const demoMesh = new THREE.Mesh(geometry, material)5​6// 销毁组中的全部子类7// glassPanel.clear()8// 销毁组中的网格模型9glassPanel.remove(this.demoMesh)10// 销毁该网格模型的几何对象11demoMesh.geometry.dispose()12// (可选)利用js内存回收机制, 清除创建的网格模型对象13demoMesh = null as nulljs |
 | **traverse(function)**              | 该方法也可以遍历调用者和调用者的所有后代，**function** 参数是一个函数，被调用者和每一个后代对象调用 **function** 方法。 |
 | **fog**                             | 使用该属性可以为场景添加雾化效果，可以产生隐藏远处物体的浓雾效果。 |
 | **overrideMaterial**                | 使用该属性可以强制场景中的所有物体使用相同的材质。           |
@@ -87,7 +87,7 @@ renderer.setClearColor('#ff3040', 1); //  (颜色, 透明度)
 
 ### **场景添加背景图**
 
-* 通过[.background](https://threejs.org/docs/index.html?q=scene#api/zh/scenes/Scene.background) 设置场景背景图
+通过[.background](https://threejs.org/docs/index.html?q=scene#api/zh/scenes/Scene.background) 设置场景背景图
 
 ```tsx
 // 创建场景
@@ -110,9 +110,10 @@ scene.background = envMapT
 
 ### 场景内的物体添加默认环境贴图
 
-* [.environment](https://threejs.org/docs/index.html?q=scene#api/zh/scenes/Scene.environment) 可以给场景内 所有的物体添加一个默认的环境贴图 通常可以配合`.background`场景背景图使用 这样场景的背景就可以很好的映射在物体上 让物体有一种镜面效果
-  * 如果物体设置了单独的环境贴图 那么将会被替换 
-  * `.environment`的默认值是`null` 可以其值改成`null`还原或取消场景内物体的环境贴图
+[.environment](https://threejs.org/docs/index.html?q=scene#api/zh/scenes/Scene.environment) 可以给场景内 所有的物体添加一个默认的环境贴图 通常可以配合`.background`场景背景图使用 这样场景的背景就可以很好的映射在物体上 让物体有一种镜面效果
+
+* 如果物体设置了单独的环境贴图 那么将会被替换 
+* `.environment`的默认值是`null` 可以其值改成`null`还原或取消场景内物体的环境贴图
 
 ```tsx
 // 创建场景

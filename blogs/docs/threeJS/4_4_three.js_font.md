@@ -17,7 +17,8 @@ three.js 之 font 字体的记录<br>
 
 three.js可以通过附加组件[FontLoader](https://threejs.org/docs/index.html?q=FontLoader#examples/zh/loaders/FontLoader)字体加载器进行字体的导入, 并且自带一些基于英文的json格式的字体
 
-* [FontLoader](https://threejs.org/docs/index.html?q=FontLoader#examples/zh/loaders/FontLoader)字体加载器, 是附加组件需要单独引入, `FontLoader`**只支持json格式的字体**
+* [FontLoader](https://threejs.org/docs/index.html?q=FontLoader#examples/zh/loaders/FontLoader)字体加载器, 是附加组件需要单独引入, `FontLoader`**只支持json格式的字体** 
+* 可以使用[facetype.js](https://gero3.github.io/facetype.js/)来在线转换ttf字体。
 
 ```js
 // 导入json字体加载器

@@ -36,7 +36,7 @@ three.js 之 Loader 加载器 <br>
 
 ![123](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210211826476.jpg)
 
-## 导入外部加载的模型 GLTFLoader()
+## 模型加载器 GLTFLoader
 
 * 我们在做threejs的时候会引入大量3D模型 通过是`gltf/glb`格式的文件 代替我们前端渲染的复杂模型 我们前端只需要写交互即可 我记录了有关[gltf格式的信息](./3_gltf)
 * 我们可以使用官方的控件 [GLTFLoader](https://threejs.org/docs/index.html?q=GLTFLoader#examples/zh/loaders/GLTFLoader) 来实现加载`gltf/glb` 格式的文件 获取其模型对象 通过添加场景 光源 相机 渲染器后 直接在页面中显示
@@ -175,6 +175,185 @@ var plane = new THREE.Mesh(geometry, material);
       // 把gltf.scene中的所有模型添加到model组对象中
       model.add(gltf.scene)
     })
+```
+
+### **Vite中导入glb和gltf**
+
+glb和gltf资源是[静态资源](https://cn.vitejs.dev/config/shared-options.html#assetsinclude), 如果文件在脚手架([create-vue](https://github.com/vuejs/create-vue))中导入使用, 需要在`vite.config.ts`配置中设置为静态资源, 不进行编译处理
+
+```js
+// 静态资源设置
+assetsInclude: ['**/*.gltf', '**/*.glb'],
+```
+
+* 在ts代码中进行导入
+  * [create-vue](https://github.com/vuejs/create-vue)脚手架环境下, ts/js文件中静态资源不可以直接通过路径来导入, 需要通过`import`或通过[官方封装的方法导入](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url)(Vue文件可以直接使用路径导入)
+
+```js
+// 导入手机模型gltf
+import huawei from '@/assets/iphone/huaweiB.glb'
+// 创建glTF加载器
+const loader = new GLTFLoader()
+// 异步获得加载的模型
+const gltf = await this.loader.loadAsync(huawei)
+
+```
+
+::: details 查看文件目录
+![image-20230216173250748](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161732791.png)
+:::
+
+### **在ts环境下使用glb和gltf**
+
+glb,gltf 文件在ts环境下是没有类型标识的, 直接导入会报错, 所以我们需要在脚手架([create-vue](https://github.com/vuejs/create-vue))根目录下创建一个`env.d.ts`(格式为`*.d.ts`)作为字符串导入
+
+```tsx
+declare module '*.glb' {
+  const value: string
+  export default value
+}
+declare module '*.gltf' {
+  const value: string
+  export default value
+}
+
+```
+
+::: details 查看文件目录
+![image-20230216172529775](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161726829.png)
+:::
+
+## 纹理加载器 TextureLoader
+
+[TextureLoader](https://threejs.org/docs/index.html?q=TextureLoader#api/zh/loaders/TextureLoader) 纹理加载器, 用于加载单张图片格式的纹理贴图
+
+```js
+// 创建纹理加载器
+const textureLoader = new THREE.TextureLoader()
+// 导入一张纹理贴图
+import someJPG from '@/assets/door/alpha.jpg'
+
+// 创建异步加载
+const loader = async () => {
+    // 加载一张贴图
+  const loaderSome = await textureLoader.loadAsync(someJPG)
+}
+
+```
+
+## 环境贴图加载器 CubeTextureLoader
+
+[CubeTextureLoader](https://threejs.org/docs/index.html?q=CubeTextureLoader#api/zh/loaders/CubeTextureLoader) 环境贴图加载器, 用来加载一组环境贴图, 基本上是六张图片
+
+![image-20230308114807800](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303081148867.png)
+
+* `.setPath`可以统一设置环境贴图加载的根路径
+
+```js
+// 创建环境贴图加载器
+const cubeLoader = new THREE.CubeTextureLoader()
+
+// 创建异步加载
+const loader = async () => {
+  // 参数为数组，数组中的每一项都是一个图片的路径
+  const loaderSome = await cubeLoader
+    .setPath('textures/cubeMaps/')
+    .loadAsync(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'])
+}
+
+```
+
+### **在Vue脚手架环境下**
+
+如果图片在中Vue脚手架 [create-vue](https://github.com/vuejs/create-vue)环境下就需要单独处理, 需要通过`import`或通过[官方封装的方法导入](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url)(Vue文件可以直接使用路径导入)
+
+* [静态资源处理 | Vite 官方中文文档](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url) 通过官网介绍进行封装
+
+```tsx
+// getAssetsFile.ts
+// 封装静态资源引用方法 
+export const getAssetsFile = (url: string) => {
+  return new URL(`../assets/${url}`, import.meta.url).href
+}
+// export { getAssetsFile }
+
+```
+
+* 该函数方法默认指向Vue静态资源文件夹`assets`, 所以可以省略`assets`路径前缀
+
+```ts
+// 静态资源引入方法
+import { getAssetsFile } from '@/utils/getAssetsFile'
+// 创建环境贴图加载器
+const envMapLoader = new THREE.CubeTextureLoader()
+
+const setEnvMap = async () => {
+  // 加载环境贴图
+  const envMapTexture = await envMapLoader.loadAsync([
+    getAssetsFile('car/envMap/px.jpg'),
+    getAssetsFile('car/envMap/nx.jpg'),
+    getAssetsFile('car/envMap/py.jpg'),
+    getAssetsFile('car/envMap/ny.jpg'),
+    getAssetsFile('car/envMap/pz.jpg'),
+    getAssetsFile('car/envMap/nz.jpg'),
+  ] as any)
+}
+
+```
+
+::: details 查看示例所在的文件
+
+![image-20230308121203772](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303081212811.png)
+
+:::
+
+## 字体加载器 FontLoader
+
+[FontLoader](https://threejs.org/docs/index.html?q=FontLoader#examples/zh/loaders/FontLoader) 字体加载器, 是一个附加组件需要单独导入
+
+* `FontLoader`**只支持json格式的字体** 
+* 可以使用[facetype.js](https://gero3.github.io/facetype.js/)来在线转换ttf字体。
+*  <font color =#ff3040>注意: 在Vite环境中, 需要对[显式 URL 引入](https://cn.vitejs.dev/guide/assets.html#explicit-url-imports) 的资源添加`?url`后缀, 取消编译时的操作</font>
+
+```js
+// 导入json字体加载器
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
+// 导入three.js的json字体, url资源需要在后缀加上?url
+import helvetiker from '@/assets/iphone/font/text.json?url'
+
+// 创建字体加载器
+const fontLoader = new FontLoader()
+
+// 创建异步加载
+const loader = async () => {
+  // 只支持json格式的字体
+  const fontSome = await fontLoader.loadAsync(helvetiker)
+}
+
+```
+
+## HDR加载器 RGBELoader
+
+`RGBELoader`是用来加载HDR图片的, HDR可以作为环境贴图来使用
+
+* HDR图片非常大, 且性能消耗巨大
+
+```js
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
+// 1. 创建three.js场景
+const scene = new THREE.Scene()
+// 添加HDR贴图
+const HDRloader = new RGBELoader()
+// 异步加载HDR贴图
+HDRloader.loadAsync('hdr/002.hdr').then((HDRtexture) => {
+  // 设置HDR贴图的贴图环绕方式
+  HDRtexture.mapping = THREE.EquirectangularReflectionMapping
+  // 给场景设置HDR背景图
+  scene.background = HDRtexture
+  // 给场景内所有的物体添加默认的环境贴图 (如果物体不单独设置环境贴图 默认使用这个环境贴图)
+  scene.environment = HDRtexture
+})
+
 ```
 
 ## Loader加载器在Vue cil中加载
@@ -398,85 +577,48 @@ export class CreatedRender {
 
 ```
 
-## Vite脚手架下导入静态资源
+## Vue脚手架下导入静态资源
 
-[create-vue](https://github.com/vuejs/create-vue)脚手架环境下静态资源, ts/js文件中静态资源不可以直接通过路径来导入, 需要通过`import`或通过[官方封装的方法导入](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url)(Vue文件可以直接使用路径导入)
+如果图片在中Vue脚手架 [create-vue](https://github.com/vuejs/create-vue)环境下就需要单独处理, 需要通过`import`或通过[官方封装的方法导入](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url)(Vue文件可以直接使用路径导入)
 
 * [静态资源处理 | Vite 官方中文文档](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url) 通过官网介绍进行封装
 
-```js
+```tsx
 // getAssetsFile.ts
-// 封装静态资源引用方法
-const getAssetsFile = (url: string) => {
+// 封装静态资源引用方法 
+export const getAssetsFile = (url: string) => {
   return new URL(`../assets/${url}`, import.meta.url).href
 }
-export { getAssetsFile }
+// export { getAssetsFile }
 
 ```
 
-* 在ts中使用导入方法
+* 该函数方法默认指向Vue静态资源文件夹`assets`, 所以可以省略`assets`路径前缀
 
 ```ts
+// 静态资源引入方法
 import { getAssetsFile } from '@/utils/getAssetsFile'
-
-// 设置一个环境贴图加载器
+// 创建环境贴图加载器
 const envMapLoader = new THREE.CubeTextureLoader()
-// 这里是three.js的环境贴图加载器 引用多张图片进行加载
-const envMap = await envMapLoader.loadAsync([
-  getAssetsFile('environmentMaps/0/px.jpg'),
-  getAssetsFile('environmentMaps/0/nx.jpg'),
-  getAssetsFile('environmentMaps/0/py.jpg'),
-  getAssetsFile('environmentMaps/0/ny.jpg'),
-  getAssetsFile('environmentMaps/0/pz.jpg'),
-  getAssetsFile('environmentMaps/0/nz.jpg'),
-] as any)
 
-```
-
-## Vite中导入glb和gltf
-
-glb和gltf资源是[静态资源](https://cn.vitejs.dev/config/shared-options.html#assetsinclude), 如果文件在脚手架([create-vue](https://github.com/vuejs/create-vue))中导入使用, 需要在`vite.config.ts`配置中设置为静态资源, 不进行编译处理
-
-```js
-// 静态资源设置
-assetsInclude: ['**/*.gltf', '**/*.glb'],
-```
-
-* 在ts代码中进行导入
-  * [create-vue](https://github.com/vuejs/create-vue)脚手架环境下, ts/js文件中静态资源不可以直接通过路径来导入, 需要通过`import`或通过[官方封装的方法导入](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url)(Vue文件可以直接使用路径导入)
-
-```js
-// 导入手机模型gltf
-import huawei from '@/assets/iphone/huaweiB.glb'
-// 创建glTF加载器
-const loader = new GLTFLoader()
-// 异步获得加载的模型
-const gltf = await this.loader.loadAsync(huawei)
-
-```
-
-::: details 查看文件目录
-![image-20230216173250748](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161732791.png)
-:::
-
-## 在ts环境下使用glb和gltf
-
-glb,gltf 文件在ts环境下是没有类型标识的, 直接导入会报错, 所以我们需要在脚手架([create-vue](https://github.com/vuejs/create-vue))根目录下创建一个`env.d.ts`(格式为`*.d.ts`)作为字符串导入
-
-```tsx
-declare module '*.glb' {
-  const value: string
-  export default value
-}
-declare module '*.gltf' {
-  const value: string
-  export default value
+const setEnvMap = async () => {
+  // 加载环境贴图
+  const envMapTexture = await envMapLoader.loadAsync([
+    getAssetsFile('car/envMap/px.jpg'),
+    getAssetsFile('car/envMap/nx.jpg'),
+    getAssetsFile('car/envMap/py.jpg'),
+    getAssetsFile('car/envMap/ny.jpg'),
+    getAssetsFile('car/envMap/pz.jpg'),
+    getAssetsFile('car/envMap/nz.jpg'),
+  ] as any)
 }
 
 ```
 
-::: details 查看文件目录
-![image-20230216172529775](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161726829.png)
+::: details 查看示例所在的文件
+
+![image-20230308121203772](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303081212811.png)
+
 :::
 
 ##  参考文献
