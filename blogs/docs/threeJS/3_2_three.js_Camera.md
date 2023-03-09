@@ -24,14 +24,16 @@ three.js 之 Camera 相机 <br>
 
 ```js
 // 正投影相机对象
-var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000)
+
 ```
 
 - `PerspectiveCamera` 透视相机，这一投影模式被用来模拟人眼所看到的景象，它是3D场景的渲染中使用得最普遍的投影模式。
 
 ```js
 // 透视投影相机对象
-var camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
+const camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000)
+
 ```
 
 > 透视相机 和 正交相机的区别图

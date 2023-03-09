@@ -324,5 +324,63 @@ console.log('几何体变化', geometry.attributes.position)
 
 ```
 
+## 批量修改Mesh网格 .traverse
 
+可以使用`Object3D`中 [.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse)方法递归其包含的子级网格
+
+* 通常要先用`.type`去判断能修改的类型`Mesh`网格类型, 很可能里面也存在一些其他类型比如`Object3D`
+* 通常会把需要批量修改的网格放到 [Group](https://threejs.org/docs/index.html?q=Group#api/zh/objects/Group)组对象中进行` .traverse`递归
+
+```js
+// 导入汽车模型gltf
+import car from '@/assets/car/轿车.gltf'
+// 导入外包加载器
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+// 导入three.js
+import * as THREE from 'three'
+
+const loader = new GLTFLoader()
+// 异步获得加载的模型
+const gltf = await loader.loadAsync(car)
+
+// 替换金属内容的材质
+gltf.scene.traverse((child) => {
+  // 符合mesh类型(只有mesh网格模型类型才有材质)
+  if (child.type === 'Mesh') {
+    // 如果名称中包含高光金属
+    if (child.name.includes('高光金属')) {
+      // 修改材质
+      const meshOject = child as THREE.Mesh<
+        THREE.BufferGeometry,
+        THREE.MeshStandardMaterial
+      >
+      meshOject.material = new THREE.MeshStandardMaterial({
+        color: meshOject.material.color,
+        metalness: 1.0,
+        roughness: 0.2,
+      })
+    }
+
+    // 如果名称中包含后视镜
+    if (child.name.includes('后视镜')) {
+      // 修改材质
+      const meshOject = child as THREE.Mesh<
+        THREE.BufferGeometry,
+        THREE.MeshStandardMaterial
+      >
+      meshOject.material = new THREE.MeshStandardMaterial({
+        color: '#ffffff',
+        metalness: 1.0,
+        roughness: 0.0,
+        envMapIntensity: 1.0,
+      })
+    }
+  }
+})
+
+```
+
+对应递归的子级的集合
+
+![image-20230309161358307](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303091614385.png)
 

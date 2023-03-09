@@ -321,7 +321,7 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 
 ### **设置粗糙/光滑度**
 
-* [.roughness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughness) 设置纹理贴图的整体粗糙度 **默认为1 最小值为0 最大值为1 例如: 镜子反光明显他的的粗糙度就是0.1**
+* [.roughness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.roughness) 设置纹理贴图的整体粗糙度 **默认为1 最小值为0 最大值为1 例如: 镜子反光明显他的的粗糙度就是0**
   * 粗糙度是物体表面反光的一种表现 越光滑的物体 反光越明显 相反越粗糙的物体反光就比较受限
 
 ![image-20220923142137149](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231421307.png)
@@ -363,14 +363,14 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 
 ### **设置金属度**
 
-* [.metalness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.metalness) 设置纹理贴图的整体金属度 **默认为0 最小值为0 最大值为1 越大金属度越明显会很黑**
+* [.metalness](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.metalness) 设置纹理贴图的整体金属度 **默认为0 最小值为0 最大值为1 **
 
   * 金属度代表了有多少光子是直接被反射出去, 有多少光子在进入体内,后成了漫反射 
   * 金属度等于0, 或者很低的情况下, **直接反射会变得非常弱, 只有漫反射**
 
   ![image-20220923151659503](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231516595.png)
 
-  * 金属度如果等于1的情况下, **所有的光子都会被反射出去, 会完全没有漫反射**
+  * 金属度如果等于1的情况下, **所有的光子都会被反射出去, 形成镜面反射效果**
 
   ![image-20220923151739046](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231517114.png)
 
@@ -558,6 +558,22 @@ const starMaterial = new THREE.PointsMaterial({
   transparent: true, // 开启透明度
   depthWrite: false, // 关闭深度写入(防止点被遮挡),
   vertexColors: true, // 开启顶点颜色 (默认为false) 顶点颜色是指每个顶点都有一个颜色值(默认色值) 顶点颜色的优先级高于材质颜色(通过.color设置的颜色) 顶点颜色的值是一个0-1的值 0表示黑色 1表示白色
+})
+
+```
+
+### **设置环境贴图的强度**
+
+[MeshStandardMaterial](https://threejs.org/docs/index.html?q=mesh#api/zh/materials/MeshStandardMaterial)PBR材质 和 [MeshPhysicalMaterial](https://threejs.org/docs/index.html?q=mesh#api/zh/materials/MeshPhysicalMaterial) 物理网格材质(高阶PBR) 提供了环境贴图强度设置 [.envMapIntensity](https://threejs.org/docs/index.html#api/zh/materials/MeshStandardMaterial.envMapIntensity),通过乘以环境贴图的颜色来缩放环境贴图的效果。数值越大环境贴图的强度越大
+
+* `envMapIntensity`的默认值是1
+
+```js
+const material = new THREE.MeshStandardMaterial({
+  color: '#ffffff',
+  metalness: 1.0,
+  roughness: 0.0,
+  envMapIntensity: 1.0,
 })
 
 ```
@@ -762,9 +778,11 @@ const gltf = await loader.loadAsync(car)
 
 ```
 
-## 纹理贴图二次修改问题
+## 纹理贴图二次修改和ts类型问题
 
 会有这样的一个场景, 颜色贴图`envMap`可以进行二次修改, 这里会出现一个问题, 在`mesh`模型中是存在`material`这个属性, 但是在ts中可能因为某些原因不存在`material`类型, 所以我们需要通过断言进行二次修改
+
+* 在ts中(@types/three版本0.149.0)直接引用`Mesh`网格中的`material`材质会出现类型不存在报错, 但本身其实是`Mesh`类型, 可以通过断言给其设置为`Mesh<THREE.BufferGeometry, 使用材质的类型>`
 
 ```tsx
 // 先设置一次设置PBR材质
@@ -773,8 +791,8 @@ iphoneMap.material = new THREE.MeshStandardMaterial({
   map,
 })
 
-// 通过断言设置material类型为我们之前使用的材质
-const iphoneMapMaterial = this.iphoneMap.material as THREE.MeshPhysicalMaterial
+// 给Mesh网格物体 设置Mesh类型泛型为BufferGeometry和MeshStandardMaterial(依据使用材质的类型)
+const iphoneMapMaterial = this.iphoneMap.material as THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>
 // 标记为需要更新
 iphoneMapMaterial.needsUpdate = true
 // 更新贴图
@@ -807,7 +825,7 @@ three.js里的很多对象都有一个`.needsUpdate`属性, 纹理贴图也有�
 
 ```tsx
 // 查找模型, 给其设置Mesh类型泛型为BufferGeometry和MeshStandardMaterial(依据使用材质的类型)
-const iphoneMap = this.iphone.getObjectByName('手机') as  THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>
+const iphoneMap = this.iphone.getObjectByName('手机') as THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>
 
 // 先设置一次设置PBR材质
 iphoneMap.material = new THREE.MeshStandardMaterial({
@@ -826,7 +844,7 @@ iphoneMapMaterial.map = map2
 
 ::: tip 关于纹理贴图的缓存机制
 
-材质在three.js中是通过`THREE.Material`来描述的，其实材质并没有什么数据要传输，但是为什么还要搞一个needsUpdate呢，这里还要说一下shader这个东西，shader直译过来是着色器，提供了在gpu中编程处理顶点和像素的可能性，在绘画中有个shading的术语来表示绘画的明暗法，GPU中的shading也类似，通过程序计算光照的明暗来表现物体的材质，ok, 既然shader是一段跑在GPU上的程序，那么像所有程序一样都需要进行一次编译链接的操作， WebGL中是在运行时对shader程序进行编译的，这当然需要消耗时间，因此也是最好能够一次编译就运行到程序结束。所以three.js中就在material初始化的时候就编译链接了shader程序并且缓存了编译链接后得到的program对象。一般一个material是不需要再去重新编译整个shader了，材质的调整只需要修改shader的uniform参数就行了。但是如果是替换了整个材质，比如将原来phong的shader替换成了一个lambert的shader，就需要将`material.needsUpdate`设置成true去重新做一次编译。
+材质在three.js中是通过`THREE.Material`来描述的，其实材质并没有什么数据要传输，但是为什么还要搞一个`.needsUpdate`呢，这里还要说一下shader这个东西，shader直译过来是着色器，提供了在gpu中编程处理顶点和像素的可能性，在绘画中有个shading的术语来表示绘画的明暗法，GPU中的shading也类似，通过程序计算光照的明暗来表现物体的材质，ok, 既然shader是一段跑在GPU上的程序，那么像所有程序一样都需要进行一次编译链接的操作， WebGL中是在运行时对shader程序进行编译的，这当然需要消耗时间，因此也是最好能够一次编译就运行到程序结束。所以three.js中就在material初始化的时候就编译链接了shader程序并且缓存了编译链接后得到的program对象。一般一个material是不需要再去重新编译整个shader了，材质的调整只需要修改shader的uniform参数就行了。但是如果是替换了整个材质，比如将原来phong的shader替换成了一个lambert的shader，就需要将`material.needsUpdate`设置成true去重新做一次编译。
 
 :::
 

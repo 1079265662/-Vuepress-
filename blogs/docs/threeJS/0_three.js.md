@@ -764,6 +764,8 @@ export class CreatedRender extends Type {
   isCSS2DRenderer = false
   // 2D渲染器
   label2DRenderer!: CSS2DRenderer
+  //gui调试面板
+  gui!: dat.GUI
 
   // 尺寸变化时调整渲染器大小
   onWindowResize = () => {
@@ -798,12 +800,15 @@ export class CreatedRender extends Type {
     this.controls.dispose()
     // 清除渲染器
     this.renderer.dispose()
-    // 释放内存
-    // this.renderer.forceContextLoss()
     // 清除动画
     cancelAnimationFrame(this.animationId)
     // 销毁监听
     window.removeEventListener('resize', this.onWindowResize)
+    // 销毁gui
+    if (this.gui) this.gui.destroy()
+
+    // 释放内存(可能会导致短暂白屏)
+    this.renderer.forceContextLoss()
   }
 }
 

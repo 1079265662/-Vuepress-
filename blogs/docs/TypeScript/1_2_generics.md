@@ -172,6 +172,22 @@ myUser.info = { name: '刘凯利', age: 22 }
 console.log(myUser); // UserX { info: { name: '刘凯利', age: 22 } }
 ```
 
+### 对象使用泛型
+
+写一些对象的时候可以设置泛型, 这样对象就具备了泛型中的所有类型, 进行提示和类型检测
+
+```tsx
+// 导入three.js
+import * as THREE from 'three'
+// 设置一个对象, 使用THREE.MeshStandardMaterial泛型
+const guiControlsMirror = <THREE.MeshStandardMaterial>{ 
+  metalness: 1.0, // 金属度
+  roughness: 0, // 粗糙度
+  envMapIntensity: 1.0 // 设置环境贴图强度
+}
+
+```
+
 ### **总结**
 
 `泛型`（Generics），从字面上理解，泛型就是一般的，广泛的。

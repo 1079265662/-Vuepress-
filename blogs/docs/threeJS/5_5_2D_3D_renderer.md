@@ -19,7 +19,7 @@ three.js提供了两种内置的页面元素渲染器, 用来渲染Vue或者其�
 
 <font color =#ff3040>注意: 2D/3D渲染器的`.setSize`依赖`WebGLRenderer`场景渲染器的宽度高度 需要和其保持一致 否则会出现偏移问题 无论如何 他俩的宽高应该都是一个作用域的值(相同)</font>
 
-### 2D渲染器介绍
+### **2D渲染器介绍**
 
 [CSS2DRenderer](https://threejs.org/docs/index.html?q=CSS2DRenderer#examples/zh/renderers/CSS2DRenderer) 2D渲染器, 对应的是`CSS2DObject`2D对象, 是一个`Object3D`(残缺版, 部分属性无效), 2D渲染器更适合做一些需要持续显示的标签
 
@@ -42,7 +42,7 @@ import {
 
 ![image-20220610122035918](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220610122035918.png)
 
-### 3D渲染器介绍
+### **3D渲染器介绍**
 
 [CSS3DRenderer](https://threejs.org/docs/index.html?q=CSS2DRenderer#examples/zh/renderers/CSS2DRenderer) 3D渲染器, 对应的是`CSS3DObject`, 是一个[Object3D](https://threejs.org/docs/index.html?q=Object#api/zh/core/Object3D), 3D渲染器更适合做一些和模型保持一致的标签, 比如模型旋转标签也跟着旋转的需求
 

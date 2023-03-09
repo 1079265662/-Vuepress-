@@ -151,32 +151,6 @@ material.map.encoding = THREE.sRGBEncoding;
 var plane = new THREE.Mesh(geometry, material);
 ```
 
-### **批量修改网格模型材质**
-
-* 我们可以使用模型提供的材质 通过[.traverse](https://threejs.org/docs/index.html#api/zh/core/Object3D.traverse)方法 遍历object3D对象方法把模型文件`glb`或`glft`的材质遍历出来使用
-* 要用`.type` 去判断类型 在three.js 导入`glt `或 `gltf`中 `Mesh`是网格模型对象的属性名(键)
-
-```js
-    const model = new THREE.Group()// 声明一个组对象，用来添加加载成功的三维场景
-    const loader = new GLTFLoader() // 创建一个GLTF加载器
-    loader.loadAsync(`${process.env.BASE_URL}model/model.glb`, (gltf) => { // gltf加载成功后返回一个对象
-    }).then((gltf) => {
-      // 递归遍历gltf.scene，批量更改所有Mesh的材质
-      gltf.scene.traverse(object => {
-        if (object.type === 'Mesh') {
-          // MeshLambertMaterial：受光照影响   MeshBasicMaterial：不受光照影响
-          object.material = new THREE.MeshLambertMaterial({
-            map: object.material.map, // 获取原来材质的颜色贴图属性值
-            color: object.material.color // 读取原来材质的颜色
-            // side: THREE.DoubleSide,//围墙需要设置双面显示
-          })
-        }
-      })
-      // 把gltf.scene中的所有模型添加到model组对象中
-      model.add(gltf.scene)
-    })
-```
-
 ### **Vite中导入glb和gltf**
 
 glb和gltf资源是[静态资源](https://cn.vitejs.dev/config/shared-options.html#assetsinclude), 如果文件在脚手架([create-vue](https://github.com/vuejs/create-vue))中导入使用, 需要在`vite.config.ts`配置中设置为静态资源, 不进行编译处理
