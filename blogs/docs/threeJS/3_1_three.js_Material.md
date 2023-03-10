@@ -1,6 +1,6 @@
 ---
 title: three.js 之 Material材质
-date: 2022-05-21
+date: 2023-03-10
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-l3xk6q.jpg
 tags:
  - three.js
@@ -31,29 +31,7 @@ const material = new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true
 
 ![basic material](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/1460000014639070)
 
-## 网格标准材质([MeshStandardMaterial](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial))
 
-`MeshStandardMaterial`的主要目标是将`MeshLambertMaterial`和`MeshPhoneMaterial`结合成一种材质。它有粗糙度和金属性的材质并且改变这些属性能够创建暗淡或者金属性光泽的表秒。
-
-* 他的学名也叫 [PBR材质](./6_PBR.md) 是一种非常写实的材质 立体感很棒 渲染的效果非常好 同时消耗性能较大 `PBR`已经成为很多3D渲染引擎的标准，而无论你在任何软件，引擎中使用标准材质时，得到的结果都是一样的。
-  * `粗糙度` 和 `金属度` 是该材质的典型内容
-* 通常我们加载的`gltf`和`glb`默认会使用`PBR`材质
-* <font color =#ff3040>注意: 该材质需要灯光才能看到</font>
-
-```js
-const material = new THREE.MeshStandardMaterial({metalness: 0, roughness: 0.5});
-```
-
-<img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207271930405.png" alt="图片" style="zoom:67%;" />
-
-我们可以直接调整粗糙度`roughness`和金属度`metalness`的值来观察
-
-```js
-material.metalness = 0.45
-material.roughness = 0.65
-```
-
-<img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207271929399.png" alt="图片" style="zoom:67%;" />
 
 ## 网格朗伯材质([MeshLambertMaterial](https://threejs.org/docs/index.html?q=MeshLambertMaterial#api/zh/materials/MeshLambertMaterial))
 
@@ -94,23 +72,145 @@ material.specular = new THREE.Color(0x1188ff)
 
 这段代码让反射的光线有些泛蓝色，看出来了吗？
 
+## PBR网格标准材质([MeshStandardMaterial](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial))
+
+`MeshStandardMaterial`的主要目标是将`MeshLambertMaterial`和`MeshPhoneMaterial`结合成一种材质。
+
+* [PBR材质](./6_PBR.md) 是一种非常写实的材质 立体感很棒 渲染的效果非常好 同时消耗性能较大 `PBR`已经成为很多3D渲染引擎的标准，而无论你在任何软件，引擎中使用标准材质时，得到的结果都是一样的。
+  * [.metalness](https://threejs.org/docs/index.html?q=sta#api/zh/materials/MeshStandardMaterial.metalness)粗糙度 和 [.roughness](https://threejs.org/docs/index.html?q=sta#api/zh/materials/MeshStandardMaterial.metalness)金属度 是该材质的典型内容
+* `PBR材质`它有粗糙度和金属性的材质并且改变这些属性能够创建**非透明**的暗淡或者金属性光泽的表秒。
+
+* <font color =#ff3040>注意: 该材质需要灯光才能看到</font>
+
+![image-20230310174221078](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101742172.png)
+
+我们可以直接调整粗糙度`roughness`和金属度`metalness`的值来观察
+
+```js
+const material = new THREE.MeshStandardMaterial({metalness: 0, roughness: 0.5});
+material.metalness = 0.45
+material.roughness = 0.65
+```
+
+<img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207271929399.png" alt="图片" style="zoom:67%;" />
+
+
+
 ## 物理材质([MeshPhysicalMaterial](https://threejs.org/docs/index.html?q=MeshPhysicalMaterial#api/zh/materials/MeshPhysicalMaterial))
 
-- **基于物理的透明度:** 可以实现更加真实的类似玻璃等薄而透明的效果。
+**基于物理的透明度:** 可以实现更加真实的类似玻璃等薄而透明的效果。
 
-- **更优秀的反射效果 性能消耗高于`MeshStandardMaterial`PBR材质**。
-
+- **继承了`MeshStandardMaterial`PBR材质**金属度、粗糙度等属性, 并提供更优秀的反射和半透明效果 性能消耗高于`MeshStandardMaterial`PBR材质。
+- 像汽车的漆面和镜子的镜面效果, 都可以用`MeshStandardMaterial`物理材质实现
+- `MeshPhysicalMaterial`在不同版本three.js中，支持的属性也不完全相同，总的来说，版本越新，支持的功能越多。
 - <font color =#ff3040>注意: 该材质需要灯光才能看到</font>
 
-- 物理材质`MeshPhysicalMaterial`是`MeshStandardMaterial`的扩展或者说加强版，提供更高级的基于物理的渲染属性，比如：
+![image-20230310173943381](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101740483.png)
 
-  - **清漆属性Clearcoat:** 有一些材料 (例如汽车油漆，碳纤维和潮湿的表面) 需要在另一层可能不规则或粗糙的表面上的透明反射层。Clearcoat可以实现近似的效果，而不需要单独的透明表面。
+### **车外壳油漆效果**
 
-    <img src="https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207271941547.png" alt="图片" style="zoom:67%;" />
+车外壳油漆效果，你可以通过PBR材质的 清漆层厚度属性 [.clearcoat](https://threejs.org/docs/index.html#api/zh/materials/MeshPhysicalMaterial.clearcoat) 和 清漆层粗糙度属性 [.clearcoatRoughness](https://threejs.org/docs/index.html#api/zh/materials/MeshPhysicalMaterial.clearcoatRoughness)模拟
 
-- 其他的展示效果
+#### **清漆层厚度和清漆层粗糙度**
 
-![图片](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202207271941126.png)
+使用清漆层厚度属性`.clearcoat`，就好比你在物体表面包裹了一层东西，刷了一层漆，喷了点水。
+
+* 想模拟车漆，碳纤维，湿水的表面，就需要在原有Mesh的面上再增加一个透明的涂层效果，`.clearcoat`属性可以在不需要重新创建一个透明的图层Mesh的情况下做到类似的效果。
+* 你可以认为`.clearcoat`表示透明涂层的厚度, 把他理解为物体表面有一层透明图层，，从0.0到1.0。默认值为0.0。值越高透射性越差颜色会更深
+
+清漆层粗糙度属性`.clearcoatRoughness`, 为了模拟清漆图层，而且涂层最好具有一定的反光特性，有一定的起伏和粗糙度
+
+* 清漆层粗糙度`.clearcoatRoughness`属性表示物体表面透明涂层`.clearcoat`对应的的粗糙度，`.clearcoatRoughness`的范围是为0.0至1.0。默认值为0.0。值越表面越粗糙, 光线越差
+* 清漆层粗糙度效果十分的明显, 如果想保持一个极高的漆面效果, 这个值需要调的很低
+
+```js
+const material = new THREE.MeshPhysicalMaterial({
+  clearcoat: 1, // 设置清漆度, 从0.0到1.0。默认值为0.0。值越高透射性越差颜色会更深
+  clearcoatRoughness: 0.01,//透明涂层表面的粗糙度
+})
+
+```
+
+![image-20230310182238138](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101822550.png)
+
+#### **清漆层粗糙度贴图**
+
+如果一个mesh表面的透明图层对应的粗糙图属性`.clearcoatRoughness`，不同位置不同，可以用清漆层粗糙度贴图`.clearcoatRoughnessMap `来表示。
+
+### **车子玻璃效果**
+
+车子的玻璃效果需要打开透明支持 [.transparent](https://threejs.org/docs/index.html?q=mesh#api/zh/materials/Material.transparent), 通过物理光学透明度 [.transmission](https://threejs.org/docs/index.html?q=mesh#api/zh/materials/MeshPhysicalMaterial.transmission)(透射度)属性配合透明属性 [.opacity](https://threejs.org/docs/index.html?q=mesh#api/zh/materials/Material.opacity), 实现一个玻璃效果
+
+#### **物理光学透明度`.transmission`(透射度)**
+
+为了更好的模拟玻璃、半透明塑料一类的视觉效果, 需要配合透明度属性`.opacity`。
+
+* 对于半透明的Mesh，可以使用Mesh透明度属性`.opacity`设置，不过在透明度`.opacity`比较高的时候，整个物体会隐藏起来。通过物理透明度`.transmission`属性, 即便完全透射的情况下仍可保持高反射率, 物体不会隐藏起来
+* 物理光学透明度`.transmission`的值范围是从0.0到1.0。默认值为0.0。数值越高透明度越差
+* 透明度属性`opacity`的值范围是从0.0到1.0。默认值为0.0, 数值越搞物体越真实存在
+* 通常理透明度`.transmission`属性配合透明度属性`.opacity`。
+
+```js
+const material = new THREE.MeshPhysicalMaterial({
+  color: '#000000', // 设置黑色
+  opacity: 0.5, // 设置透明度, 默认为1, 半透明可以实现车窗膜效果
+  transparent: true, // 设置透明, 配合透明度使用
+  transmission: 1, // .设置透光度
+  metalness: 0, // 设置金属度
+  roughness: 0, // 设置粗糙度
+})
+
+```
+
+![image-20230310194550694](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101945843.png)
+
+![image-20230310194330735](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101943869.png)
+
+#### **物理光学透明度贴图`.transmissionMap`**
+
+使用贴图方式表达物理光学透明度`.transmission`属性。
+
+### **折射率`.ior`**
+
+非金属材料的折射率从1.0到2.333。默认值为1.5。
+
+折射率，真空IOR为1，水1.44，[各种物质折射率](https://www.btbat.com/12032.html)
+
+
+### **反射率`.reflectivity`属性**
+
+反射率`.reflectivity`属性模拟了非金属材质的反射率。当PBR材质的金属度`metalness`为1.0时，此属性无效。
+
+反射率`.reflectivity`属性的范围由0.0到1.0。默认为0.5, 相当于折射率1.5。
+
+examples案例：webgl_materials_physical_reflectivity
+
+
+### **光泽层强度`.sheen`**
+
+examples例子：webgl_materials_physical_sheen 
+
+光泽层强度`.sheen`,范围是0.0到1.0。默认为0.0。
+
+如果`.sheen`光泽属性指定了颜色，则材质将使用特殊的光泽**BRDF**，用于渲染诸如天鹅绒之类的布料。光泽的颜色提供了创建两个色调的镜面反射材料的能力。默认为null。
+
+### **光泽颜色`.sheenColor`**
+
+光泽`.sheen`的颜色，默认为0xffffff白色。
+
+### **光泽层的粗糙度`.sheenRoughness`**
+
+光泽层的粗糙度`.sheenRoughness`，范围0.0到1.0。默认值是1.0。
+
+### **光泽层粗糙度贴图`.sheenRoughnessMap`**
+
+光泽层粗糙度贴图`.sheenRoughnessMap`的透明通道会与.sheenRoughness相乘，用于改变光泽层的粗糙度，默认为null;
+
+### **光泽颜色粗糙度贴图`.sheenColorMap`**
+
+光泽颜色粗糙度贴图`.sheenColorMap`的RGB通道会与`.sheenColor`光泽颜色相乘，最终作为光泽颜色结果，默认为null。
+
+
 
 ## 网格法向材质([MeshNormalMaterial](https://link.segmentfault.com/?enc=HBAUqe%2B8KIKTnKVUHSCqSA%3D%3D.lwhm8ro9QbNcG63Q900C5qDZIdDIE49keFR6rhYJzB3dk0%2BpJ0ICtto%2FGqewpLt1%2BLm19lySeEZFHt7aTqqDk1Yqvd6D8dtE%2B9WBv7qxGTw%3D))
 
