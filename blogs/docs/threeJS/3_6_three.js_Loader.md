@@ -1,6 +1,6 @@
 ---
 title: three.js 之 Loader加载器
-date: 2022-06-16
+date: 2023-03-10
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/wallhaven-q2ypkl.jpg
 tags:
  - three.js
@@ -197,6 +197,89 @@ declare module '*.gltf' {
 ![image-20230216172529775](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202302161726829.png)
 :::
 
+### **vue-created中加载**
+
+[create-vue](https://github.com/vuejs/create-vue) 是Vue3+Vite, 在Vite中分为两种静态资源存放`public` & `assets`
+
+![image-20230310122607833](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101226874.png)
+
+* `public` 资源不会被编译, 也不会被清理
+* `assets`位于`src`目录下, 如果资源未被`import`引用, 那么打包的时候会被清理 (本地开发环境下不会)
+
+模型文件又分为`glb`和`gltf`文件, 
+
+* `glb`是二进制单文件, 里面包含模型的所有信息
+
+![image-20230310141212805](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101412835.png)
+
+* `gltf`是json格式的文件, 里面不包含模型的贴图信息, 贴图信息是通过`.bin`进行的中转
+
+![image-20230310135551735](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101355777.png)
+
+所以`glb`文件适合存放在`assets`中
+
+* 通过`import`引用
+
+```js
+// 导入手机模型gltf
+import huawei from '@/assets/iphone/手机.glb'
+
+```
+
+`gltf`文件适合存放在`public`中, 因为在vite的`src`文件中会自动清理代码中未引入的内容, 而代码中只会导入`gltf`单文件
+
+* 通过绝对路径或通过[import.meta.env.BASE_URL](https://cn.vitejs.dev/guide/env-and-mode.html#env-variables-and-modes)使用Vite的基本 URL导入
+
+```js
+// 静态绝对路径导入 可以省去/public/
+import car from '/car/轿车.gltf'
+const gltf = await loader.loadAsync('/car/轿车.gltf')
+
+// 或通过import.meta.env.BASE_URL进行导入
+const gltf = await loader.loadAsync(
+  `${import.meta.env.BASE_URL}car/轿车.gltf`
+)
+
+```
+
+### **Vue cil中加载**
+
+在[Vue CLI](https://cli.vuejs.org/zh/)使用[.Loader](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader)加载器 需要注意 如果想使用本地资源 需要把资源文件放到[public](https://cli.vuejs.org/zh/guide/html-and-static-assets.html#public-%E6%96%87%E4%BB%B6%E5%A4%B9)非编译静态(必须绝对路径) 或者 `assets`编译静态中
+
+* Vue cil使用的是webpack打包
+
+#### **public 非编译静态资源加载**
+
+* [public](https://cli.vuejs.org/zh/guide/html-and-static-assets.html#public-%E6%96%87%E4%BB%B6%E5%A4%B9)非编译静态加载 需要和当前Vue cli环境变量[process.env.BASE_URL](https://cli.vuejs.org/zh/guide/mode-and-env.html#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F) 进行绝对路径的拼接 并且不可以使用相对路径
+
+```js
+const loader = new GLTFLoader(); //创建一个GLTF加载器
+loader.load(`${process.env.BASE_URL}model/model.gltf`, function (gltf) { // 进行process.env.BASE_URL 和 资源绝对路径的拼接
+// ...进行操作
+})
+```
+
+* 对应的资源文件
+
+![image-20220510183547946](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220510183547946.png)
+
+#### **assets 编译资源加载**
+
+* `assets `编译资源 他会被webpack进行编译处理 所以在非`vue`文件中 引入会出问题 需要通过es6`import` 或 CommonJs `require` 方式导入进来
+
+```js
+// require方式导入 (适合webpack和vite)
+const img = require('@/assets/火焰/火焰.png')
+// import方式导入 (适合vite)
+import img from '@/assets/火焰/火焰.png'
+// 加载导入的纹理贴图
+const texture = textureLoader.load(img)
+```
+
+* 对应的资源文件
+
+![image-20220619171155446](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220619171155446.png)
+
 ## 纹理加载器 TextureLoader
 
 [TextureLoader](https://threejs.org/docs/index.html?q=TextureLoader#api/zh/loaders/TextureLoader) 纹理加载器, 用于加载单张图片格式的纹理贴图
@@ -329,42 +412,6 @@ HDRloader.loadAsync('hdr/002.hdr').then((HDRtexture) => {
 })
 
 ```
-
-## Loader加载器在Vue cil中加载
-
-* 在Vue cil使用[.Loader](https://threejs.org/docs/index.html?q=textur#api/zh/loaders/Loader)加载器 需要注意 如果想使用本地资源 需要把资源文件放到[public](https://cli.vuejs.org/zh/guide/html-and-static-assets.html#public-%E6%96%87%E4%BB%B6%E5%A4%B9)非编译静态(必须绝对路径) 或者 `assets`编译静态中
-
-### **public 非编译静态资源加载**
-
-* [public](https://cli.vuejs.org/zh/guide/html-and-static-assets.html#public-%E6%96%87%E4%BB%B6%E5%A4%B9)非编译静态加载 需要和当前Vue cli环境变量[process.env.BASE_URL](https://cli.vuejs.org/zh/guide/mode-and-env.html#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F) 进行绝对路径的拼接 并且不可以使用相对路径
-
-```js
-const loader = new GLTFLoader(); //创建一个GLTF加载器
-loader.load(`${process.env.BASE_URL}model/model.gltf`, function (gltf) { // 进行process.env.BASE_URL 和 资源绝对路径的拼接
-// ...进行操作
-})
-```
-
-* 对应的资源文件
-
-![image-20220510183547946](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220510183547946.png)
-
-### **assets 编译资源加载**
-
-* `assets `编译资源 他会被webpack进行编译处理 所以在非`vue`文件中 引入会出问题 需要通过es6`import` 或 CommonJs `require` 方式导入进来
-
-```js
-// require方式导入 (适合webpack和vite)
-const img = require('@/assets/火焰/火焰.png')
-// import方式导入 (适合vite)
-import img from '@/assets/火焰/火焰.png'
-// 加载导入的纹理贴图
-const texture = textureLoader.load(img)
-```
-
-* 对应的资源文件
-
-![image-20220619171155446](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220619171155446.png)
 
 ## 资源统一加载
 

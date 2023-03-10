@@ -1,6 +1,6 @@
 ---
 title: 用Vite创建项目
-date: 2022-08-30
+date: 2023-03-10
 cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209041935875.jpg
 tags:
  - Vite
@@ -502,18 +502,44 @@ import item9 from "../assets/image/item_9.png"
 const imgs = import.meta.globEager("../assets/image/item_*.png");
 ```
 
-## 静态资源处理
+## 静态资源处理 public & assets
 
-* 在Vue中分为两种静态资源
+在Vite中分为两种静态资源: 
 
-![image-20221015202600114](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210152026144.png)
+![image-20230310122607833](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101226874.png)
 
-* `public`资源不应该作为代码进行引用 他只适合一些本地下载的资源 或...
-  * 引入 `public` 中的资源永远应该使用根绝对路径 —— 举个例子，`public/icon.png` 应该在源码中被引用为 `/icon.png`。
-  * `public` 中的资源不应该被 JavaScript 文件引用。
-  * `public`不会被vite进行编译
-* `assets`资源作为代码中统一的静态资源管理 适合在代码中进行使用
-  * `assets`会被vite进行编译 所以需要单独设置
+[public](https://cn.vitejs.dev/guide/assets.html#the-public-directory)资源不应该作为代码进行引用 他只适合一些本地下载的资源 或...
+
+* 引入 `public` 中的资源永远应该使用根**绝对路径** —— 举个例子，`public/icon.png` 应该在源码中被引用为 `/icon.png`。或通过[import.meta.env.BASE_URL](https://cn.vitejs.dev/guide/env-and-mode.html#env-variables-and-modes)使用Vite的基本 URL导入
+
+![image-20230310122419197](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101224240.png)
+
+```js
+// 静态绝对路径导入 可以省去/public/
+import car from '/car/轿车.gltf'
+const gltf = await loader.loadAsync('/car/轿车.gltf')
+
+// 或通过import.meta.env.BASE_URL进行导入
+const gltf = await loader.loadAsync(
+  `${import.meta.env.BASE_URL}car/轿车.gltf`
+)
+
+```
+
+* `public` 中的资源不应该被 JavaScript 文件引用。
+* `public`中的文件不会被vite处理, 比如一些未被`import`引用的资源
+* `public` 资源需要通过绝对**路径导入**, 且无需设置 [?url](https://cn.vitejs.dev/guide/assets.html#explicit-url-imports)后缀
+
+* `public`适合一些被拆分但又会被导入的文件, 比如`gltf`文件, 这种文件不能放在`assets`中, 因为在vite的`src`文件中会自动清理代码中未引入的内容, 而代码中只会导入`gltf`单文件
+
+![image-20230310135551735](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101355777.png)
+
+<br/>
+
+`assets`资源作为代码中统一的静态资源管理 适合在代码中进行使用
+
+* `assets`会被vite进行编译 所以需要单独设置
+* `assets`里面的文件如果没有被明确的`import`引用, 打包的时候会被自动清理掉, 在`src`里面的所有文件都会通过打包编译处理, 这就是所谓的`loader` (本地开发环境下不会)
 
 ### **template模板中引用资源**
 
@@ -638,6 +664,79 @@ import shaderString from './shader.glsl?raw'
 
 ```
 
+## [环境变量和模式](https://cn.vitejs.dev/guide/env-and-mode.html#env-variables-and-modes)
+
+在Vue2时代的webpack中我们使用的是` process.env`, webpack帮我们做了处理，使浏览器可以直接识别node.js的`process.env`变量，从而实现了浏览器识别环境变量的功能。
+
+在Vue3搭配Vite使用的是特殊的 **`import.meta.env`** 对象上暴露环境变量, 他是现代浏览器提供的关键字[import.meta](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/import.meta)。这里有一些在所有情况下都可以使用的内建变量：
+
+- **`import.meta.env.MODE`**: {string} 应用运行的[模式](https://cn.vitejs.dev/guide/env-and-mode.html#modes)。
+- **`import.meta.env.BASE_URL`**: {string} 部署应用时的基本 URL。他由[`base` 配置项](https://cn.vitejs.dev/config/shared-options.html#base)决定。**常用在导入public静态资源中**
+- **`import.meta.env.PROD`**: {boolean} 应用是否运行在生产环境。
+- **`import.meta.env.DEV`**: {boolean} 应用是否运行在开发环境 (永远与 `import.meta.env.PROD`相反)。
+- **`import.meta.env.SSR`**: {boolean} 应用是否运行在 [server](https://cn.vitejs.dev/guide/ssr.html#conditional-logic) 上。
+
+注：这些变量在运行在环境中，**vite.config.ts**中无法访问
+
+### **vite中自定义环境变量**
+
+Vite内置了dotenv这个第三方库， dotenv会自动读取.env文件， [dotenv](https://github.com/motdotla/dotenv) 从你的 [环境目录](https://vitejs.cn/vite3-cn/config/shared-options.html#envdir) 中的下列文件加载额外的环境变量：
+
+* .env     所有情况下都会加载
+* .env.[mode]     只在指定模式下加载 
+
+> 默认情况下
+
+- *npm run dev 会加载 .env 和 .env.development 内的配置*
+- *npm run build 会加载 .env 和 .env.production 内的配置*
+- *mode 可以通过命令行 --mode 选项来重写。*
+
+加载的环境变量也会通过 `import.meta.env` 以字符串形式暴露给客户端源码。为了防止意外地将一些环境变量泄漏到客户端，只有以 **`VITE_`** 为前缀的变量才会暴露给经过 Vite处理的代码。
+
+> 我们验证下
+
+我们在项目的根目录下，创建 **.env**文件，写入测试内容；
+
+```ini
+HELLO = "小伙子，我是base数据"
+VITE_HELLO = "小伙子，我是base数据"
+
+```
+
+创建 **.env.development** 文件，写入测试内容；
+
+```ini
+HI = "小伙子，我是development数据"
+VITE_HI = "小伙子，我是development数据"
+
+```
+
+ 创建 **.env.production** 文件，写入测试内容；
+
+```ini
+MD =  "小伙子，我是production数据"
+VITE_MD =  "小伙子，我是production数据"
+
+```
+
+然后在入口文件main.ts中打印一下
+
+```js
+console.log(' HI: ',  import.meta.env.HI);
+console.log(' VITE_HI: ',  import.meta.env.VITE_HI);
+console.log(' HELLO: ',  import.meta.env.HELLO);
+console.log(' VITE_HELLO: ',  import.meta.env.VITE_HELLO);
+console.log(' MD: ',  import.meta.env.MD);
+console.log(' VITE_MD: ',  import.meta.env.VITE_MD);
+
+```
+
+运行 `npm run dev` 命令，，观察浏览器打印结果
+
+![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101158482.webp)
+
+由于我们执行的是`npm run dev`，所以mode的值是**development**，因此 **.env和** **.env.development**中以**VITE_** 为前缀的变量都会被识别。
+
 ## 生产环境去除打印
 
 [vite-plugin-remove-console](https://github.com/xiaoxian521/vite-plugin-remove-console) Vite第三方插件可以在生产环境中移除打印和断点
@@ -706,3 +805,5 @@ declare module '*.gltf' {
 [收下这7款插件，让你在使用 Vite 的时候如虎添翼](https://www.cnblogs.com/hooray/p/15213132.html)
 
 [动态引入图片的几种方式](https://www.jianshu.com/p/ddfb5a8b458b)
+
+[vite中环境变量的使用与配置（非常详细）](https://juejin.cn/post/7172012247852515335#comment)
