@@ -223,6 +223,7 @@ export default defineConfig({
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
     "baseUrl": ".",
+    "isolatedModules": false, // 取消导出检查
     "paths": {
       "@/*": ["./src/*"]
     }
@@ -736,6 +737,55 @@ console.log(' VITE_MD: ',  import.meta.env.VITE_MD);
 ![img](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303101158482.webp)
 
 由于我们执行的是`npm run dev`，所以mode的值是**development**，因此 **.env和** **.env.development**中以**VITE_** 为前缀的变量都会被识别。
+
+## vite中使用webworker
+
+[Web Workers](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers)和[SharedWorker](https://developer.mozilla.org/zh-CN/docs/Web/API/SharedWorker) 是浏览器提供的多线程方式, 在vite中也支持使用, 但是需要[import.meta](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/import.meta) js模块暴露支持, 详细看[Web Workers](https://cn.vitejs.dev/guide/features.html#web-workers) 在vite的支持
+
+### **通过构造器导入**
+
+一个 Web Worker 可以使用 [`new Worker()`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) 和 [`new SharedWorker()`](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/SharedWorker) 导入。与 worker 后缀相比，这种语法更接近于标准，是创建 worker 的 **推荐** 方式。
+
+```ts
+const worker = new Worker(new URL('./worker.js', import.meta.url))
+
+```
+
+把type设置为`module`“模块”类型, 可以让webworker文件支持`import`导入
+
+```ts
+const worker = new Worker(new URL('./worker.js', import.meta.url), {
+  type: 'module',
+})
+
+```
+
+### **带有查询后缀的导入**
+
+你可以在导入请求上添加 `?worker` 或 `?sharedworker` 查询参数来直接导入一个 web worker 脚本。默认导出会是一个自定义 worker 的构造函数：
+
+```js
+import MyWorker from './worker?worker'
+
+const worker = new MyWorker()
+
+```
+
+Worker 脚本也可以使用 `import` 语句来替代 `importScripts()` —— 注意，在开发过程中，这依赖于浏览器原生支持，目前只在 Chrome 中适用，而在生产版本中，它已经被编译掉了。
+
+默认情况下，worker 脚本将在生产构建中编译成单独的 chunk。如果你想将 worker 内联为 base64 字符串，请添加 `inline` 查询参数：
+
+```js
+import MyWorker from './worker?worker&inline'
+
+```
+
+如果你想要以一个 URL 的形式读取该 worker，请添加 `url` 这个 query：
+
+```js
+import MyWorker from './worker?worker&url'
+
+```
 
 ## 生产环境去除打印
 
