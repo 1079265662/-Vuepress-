@@ -136,6 +136,8 @@ module.exports = {
   rules: {
     // 可以使用any
     '@typescript-eslint/no-explicit-any': 'off',
+    // 可以使用非空断言
+    '@typescript-eslint/no-non-null-assertion': 'off',
     // 标签闭合
     'vue/html-self-closing': [
       'warn',

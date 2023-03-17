@@ -43,7 +43,7 @@ blender导出gltf模型模型的时候，支持导出PBR材质，比如模型的
 
 ### **产品模型导出位置和姿态**
 
-模型导出要注意两方面问题，一方面是位置是否**居中**，另一方面是模型**姿态角度**问题。
+xxxxxxxxxx13 1// 创建一个组2const glassPanel = new THREE.Group()3// 创建一个网格模型4const demoMesh = new THREE.Mesh(geometry, material)5​6// 销毁组中的全部子类7// glassPanel.clear()8// 销毁组中的网格模型9glassPanel.remove(this.demoMesh)10// 销毁该网格模型的几何对象11demoMesh.geometry.dispose()12// (可选)利用js内存回收机制, 清除创建的网格模型对象13demoMesh = null as nulljs
 
 1. 位置：手机模型的几何中心尽量和三维坐标系世界**坐标原点**重合
    

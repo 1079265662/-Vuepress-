@@ -37,7 +37,7 @@ Uncaught (in promise) TypeError: 'get' on proxy: property 'modelViewMatrix' is a
 * 我们先通过`reactive()`声明储存 然后通过`toRaw()`取消`proxy`代理特性 即可优雅使用
 * 需要取消代理的对象
   * Scene() 场景对象
-  * Mesh() 网格模型对象
+  * xxxxxxxxxx13 1// 创建一个组2const glassPanel = new THREE.Group()3// 创建一个网格模型4const demoMesh = new THREE.Mesh(geometry, material)5​6// 销毁组中的全部子类7// glassPanel.clear()8// 销毁组中的网格模型9glassPanel.remove(this.demoMesh)10// 销毁该网格模型的几何对象11demoMesh.geometry.dispose()12// (可选)利用js内存回收机制, 清除创建的网格模型对象13demoMesh = null as nulljs
   * Group() 导入模型
 
 
@@ -76,9 +76,59 @@ onMounted(() => {
 
 ## 最佳问题解决
 
-* 如果我们每次都需要使用`toRaw`进行取消代理 在配合Vue3的`composition API` 那么我们岂不是非常麻烦吗 如果这个模型在很多方法多个文件中使用 那无疑是非常麻烦的 
-* 使用Vue3的[shallowReactive()](https://staging-cn.vuejs.org/api/reactivity-advanced.html#shallowreactive)响应式API 该API只会代理最外层的响应式 `property` 的值会被原样存储和暴露 并非使用的是`proxy`代理
-* 几乎的所有的three.js声明的 结构对象 都可以用[shallowReactive()](https://staging-cn.vuejs.org/api/reactivity-advanced.html#shallowreactive) 来进行浅层代理
+如果我们每次都需要使用`toRaw`进行取消代理 在配合Vue3的`composition API` 那么我们岂不是非常麻烦吗 如果这个模型在很多方法多个文件中使用 那无疑是非常麻烦的 
+
+* 使用Vue3 [shallowref()](https://cn.vuejs.org/api/reactivity-advanced.html#shallowref)和 [shallowReactive()](https://staging-cn.vuejs.org/api/reactivity-advanced.html#shallowreactive)浅层响应式代理(只代理第一次, 没递归处理), 该API只会代理最外层的响应式而深层不会代理, 并非使用的是`proxy`代理
+  * `shallowref()` 对应的是`ref()`浅层作用形式, 此对象只有一个指向其内部值的属性 `.value`, 访问的时候需要用 `.value`
+  * `shallowReactive()` 对应的是[`reactive()`](https://cn.vuejs.org/api/reactivity-core.html#reactive) 的浅层作用形式。
+* 这两种浅层响应式都可以使用, 但如果是通过class类构造的单一数据结构推荐使用`shallowref()`
+
+> `shallowref()` 使用 
+
+创建一个通过class类构造的单一数据结构
+
+```vue
+<template>
+  <div>
+    <div ref="stateDom" />
+    <!-- 在模板中, 如果是class类中的Vue响应式数据，需要使用.value -->
+    <LoaDing :loadingNumber="Three?.loadingNumber.value" />
+  </div>
+</template>
+<script setup lang="ts">
+// 导入Vue3的API
+import { ref, onMounted, onBeforeUnmount, shallowRef } from 'vue'
+// 导入three.js的构造函数
+import { CreatedCanvas } from './components/car_render'
+
+// 获取Dom
+const stateDom = ref()
+// 通过shallowRef()浅层响应式代理three.js数据
+const Three = shallowRef<CreatedCanvas>()
+
+onMounted(() => {
+  // 创建three.js实例
+  Three.value = new CreatedCanvas(stateDom.value)
+  // 传递页面Dom 绘制three.js
+  Three.value.createScene()
+})
+
+onBeforeUnmount(() => {
+  // 销毁three.js实例
+  Three.value?.dispose()
+})
+</script>
+
+<script lang="ts">
+export default {
+  name: 'BydCar'
+}
+</script>
+<style lang="scss" scoped></style>
+
+```
+
+> `shallowReactive()`使用
 
 ```vue
 <script setup>

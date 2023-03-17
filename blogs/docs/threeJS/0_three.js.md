@@ -807,7 +807,7 @@ export class CreatedRender extends Type {
     // 销毁gui
     if (this.gui) this.gui.destroy()
 
-    // 释放内存(可能会导致短暂白屏)
+    // 释放内存
     this.renderer.forceContextLoss()
   }
 }
@@ -826,8 +826,15 @@ export class CreatedRender extends Type {
 import * as THREE from 'three'
 // 导入公共类
 import { CreatedRender } from './createdrender'
+// 导入加载类型
+import type { LoadingManager } from 'three'
+// 导入Vue响应式
+import { ref } from 'vue'
 
 export class CreatedUtils extends CreatedRender {
+  // 加载的进度
+  loadingNumber = ref(0)
+
   /**
    * @description 设置包围盒
    * @param THREE.Object3D 传入的物体
@@ -884,6 +891,48 @@ export class CreatedUtils extends CreatedRender {
     mouse.y = -((clientY / window.innerHeight) * 2 - 1) // Y轴坐标 2个单位 -1到1 这里需要反转一下 因为在JS/CSS坐标中Y轴是反的
 
     return mouse
+  }
+
+  /**
+   * @description: GLTF模型进度加载器
+   * @returns LoadingManager | undefined
+   */
+  createLoadingGLTF = (): LoadingManager | undefined => {
+    // 创建加载器
+    const manager = new THREE.LoadingManager()
+
+    // 加载中的参数  url被加载的项的url itemsLoaded目前已加载项的个数 itemsTotal总共所需要加载项的个数。
+    manager.onProgress = (url, itemsLoaded, itemsTotal) => {
+      // 获取加载百分比: 已加载个数 / 总数量 * 100 计算出加载百分比 并取两位小数
+      this.loadingNumber.value = Number(
+        ((itemsLoaded / itemsTotal) * 100).toFixed(2)
+      )
+      console.log(this.loadingNumber)
+    }
+
+    return manager
+  }
+
+  /**
+   * @description: 假的加载管理器
+   * @returns {}
+   */
+  createLoadingFalse = (loadingIng = false) => {
+    const i = setInterval(() => {
+      // 加载完成清除定时器
+      if (loadingIng) {
+        this.loadingNumber.value = 100
+        // 加载完成后清除定时器
+        clearInterval(i)
+      } else {
+        // 0到3之间随机数
+        const random = Math.floor(Math.random() * 2 + 0)
+        // 不能能超过98, 到98就卡住
+        if (this.loadingNumber.value >= 98) return
+        // 每次加1
+        this.loadingNumber.value += random
+      }
+    }, 50)
   }
 }
 
@@ -972,6 +1021,7 @@ export class CreatedCanvas extends CreatedUtils {
 ```
 
 4. 最后, 我们在Vue中导入最后一层的class构造函数, 实现three.js的展示
+   * 可以通过[shallowRef()](https://cn.vuejs.org/api/reactivity-advanced.html#shallowref) 对three.js的数据进行[`ref()`](https://cn.vuejs.org/api/reactivity-core.html#ref) 的浅层作用形式。three.js数据不可以被Vue的`fef()`或者`reactive()`响应式代理, 详细看[这里](./2_1_three.js_vue3_error.md)
 
 ```vue
 <template>
@@ -981,38 +1031,36 @@ export class CreatedCanvas extends CreatedUtils {
 </template>
 <script setup lang="ts">
 // 导入Vue3的API
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, shallowRef } from 'vue'
 // 导入three.js的构造函数
-import { CreatedCanvas } from './components/iphone_render'
+import { CreatedCanvas } from './components/car_render'
 
 // 获取Dom
 const stateDom = ref()
-// 储存three.js的实例
-let Three: CreatedCanvas 
+// 通过shallowRef()浅层响应式代理three.js数据
+const Three = shallowRef<CreatedCanvas>()
 
 onMounted(() => {
   // 创建three.js实例
-  Three = new CreatedCanvas(stateDom.value)
+  Three.value = new CreatedCanvas(stateDom.value)
   // 传递页面Dom 绘制three.js
-  Three.createScene()
+  Three.value.createScene()
 })
 
 onBeforeUnmount(() => {
   // 销毁three.js实例
-  Three.dispose()
+  Three.value?.dispose()
 })
 </script>
 
 <script lang="ts">
 export default {
-  name: 'IPhone'
+  name: 'BydCar'
 }
 </script>
 <style lang="scss" scoped></style>
 
 ```
-
-
 
 ### **着色器GLSL代码**
 

@@ -642,6 +642,16 @@ const setEnvMap = async () => {
 
 :::
 
+## 取消异步请求
+
+如果我们通过异步请求加载了一个很大的模型文件, 在没加载完毕的时候暂停或取消加载, 可能需要用到 [AbortController](https://developer.mozilla.org/zh-CN/docs/Web/API/AbortController), `AbortController`接口代表一个控制器对象，允许在需要时中止一个或多个 DOM 请求。详细看[这里介绍](https://github.com/pfan123/Articles/issues/68)
+
+但是three.js目前并不支持使用`AbortController`取消异步请求
+
+![image-20230317203224901](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303172032956.png)
+
+因为该功能目前正处于QA阶段, 在不久的将来, 极有可能支持
+
 ##  参考文献
 
 [Three.js零基础入门教程(郭隆邦)](http://www.yanhuangxueyuan.com/Three.js/)
