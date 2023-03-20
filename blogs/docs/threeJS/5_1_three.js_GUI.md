@@ -8,7 +8,7 @@ categories: three.js
 ---
 
 ::: tip 介绍
-three.js 之 GUI调试面板<br>
+three.js 之 lil-gui调试面板<br>
 :::
 
 <!-- more -->
@@ -16,42 +16,37 @@ three.js 之 GUI调试面板<br>
 ## three.js官方调试面板
 
 * `webgl`调试面板的常用库。
-
-  - [dat.GUI](https://github.com/dataarts/dat.gui)
-
+  - [dat.GUI](https://github.com/dataarts/dat.gui), 现在推荐用升级版 [lil-gui](https://lil-gui.georgealways.com/)
+  
   - control-panel
-
+  
   - ControlKit
-
+  
   - Uil
-
+  
   - Tweakpane
-
+  
   - Guify
-
+  
   - Oui
+  
+* [lil-gui](https://link.juejin.cn/?target=https%3A%2F%2Flil-gui.georgealways.com%2F) 是three.js官方的调试面板
 
-* [dat.GUI](https://github.com/dataarts/dat.gui) 是three.js官方的调试面板
-
-> 使用GUI
+> 使用lil-gui
 
 * npm包下载
 
 ```bash
-npm install --save dat.gui
+npm install lil-gui --save-dev
 ```
 
 * 在项目中导入 使用`GUI`
 
 ```js
-// CommonJS:
-const dat = require('dat.gui');
+import GUI from 'lil-gui'
 
-// ES6:
-import * as dat from 'dat.gui';
+const gui = new GUI()
 
-// 创建GUI调试面板的实例
-const gui = new dat.GUI();
 ```
 
 * 支持的控件
@@ -65,7 +60,7 @@ const gui = new dat.GUI();
 
 ## 调试基础面板控件
 
-* 我们必须要使用[gui.add() ](https://github.com/dataarts/dat.gui/blob/master/API.md#guiaddobject-property-min-max-step--controller)方法来向调试UI面板中添加控件。该方法的第1个参数是该控件将要影响的对象，第2个参数则是该控件绑定修改的对象属性。
+* 我们必须要使用[.add() ](https://lil-gui.georgealways.com/#GUI#add)方法来向调试UI面板中添加控件。该方法的第1个参数是该控件将要影响的对象，第2个参数则是该控件绑定修改的对象属性。
 * `gui`支持链式操作 也可以都使用一个方法 不过命名需要单独进行链式操作`.name()`
 
 ![image-20220627201938228](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/image-20220627201938228.png)
@@ -73,8 +68,11 @@ const gui = new dat.GUI();
 * 先创建`GUI`调试面板的实例
 
 ```js
+import GUI from 'lil-gui'
+
 // 创建GUI调试面板的实例
-const gui = new dat.GUI();
+const gui = new GUI()
+
 ```
 
 ### **xyz轴调试**
@@ -92,25 +90,32 @@ const gui = new dat.GUI();
 * 默认情况下，控件的名称是影响的变量名，比如`y`，我们也可以通过`.name()`参数来指定控件的名称，这样会更加容易分辨这个调试面板的控件到底产生什么影响。
 
 ```js
-  // 设置gui面板
-  const gui = new dat.GUI()
-  gui.add(cube.position, 'x').min(0).max(5).step(0.01).name('修改X轴')
-    // 修改值的方法
-    .onChange(value => {
-      console.log('值被修改了', value)
-    })
-  	// 修改完毕的方法
-    .onFinishChange(value => {
-      console.log('修改完毕', value)
-    })
+// 设置gui面板
+const gui = new GUI()
+gui
+  .add(cube.position, 'x')
+  .min(0)
+  .max(5)
+  .step(0.01)
+  .name('修改X轴')
+  // 修改值的方法
+  .onChange((value) => {
+    console.log('值被修改了', value)
+  })
+  // 修改完毕的方法
+  .onFinishChange((value) => {
+    console.log('修改完毕', value)
+  })
+
 ```
 
 ### **模型显示隐藏**
 
-* 添加控件时，`dat.GUI`会自动检测对象变量的类型，比如检测到我们添加的控件将改变的是一个布尔值的话，就自动显示成`checkbox`勾选控件了。
+* 添加控件时，`lil-gui`会自动检测对象变量的类型，比如检测到我们添加的控件将改变的是一个布尔值的话，就自动显示成`checkbox`勾选控件了。
 
 ```js
 gui.add(mesh, 'visible').name('是否显示模型')
+
 ```
 
 ### **显示材质线框**
@@ -125,11 +130,12 @@ const skyBoxMaterial = new THREE.MeshBasicMaterial({
 })  
 // 显示线框
 gui.add(skyBoxMaterial, 'wireframe').name('显示线框')
+
 ```
 
 ### **添加方法按钮控件**
 
-* 在使用`gui.add(...)`添加调试UI控件时，如果第2个参数传递的是一个函数对象，则会自动在调试UI面板中添加一个按钮，并且在按钮点击的时候调用这个函数。
+* 在使用`.add(...)`添加调试UI控件时，如果第2个参数传递的是一个函数对象，则会自动在调试UI面板中添加一个按钮，并且在按钮点击的时候调用这个函数。
   * 可以通过其他方法进行按钮的设置
 
 ```js
@@ -170,11 +176,11 @@ gui.add(start, 'spin').name('开始动画')
 
 ```js
 // 导入gui
-import * as dat from 'dat.gui'
+import GUI from 'lil-gui'
 
 export class GuiCreated {
   // 创建GUI调试面板的实例
-  gui = new dat.GUI()
+  gui = new GUI()
 
   // 创建GUI调试面板
   createGui = () => {
@@ -201,76 +207,114 @@ export class GuiCreated {
 
 ```
 
+### 修改gui菜单标题
+
+默认gui的标题是英文的controls(属性), 可以通过 [.title](https://lil-gui.georgealways.com/#GUI#title)进行修改
+
+![image-20230320105108952](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303201051029.png)
+
+```js
+gui.title('汽车调试面板')
+
+```
+
 ## 添加调色板
 
-* [gui.addColor()](https://github.com/dataarts/dat.gui/blob/master/API.md#GUI+addColor) 设置调色板内容 需要设置一个默认的颜色对象
+* [.addColor()](https://lil-gui.georgealways.com/#GUI#addColor) 设置调色板内容 需要设置一个默认的颜色对象
   * 通过设置`onChange()` 修改时触发颜色变量 再修改物体的材质`material.color` 颜色属性 实现调色功能
 
 ```js
-  // 默认物体的颜色
-  const params = {
-    color: '#b1e1e5'
-  }
-  // 修改物体颜色
-  gui.addColor(params, 'color').onChange(value => { // 获取修改的颜色变量
-      // 更新物体的材质颜色 实现变色
-    cube.material.color.set(value)
-  })
+// 默认物体的颜色
+const params = {
+  color: '#b1e1e5',
+}
+// 修改物体颜色
+gui.addColor(params, 'color').onChange((value) => {
+  // 获取修改的颜色变量
+  // 更新物体的材质颜色 实现变色
+  cube.material.color.set(value)
+})
+
 ```
 
 ## 设置调试分组
 
-* [gui.addFolder()](https://github.com/dataarts/dat.gui/blob/master/API.md#guiaddfoldername--datguigui) 可以设置调试分组 可以更好的归纳一些内容
+* [.addFolder()](https://lil-gui.georgealways.com/#GUI#addFolder) 可以设置调试分组 可以更好的归纳一些内容
 
 ```js
-  // 设置gui的展开缩放
-  const select = gui.addFolder('拓展属性')
-  // 设置线框调试
-  select.add(cube.material, 'wireframe').name('显示线框')
+// 设置gui的展开缩放
+const select = gui.addFolder('拓展属性')
+// 设置线框调试
+select.add(cube.material, 'wireframe').name('显示线框')
+
 ```
 
 * 实现效果
 
 ![image-20220828183245084](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202208281832141.png)
 
-## 调试面板设置
+### 打开分组
+
+[.open](https://lil-gui.georgealways.com/#GUI#open) 打开分组
+
+```js
+select.open()
+
+```
+
+### 关闭分组
+
+[.close()](https://lil-gui.georgealways.com/#GUI#close) 关闭分组
+
+```js
+select.close()
+
+```
+
+## 面板构造参数
+
+[lil-gui ](https://lil-gui.georgealways.com/#GUI)提供了一些默认构造参数, 用来规定gui部分默认行为
 
 ### **默认关闭折叠**
 
-* 在`dat.GUI`初始化时设置`closed`参数为`true`，那么调试UI面板默认将处于关闭折叠的状态。
+在`lil-gui`初始化时设置`closeFolders`参数为`true`，那么调试UI面板默认将处于关闭折叠的状态。
+
+* 如果不设置参数, 默认为`false`展架所有折叠
 
 ```js
-const gui = new dat.GUI({ closed: true })
+const gui = new GUI({ closeFolders: true })
+
 ```
 
-### **面板宽度**
+### **修改面板宽度**
 
-* 也可以通过设置`width`参数来改变面板的默认宽度：
+在声明gui的时候可以设置`width`面板宽度
+
+* 如果不设置参数, 默认为245
 
 ```js
-const gui = new dat.GUI({ width: 400 })
+const gui = new GUI( { width: 400 } )
+
 ```
 
-## 销毁面板
+## 隐藏面板和销毁面板
 
-* `.hide()` 可以效果面板 通常可以在路由销毁后使用 比如Vue3的`onUnmounted()`
+[.hide()](https://lil-gui.georgealways.com/#GUI#hide) 可以对面板进行隐藏, 隐藏不是销毁, 二次创建还会出现一个新的gui面板
 
 ```JS
 gui.hide()
+
 ```
 
-* 在Vue框架中 这种方式的显示隐藏会出现重复 原因是`gui`重复添加了
-  * 给`gui`设置`name`属性 添加唯一标识 判断是否存在`name` 防止重复添加
+[.destroy()](https://lil-gui.georgealways.com/#GUI#destroy) 销毁gui, 销毁与此gui关联的所有 DOM 元素和事件侦听器
 
 ```js
-  // 如果存在gui名称 不进行添加
-  if (gui.name) return
-  // 设置gui配置的唯一标识 可以防止冲突添加
-  gui.name = 'gui'
+gui.destroy()
+
 ```
-
-
 
 ## 参考文献
 
 [给你的网页添加实时参数调试面板](https://mp.weixin.qq.com/s?__biz=Mzg3MTUyNzQzNg==&mid=2247488905&idx=1&sn=266b08190e0f2f008955b2a77000dc72&chksm=cefc70eaf98bf9fcab5e2421dcce84492b7bb3fae5091d591ec51c942a0846f6fe0ce72b9eba&scene=178&cur_album_id=2405559566127480834#rd)
+
+[lil-gui](https://lil-gui.georgealways.com/#)

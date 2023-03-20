@@ -102,24 +102,25 @@ texture.center.set(0.5, 0.5)
 
 ```
 
-### **设置贴图重复**
+### **设置贴图重复和阵列效果**
 
-* [.repeat](https://threejs.org/docs/index.html?q=V#api/zh/textures/Texture.repeat) 设置贴图重复 [二维向量（Vector2）](https://threejs.org/docs/index.html?q=V#api/zh/math/Vector2) 代表x轴y轴 对应的重复次数
-  * 默认的贴图包裹是[THREE.ClampToEdgeWrapping](https://threejs.org/docs/index.html?q=V#api/zh/constants/Textures)是将贴图推至到边远 而非重复 所以需要将贴图的水平和垂直设置重复包裹[THREE.RepeatWrapping](https://threejs.org/docs/index.html?q=V#api/zh/constants/Textures)
-    * [.wrapS](https://threejs.org/docs/index.html?q=V#api/zh/textures/Texture.wrapS) 定义了纹理贴图在水平方向上将如何包裹
-    * [.wrapT](https://threejs.org/docs/index.html?q=V#api/zh/textures/Texture.wrapT) 定义了纹理贴图在垂直方向上将如何包裹
+[.repeat](https://threejs.org/docs/index.html?q=V#api/zh/textures/Texture.repeat) 设置贴图重复, 参数为[二维向量（Vector2）](https://threejs.org/docs/index.html?q=V#api/zh/math/Vector2),代表x轴y轴对应的重复次数, 默认是(1, 1)
+
+* 默认的贴图阵列效果是 [THREE.ClampToEdgeWrapping](https://threejs.org/docs/index.html?q=V#api/zh/constants/Textures)将贴图推至到边远, 而非重复. 实现贴图重复阵列需要将贴图的`.wrapS`水平和`.wrapT`垂直的阵列效果设置为: [THREE.RepeatWrapping](https://threejs.org/docs/index.html?q=V#api/zh/constants/Textures)
+  * [.wrapS](https://threejs.org/docs/index.html?q=V#api/zh/textures/Texture.wrapS) 定义了纹理贴图在水平方向上将如何阵列
+  * [.wrapT](https://threejs.org/docs/index.html?q=V#api/zh/textures/Texture.wrapT) 定义了纹理贴图在垂直方向上将如何阵列
 
 ```tsx
-// 设置重复包裹
-// 设置水平方向上
+// 设置贴图重复
+// 设置水平方向上阵列
 texture.wrapS = THREE.RepeatWrapping
-// 设置垂直方向
+// 设置垂直方向阵列
 texture.wrapT = THREE.RepeatWrapping
 
 // 1.设置重复次数
 texture.repeat.set(3, 2) // 设置 x y轴的重复次数
 
-// 2.直接设置
+// 2.直接xy轴的重复次数
 texture.repeat.x = 2
 texture.repeat.y = 3
 
@@ -427,8 +428,9 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 
 ### **开启透明度(共有属性)**
 
-* 通过材质的透明度属性[.opacity](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/Material.side)可以设置材质的透明程度，`.opacity`属性值的范围是0.0~1.0，0.0值表示完全透明, 1.0表示完全不透明，`.opacity`默认值1.0。这是一个**共有属性**
-* 当设置`.opacity`属性值的时候，需要设置材质属性`transparent`值为`true`，如果材质的transparent属性没设置为true, 材质会保持完全不透明状态。
+通过材质的透明度属性[.opacity](https://threejs.org/docs/index.html?q=MeshBasicMaterial#api/zh/materials/Material.side)可以设置材质的透明程度，`.opacity`属性值的范围是0.0~1.0，0.0值表示完全透明, 1.0表示完全不透明，`.opacity`默认值1.0。这是一个**共有属性**
+
+* 当设置`.opacity`属性值的时候，**需要设置材质属性`transparent`值为`true`**
 * 在构造函数参数中设置`transparent`和`.opacity`的属性值
 
 ```tsx
@@ -442,7 +444,7 @@ const material = new THREE.MeshPhongMaterial({
 
 ```
 
-* 通过访问材质对象属性形式设置`transparent`和`.opacity`的属性值
+通过访问材质对象属性形式设置`transparent`和`.opacity`的属性值
 
 ```tsx
   // transparent设置为true，开启透明，否则opacity不起作用
@@ -451,14 +453,12 @@ material.transparent = true;
 material.opacity = 0.4;
 ```
 
-
-
-
-
 ### **设置法线贴图**
 
-* [.normalMap](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.normalMap) 设置法线贴图
-  * 法线贴图可以让模型从精模到简模, 把一些顶点几何数据转化为贴图法线数据, 这样通过法线贴图来完善模型的细节, 从而减少模型的大小, 并且不影响过多的模型显示效果
+[.normalMap](https://threejs.org/docs/index.html?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial.normalMap) 设置法线贴图
+
+* 用于创建法线贴图的纹理。RGB值会影响每个像素片段的曲面法线，并更改颜色照亮的方式。法线贴图不会改变曲面的实际形状，只会改变光照。可以作为物体的凹凸效果的贴图
+* 法线贴图可以让模型从精模到简模, 把一些顶点几何数据转化为贴图法线数据, 这样通过法线贴图来完善模型的细节, 从而减少模型的大小, 并且不影响过多的模型显示效果
 
 
 ![image-20220923161909543](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202209231619586.png)
@@ -490,6 +490,21 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
   // 导入法线贴图
   normalMap: textureNormal,
 })
+
+```
+
+#### 放大法线贴图的影响
+
+法线贴图对材质的影响程度。`Vector2`类型, 默认值为（1,1）。
+
+![image-20230320113241777](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303201132845.png)
+
+```js
+material.normalMap = doorNormalTexture
+material.normalScale.set(2, 2)
+
+// 或者直接赋值二维向量
+material.normalScale = new THREE.Vector2(2, 2)
 
 ```
 

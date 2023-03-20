@@ -37,7 +37,7 @@ const material = new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true
 
 `MeshLambertMaterial`能够反光(但达不到镜面效果)，可以让几何物体产生简单的暗淡的表面。在大部分 3D 应用中，朗伯都是一种常用的材质。就像之前，我们可以调整颜色。我们可以通过 `emissive` 属性来给材质添加亮色。适合粗糙的物体
 
-* 他的其他名字叫 `漫反射材质` 他具备光照反射效果 具备立体感 同时消耗性能较低 适合粗糙的物体 比如墙体或者木头, **也可以设置文字展示**的效果
+* 他的其他名字叫 `漫反射材质` 他具备光照反射效果 具备立体感 同时消耗性能较低 适合粗糙的物体, 比如墙体, 木头或地板, **也可以设置文字展示**的效果
 * 如果需要更高的显示效果, 需要使用开较大的`MeshStandardMaterial`PBR材质
 * <font color =#ff3040>注意: 该材质需要灯光才能看到</font>
 
@@ -143,7 +143,7 @@ const material = new THREE.MeshPhysicalMaterial({
 
 #### **物理光学透明度`.transmission`(透射度)**
 
-为了更好的模拟玻璃、半透明塑料一类的视觉效果, 需要配合透明度属性`.opacity`。
+为了更好的模拟玻璃、半透明塑料一类的视觉效果, 需要配合透明度属性`.opacity`。`.opacity`需要开启`transparent`透明支持
 
 * 对于半透明的Mesh，可以使用Mesh透明度属性`.opacity`设置，不过在透明度`.opacity`比较高的时候，整个物体会隐藏起来。通过物理透明度`.transmission`属性, 即便完全透射的情况下仍可保持高反射率, 物体不会隐藏起来
 * 物理光学透明度`.transmission`的值范围是从0.0到1.0。默认值为0.0。数值越高透明度越差

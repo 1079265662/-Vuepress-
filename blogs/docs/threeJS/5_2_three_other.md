@@ -100,14 +100,18 @@ controls.maxAzimuthAngle = Math.PI / 2 // 最大 90
 * 设置垂直(上下)旋转范围, 有效值范围[0 , Math.PI]弧度值, 0°~180°
 *  <font color =ff3040>注意: 垂直(上下)旋转范围最小值和最大值必须都设置才会生效, 单独设置一个无效</font>
   * [.minPolarAngle](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.minPolarAngle) 你能够垂直旋转的角度的下限，其默认值为0
-  * [.maxPolarAngle](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.maxPolarAngle) 你能够垂直旋转的角度的上限，其默认值为`Math.PI`。
+  * [.maxPolarAngle](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.maxPolarAngle) 你能够垂直旋转的角度的上限，其默认值为`Math.PI`(不限制)。
 
 ```js
 // 上下旋转范围0~120度
 controls.minPolarAngle = 0
 controls.maxPolarAngle = Math.PI * (120 / 180)
 
+// 如果是一个地面效果, 最多旋转84°, (比直角小一点, 防止重合)
+controls.maxPolarAngle = Math.PI / 2 - 0.1
 ```
+
+![image-20230320195312677](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202303201953858.png)
 
 * [.enablePan](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls.enablePan)禁止右键拖拽平移, 默认为`true`
 
