@@ -348,9 +348,26 @@ window.onresize = () = >{
 * 页面多个内容滚动的时候(高度为`100vh`) 可以通过相机的`y`轴移动 来显示这些内容
 
 ```tsx
-    // 移动相机 下滚动所以是-y 让相机沿着-y轴移动 
-    this.camera.position.y =
-      -(window.scrollY / window.innerHeight) * 30 // 当前滚动的距离 / 屏幕高度 * 物体间距 下滚动所以是-y
+// 移动相机 下滚动所以是-y 让相机沿着-y轴移动
+this.camera.position.y = -(window.scrollY / window.innerHeight) * 30 // 当前滚动的距离 / 屏幕高度 * 物体间距 下滚动所以是-y
+
+```
+
+## 获取当前相机位于坐标原点的距离
+
+.[length](https://threejs.org/docs/index.html#api/zh/math/Vector3.length)() 可以获取当前相机位于坐标原点的距离, 可以通过设置相应的值来约束`OrbitControls`轨道控制器
+
+* 内部是通过距离计算公式: [欧式距离](https://blog.csdn.net/weixin_38659482/article/details/85045470), 进行计算的
+
+```js
+// 获取当前相机位于坐标原点的距离
+console.log(camera.position.length())
+
+// 设置控制器的最大距离
+controls.maxDistance = 450
+// 设置控制器的最小距离
+controls.minDistance = 260
+
 ```
 
 ## 参考文献

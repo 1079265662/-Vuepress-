@@ -652,6 +652,8 @@ const setEnvMap = async () => {
 
 因为该功能目前正处于QA阶段, 在不久的将来, 极有可能支持
 
+**目前可以通过[<iframe>](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe) 标签切换`src`实现取消模型加载的需求, 但这种方式绝对不是最佳方式**
+
 ##  参考文献
 
 [Three.js零基础入门教程(郭隆邦)](http://www.yanhuangxueyuan.com/Three.js/)
