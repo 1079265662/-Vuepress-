@@ -175,6 +175,17 @@ tom = ['Tom'];
 // Property '1' is missing in type '[string]' but required in type '[string, number]'.
 ```
 
+类型一致, 但不知道长度的数组可以这样设置其元组类型, 作为对类型一致的空数组`push`使用
+
+```tsx
+const list = [] as string[]
+
+list.push('a')
+
+```
+
+
+
 ### **枚举** `enum`
 
 * 关键字 `enum`
