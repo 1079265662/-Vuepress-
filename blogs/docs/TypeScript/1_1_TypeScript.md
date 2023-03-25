@@ -178,8 +178,12 @@ tom = ['Tom'];
 类型一致, 但不知道长度的数组可以这样设置其元组类型, 作为对类型一致的空数组`push`使用
 
 ```tsx
-const list = [] as string[]
+// 直接赋值
+const list:string[] = [] 
+list.push('a')
 
+// 通过断言
+const list = [] as string[]
 list.push('a')
 
 ```

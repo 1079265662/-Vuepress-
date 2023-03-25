@@ -71,33 +71,6 @@ export default {
 
 ## 学习three.js前置知识
 
-### **关于颜色设置**
-
-three.js支持十六进制的颜色设置 和 字符串类型的css风格颜色
-
-- 十六进制的颜色设置
-
-```js
-// 创建渲染器对象
-const renderer = new THREE.WebGLRenderer({
-  antialias: true, // 开启锯齿
-})
-// 设置渲染器背景颜色
-renderer.setClearColor(0x00577)
-```
-
-- css风格颜色
-  - 注意: css风格的颜色 需要是字符串格式的才可以
-
-```js
-// 创建渲染器对象
-const renderer = new THREE.WebGLRenderer({
-  antialias: true, // 开启锯齿
-})
-// 设置渲染器背景颜色 类型要为字符串格式
-renderer.setClearColor('#00577')
-```
-
 ### **三维物体（Object3D）**
 
 * 3d的东西肯定有 `x轴z轴y轴`

@@ -15,23 +15,40 @@ three.js 之 color 颜色<br>
 
 ## color介绍
 
-* [Color](https://threejs.org/docs/index.html?q=color#api/zh/math/Color) 作为three.js颜色数学库
-  * 支持css字符串风格、十六进制风格、RGB( 255,0,0 )、RGB( 1, 0, 0 )
+[Color](https://threejs.org/docs/index.html?q=color#api/zh/math/Color) 作为three.js颜色数学库
+
+* 支持css字符串风格、十六进制风格、RGB( 255,0,0 )、RGB( 1, 0, 0 ), HSL
+
+* three.js 内部默认使用的是RGB风格颜色, 如果使用非RGB颜色, 那么three.js会自动转换成RGB风格颜色
+
+  ![image-20230325160534836](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/undefined202303251605871.png)
 
 ```js
-// 生成 0~1的 RGB( 1, 0, 0 )风格的颜色 Math.random()默认范围是0-1
-const color = new THREE.Color(Math.random(), Math.random(), Math.random()) // const color7 = new THREE.Color( 1, 0, 0 );
-const color3 = new THREE.Color("rgb(255, 0, 0)");
-const color2 = new THREE.Color( 0xff0000 );
-const color1 = new THREE.Color('#ff3040');
+// 创建RGB风格颜色
+const color = new THREE.Color(1, 1, 1)
+
+// 如果使用非RGB颜色, 那么three.js会自动转换成RGB风格颜色
+const color = new THREE.Color('#ff3040') // 字符串风格
+const color = new THREE.Color(0x00577) // 十六进制风格
+const color = new THREE.Color(255, 0, 0) // 其他RGB风格
+
 ```
 
-* 颜色有 四个属性
-  * `.isColor`判断是否是颜色属性
-  * `.r` 红色通道的值在0到1之间。默认值为1。
-  * `.g` 绿色通道的值在0到1之间。默认值为1。
-  * `.b` 蓝色通道的值在0到1之间。默认值为1。
-* `rgb`在修改单独颜色的时候 可能需要一起修改
+three.js的color属性参数: 
+* `.isColor`判断是否是颜色属性
+* `.r` 红色通道的值在0到1之间。默认值为1。
+* `.g` 绿色通道的值在0到1之间。默认值为1。
+* `.b` 蓝色通道的值在0到1之间。默认值为1。
+
+### 修改颜色
+
+.[setHex](https://threejs.org/docs/index.html#api/zh/math/Color.setHex) 修改十六进制的颜色
+
+.[setHSL](https://threejs.org/docs/index.html#api/zh/math/Color.setHSL) 修改HLS值颜色
+
+.[setRGB](https://threejs.org/docs/index.html#api/zh/math/Color.setRGB) 修改RGB值颜色
+
+.[setStyle](https://threejs.org/docs/index.html#api/zh/math/Color.setStyle) 修改css字符串颜色
 
 ## 颜色随机
 
