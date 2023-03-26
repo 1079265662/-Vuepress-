@@ -534,6 +534,17 @@ scene.add(rectAreaLightHelper)
 
 ![image-20221030181556010](https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/202210301815069.png)
 
+## 二次修改灯光强度
+
+.[intensity](https://threejs.org/docs/index.html#api/zh/lights/Light.intensity) 光照的强度属性, 可以查看当前灯光强度, 也可以进行光亮的修改
+
+```js
+const directionalLight = new THREE.DirectionalLight(1, '#FFFFFF')
+// 修改光亮强度
+directionalLight.intensity = 0.4
+
+```
+
 ## 参考文献
 
 [一文搞懂3D世界里的灯光 |《Three.js零基础直通13》](https://mp.weixin.qq.com/s?__biz=Mzg3MTUyNzQzNg==&mid=2247489582&idx=1&sn=58352429e98ca46417625407b5bad600&chksm=cefc7d4df98bf45b61bccf43fd999fea7e8fedf425cc338be58b44756622b8cb168a45ca6194&scene=178&cur_album_id=2405559566127480834#rd)

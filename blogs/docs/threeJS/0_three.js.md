@@ -86,15 +86,15 @@ export default {
 
 * three.js的三大组件之一 必要元素
   1. 创建场景对象 [Scene](https://threejs.org/docs/index.html?q=Scene#api/zh/scenes/Scene)
-  2. 创建网格模型 [Mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh)
+  2. 创建网格模型 [Mesh](https://threejs.org/docs/index.html?q=Mesh#api/zh/objects/Mesh), 基类是 [Object3D](https://threejs.org/docs/index.html#api/zh/core/Object3D)
      *  可包含材质 [Material](https://threejs.org/docs/index.html?q=Material#api/zh/constants/Materials)
      *  颜色 [Color](./3_9_three.js_Color.md)
      *  纹理 [Texture](./4_three.js_Texture.md)
   3. 创建相机 [Camera](https://threejs.org/docs/index.html?q=Camera#api/zh/cameras/Camerad)
   4. 光源的设置(非必须) [Light](https://threejs.org/docs/index.html?q=DirectionalLight#api/zh/lights/Light)
   5. 创建渲染器 [WebGLRenderer](https://threejs.org/docs/index.html?q=WebGLRenderer#api/zh/renderers/WebGLRenderer)
-  6. 把渲染器绑定到指定页面元素上(可通过[element.appendChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)进行绑定) 通过[canvas](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API) 渲染[WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
-  7. 通过[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame) 更新动画API实现实时渲染画布的效果(非必须 通常配合[OrbitControls](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls) 轨道控制器使用)
+  6. 把渲染器绑定到指定页面元素上(可通过 [element.appendChild](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild)进行绑定)通过 [canvas](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API)渲染 [WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
+  7. 通过 [requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame)更新动画API实现实时渲染画布的效果(非必须 通常配合 [OrbitControls](https://threejs.org/docs/index.html?q=OrbitControls#examples/zh/controls/OrbitControls)轨道控制器使用)
 
 > 纯JS的简单案例
 
@@ -708,13 +708,19 @@ export class Type {
     // 相机的进截面 (近距离不可见范围)
     0.1,
     // 远截面 (远距离不可见范围)
-    1000
+    3000
   )
 
   // 创建纹理加载器
   textureLoader = new THREE.TextureLoader()
   // 创建时钟
   clock = new THREE.Clock()
+
+  // 创建平行光
+  directionalLight!: THREE.DirectionalLight
+
+  // 创建环境光
+  ambientLight!: THREE.AmbientLight
 }
 
 ```
@@ -730,6 +736,7 @@ export class Type {
 // 导入公共类
 import { Type } from './type'
 import type { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js'
+import type { GUI } from 'lil-gui'
 
 export class CreatedRender extends Type {
   // 是否开启CSS2DRenderer或者CSS3DRenderer的渲染
@@ -738,7 +745,7 @@ export class CreatedRender extends Type {
   // 2D渲染器
   label2DRenderer!: CSS2DRenderer
   //gui调试面板
-  gui!: dat.GUI
+  gui!: GUI
 
   // 尺寸变化时调整渲染器大小
   onWindowResize = () => {
@@ -880,7 +887,8 @@ export class CreatedUtils extends CreatedRender {
       this.loadingNumber.value = Number(
         ((itemsLoaded / itemsTotal) * 100).toFixed(2)
       )
-      console.log(this.loadingNumber)
+
+      console.log('加载中', this.loadingNumber.value)
     }
 
     return manager
