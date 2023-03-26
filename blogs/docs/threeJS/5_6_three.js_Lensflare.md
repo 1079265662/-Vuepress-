@@ -1,14 +1,14 @@
 ---
-title: three.js光晕效果
+title: three.js 镜头光晕
 date: 2023-03-26
-cover: 
+cover: https://jinyanlong-1305883696.cos.ap-hongkong.myqcloud.com/undefined202303261538243.jpg
 tags:
  - three.js
 categories: three.js
 ---
 
 ::: tip 介绍
-three.js绘制一个圆和线的实现代码<br>
+镜头光晕效果, 通过光晕贴图实现<br>
 :::
 
 <!-- more -->
