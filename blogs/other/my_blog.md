@@ -40,9 +40,7 @@ tags:
 
 ::: warning 今年的目标 !
 
-🔲 学习[矩阵](https://www.bilibili.com/video/BV1P3411B7pp/?spm_id_from=333.337.search-card.all.click&vd_source=3a0029ff8ede56423c7ee662853dfd29)相关内容(相乘相加矩阵)
-
-🔲 学习[计算机图形学](https://www.bilibili.com/video/BV1X7411F744/?spm_id_from=333.337.search-card.all.click)
+🔲 学习[Blender](https://www.bilibili.com/video/BV1fb4y1e7PD/?spm_id_from=333.337.search-card.all.click)
 
 🔲 想准备一场旅游
 
